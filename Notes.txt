@@ -1,0 +1,14 @@
+1. Install nodejs - version for this project 10.16.3
+2. npm version 6.9.0
+3. typescript version - 3.2.2
+4. Angular cli 8.3.4
+5. Adding angular material
+`npm install --save @angular/material @angular/cdk @angular/animations`
+6. Angular FlexLayoutModule
+`npm i -s @angular/flex-layout @angular/cdk`
+7. Angular Material icons adding in index.html
+`  <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+`
+8.Fontawesome integrations
+`  <script src="https://kit.fontawesome.com/92b8192c54.js"></script>
+`
