@@ -9,7 +9,11 @@ body {
 }
 body {
 	margin: 0;
-	font-family: 'DIN-Regular','Varela Round', "Helvetica Neue", sans-serif !important;
+	font-family: 'DIN-Regular', 'Varela Round', "Helvetica Neue", sans-serif !important;
 }
-$custom-typography: mat-typography-config($font-family: 'DIN-Regular');
+$custom-typography: mat-typography-config(
+	$font-family: 'DIN-Regular',
+	$headline: mat-typography-level(32px, 48px, 700),
+	$body-1: mat-typography-level(16px, 24px, 500)
+);
 @include mat-core($custom-typography);
