@@ -17,6 +17,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SharedService } from './services/shared.service';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -39,7 +41,12 @@ import { SharedService } from './services/shared.service';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   exports:[
     
@@ -59,7 +66,12 @@ import { SharedService } from './services/shared.service';
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers:[SharedService]
 })

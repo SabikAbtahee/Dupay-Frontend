@@ -25,7 +25,7 @@ export class NavSideBarComponent implements OnInit {
 	ngOnInit() {
 		this.initiateVariables();
 		this.selectedRow = 0;
-		this.route(dupayConst.sidebar[0].url);
+		// this.route(dupayConst.sidebar[0].url);
 	}
 	initiateVariables() {
 		this.title = dupayConst.siteName.name;

@@ -33,11 +33,7 @@ import { MatListModule } from '@angular/material/list';
     CoreModule,
     ConfigModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
+    
   ],
   providers: [RootService],
   bootstrap: [AppComponent]
