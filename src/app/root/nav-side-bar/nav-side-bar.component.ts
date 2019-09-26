@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'app-nav-side-bar',
 	templateUrl: './nav-side-bar.component.html',
-	styleUrls: [ './nav-side-bar.component.scss' ]
+	styleUrls: ['./nav-side-bar.component.scss']
 })
 export class NavSideBarComponent implements OnInit {
 	isHandset$: Observable<boolean> = this.breakpointObserver
@@ -20,7 +20,7 @@ export class NavSideBarComponent implements OnInit {
 	menuItems;
 	selectedRow: number;
 
-	constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+	constructor(private breakpointObserver: BreakpointObserver, private router: Router) { }
 
 	ngOnInit() {
 		this.initiateVariables();
@@ -37,11 +37,11 @@ export class NavSideBarComponent implements OnInit {
 	}
 
 	route(url) {
-    this.router.navigateByUrl(url);
-    
-  }
-  selectRow(index) {
+		this.router.navigateByUrl(url);
+
+	}
+	selectRow(index) {
 		this.selectedRow = index;
-		
+
 	}
 }

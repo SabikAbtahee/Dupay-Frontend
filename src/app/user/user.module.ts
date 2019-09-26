@@ -4,12 +4,9 @@ import { MerchantListComponent } from './components/merchant-list/merchant-list.
 import { MerchantRequestsComponent } from './components/merchant-requests/merchant-requests.component';
 import { MerchantNotificationComponent } from './components/merchant-notification/merchant-notification.component';
 import { Routes, RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 const routes:Routes=[
-  {
-    path:'',
-    redirectTo:'/home'
-  },
   {
     path:'merchant-list',
     component:MerchantListComponent
@@ -28,7 +25,8 @@ const routes:Routes=[
   declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule
   ]
 })
 export class UserModule { }
