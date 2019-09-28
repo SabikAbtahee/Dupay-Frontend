@@ -3,3 +3,8 @@ export enum Roles{
     Merchant='Merchant',
     Anonymous='Anonymous'
 }
+
+export enum Merchant_Status{
+    Active='Active',
+    Inactive='Inactive'
+}

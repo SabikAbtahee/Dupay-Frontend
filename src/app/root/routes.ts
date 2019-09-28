@@ -6,7 +6,7 @@ import { NavSideBarComponent } from './nav-side-bar/nav-side-bar.component';
 export const routes: Routes = [
     {
 		path: '',
-		redirectTo: 'authentication',
+		redirectTo: 'home',
 		pathMatch: 'full'
 	},
 	{

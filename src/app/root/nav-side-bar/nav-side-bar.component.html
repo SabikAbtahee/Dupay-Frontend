@@ -51,28 +51,29 @@
                   <span *ngIf="!drawer.opened">DUPAY</span>
                   <div *ngIf="drawer.opened" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
                     <div>DUPAY</div>
-                    <div><i class="material-icons">
+                    <!-- <div><i class="material-icons">
                         whatshot
-                      </i></div>
+                      </i></div> -->
       
                   </div>
       
                 </div>
               </div>
-              <!-- <div [matMenuTriggerFor]="menu" fxLayout="row" fxLayoutAlign="center center" class="mr-64">
+              <!-- [matMenuTriggerFor]="menu" -->
+              <div  fxLayout="row" fxLayoutAlign="center center" class="mr-64">
                 <mat-icon class="material-icons-outlined cursor-pointer">
                   settings
                 </mat-icon>
-                <button mat-button class="font-size-16">{{Username}}</button>
-                <mat-menu #menu="matMenu" class="w-180 mt-16">
+                <button mat-button class="font-size-16" (click)='route(Username.url)'>{{Username.name}}</button>
+                <!-- <mat-menu #menu="matMenu" class="w-180 mt-16">
                   <button mat-menu-item>
                     <div (click)="route(menuItems.profile.url)">{{menuItems.profile.name}}</div>
                   </button>
                   <button mat-menu-item>
                     <div (click)="logout()">{{menuItems.logout.name}}</div>
                   </button>
-                </mat-menu>
-              </div> -->
+                </mat-menu> -->
+              </div>
             </div>
       
           </mat-toolbar>

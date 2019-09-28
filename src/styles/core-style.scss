@@ -1,5 +1,5 @@
 @import './styles/color.scss';
-
+@import './theme';
 // Paddding
 
 $p: p !default;
@@ -281,6 +281,30 @@ $x1: 0;
 .third-text-color {
 	color: $third-color !important;
 }
+
+
+.primary-accent-background {
+	background: $primary-accent-color !important;
+}
+.primary-accent-text-color {
+	color: $primary-accent-color !important;
+}
+
+.secondary-accent-background {
+	background: $secondary-accent-color !important;
+}
+.secondary-accent-text-color {
+	color: $secondary-accent-color !important;
+}
+
+.third-accent-background {
+	background: $third-accent-color !important;
+}
+.third-accent-text-color {
+	color: $third-accent-color !important;
+}
+
+
 .accepted-color {
 	color: $accepted-color !important;
 }
