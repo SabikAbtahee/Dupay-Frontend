@@ -7,7 +7,7 @@ export const dupayConst = {
 		},
 		{
 			name: 'Query Transaction',
-			url: 'query',
+			url: 'transaction/query',
 			icon: 'account_balance'
 		}
 	],
