@@ -16,7 +16,7 @@ export class NavSideBarComponent implements OnInit {
 
 	title: string;
 	sidebar;
-	Username: string;
+	Username: any=dupayConst.username;
 	menuItems;
 	selectedRow: number;
 
@@ -32,16 +32,17 @@ export class NavSideBarComponent implements OnInit {
 
 		this.makeSideBar();
 	}
-	makeSideBar() {
-		this.sidebar = dupayConst.sidebar;
+	
+	makeSideBar() { 
+		this.sidebar = dupayConst.DefaultSideBar;
+		// this.sidebar = dupayConst.AdminSidebar;
+		// this.sidebar = dupayConst.MerchantSidebar;
 	}
 
 	route(url) {
 		this.router.navigateByUrl(url);
-
 	}
 	selectRow(index) {
 		this.selectedRow = index;
-
 	}
 }

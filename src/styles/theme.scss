@@ -2,10 +2,29 @@
 @import 'color.scss';
 @include mat-core();
 
-$dupay-primary: mat-palette($mat-light-blue,A200, A100, A400);
-$dupay-accent: mat-palette($mat-cyan, A200, A100, A400);
-$dupay-warn: mat-palette($mat-red);
+$primary:$mat-blue;
+$accent:$mat-cyan;
+$warn:$mat-red;
+
+$dupay-primary: mat-palette($primary,A200, A100, A400);
+$dupay-accent: mat-palette($accent, A200, A100, A400);
+$dupay-warn: mat-palette($warn);
 
 $dupay-theme: mat-light-theme($dupay-primary, $dupay-accent, $dupay-warn);
+
+// $primary-color:#40c4ff;
+$primary-color:  map-get($primary,A200);
+$secondary-color:map-get($primary,A100);
+$third-color:map-get($primary,A400);
+
+$primary-accent-color:  map-get($accent,A200);
+$secondary-accent-color:map-get($accent,A100);
+$third-accent-color:map-get($accent,A400);
+
+
+$accepted-color:#2bd057;
+$rejected-color:#f44336;
+$white-color: white;
+$black-color:black;
 
 @include angular-material-theme($dupay-theme);
