@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MerchantListComponent implements OnInit {
 
+  marchants = ['DESCO','TITAS'];
+
   constructor() { }
 
   ngOnInit() {
