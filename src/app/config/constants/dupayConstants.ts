@@ -1,3 +1,5 @@
+import { environment } from '../../../environments/environment';
+
 export const dupayConst = {
 	DefaultSideBar: [
 		{
@@ -50,8 +52,11 @@ export const dupayConst = {
 	siteName: {
 		name: 'DUPAY'
 	},
-	username:{
-		name:'Login',
-		url:'authentication/sign-in'
-	}
+	username: {
+		name: 'Login',
+		url: 'authentication/sign-in'
+	},
+	baseURL:environment.baseurl,
+	baseURLAdmin:environment.baseurlAdmin,
+	baseURLMerchant:environment.baseurlMerchant
 };
