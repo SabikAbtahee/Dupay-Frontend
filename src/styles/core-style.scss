@@ -325,6 +325,10 @@ $x1: 0;
 	color: $black-color;
 }
 
+.link-color{
+	color:$link-color;
+}
+
 .header-1 {
 	font-size: 40px;
 	color: $primary-color;
@@ -408,5 +412,5 @@ $x1: 0;
 }
 .active {
 	background: $primary-color !important;
-	color: $black-color !important;
+	color: $white-color !important;
 }
