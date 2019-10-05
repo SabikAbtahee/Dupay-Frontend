@@ -44,3 +44,9 @@ export interface Notification{
 	Ntf_Date:string,
 	Ntf_Message:string
 }
+
+export interface authenticationEmailOtp{
+	key:string,
+	isEmailDone?:boolean,
+	isOtpDone?:boolean
+}
