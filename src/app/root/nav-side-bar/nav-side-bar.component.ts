@@ -34,9 +34,9 @@ export class NavSideBarComponent implements OnInit {
 	}
 	
 	makeSideBar() { 
-		this.sidebar = dupayConst.DefaultSideBar;
+		// this.sidebar = dupayConst.DefaultSideBar;
 		// this.sidebar = dupayConst.AdminSidebar;
-		// this.sidebar = dupayConst.MerchantSidebar;
+		this.sidebar = dupayConst.MerchantSidebar;
 	}
 
 	route(url) {

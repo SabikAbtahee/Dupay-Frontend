@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { MerchantSignupComponent } from './components/merchant-signup/merchant-signup.component';
+import { AuthenticationService } from './services/authentication.service';
+import { CoreModule } from '../core/core.module';
 
 const routes:Routes=[
   {
@@ -31,7 +33,9 @@ const routes:Routes=[
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
-  ]
+    SharedModule,
+    CoreModule
+  ],
+  providers:[AuthenticationService]
 })
 export class AuthenticationModule { }

@@ -18,7 +18,7 @@ export const dupayConst = {
 		{
 			name: 'Dashboard',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'dashboard'
 		},
 		{
 			name: 'Merchant',
@@ -28,7 +28,7 @@ export const dupayConst = {
 		{
 			name: 'Configuration',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'build'
 		}
 	],
 
@@ -36,17 +36,17 @@ export const dupayConst = {
 		{
 			name: 'Dashboard',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'dashboard'
 		},
 		{
 			name: 'Configuration',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'build'
 		},
 		{
 			name: 'Transfer request',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'compare_arrows'
 		}
 	],
 	siteName: {
@@ -56,7 +56,32 @@ export const dupayConst = {
 		name: 'Login',
 		url: 'authentication/sign-in'
 	},
-	baseURL:environment.baseurl,
-	baseURLAdmin:environment.baseurlAdmin,
-	baseURLMerchant:environment.baseurlMerchant
+	baseURL: environment.baseurl,
+	baseURLAdmin: environment.baseurlAdmin,
+	baseURLMerchant: environment.baseurlMerchant
+};
+export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+export const authentication_error_messages={
+	merchant_type:'Please choose merchant type',
+	empty_name:'Please provide your name',
+	email_error:'Invalid email',
+	nid_error:'Please provide your National ID number',
+	weak_password:'Make within 8 characters',
+	password_mismatch:'Password does not match',
+	phone_number_error:'Provide phone number'
+};
+
+export const urlPaths = {
+	Authentication: {
+		Signin: {
+			url: 'authentication/sign-in'
+		},
+		Signup: {
+			url: 'authentication/merchant-signup'
+		},
+		AccountRecovery: {
+			url: 'authentication/account-recovery'
+		}
+	},
+	
 };
