@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../../services/authentication.service";
+import * as util from "util";
 
 @Component({
   selector: 'app-signin',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  signinform = this.authService.logInForm;
+
+  constructor(private authService: AuthenticationService, ) { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    console.log(util.inspect(this.signinform.value));
+  }
 }
