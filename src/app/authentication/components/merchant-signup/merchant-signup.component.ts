@@ -1,3 +1,4 @@
+import { dupayConst, snackbarMessages } from './../../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordRegex, authentication_error_messages, urlPaths } from '../../../config/constants/dupayConstants';
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
 import { authenticationEmailOtp } from '../../../config/interfaces/dupay.interface';
 import { QueryService } from '../../../core/query-services/query.service';
 import { MutationService } from '../../../core/mutation-services/mutation.service';
+import { SharedService } from '../../../shared/services/shared.service';
 
 @Component({
 	selector: 'app-merchant-signup',
@@ -20,7 +22,8 @@ export class MerchantSignupComponent implements OnInit {
 		private authService: AuthenticationService,
 		private router: Router,
 		private coreQuery: QueryService,
-		private coreMutate: MutationService
+		private coreMutate: MutationService,
+		private sharedService:SharedService
 	) {}
 
 	// Localstorage Object
@@ -132,6 +135,7 @@ export class MerchantSignupComponent implements OnInit {
 				isOtpDone: false
 			};
 			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+			this.openSnackBar(snackbarMessages.email_sent,true);
 			this.isEmailLoading = false;
 		} else {
 			this.authService.touchAllfields(this.emailForm);
@@ -150,6 +154,7 @@ export class MerchantSignupComponent implements OnInit {
 				isOtpDone: true
 			};
 			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+			this.openSnackBar(snackbarMessages.otp_verified,true);
 			this.isOTPLoading = false;
 		} else {
 			this.authService.touchAllfields(this.OTPForm);
@@ -159,5 +164,15 @@ export class MerchantSignupComponent implements OnInit {
 
 	routeToLogin() {
 		this.router.navigate([ urlPaths.Authentication.Signin.url ]);
+	}
+
+	openSnackBar(message,isAccepted) {
+		this.sharedService.openSnackBar({
+			data: { message: message, isAccepted: isAccepted },
+			duration: 2,
+			panelClass: [ 'recovery-snackbar' ],
+			horizontalPosition: 'right',
+			verticalPosition: 'top'
+		});
 	}
 }

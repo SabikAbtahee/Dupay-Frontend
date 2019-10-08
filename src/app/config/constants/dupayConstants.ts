@@ -61,6 +61,7 @@ export const dupayConst = {
 	baseURLMerchant: environment.baseurlMerchant
 };
 export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+
 export const authentication_error_messages={
 	merchant_type:'Please choose merchant type',
 	empty_name:'Please provide your name',
@@ -71,6 +72,14 @@ export const authentication_error_messages={
 	phone_number_error:'Provide phone number',
 	otp_error:'Wrong OTP given'
 };
+
+export const snackbarMessages={
+	email_sent:'Email sent successfully',
+	otp_verified:'OTP verified',
+	email_exists:'Email already exists in our system',
+	otp_failed:'OTP verification failed',
+	check_email_for_verification:'Check email for verification'
+}
 
 export const urlPaths = {
 	Authentication: {
