@@ -20,9 +20,10 @@ import { SharedService } from './services/shared.service';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [SnackbarComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -75,6 +76,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     HttpClientModule
   ],
-  providers:[SharedService]
+  providers:[SharedService],
+  entryComponents:[SnackbarComponent]
 })
 export class SharedModule { }

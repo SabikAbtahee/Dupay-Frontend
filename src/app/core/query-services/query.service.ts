@@ -20,4 +20,14 @@ export class QueryService {
 	getSingleDataAsMerchant(entity): Observable<any> {
 		return this.http.get(dupayConst.baseURLMerchant + entity);
 	}
+
+
+	//Read Data from localStorage
+	readValueFromLocalStorage(key){
+		return localStorage.getItem(key);
+	}
+	//Read JSON data from localStorage
+	readJSONValueFromLocalStorage(key){
+		return JSON.parse(localStorage.getItem(key));
+	}
 }
