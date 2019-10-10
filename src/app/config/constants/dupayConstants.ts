@@ -1,4 +1,5 @@
 import { environment } from '../../../environments/environment';
+import { HttpHeaders } from '@angular/common/http';
 
 export const dupayConst = {
 	DefaultSideBar: [
@@ -98,4 +99,10 @@ export const urlPaths = {
 		}
 	},
 	
+};
+
+export const httpHeader = {
+	headers: new HttpHeaders({
+		'Content-Type':'application/json'
+	})
 };
