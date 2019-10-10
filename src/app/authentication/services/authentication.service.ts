@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { UtilityService } from '../../core/utility-services/utility-service.service';
 
@@ -8,8 +8,8 @@ import { UtilityService } from '../../core/utility-services/utility-service.serv
 })
 export class AuthenticationService {
   public logInForm = this.fb.group({
-    email: [''],
-    password: ['']
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
   });
   constructor(private fb: FormBuilder,private util:UtilityService ) { }
 

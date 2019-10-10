@@ -66,15 +66,19 @@ export const authentication_error_messages={
 	merchant_type:'Please choose merchant type',
 	empty_name:'Please provide your name',
 	email_error:'Invalid email',
+	email_required:'Email is required',
 	nid_error:'Please provide your National ID number',
 	weak_password:'Make within 8 characters',
 	password_mismatch:'Password does not match',
+	password_required:'Password is required',
 	phone_number_error:'Provide phone number',
 	otp_error:'Wrong OTP given'
 };
 
 export const snackbarMessages={
 	email_sent:'Email sent successfully',
+	login:'Log in successfully',
+	login_failed:'Email or password do not match',
 	otp_verified:'OTP verified',
 	email_exists:'Email already exists in our system',
 	otp_failed:'OTP verification failed',
