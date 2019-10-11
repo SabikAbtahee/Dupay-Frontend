@@ -1,4 +1,3 @@
-import { environment } from '../../../environments/environment';
 import { HttpHeaders } from '@angular/common/http';
 
 export const dupayConst = {
@@ -57,9 +56,7 @@ export const dupayConst = {
 		name: 'Login',
 		url: 'authentication/sign-in'
 	},
-	baseURL: environment.baseurl,
-	baseURLAdmin: environment.baseurlAdmin,
-	baseURLMerchant: environment.baseurlMerchant
+	
 };
 export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
 
@@ -98,6 +95,11 @@ export const urlPaths = {
 			url: 'authentication/account-recovery'
 		}
 	},
+	Home:{
+		HomeDefault:{
+			url:'home'
+		}
+	}
 	
 };
 
@@ -106,3 +108,10 @@ export const httpHeader = {
 		'Content-Type':'application/json'
 	})
 };
+
+export const httpOptions = {
+	headers: new HttpHeaders({
+	  'Content-Type':  'application/json',
+	  'Authorization': 'my-auth-token'
+	})
+  };

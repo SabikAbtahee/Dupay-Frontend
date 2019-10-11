@@ -11,9 +11,9 @@ export class HomeDefaultComponent implements OnInit {
 	constructor(private homeService:HomeService) {}
 
 	ngOnInit() {
-		this.homeService.checkConnectionStatus().subscribe(res=>{
-			console.log(res);
-		})
+		// this.homeService.checkConnectionStatus().subscribe(res=>{
+		// 	console.log(res);
+		// })
 		
 	}
 }
