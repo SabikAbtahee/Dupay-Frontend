@@ -47,6 +47,7 @@ export interface Notification{
 
 export interface authenticationEmailOtp{
 	key:string,
+	email?:string,
 	isEmailDone?:boolean,
 	isOtpDone?:boolean
 }

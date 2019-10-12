@@ -9,8 +9,11 @@ export const api_path = {
     checkStatus: `${environment.baseurl}status`,
     
     // Merchant signup
-    signUpOTPEmail:`${environment.baseurl}api/user/otp`,
-    signUpOTPVerification:`${environment.baseurl}api/user/verify-otp`,
-    signUpMerchantAccount:`${environment.baseurl}api/user/register`
+    signUpOTPEmail:`${environment.baseurl}/api/user/email/otp`,
+    signUpOTPVerification:`${environment.baseurl}/api/user/email/otp/verify`,
+    registerMerchantAccount:`${environment.baseurl}/api/user`
+
+
+    
     
 }

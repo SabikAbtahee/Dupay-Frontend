@@ -26,7 +26,7 @@
                             </i>
                         </div>
                         <div>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" class='w-224'>
                                 <mat-label>Email</mat-label>
                                 <input type="email" matInput placeholder="Type in email" formControlName="email">
                                 <mat-error *ngIf="emailForm.get('email').touched && emailForm.get('email').invalid">
@@ -47,7 +47,7 @@
                 </div>
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='sendOTPtoEmail()' mat-raised-button color="primary"
-                        class="w-240 h-40">Send OTP</button>
+                        class="w-260 h-40">Send OTP</button>
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                             login</button> -->
 
@@ -57,7 +57,7 @@
             </mat-card>
         </div>
         <div>
-            <a (click)='routeToLogin()' class="cursor-pointer link-color font-size-16">Back to login </a>
+            <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
 
     </div>
@@ -85,7 +85,7 @@
                             </i>
                         </div>
                         <div>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" class='w-224'>
                                 <mat-label>OTP</mat-label>
                                 <input type="text" matInput placeholder="Type in OTP" formControlName="otp">
                                 <mat-error *ngIf="OTPForm.get('otp').touched && OTPForm.get('otp').invalid">
@@ -106,7 +106,7 @@
                 </div>
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='verifyOTP()' mat-raised-button color="primary"
-                        class="w-240 h-40">Verify
+                        class="w-260 h-40">Verify
                         OTP</button>
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                             login</button> -->
@@ -117,7 +117,7 @@
             </mat-card>
         </div>
         <div>
-            <a (click)='routeToLogin()' class="cursor-pointer link-color font-size-16">Back to login </a>
+            <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
 
     </div>
@@ -147,7 +147,7 @@
                                 </i>
                             </div>
                             <div>
-                                <mat-form-field appearance="outline">
+                                <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Name</mat-label>
                                     <input type="text" matInput placeholder="Type in name" formControlName="name">
                                     <mat-error *ngIf="signupform.get('name').touched && signupform.get('name').invalid">
@@ -168,7 +168,7 @@
                                 </i>
                             </div>
                             <div>
-                                <mat-form-field appearance="outline">
+                                <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Merchant type</mat-label>
                                     <mat-select formControlName='merchant_type' multiple disableOptionCentering>
                                         <mat-option *ngFor='let type of merchant_types | keyvalue' [value]='type.key'>
@@ -190,7 +190,7 @@
                                 </i>
                             </div>
                             <div>
-                                <mat-form-field appearance="outline">
+                                <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Password</mat-label>
                                     <input type="password" matInput placeholder="Type in password "
                                         formControlName="password" [errorStateMatcher]="matcher">
@@ -218,7 +218,7 @@
                                 </i>
                             </div>
                             <div>
-                                <mat-form-field appearance="outline">
+                                <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Phone Number</mat-label>
                                     <input type="tel" matInput placeholder="Type in phone number"
                                         formControlName="phone_number">
@@ -241,7 +241,7 @@
                                 </i>
                             </div>
                             <div>
-                                <mat-form-field appearance="outline">
+                                <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>NID No.</mat-label>
                                     <input type="text" matInput placeholder="Type in NID number"
                                         formControlName="nid_number">
@@ -264,7 +264,7 @@
                                 </i>
                             </div>
                             <div>
-                                <mat-form-field appearance="outline">
+                                <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Confirm Password</mat-label>
                                     <input type="password" matInput placeholder="Type in confirm password "
                                         formControlName="confirm_password" [errorStateMatcher]="matcher">
@@ -294,7 +294,7 @@
             </mat-card>
         </div>
         <div>
-            <a (click)='routeToLogin()' class="cursor-pointer link-color font-size-16">Back to login </a>
+            <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
         <!-- <div fxFlex='15' fxLayout="row" fxFlexAlign="start center">
             <div>

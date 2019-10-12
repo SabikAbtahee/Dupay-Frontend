@@ -16,8 +16,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class SigninComponent implements OnInit {
 	isLoading: boolean = false;
 	signinform: FormGroup;
-  error_messages = authentication_error_messages;
-  urlPaths=urlPaths;
+	error_messages = authentication_error_messages;
+	urlPaths = urlPaths;
 
 	constructor(
 		private authService: AuthenticationService,
@@ -40,21 +40,20 @@ export class SigninComponent implements OnInit {
 	}
 
 	onSubmit() {
-    this.isLoading=true;
+		this.isLoading = true;
 		if (this.signinform.valid) {
-      // this.authService.signin(this.signinform);
+			// this.authService.signin(this.signinform);
 			// console.log(util.inspect(this.signinform.value));
 			this.openSnackBar(snackbarMessages.login, true);
 		} else {
-      this.authService.touchAllfields(this.signinform);
-      this.isLoading=false;
-      
+			this.authService.touchAllfields(this.signinform);
+			this.isLoading = false;
 		}
 	}
-	
-  route(path){
-    this.router.navigate([path]);
-  }
+
+	route(path) {
+		this.router.navigate([ path ]);
+	}
 
 	openSnackBar(message, isAccepted) {
 		this.sharedService.openSnackBar({

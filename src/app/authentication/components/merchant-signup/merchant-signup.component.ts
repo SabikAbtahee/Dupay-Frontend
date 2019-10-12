@@ -10,6 +10,7 @@ import { authenticationEmailOtp } from '../../../config/interfaces/dupay.interfa
 import { QueryService } from '../../../core/query-services/query.service';
 import { MutationService } from '../../../core/mutation-services/mutation.service';
 import { SharedService } from '../../../shared/services/shared.service';
+import { first } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-merchant-signup',
@@ -23,12 +24,12 @@ export class MerchantSignupComponent implements OnInit {
 		private router: Router,
 		private coreQuery: QueryService,
 		private coreMutate: MutationService,
-		private sharedService:SharedService
+		private sharedService: SharedService
 	) {}
 
 	// Localstorage Object
 	authenticationObject: authenticationEmailOtp = {
-		key: 'Dupay'
+		key: 'DupaySignUp'
 	};
 
 	// Progress bar
@@ -48,6 +49,7 @@ export class MerchantSignupComponent implements OnInit {
 	matcher;
 	merchant_types = Merchant_Types;
 	error_messages = authentication_error_messages;
+	urlPaths = urlPaths;
 
 	ngOnInit() {
 		this.checkForm();
@@ -68,6 +70,7 @@ export class MerchantSignupComponent implements OnInit {
 		}
 	}
 
+	// 3 Forms related to signup
 	makeEmailForm() {
 		this.emailForm = this.fb.group({
 			email: [ '', [ Validators.required, Validators.email ] ]
@@ -78,7 +81,6 @@ export class MerchantSignupComponent implements OnInit {
 			otp: [ '', [ Validators.required ] ]
 		});
 	}
-
 	makeSignupFormMerchant() {
 		this.signupform = this.fb.group({
 			name: [ '', Validators.required ],
@@ -89,6 +91,8 @@ export class MerchantSignupComponent implements OnInit {
 			merchant_type: [ '', Validators.required ]
 		});
 	}
+
+	// Matching password and confirm password
 	passwordMatchValidator(group: FormGroup): any {
 		if (group) {
 			if (group.get('password').value !== group.get('confirm_password').value) {
@@ -103,6 +107,57 @@ export class MerchantSignupComponent implements OnInit {
 		this.signupform.updateValueAndValidity();
 		this.matcher = new FieldMatcher();
 	}
+
+	sendOTPtoEmail() {
+		// If valid save the email in local storage and send email
+		debugger;
+		this.isEmailLoading = true;
+		if (this.emailForm.valid) {
+			this.authService.sendOtpToEmailforSignUp(this.emailForm.value.email).pipe(first()).subscribe(
+				(res) => {
+					this.isEmailFormDone = true;
+					this.authenticationObject = {
+						key: this.authenticationObject.key,
+						email: this.emailForm.value.email,
+						isEmailDone: true,
+						isOtpDone: false
+					};
+					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+					this.openSnackBar(snackbarMessages.email_sent, true);
+					this.isEmailLoading = false;
+				},
+				(err) => {
+					debugger
+					console.log(err);
+					this.openSnackBar(err.error, false);
+					this.isEmailLoading = false;
+				}
+			);
+		} else {
+			this.authService.touchAllfields(this.emailForm);
+			this.isEmailLoading = false;
+		}
+	}
+
+	verifyOTP() {
+		// If valid save the otpdone in localstorage
+		this.isOTPLoading = true;
+		if (this.OTPForm.valid) {
+			this.isOTPFormDone = true;
+			this.authenticationObject = {
+				key: this.authenticationObject.key,
+				isEmailDone: true,
+				isOtpDone: true
+			};
+			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+			this.openSnackBar(snackbarMessages.otp_verified, true);
+			this.isOTPLoading = false;
+		} else {
+			this.authService.touchAllfields(this.OTPForm);
+			this.isOTPLoading = false;
+		}
+	}
+
 	onSignupSubmit() {
 		this.isSignUpLoading = true;
 		// If valid delete localstorage
@@ -124,50 +179,11 @@ export class MerchantSignupComponent implements OnInit {
 		}
 	}
 
-	sendOTPtoEmail() {
-		// If valid save the email in local storage and send email
-		this.isEmailLoading = true;
-		if (this.emailForm.valid) {
-			// this.authService.sendOtpToEmail(this.emailForm.value.email);
-			this.isEmailFormDone = true;
-			this.authenticationObject = {
-				key: this.authenticationObject.key,
-				isEmailDone: true,
-				isOtpDone: false
-			};
-			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
-			this.openSnackBar(snackbarMessages.email_sent,true);
-			this.isEmailLoading = false;
-		} else {
-			this.authService.touchAllfields(this.emailForm);
-			this.isEmailLoading = false;
-		}
+	route(path) {
+		this.router.navigate([ path ]);
 	}
 
-	verifyOTP() {
-		// If valid save the otpdone in localstorage
-		this.isOTPLoading = true;
-		if (this.OTPForm.valid) {
-			this.isOTPFormDone = true;
-			this.authenticationObject = {
-				key: this.authenticationObject.key,
-				isEmailDone: true,
-				isOtpDone: true
-			};
-			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
-			this.openSnackBar(snackbarMessages.otp_verified,true);
-			this.isOTPLoading = false;
-		} else {
-			this.authService.touchAllfields(this.OTPForm);
-			this.isOTPLoading = false;
-		}
-	}
-
-	routeToLogin() {
-		this.router.navigate([ urlPaths.Authentication.Signin.url ]);
-	}
-
-	openSnackBar(message,isAccepted) {
+	openSnackBar(message, isAccepted) {
 		this.sharedService.openSnackBar({
 			data: { message: message, isAccepted: isAccepted },
 			duration: 2,

@@ -1,6 +1,6 @@
 <form [formGroup]="signinform">
   <div fxLayout="row" fxLayoutAlign="center center" class="pt-124 pb-48 header-1 ">
-    Welcome to DUPAY
+    Welcome to  <span (click)='route([urlPaths.Home.HomeDefault.url][0])' class='cursor-pointer ml-12'>  DUPAY</span>
   </div>
   <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="12px" class="margin-auto w-312 pb-16">
     <div>
@@ -17,7 +17,7 @@
                 </i>
               </div>
               <div>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class='w-224'>
                   <mat-label>Email</mat-label>
                   <input type="email" matInput placeholder="Type in Email" formControlName="email">
                   <!--                <mat-error *ngIf="signinform.get('email').touched && signinform.get('email').invalid">{{emailError()}}</mat-error>-->
@@ -38,14 +38,14 @@
 
               </div>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px" >
               <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                 <i class="material-icons-outlined">
                   lock
                 </i>
               </div>
-              <div>
-                <mat-form-field appearance="outline">
+              <div >
+                <mat-form-field appearance="outline" class='w-224'>
                   <mat-label>Password</mat-label>
                   <input type="password" matInput placeholder="Type in passoword " formControlName="password">
                   <!--                <mat-error *ngIf="signinform.get('password').touched && signinform.get('password').invalid">{{passwordError()}}</mat-error>-->
@@ -63,10 +63,10 @@
 
           <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
             <button type="submit" (click)='onSubmit()' mat-raised-button color="primary"
-              class="w-240 h-40">Login</button>
+              class="w-260 h-40">Login</button>
 
             <button (click)='route([urlPaths.Authentication.Signup.url][0])' mat-stroked-button color="primary"
-              class="w-240 h-40">Create Merchant
+              class="w-260 h-40">Create Merchant
               Account
             </button>
             <!-- <button (click)='routeToHome()' mat-stroked-button color="primary" class="w-240 h-40">Back To Home
@@ -79,13 +79,13 @@
 
 
   </div>
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="margin-auto w-312 pb-124">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="margin-auto w-332 pb-124">
     <div>
       <a (click)='route([urlPaths.Authentication.AccountRecovery.url][0])'
-        class="cursor-pointer secondary-text-color">Forgot Password? </a>
+        class="cursor-pointer primary-text-color">Forgot Password? </a>
     </div>
     <div>
-      <a (click)='route([urlPaths.Home.HomeDefault.url][0])' class="cursor-pointer secondary-text-color">Back to Home
+      <a (click)='route([urlPaths.Home.HomeDefault.url][0])' class="cursor-pointer primary-text-color">Back to Home
       </a>
     </div>
   </div>
