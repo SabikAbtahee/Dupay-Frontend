@@ -128,16 +128,16 @@ export class MerchantSignupComponent implements OnInit {
 		// If valid save the email in local storage and send email
 		this.isEmailLoading = true;
 		if (this.emailForm.valid) {
-			this.authService.sendOtpToEmail(this.emailForm.value.email);
-			// this.isEmailFormDone = true;
-			// this.authenticationObject = {
-			// 	key: this.authenticationObject.key,
-			// 	isEmailDone: true,
-			// 	isOtpDone: false
-			// };
-			// this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
-			// this.openSnackBar(snackbarMessages.email_sent,true);
-			// this.isEmailLoading = false;
+			// this.authService.sendOtpToEmail(this.emailForm.value.email);
+			this.isEmailFormDone = true;
+			this.authenticationObject = {
+				key: this.authenticationObject.key,
+				isEmailDone: true,
+				isOtpDone: false
+			};
+			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+			this.openSnackBar(snackbarMessages.email_sent,true);
+			this.isEmailLoading = false;
 		} else {
 			this.authService.touchAllfields(this.emailForm);
 			this.isEmailLoading = false;

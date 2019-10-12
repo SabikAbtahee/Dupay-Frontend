@@ -1,1 +1,31 @@
-<p>merchant-requests works!</p>
+<!-- <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field> -->
+
+<mat-form-field>
+    <input matInput [(ngModel)]="searchTerm" placeholder="Filter">
+</mat-form-field>
+
+
+<div *ngFor="let request of filteredRequests">
+<mat-card class="example-card">
+        <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Request sent at .....</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+        <label>Name</label>: Shiba <br>
+        <label>NID</label>: {{request.Merchant_NID}} <br>
+        <label>Trade License of Business</label>: {{request.Merchant_trade_inc}} <br>
+        <label>NID</label>: {{request.Merchant_balance}} <br>
+        <label>Email</label>: person@gmail.com <br>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-stroked-button color="basic">VIEW</button>
+        <button mat-stroked-button color="primary">ACCEPT</button>
+        <button mat-stroked-button color="warn">DELETE</button>
+        </mat-card-actions>
+    </mat-card>
+    
+</div>
