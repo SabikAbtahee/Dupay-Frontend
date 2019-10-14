@@ -9,38 +9,15 @@ import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 })
 export class MerchantListComponent implements OnInit {
 
-  merchants: Merchant[] = [{
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 3498,
-    Merchant_status: Merchant_Status.Active,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  },
-  {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 3498,
-    Merchant_status: Merchant_Status.Active,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  },
-  {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 3498,
-    Merchant_status: Merchant_Status.Active,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  },
-  {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 3498,
-    Merchant_status: Merchant_Status.Active,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  }];
+  
+  merchants: Merchant[]=[
+    {
+      email:'asd',
+      username:'asd',
+      
+    },
+      
+    ]
 
   constructor() { }
 

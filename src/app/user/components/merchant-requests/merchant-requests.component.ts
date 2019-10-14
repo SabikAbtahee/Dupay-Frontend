@@ -19,37 +19,10 @@ export class MerchantRequestsComponent implements OnInit {
  
   requests: Merchant[]=[
   {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 3000,
-    Merchant_status: Merchant_Status.Inactive,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
+    email:'asd',
+    username:'asd',
+    
   },
-  {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 4000,
-    Merchant_status: Merchant_Status.Inactive,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  },
-  {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 5000,
-    Merchant_status: Merchant_Status.Inactive,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  },
-  {
-    Merchant_NID: "3452394839843948(NID)",
-    Merchant_balance: 6000,
-    Merchant_status: Merchant_Status.Inactive,
-    Merchant_trade_inc:"Merchant_trade_inc",
-    Merchant_type:"Merchant Type",
-    code:"merchantcode"
-  }
     
   ]
 
