@@ -108,8 +108,7 @@
                     <button type="submit" (click)='verifyOTP()' mat-raised-button color="primary"
                         class="w-260 h-40">Verify
                         OTP</button>
-                    <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
-                            login</button> -->
+                    <button *ngIf='isresendOtp'  (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend Otp</button>
 
 
                 </div>
@@ -119,6 +118,7 @@
         <div>
             <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
+        
 
     </div>
 </form>
@@ -133,7 +133,7 @@
 
             <mat-card class="p-36 " [class.mat-elevation-z4]="true">
 
-                <div fxLayout="row" fxLayout.lt-md='column' fxLayoutAlign="center center"
+                <div fxLayout="row" fxLayout.lt-md='column' fxLayoutAlign="center start"
                     fxLayoutAlign.lt-md="start center" fxLayoutGap="32px" fxLayoutGap.lt-md='12px'>
                     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="12px">
 
@@ -170,7 +170,7 @@
                             <div>
                                 <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Merchant type</mat-label>
-                                    <mat-select formControlName='merchant_type' multiple disableOptionCentering>
+                                    <mat-select formControlName='merchant_type' disableOptionCentering>
                                         <mat-option *ngFor='let type of merchant_types | keyvalue' [value]='type.key'>
                                             {{type.value}}</mat-option>
                                     </mat-select>
@@ -205,12 +205,34 @@
                                 </mat-form-field>
                             </div>
                         </div>
+                        <!-- Trade Insurance -->
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                            <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
+                                <i class="material-icons-outlined">
+                                    perm_identity
+                                </i>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="outline" class='w-224'>
+                                    <mat-label>Trade Insurance</mat-label>
+                                    <input type="text" matInput placeholder="Type in trade insurance" formControlName="trade_insurance">
+                                    <mat-error *ngIf="signupform.get('trade_insurance').touched && signupform.get('trade_insurance').invalid">
+                                        {{error_messages.trade_insurance_error}}</mat-error>
+
+                                    <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
+
+                                    <!-- <mat-error *ngIf="true">222</mat-error> -->
+                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        
 
 
                     </div>
 
                     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="12px">
-                        <!-- Phone_number -->
+                        <!-- USERNAME -->
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
                             <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                                 <i class="material-icons-outlined">
@@ -219,12 +241,12 @@
                             </div>
                             <div>
                                 <mat-form-field appearance="outline" class='w-224'>
-                                    <mat-label>Phone Number</mat-label>
-                                    <input type="tel" matInput placeholder="Type in phone number"
-                                        formControlName="phone_number">
+                                    <mat-label>User Name</mat-label>
+                                    <input type="tel" matInput placeholder="Type in username"
+                                        formControlName="username">
                                     <mat-error
-                                        *ngIf="signupform.get('phone_number').touched && signupform.get('phone_number').invalid">
-                                        {{error_messages.phone_number_error}}</mat-error>
+                                        *ngIf="signupform.get('username').touched && signupform.get('username').invalid">
+                                        {{error_messages.username_error}}</mat-error>
 
                                     <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
 

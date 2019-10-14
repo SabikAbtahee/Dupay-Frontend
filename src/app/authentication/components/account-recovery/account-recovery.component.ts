@@ -6,10 +6,10 @@ import { FieldMatcher } from '../../../core/utility-services/utility-service.ser
 import { Merchant_Types } from '../../../config/enums/dupay.enum';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { authenticationEmailOtp } from '../../../config/interfaces/dupay.interface';
 import { QueryService } from '../../../core/query-services/query.service';
 import { MutationService } from '../../../core/mutation-services/mutation.service';
 import { SharedService } from '../../../shared/services/shared.service';
+import { authenticationEmailOtp } from '../../../config/interfaces/configurations.interface';
 
 @Component({
   selector: 'app-account-recovery',

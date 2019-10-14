@@ -37,6 +37,32 @@ export class UtilityService {
 		// return an observable with a user-facing error message
 		return throwError('Something bad happened; please try again later.');
 	}
+
+	toJSON(str){
+		let object=str;
+		try {
+			object=JSON.parse(str);
+		} catch (e) {
+			return object;
+		}
+		return object;
+	}
+
+	giveErrorMessage(err){
+		if(err && err.error && err.error.error ){
+			return err.error.error;
+		}
+		else if(err && err.error){
+			return err.error;
+		}
+		else{
+			return err;
+		}
+	}
+
+	toCapitalize(str){
+		return (str.charAt(0).toUpperCase() + str.slice(1))
+	}
 }
 export class FieldMatcher implements ErrorStateMatcher {
 	isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

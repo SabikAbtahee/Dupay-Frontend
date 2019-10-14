@@ -69,7 +69,9 @@ export const authentication_error_messages = {
 	password_mismatch: 'Password does not match',
 	password_required: 'Password is required',
 	phone_number_error: 'Provide phone number',
-	otp_error: 'Wrong OTP given'
+	otp_error: 'Wrong OTP given',
+	username_error:'Provide valid username',
+	trade_insurance_error:'Provide valid trade insurance error'
 };
 
 export const snackbarMessages = {
@@ -79,7 +81,9 @@ export const snackbarMessages = {
 	otp_verified: 'OTP verified',
 	email_exists: 'Email already exists in our system',
 	otp_failed: 'OTP verification failed',
-	check_email_for_verification: 'Check email for verification'
+	check_email_for_verification: 'Check email for verification',
+	registration_complete:'Registration Complete',
+	try_again:'Please try again'
 };
 
 export const urlPaths = {
@@ -103,20 +107,26 @@ export const urlPaths = {
 
 export const httpHeader = {
 	headers: new HttpHeaders({
-		'Content-Type': 'application/json'
+		'Content-Type': 'application/json',
+		'Accept':'application/json'
 	})
 };
 
-export const httpOptionsText = {
+// export const httpOptionsText = new HttpHeaders({
+// 	'Content-Type': 'application/json'
+// });
+
+
+export const httpOptionsText:Object = {
 	headers: new HttpHeaders({
 		'Content-Type': 'application/json',
 		'Accept':'application/json'
-		
 	}),
+	
 	
 };
 export const httpOptionsJson = {
 	headers: new HttpHeaders({
-		'Content-Type': 'application/json',
+		'Content-Type': 'application/json'
 	})
 };
