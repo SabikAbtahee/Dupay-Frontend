@@ -1,0 +1,95 @@
+The ?? is the variable the rest is applied
+
+example-  <div class='p-?? m-?? font-size-?? w-?? w-??-p h-?? h-??-p' > CONTENT </div>
+
+For PADDING-----
+
+p-??
+{
+    padding: ?? px
+}
+pl-??
+{
+    padding-left: ?? px
+}
+pr-??
+{
+    padding-right: ?? px
+}
+pb-??
+{
+    padding-bottom: ?? px
+}
+pt-??
+{
+    padding-top: ?? px
+}
+px-??
+{
+    padding-left: ?? px
+    padding-right: ?? px
+}
+py-??
+{
+    padding-top: ?? px
+    padding-bottom: ?? px
+}
+
+
+For MARGIN
+
+same as padding
+
+m-??
+ml-??
+mr-??
+mt-??
+mb-??
+mx-??
+my-??
+
+WIDTH
+
+w-??
+{
+    width: ?? px
+}
+
+w-??-p
+{
+    width: ?? %
+
+}
+
+HEIGHT
+
+h-??
+{
+    height: ?? px
+}
+
+h-??-p
+{
+    height: ?? %
+
+}
+
+
+BORDER RADIUS
+
+border-radius-??
+{
+    border-radius: ?? px
+}
+
+border-radius-??-p
+{
+    border-radius: ?? %
+}
+
+FONT-SIZE
+
+font-size-??
+{
+    font-size: ?? px
+}

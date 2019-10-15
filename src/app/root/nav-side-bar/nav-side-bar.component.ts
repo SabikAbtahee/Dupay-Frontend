@@ -4,10 +4,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+
 @Component({
 	selector: 'app-nav-side-bar',
 	templateUrl: './nav-side-bar.component.html',
-	styleUrls: ['./nav-side-bar.component.scss']
+	styleUrls: [ './nav-side-bar.component.scss' ]
 })
 export class NavSideBarComponent implements OnInit {
 	isHandset$: Observable<boolean> = this.breakpointObserver
@@ -16,11 +17,11 @@ export class NavSideBarComponent implements OnInit {
 
 	title: string;
 	sidebar;
-	Username: any=dupayConst.username;
+	Username: any = dupayConst.username;
 	menuItems;
 	selectedRow: number;
-
-	constructor(private breakpointObserver: BreakpointObserver, private router: Router) { }
+	isExpanded: boolean = false;
+	constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
 
 	ngOnInit() {
 		this.initiateVariables();
@@ -32,8 +33,8 @@ export class NavSideBarComponent implements OnInit {
 
 		this.makeSideBar();
 	}
-	
-	makeSideBar() { 
+
+	makeSideBar() {
 		// this.sidebar = dupayConst.DefaultSideBar;
 		// this.sidebar = dupayConst.AdminSidebar;
 		this.sidebar = dupayConst.MerchantSidebar;
