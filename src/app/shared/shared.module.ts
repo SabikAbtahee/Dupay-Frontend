@@ -21,7 +21,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
-
 @NgModule({
   declarations: [SnackbarComponent],
   imports: [

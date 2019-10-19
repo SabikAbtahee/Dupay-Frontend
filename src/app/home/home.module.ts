@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HomeDefaultComponent } from './components/home-default/home-default.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeService } from './services/home.service';
+import { SharedModule } from '../shared/shared.module';
+import { CoreModule } from '../core/core.module';
+import { ConfigModule } from '../config/config.module';
 
 
 const routes:Routes=[
@@ -15,7 +18,10 @@ const routes:Routes=[
   declarations: [HomeDefaultComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
+    CoreModule,
+    ConfigModule
   ],
   providers:[HomeService]
 })

@@ -5,12 +5,12 @@ export const dupayConst = {
 		{
 			name: 'Home',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'home'
 		},
 		{
 			name: 'Query Transaction',
 			url: 'transaction/query',
-			icon: 'account_balance'
+			icon: 'search'
 		}
 	],
 

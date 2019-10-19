@@ -1,9 +1,7 @@
 <mat-sidenav-container class="sidenav-container " autosize>
-  <mat-sidenav #drawer [ngClass]="isExpanded ? 'sidenav-opened' : 'sidenav-closed' " 
-  
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false" >
-
+  <mat-sidenav #drawer [ngClass]="isExpanded ? 'sidenav-opened' : 'sidenav-closed' "
+    [opened]="(isHandset$ | async) === false" [mode]="(isHandset$ | async) ? 'side' : 'side'">
+    <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" -->
     <mat-toolbar *ngIf="isExpanded" fxLayout="row" fxLayoutAlign="space-between center" class="white-color-foreground">
       <div>{{title}}</div>
 
