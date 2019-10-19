@@ -6,6 +6,8 @@ import { MerchantNotificationComponent } from './components/merchant-notificatio
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PasswordChangeComponent } from './components/password-change/password-change.component';
+import {PasswordModalService} from "./services/password-modal.service";
 
 const routes:Routes=[
   {
@@ -27,11 +29,13 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule
-  ]
+  ],
+  providers: [ PasswordModalService ],
+  entryComponents: [ PasswordChangeComponent ]
 })
 export class UserModule { }
