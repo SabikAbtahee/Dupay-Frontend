@@ -1,4 +1,4 @@
-import { Roles, Merchant_Status } from '../enums/dupay.enum';
+import { Roles, Merchant_Status, Merchant_Types } from '../enums/dupay.enum';
 
 export interface User {
 	Email: string;
@@ -11,59 +11,34 @@ export interface User {
 }
 
 export interface Merchant {
-	Merchant_NID: string;
-	Merchant_balance: number;
-	Merchant_type: string;
-	Merchant_status: Merchant_Status;
-	Merchant_trade_inc: string;
-	code: string;
-}
+	id?:string,
+	username:string,
+	email:string,
+	password?:string,
+	name?:string,
+	tradeInsurance?:string,
+	NID?:string,
+	balance?:number,
+	type?:Merchant_Types,
+	code?:string,
+	pending?:boolean,
+	approved?:boolean
 
-export interface Payment{
-	Pay_Id:string,
-	Pay_Date:Date,
-	Pay_Amount:number,
-	Pay_Account:string,
-	Pay_Conf:string,
-	Pay_Wallet:string
-}
 
-export interface Withdraw{
-	With_ID:string,
-	With_Date:Date,
-	With_Amount:number,
-	With_Status:string, //enum hobe
-	With_Wallet_Type:string,
-	With_Branch:string,
-	With_Account_number:string,
-}
 
-export interface Notification{
-	Ntf_ID:string,
-	Ntf_Status:string, //enum hobe
-	Ntf_Date:string,
-	Ntf_Message:string
-}
 
-export interface authenticationEmailOtp{
-	key:string,
-	isEmailDone?:boolean,
-	isOtpDone?:boolean
 }
 
 
 
-export interface snackbar {
-	duration?: number;
-	data: snackbarData;
-	horizontalPosition?: MatSnackBarHorizontalPosition;
-	verticalPosition?: MatSnackBarVerticalPosition;
-	panelClass?: string[];
+export interface email{
+	email:string
 }
-export interface snackbarData{
-	message:string,
-	isAccepted?:any
+
+export interface emailOtp{
+	email:string,
+	otpCode:string
 }
-export declare type MatSnackBarHorizontalPosition = 'start' | 'center' | 'end' | 'left' | 'right';
-export declare type MatSnackBarVerticalPosition = 'top' | 'bottom';
-export declare type acceptance = 'default' | true | false;
+
+
+

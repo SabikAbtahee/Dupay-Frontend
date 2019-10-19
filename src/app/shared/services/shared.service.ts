@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { snackbar } from '../../config/interfaces/dupay.interface';
 import { SnackbarComponent } from '../components/snackbar/snackbar.component';
+import { snackbar } from '../../config/interfaces/configurations.interface';
 
 @Injectable({
   providedIn: 'root'

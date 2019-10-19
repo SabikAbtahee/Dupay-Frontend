@@ -10,6 +10,6 @@ export enum Merchant_Status{
 }
 
 export enum Merchant_Types{
-    SSL='SSL',
-    Ecommerce='Ecommerce'
+    TYPE_A='TYPE_A',
+    TYPE_B='TYPE_B'
 }

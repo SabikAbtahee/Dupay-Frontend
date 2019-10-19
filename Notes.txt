@@ -14,3 +14,11 @@
 `
 9. Font awesome installation 
 `npm install --save font-awesome angular-font-awesome`
+
+
+10.Kill a process in windows
+
+netstat -ano | findstr :yourPortNumber
+taskkill /PID typeyourPIDhere /F
+
+

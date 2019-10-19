@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeDefaultComponent } from './components/home-default/home-default.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeService } from './services/home.service';
 
 
 const routes:Routes=[
@@ -15,6 +16,7 @@ const routes:Routes=[
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers:[HomeService]
 })
 export class HomeModule { }
