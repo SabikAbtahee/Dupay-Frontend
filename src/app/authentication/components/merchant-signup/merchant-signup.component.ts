@@ -53,6 +53,7 @@ export class MerchantSignupComponent implements OnInit {
 	matcher;
 	merchant_types = Merchant_Types;
 	error_messages = authentication_error_messages;
+	snackbarMessages=snackbarMessages;
 	urlPaths = urlPaths;
 
 	ngOnInit() {
@@ -129,13 +130,23 @@ export class MerchantSignupComponent implements OnInit {
 						isEmailDone: true,
 						isOtpDone: false
 					};
+					debugger
+
 					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
 					this.openSnackBar(res.message, true);
 					this.isEmailLoading = false;
 				},
 				(err) => {
+					debugger
 					let message = this.util.giveErrorMessage(err);
-					this.openSnackBar(this.util.toCapitalize(message), false);
+					
+					if(typeof(message)=='string'){
+						this.openSnackBar(this.util.toCapitalize(message), false);
+					}
+					else{
+						this.openSnackBar(snackbarMessages.try_again, false);
+
+					}
 					this.isEmailLoading = false;
 				}
 			);
@@ -167,7 +178,14 @@ export class MerchantSignupComponent implements OnInit {
 				(err) => {
 					this.isresendOtp = true;
 					let message = this.util.giveErrorMessage(err);
-					this.openSnackBar(this.util.toCapitalize(message), false);
+					
+					if(typeof(message)=='string'){
+						this.openSnackBar(this.util.toCapitalize(message), false);
+					}
+					else{
+						this.openSnackBar(snackbarMessages.try_again, false);
+
+					}
 					this.isOTPLoading = false;
 				}
 			);
@@ -208,7 +226,14 @@ export class MerchantSignupComponent implements OnInit {
 				},
 				(err) => {
 					let message = this.util.giveErrorMessage(err);
-					this.openSnackBar(this.util.toCapitalize(message), false);
+					
+					if(typeof(message)=='string'){
+						this.openSnackBar(this.util.toCapitalize(message), false);
+					}
+					else{
+						this.openSnackBar(snackbarMessages.try_again, false);
+
+					}
 					this.isSignUpLoading = false;
 				}
 			);
