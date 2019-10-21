@@ -5,6 +5,7 @@ import { MerchantRequestsComponent } from './components/merchant-requests/mercha
 import { MerchantNotificationComponent } from './components/merchant-notification/merchant-notification.component';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes:Routes=[
   {
@@ -18,11 +19,15 @@ const routes:Routes=[
   {
     path:'merchant-notification',
     component:MerchantNotificationComponent
+  },
+  {
+    path:'profile',
+    component:UserProfileComponent
   }
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

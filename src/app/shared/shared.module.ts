@@ -21,6 +21,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+
+import { MatTableModule } from '@angular/material/table';
+
 @NgModule({
   declarations: [SnackbarComponent],
   imports: [
@@ -47,7 +50,8 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   exports:[
     
@@ -73,7 +77,8 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]
