@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SecurityService } from './security.service';
-import { urlPaths } from 'src/app/config/constants/dupayConstants';
+import { urlPaths } from '../../config/constants/dupayConstants';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class MerchantGuard implements CanActivate {
-  constructor(private securityService: SecurityService, private router: Router) {}
+	constructor(private securityService: SecurityService, private router: Router) {}
 
 	canActivate(): Observable<boolean> {
 		return new Observable((observer) => {
@@ -22,5 +22,4 @@ export class MerchantGuard implements CanActivate {
 			});
 		});
 	}
-  
 }
