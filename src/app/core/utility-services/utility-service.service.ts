@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import * as _ from 'lodash';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { snackbarMessages } from '../../config/constants/dupayConstants';
 @Injectable({
 	providedIn: 'root'
 })
@@ -50,13 +51,30 @@ export class UtilityService {
 
 	giveErrorMessage(err){
 		if(err && err.error && err.error.error ){
-			return err.error.error;
+			if(typeof(err.error.error)=='string'){
+				return err.error.error;
+			}
+			else{
+				return snackbarMessages.try_again
+			}
 		}
 		else if(err && err.error){
-			return err.error;
+			if(typeof(err.error)=='string'){
+				return err.error;
+			}
+			else{
+				return snackbarMessages.try_again
+			}
+		
 		}
 		else{
-			return err;
+			if(typeof(err)=='string'){
+				return err;
+			}
+			else{
+				return snackbarMessages.try_again
+			}
+			
 		}
 	}
 

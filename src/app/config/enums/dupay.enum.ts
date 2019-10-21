@@ -1,7 +1,7 @@
 export enum Roles{
-    Admin='Admin',
-    Merchant='Merchant',
-    Anonymous='Anonymous'
+    ADMIN='ADMIN',
+    MERCHANT='MERCHANT',
+    anonymousUser='anonymousUser'
 }
 
 export enum Merchant_Status{

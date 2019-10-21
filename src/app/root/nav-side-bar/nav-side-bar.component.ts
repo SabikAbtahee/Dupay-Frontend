@@ -4,6 +4,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { RootService } from '../services/root.service';
+import { Roles } from 'src/app/config/enums/dupay.enum';
 
 @Component({
 	selector: 'app-nav-side-bar',
@@ -21,11 +23,15 @@ export class NavSideBarComponent implements OnInit {
 	menuItems;
 	selectedRow: number;
 	isExpanded: boolean = false;
-	constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+	constructor(
+		private breakpointObserver: BreakpointObserver,
+		private router: Router,
+		private RootService: RootService
+	) {}
 
 	ngOnInit() {
 		this.initiateVariables();
-		this.selectedRow = 0;
+		// this.selectedRow = 0;
 		// this.route(dupayConst.sidebar[0].url);
 	}
 	initiateVariables() {
@@ -35,9 +41,12 @@ export class NavSideBarComponent implements OnInit {
 	}
 
 	makeSideBar() {
-		this.sidebar = dupayConst.DefaultSideBar;
-		// this.sidebar = dupayConst.AdminSidebar;
-		// this.sidebar = dupayConst.MerchantSidebar;
+		this.RootService.checkRole().subscribe((res) => {
+			if (res == Roles.ADMIN) this.sidebar = dupayConst.AdminSidebar;
+			else if (res == Roles.MERCHANT) this.sidebar = dupayConst.MerchantSidebar;
+			else if (res == Roles.anonymousUser) this.sidebar = dupayConst.DefaultSideBar;
+		});
+		
 	}
 
 	route(url) {

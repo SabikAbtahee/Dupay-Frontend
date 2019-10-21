@@ -22,7 +22,7 @@
     </mat-toolbar>
 
 
-    <mat-nav-list *ngIf='isExpanded' class="white-color-foreground">
+    <mat-nav-list *ngIf='isExpanded && sidebar' class="white-color-foreground">
       <div *ngFor="let content of sidebar;let i = index">
 
         <mat-list-item (click)="route(content.url) ; selectRow(i)" [class.active]="i == selectedRow"
@@ -36,7 +36,7 @@
       </div>
     </mat-nav-list>
 
-    <mat-nav-list *ngIf='!isExpanded' class="white-color-foreground">
+    <mat-nav-list *ngIf='!isExpanded && sidebar' class="white-color-foreground">
 
       <div *ngFor="let content of sidebar;let i = index">
 

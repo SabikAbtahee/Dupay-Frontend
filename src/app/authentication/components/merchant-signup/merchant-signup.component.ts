@@ -1,4 +1,4 @@
-import { dupayConst, snackbarMessages } from './../../../config/constants/dupayConstants';
+import { dupayConst, snackbarMessages, localStorageKeys } from './../../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordRegex, authentication_error_messages, urlPaths } from '../../../config/constants/dupayConstants';
@@ -31,7 +31,7 @@ export class MerchantSignupComponent implements OnInit {
 
 	// Localstorage Object
 	authenticationObject: authenticationEmailOtp = {
-		key: 'DupaySignUp'
+		key: localStorageKeys.DupaySignUp
 	};
 
 	// Progress bar
@@ -64,7 +64,6 @@ export class MerchantSignupComponent implements OnInit {
 		this.setCustomValidation();
 	}
 
-	// Check if email and otp is already done setting
 	checkForm() {
 		let check: authenticationEmailOtp = this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key);
 		if (check && check.isEmailDone) {
@@ -178,14 +177,7 @@ export class MerchantSignupComponent implements OnInit {
 				(err) => {
 					this.isresendOtp = true;
 					let message = this.util.giveErrorMessage(err);
-					
-					if(typeof(message)=='string'){
-						this.openSnackBar(this.util.toCapitalize(message), false);
-					}
-					else{
-						this.openSnackBar(snackbarMessages.try_again, false);
-
-					}
+					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isOTPLoading = false;
 				}
 			);
@@ -218,7 +210,6 @@ export class MerchantSignupComponent implements OnInit {
 			};
 			this.authService.signUpMerchantAccount(merchant).pipe(first()).subscribe(
 				(res) => {
-					debugger;
 					this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 					this.openSnackBar(snackbarMessages.registration_complete, true);
 					this.isSignUpLoading = false;
@@ -226,14 +217,7 @@ export class MerchantSignupComponent implements OnInit {
 				},
 				(err) => {
 					let message = this.util.giveErrorMessage(err);
-					
-					if(typeof(message)=='string'){
-						this.openSnackBar(this.util.toCapitalize(message), false);
-					}
-					else{
-						this.openSnackBar(snackbarMessages.try_again, false);
-
-					}
+					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isSignUpLoading = false;
 				}
 			);

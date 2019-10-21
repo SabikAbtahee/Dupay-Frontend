@@ -83,7 +83,9 @@ export const snackbarMessages = {
 	otp_failed: 'OTP verification failed',
 	check_email_for_verification: 'Check email for verification',
 	registration_complete:'Registration Complete',
-	try_again:'Please try again'
+	try_again:'Please try again',
+	auth_failure:'Must login to continue',
+	access_denied:'Access Denied'
 };
 
 export const urlPaths = {
@@ -108,13 +110,16 @@ export const urlPaths = {
 export const httpHeader = {
 	headers: new HttpHeaders({
 		'Content-Type': 'application/json',
-		'Accept':'application/json'
+		
 	})
 };
-
-// export const httpOptionsText = new HttpHeaders({
-// 	'Content-Type': 'application/json'
-// });
+export const httpHeaderLogin = {
+	headers: new HttpHeaders({
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'Accept':'application/x-www-form-urlencoded'
+		
+	})
+};
 
 
 export const httpOptionsText:Object = {
@@ -130,3 +135,11 @@ export const httpOptionsJson = {
 		'Content-Type': 'application/json'
 	})
 };
+
+
+export const localStorageKeys={
+	DupaySignUp:'DupaySignUp',
+	User:'User',
+	Token:'Token'
+
+}

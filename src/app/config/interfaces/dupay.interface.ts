@@ -1,13 +1,13 @@
 import { Roles, Merchant_Status, Merchant_Types } from '../enums/dupay.enum';
 
-export interface User {
-	Email: string;
-	Password: string;
-	Username: string;
-	Name: string;
-	Usertype: Roles;
-	Merchant_id?: string;
-	Merchant?: Merchant;
+export interface User{
+	id: string,
+    username: string,
+    email: string,
+    password?: string,
+    name: string,
+    role: Roles,
+    token: string
 }
 
 export interface Merchant {
@@ -39,6 +39,7 @@ export interface emailOtp{
 	email:string,
 	otpCode:string
 }
+
 
 
 
