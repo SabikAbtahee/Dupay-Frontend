@@ -31,6 +31,7 @@ export class NavSideBarComponent implements OnInit {
 
 	ngOnInit() {
 		this.initiateVariables();
+		// this.checkRow();
 		// this.selectedRow = 0;
 		// this.route(dupayConst.sidebar[0].url);
 	}
@@ -45,8 +46,8 @@ export class NavSideBarComponent implements OnInit {
 			if (res == Roles.ADMIN) this.sidebar = dupayConst.AdminSidebar;
 			else if (res == Roles.MERCHANT) this.sidebar = dupayConst.MerchantSidebar;
 			else if (res == Roles.anonymousUser) this.sidebar = dupayConst.DefaultSideBar;
+			this.checkRow();
 		});
-		
 	}
 
 	route(url) {
@@ -54,5 +55,15 @@ export class NavSideBarComponent implements OnInit {
 	}
 	selectRow(index) {
 		this.selectedRow = index;
+	}
+	checkRow() {
+		let currentUrl = this.router.url;
+		let count = 0;
+		for (let i of this.sidebar) {
+			if (currentUrl == `/${i.url}`) {
+				this.selectedRow = count;
+			}
+			count += 1;
+		}
 	}
 }

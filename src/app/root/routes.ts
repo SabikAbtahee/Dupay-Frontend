@@ -28,6 +28,10 @@ export const routes: Routes = [
 			{
 				path:'transaction',
 				loadChildren:'../transaction/transaction.module#TransactionModule',
+			},
+			{
+				path:'withdrawal',
+				loadChildren:'../withdrawal/withdrawal.module#WithdrawalModule',
 			}
 			
 		]
@@ -43,6 +47,7 @@ export const routes: Routes = [
 			}
 		]
 	},
+	
     {
 		path: '**',
 		component: NotFoundComponent

@@ -16,23 +16,48 @@ export const dupayConst = {
 
 	AdminSidebar: [
 		{
-			name: 'Dashboard',
+			name: 'Home',
 			url: 'home',
+			icon: 'home'
+		},
+		{
+			name: 'Profile',
+			url: 'user/profile',
 			icon: 'dashboard'
 		},
 		{
-			name: 'Merchant',
-			url: 'home',
+			name: 'Merchant Requests',
+			url: 'user/merchant-request',
 			icon: 'account_balance'
 		},
 		{
-			name: 'Configuration',
-			url: 'home',
+			name: 'Merchant List',
+			url: 'user/merchant-list',
+			icon: 'build'
+		},
+		{
+			name: 'Transfer Request',
+			url: 'withdrawal/transer-request',
+			icon: 'build'
+		},
+		{
+			name: 'Notify Merchant',
+			url: 'user/merchant-notification',
+			icon: 'build'
+		},
+		{
+			name: 'Transaction History',
+			url: 'transaction/history',
 			icon: 'build'
 		}
 	],
 
 	MerchantSidebar: [
+		{
+			name: 'Home',
+			url: 'home',
+			icon: 'home'
+		},
 		{
 			name: 'Dashboard',
 			url: 'home',

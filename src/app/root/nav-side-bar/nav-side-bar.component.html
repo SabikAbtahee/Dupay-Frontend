@@ -26,7 +26,7 @@
       <div *ngFor="let content of sidebar;let i = index">
 
         <mat-list-item (click)="route(content.url) ; selectRow(i)" [class.active]="i == selectedRow"
-          class="cursor-pointer px-24 font-size-16 my-24">
+          class="cursor-pointer px-24 font-size-16 ">
           <i class="material-icons-outlined mr-16">
             {{content.icon}}
           </i>
@@ -40,7 +40,7 @@
 
       <div *ngFor="let content of sidebar;let i = index">
 
-        <mat-list-item class='my-24'>
+        <mat-list-item class='my-12'>
           <button mat-mini-fab color='white' (click)="route(content.url); selectRow(i)"
             [class.active]="i == selectedRow" class="cursor-pointer white-color-background"><i
               class="material-icons-outlined ">
