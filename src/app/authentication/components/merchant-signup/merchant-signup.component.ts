@@ -129,14 +129,14 @@ export class MerchantSignupComponent implements OnInit {
 						isEmailDone: true,
 						isOtpDone: false
 					};
-					debugger
+					
 
 					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
 					this.openSnackBar(res.message, true);
 					this.isEmailLoading = false;
 				},
 				(err) => {
-					debugger
+					
 					let message = this.util.giveErrorMessage(err);
 					
 					if(typeof(message)=='string'){

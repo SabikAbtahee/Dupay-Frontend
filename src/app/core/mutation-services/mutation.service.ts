@@ -28,7 +28,7 @@ export class MutationService {
 	}
 
 	httpPost(apiPath, payload, httpheader): Observable<any> {
-		debugger;
+		
 		return new Observable((observer) => {
 			this.http.post<any>(`${apiPath}`, payload, httpheader).pipe(first()).subscribe(
 				(res) => {

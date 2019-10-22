@@ -28,27 +28,27 @@ export const dupayConst = {
 		{
 			name: 'Merchant Requests',
 			url: 'user/merchant-request',
-			icon: 'account_balance'
+			icon: 'inbox'
 		},
 		{
 			name: 'Merchant List',
 			url: 'user/merchant-list',
-			icon: 'build'
+			icon: 'waves'
 		},
 		{
 			name: 'Transfer Request',
-			url: 'withdrawal/transer-request',
-			icon: 'build'
+			url: 'withdrawal/transfer-request',
+			icon: 'attach_money'
 		},
 		{
 			name: 'Notify Merchant',
 			url: 'user/merchant-notification',
-			icon: 'build'
+			icon: 'notifications_active'
 		},
 		{
 			name: 'Transaction History',
 			url: 'transaction/history',
-			icon: 'build'
+			icon: 'history'
 		}
 	],
 
@@ -59,30 +59,54 @@ export const dupayConst = {
 			icon: 'home'
 		},
 		{
-			name: 'Dashboard',
-			url: 'home',
+			name: 'Profile',
+			url: 'user/profile',
 			icon: 'dashboard'
 		},
 		{
-			name: 'Configuration',
-			url: 'home',
-			icon: 'build'
+			name: 'Merchant Notification',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active'
+		},
+		// {
+		// 	name: 'Configuration',
+		// 	url: 'home',
+		// 	icon: 'build'
+		// },
+		{
+			name: 'Withdraw request',
+			url: 'withdrawal/withdraw-request',
+			icon: 'compare_arrows'
 		},
 		{
-			name: 'Transfer request',
-			url: 'home',
-			icon: 'compare_arrows'
+			name: 'Transaction History',
+			url: 'transaction/history',
+			icon: 'history'
 		}
 	],
 	siteName: {
 		name: 'DUPAY'
 	},
+	menu: {
+		profile: {
+			name: 'My Profile',
+			url: 'user/profile'
+		},
+		logout: {
+			name: 'Logout',
+			url: 'sign-in'
+		}
+		
+	},
 	username: {
 		name: 'Login',
 		url: 'authentication/sign-in'
 	}
+	
 };
-export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+// export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+export const passwordRegex = '.{8,}$';
+
 
 export const authentication_error_messages = {
 	merchant_type: 'Please choose merchant type',
@@ -90,7 +114,7 @@ export const authentication_error_messages = {
 	email_error: 'Invalid email',
 	email_required: 'Email is required',
 	nid_error: 'Please provide your National ID number',
-	weak_password: 'Make within 8 characters',
+	weak_password: 'Password should be at least 8 characters',
 	password_mismatch: 'Password does not match',
 	password_required: 'Password is required',
 	phone_number_error: 'Provide phone number',
@@ -101,7 +125,7 @@ export const authentication_error_messages = {
 
 export const snackbarMessages = {
 	email_sent: 'Email sent successfully',
-	login: 'Log in successfully',
+	login: 'Logged in successfully',
 	login_failed: 'Email or password do not match',
 	otp_verified: 'OTP verified',
 	email_exists: 'Email already exists in our system',
@@ -110,7 +134,9 @@ export const snackbarMessages = {
 	registration_complete:'Registration Complete',
 	try_again:'Please try again',
 	auth_failure:'Must login to continue',
-	access_denied:'Access Denied'
+	access_denied:'Access Denied',
+	must_be_admin:'You need Admin permission',
+	must_be_merchant:'You need to be merchant to access'
 };
 
 export const urlPaths = {
@@ -168,3 +194,4 @@ export const localStorageKeys={
 	Token:'Token'
 
 }
+

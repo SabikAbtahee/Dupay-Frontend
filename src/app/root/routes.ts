@@ -32,6 +32,7 @@ export const routes: Routes = [
 			{
 				path:'withdrawal',
 				loadChildren:'../withdrawal/withdrawal.module#WithdrawalModule',
+				canActivate: [AuthGuard]
 			}
 			
 		]

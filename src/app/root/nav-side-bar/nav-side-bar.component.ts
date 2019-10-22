@@ -1,4 +1,4 @@
-import { dupayConst } from './../../config/constants/dupayConstants';
+import { dupayConst, urlPaths } from './../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -20,38 +20,51 @@ export class NavSideBarComponent implements OnInit {
 	title: string;
 	sidebar;
 	Username: any = dupayConst.username;
-	menuItems;
+	menuItems=dupayConst.menu;
 	selectedRow: number;
 	isExpanded: boolean = false;
+	isAuthenticated: boolean = false;
+	urlPaths = urlPaths;
+	
 	constructor(
 		private breakpointObserver: BreakpointObserver,
 		private router: Router,
-		private RootService: RootService
+		private rootService: RootService
 	) {}
 
 	ngOnInit() {
 		this.initiateVariables();
-		// this.checkRow();
-		// this.selectedRow = 0;
-		// this.route(dupayConst.sidebar[0].url);
+		this.checkRow();
+		this.getUsername();
+		
 	}
 	initiateVariables() {
 		this.title = dupayConst.siteName.name;
-
 		this.makeSideBar();
 	}
 
 	makeSideBar() {
-		this.RootService.checkRole().subscribe((res) => {
-			if (res == Roles.ADMIN) this.sidebar = dupayConst.AdminSidebar;
-			else if (res == Roles.MERCHANT) this.sidebar = dupayConst.MerchantSidebar;
-			else if (res == Roles.anonymousUser) this.sidebar = dupayConst.DefaultSideBar;
+		this.rootService.checkRole().subscribe((res) => {
+			let auth = false;
+			if (res == Roles.ADMIN) {
+				this.sidebar = dupayConst.AdminSidebar;
+				auth = true;
+			} else if (res == Roles.MERCHANT) {
+				this.sidebar = dupayConst.MerchantSidebar;
+				auth = true;
+			} else if (res == Roles.anonymousUser) {
+				this.sidebar = dupayConst.DefaultSideBar;
+				auth = false;
+			}
+			this.checkAuthentication(auth);
+
 			this.checkRow();
 		});
 	}
 
 	route(url) {
-		this.router.navigateByUrl(url);
+		console.log(url);
+		this.router.navigate([ url ]);
 	}
 	selectRow(index) {
 		this.selectedRow = index;
@@ -62,8 +75,32 @@ export class NavSideBarComponent implements OnInit {
 		for (let i of this.sidebar) {
 			if (currentUrl == `/${i.url}`) {
 				this.selectedRow = count;
+				break;
 			}
 			count += 1;
 		}
+	}
+	checkAuthentication(res: boolean) {
+		this.isAuthenticated = res;
+	}
+
+	logout(){
+		this.rootService.logout();
+		this.route(urlPaths.Authentication.Signin.url);
+	}
+	doRoute(){
+		if(!this.isAuthenticated){
+			this.route(this.urlPaths.Authentication.Signin.url);
+		}
+	}
+	getUsername(){
+		this.rootService.getUser().subscribe(res=>{
+			if(res){
+				this.Username=res.username;
+			}
+			else{
+				this.Username=dupayConst.username.name;
+			}
+		});
 	}
 }

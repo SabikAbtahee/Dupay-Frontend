@@ -6,19 +6,25 @@ import { MerchantNotificationComponent } from './components/merchant-notificatio
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AdminGuard } from '../core/security-services/admin.guard';
+import { AuthGuard } from '../core/security-services/auth.guard';
 
 const routes:Routes=[
   {
     path:'merchant-list',
-    component:MerchantListComponent
+    component:MerchantListComponent,
+    canActivate:[AdminGuard]
   },
   {
     path:'merchant-request',
-    component:MerchantRequestsComponent
+    component:MerchantRequestsComponent,
+    canActivate:[AdminGuard]
+
   },
   {
     path:'merchant-notification',
-    component:MerchantNotificationComponent
+    component:MerchantNotificationComponent,
+    canActivate:[AdminGuard]
   },
   {
     path:'profile',

@@ -71,4 +71,15 @@ export class SecurityService {
 
     })
   }
+
+  getCurrentUser():Observable<any>{
+	  return new Observable(observer=>{
+		let user: User = this.queryservice.readJSONValueFromLocalStorage(localStorageKeys.User);
+		if (user) {
+			observer.next(user);
+		} else {
+			observer.next(null);
+		}
+	  })
+  }
 }

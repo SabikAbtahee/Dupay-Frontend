@@ -75,21 +75,35 @@
           </div>
         </div>
         <!-- [matMenuTriggerFor]="menu" -->
-        <div fxLayout="row" fxLayoutAlign="center center" class="mr-64">
+        <div [matMenuTriggerFor]="menu" *ngIf='isAuthenticated' fxLayout="row" fxLayoutAlign="center center"
+          class="mr-64">
+
+          <!-- (click)='route(Username.url)' -->
+          <button mat-button class="font-size-16">{{Username}} <i class="material-icons">
+            keyboard_arrow_down
+            </i></button>
+
+          <mat-menu #menu="matMenu" class="w-180 mt-16">
+            <button mat-menu-item>
+              <div (click)="route(menuItems.profile.url)">{{menuItems.profile.name}}</div>
+            </button>
+            <button mat-menu-item>
+              <div (click)="logout()">{{menuItems.logout.name}}</div>
+            </button>
+          </mat-menu>
+        </div>
+
+
+        <div *ngIf='!isAuthenticated' (click)='doRoute()' fxLayout="row" fxLayoutAlign="center center" class="mr-64">
           <mat-icon class="material-icons-outlined cursor-pointer">
             settings
           </mat-icon>
-          <button mat-button class="font-size-16" (click)='route(Username.url)'>{{Username.name}}</button>
-          <!-- <mat-menu #menu="matMenu" class="w-180 mt-16">
-                  <button mat-menu-item>
-                    <div (click)="route(menuItems.profile.url)">{{menuItems.profile.name}}</div>
-                  </button>
-                  <button mat-menu-item>
-                    <div (click)="logout()">{{menuItems.logout.name}}</div>
-                  </button>
-                </mat-menu> -->
+          <button mat-button class="font-size-16">{{Username}}</button>
         </div>
       </div>
+
+
+
 
     </mat-toolbar>
     <router-outlet></router-outlet>

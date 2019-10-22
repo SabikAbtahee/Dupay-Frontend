@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SearchTransactionComponent } from './components/search-transaction/search-transaction.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HistoryTransactionComponent } from './components/history-transaction/history-transaction.component';
+import { AuthGuard } from '../core/security-services/auth.guard';
 
 const routes:Routes=[
   {
@@ -15,7 +16,9 @@ const routes:Routes=[
   },
   {
     path:'history',
-    component:HistoryTransactionComponent
+    component:HistoryTransactionComponent,
+    canActivate: [AuthGuard]
+
   }
  
 ]

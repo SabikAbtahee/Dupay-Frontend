@@ -9,7 +9,11 @@ import { SharedService } from '../../shared/services/shared.service';
 	providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-	constructor(private securityService: SecurityService, private router: Router,private sharedService:SharedService) {}
+	constructor(
+		private securityService: SecurityService,
+		private router: Router,
+		private sharedService: SharedService
+	) {}
 
 	canActivate(): Observable<boolean> {
 		return new Observable((observer) => {
@@ -17,14 +21,14 @@ export class AuthGuard implements CanActivate {
 				if (res) {
 					observer.next(true);
 				} else if (!res) {
-          observer.next(false);
-          this.openSnackBar(snackbarMessages.auth_failure,false);
+					observer.next(false);
+					this.openSnackBar(snackbarMessages.auth_failure, false);
 					this.router.navigate([ urlPaths.Authentication.Signin.url ]);
 				}
 			});
 		});
-  }
-  openSnackBar(message, isAccepted) {
+	}
+	openSnackBar(message, isAccepted) {
 		this.sharedService.openSnackBar({
 			data: { message: message, isAccepted: isAccepted },
 			duration: 2,
