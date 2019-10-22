@@ -16,10 +16,14 @@ export const api_path = {
     registerMerchantAccount:`${environment.baseurl}/api/user`,
 
     //Login
-    loginWithUsernamePassword:`${environment.baseurl}/api/login`
+    loginWithUsernamePassword:`${environment.baseurl}/api/login`,
 
-    
+    //Merchant account recovery
+     forgotPasswordOTPEmail:`${environment.baseurl}/api/user/reset/password/email/otp`,
+     forgotPasswordOTPVerification:`${environment.baseurl}/api/user/reset/password/otp/verify`,
+     resetPassword:`${environment.baseurl}/api/user/reset/password`
 
+     
 
 
     

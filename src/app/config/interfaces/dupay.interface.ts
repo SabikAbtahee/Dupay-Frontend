@@ -40,6 +40,11 @@ export interface emailOtp{
 	otpCode:string
 }
 
+export interface emailPasswordConfirmPassword{
+	email:string,
+	newPassword:string,
+	confirmPassword:string
+}
 
 
 

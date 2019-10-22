@@ -136,7 +136,8 @@ export const snackbarMessages = {
 	auth_failure:'Must login to continue',
 	access_denied:'Access Denied',
 	must_be_admin:'You need Admin permission',
-	must_be_merchant:'You need to be merchant to access'
+	must_be_merchant:'You need to be merchant to access',
+	reset_password_complete:'Password reset successful'
 };
 
 export const urlPaths = {
@@ -161,6 +162,7 @@ export const urlPaths = {
 export const httpHeader = {
 	headers: new HttpHeaders({
 		'Content-Type': 'application/json',
+		'Accept':'application/json'
 		
 	})
 };
@@ -191,7 +193,8 @@ export const httpOptionsJson = {
 export const localStorageKeys={
 	DupaySignUp:'DupaySignUp',
 	User:'User',
-	Token:'Token'
+	Token:'Token',
+	DupayAccountRecovery:'DupayAccountRecovery'
 
 }
 

@@ -102,8 +102,9 @@
                 </div>
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='verifyOTP()' mat-raised-button color="primary"
-                        class="w-240 h-40">Verify
+                        class="w-260 h-40">Verify
                         OTP</button>
+                        <button *ngIf='isresendOtp'  (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend Otp</button>
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                             login</button> -->
 
@@ -120,7 +121,7 @@
 </form>
 
 
-
+<!-- Reset password -->
 <form [formGroup]="accountRecoveryForm">
     <div *ngIf="isEmailFormDone && isOTPFormDone" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px"
         class="margin-auto pb-124">
@@ -189,8 +190,9 @@
                 </div>
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='onAccountRecoverySubmit()' mat-raised-button color="primary"
-                        class="w-240 h-40">
+                        class="w-260 h-40">
                     Recover Account</button>
+                    <button *ngIf='isresendPassword'  (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend Email</button>
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                         login</button> -->
 

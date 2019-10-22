@@ -1,14 +1,16 @@
-import { dupayConst, snackbarMessages } from './../../../config/constants/dupayConstants';
+import { dupayConst, snackbarMessages, localStorageKeys } from './../../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordRegex, authentication_error_messages, urlPaths } from '../../../config/constants/dupayConstants';
-import { FieldMatcher } from '../../../core/utility-services/utility-service.service';
+import { FieldMatcher, UtilityService } from '../../../core/utility-services/utility-service.service';
 import { Merchant_Types } from '../../../config/enums/dupay.enum';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { email, emailOtp, emailPasswordConfirmPassword,Merchant } from '../../../config/interfaces/dupay.interface';
 import { QueryService } from '../../../core/query-services/query.service';
 import { MutationService } from '../../../core/mutation-services/mutation.service';
 import { SharedService } from '../../../shared/services/shared.service';
+import { first } from 'rxjs/operators';
 import { authenticationEmailOtp } from '../../../config/interfaces/configurations.interface';
 
 @Component({
@@ -20,16 +22,17 @@ export class AccountRecoveryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-		private authService: AuthenticationService,
+	private authService: AuthenticationService,
     private router: Router,
     private coreQuery: QueryService,
     private coreMutate: MutationService,
-    private sharedService:SharedService
+	private sharedService:SharedService,
+	private util: UtilityService
   ) { }
 
   // Localstorage Object
 	authenticationObject: authenticationEmailOtp = {
-		key: 'DupayAccountRecovery'
+		key: localStorageKeys.DupayAccountRecovery
 	};
 
 	// Progress bar
@@ -37,6 +40,8 @@ export class AccountRecoveryComponent implements OnInit {
 	isOTPLoading = false;
 	isAccountRecoveryLoading = false;
 
+	isresendOtp = false;
+	isresendPassword=false;
 	// Page format
 	isEmailFormDone = false;
 	isOTPFormDone = false;
@@ -49,10 +54,11 @@ export class AccountRecoveryComponent implements OnInit {
 	matcher;
 	merchant_types = Merchant_Types;
 	error_messages = authentication_error_messages;
+	urlPaths = urlPaths;
 
   ngOnInit() {
     this.checkForm();
-		this.makeEmailForm();
+	this.makeEmailForm();
     this.makeOTPForm();
     this.makeAccountRecoveryForm();
     this.setCustomValidation();
@@ -83,7 +89,7 @@ export class AccountRecoveryComponent implements OnInit {
   makeAccountRecoveryForm() {
 		this.accountRecoveryForm = this.fb.group({
 		  password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
-			confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
+		  confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
 		});
 	}
   
@@ -103,67 +109,130 @@ export class AccountRecoveryComponent implements OnInit {
 		this.matcher = new FieldMatcher();
 	}
 
-  onAccountRecoverySubmit() {
-		this.isAccountRecoveryLoading = true;
-		// If valid delete localstorage
-		if (this.accountRecoveryForm.valid) {
-			this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
-			let x = {
-				
-				password: this.accountRecoveryForm.value.password,
-				confirm_password: this.accountRecoveryForm.value.confirm_password,
-			};
-			console.log(x);
-			this.isAccountRecoveryLoading = false;
-		} else {
-			this.authService.touchAllfields(this.accountRecoveryForm);
-			this.isAccountRecoveryLoading = false;
-		}
-	}
-
-
-  sendOTPtoEmail() {
+	sendOTPtoEmail() {
 		// If valid save the email in local storage and send email
 		this.isEmailLoading = true;
 		if (this.emailForm.valid) {
-			// this.authService.sendOtpToEmail(this.emailForm.value.email);
-			this.isEmailFormDone = true;
-			this.authenticationObject = {
-				key: this.authenticationObject.key,
-				isEmailDone: true,
-				isOtpDone: false
+			let email: email = {
+				email: this.emailForm.value.email
 			};
-			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
-			this.openSnackBar(snackbarMessages.email_sent,true);
-			this.isEmailLoading = false;
+			this.authService.sendOtpToEmailforAccountRecovery(email).pipe(first()).subscribe(
+				(res) => {
+					this.isEmailFormDone = true;
+					this.authenticationObject = {
+						key: this.authenticationObject.key,
+						email: this.emailForm.value.email,
+						isEmailDone: true,
+						isOtpDone: false
+					};
+
+
+					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+					this.openSnackBar(res.message, true);
+					this.isEmailLoading = false;
+				},
+				(err) => {
+					let message = this.util.giveErrorMessage(err);
+					
+					if(typeof(message)=='string'){
+						this.openSnackBar(this.util.toCapitalize(message), false);
+					}
+					else{
+						this.openSnackBar(snackbarMessages.try_again, false);
+
+					}
+					this.isEmailLoading = false;
+				}
+			);
 		} else {
 			this.authService.touchAllfields(this.emailForm);
 			this.isEmailLoading = false;
 		}
-  }
+		
+    }
 
-  verifyOTP() {
-		// If valid save the otpdone in localstorage
+    verifyOTP() {
+		
 		this.isOTPLoading = true;
 		if (this.OTPForm.valid) {
-			this.isOTPFormDone = true;
-			this.authenticationObject = {
-				key: this.authenticationObject.key,
-				isEmailDone: true,
-				isOtpDone: true
+			let emailOtp: emailOtp = {
+				email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
+				otpCode: this.OTPForm.value.otp
 			};
-			this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
-			this.openSnackBar(snackbarMessages.otp_verified,true);
-			this.isOTPLoading = false;
+
+			this.authService.verifyOtpOfEmailForAccountRecovery(emailOtp).pipe(first()).subscribe(
+				(res) => {
+					this.isOTPFormDone = true;
+					this.authenticationObject = this.coreQuery.readJSONValueFromLocalStorage(
+						this.authenticationObject.key
+					);
+					this.authenticationObject.isOtpDone = true;
+					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
+					this.openSnackBar(snackbarMessages.otp_verified, true);
+					this.isOTPLoading = false;
+				},
+				(err) => {
+					this.isresendOtp = true;
+					let message = this.util.giveErrorMessage(err);
+					this.openSnackBar(this.util.toCapitalize(message), false);
+					this.isOTPLoading = false;
+				}
+			);
 		} else {
 			this.authService.touchAllfields(this.OTPForm);
 			this.isOTPLoading = false;
 		}
+		
 	}
-  
-  routeToLogin() {
+
+	resendOtp() {
+		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
+		this.isresendOtp = false;
+		this.isEmailFormDone = false;
+		this.isOTPFormDone = false;
+		this.isresendPassword=false;
+	}
+
+  onAccountRecoverySubmit() {
+	this.isAccountRecoveryLoading = true;
+	// If valid delete localstorage
+	if (this.accountRecoveryForm.valid) {
+		let emailPasswordConfirmPassword: emailPasswordConfirmPassword = {
+			email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
+			newPassword: this.accountRecoveryForm.value.password,
+			confirmPassword:this.accountRecoveryForm.value.confirm_password
+		};
+		this.authService.recoverMerchantAccount(emailPasswordConfirmPassword).pipe(first()).subscribe(
+			(res) => {
+				debugger;
+				this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
+				this.openSnackBar(snackbarMessages.reset_password_complete, true);
+				this.isAccountRecoveryLoading = false;
+				this.route(urlPaths.Home.HomeDefault.url);
+			},
+			(err) => {
+				this.isresendPassword=true;
+				let message = this.util.giveErrorMessage(err);
+				this.openSnackBar(this.util.toCapitalize(message), false);
+				this.isAccountRecoveryLoading = false;
+			}
+		);
+	} else {
+		this.authService.touchAllfields(this.accountRecoveryForm);
+		this.isAccountRecoveryLoading = false;
+	}	
+	
+	}
+
+	routeToLogin() {
 		this.router.navigate([ urlPaths.Authentication.Signin.url ]);
 	}
+  
+  
+	route(path) {
+		this.router.navigate([ path ]);
+	}
+
 
   openSnackBar(message,isAccepted) {
 		this.sharedService.openSnackBar({
