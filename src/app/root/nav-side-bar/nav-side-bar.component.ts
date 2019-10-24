@@ -1,10 +1,13 @@
-import { dupayConst } from './../../config/constants/dupayConstants';
+import { dupayConst, urlPaths } from './../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
+import { RootService } from '../services/root.service';
+import { Roles, Token_Role } from '../../config/enums/dupay.enum';
+import { Token } from '@angular/compiler';
+import _ from 'lodash';
 @Component({
 	selector: 'app-nav-side-bar',
 	templateUrl: './nav-side-bar.component.html',
@@ -16,34 +19,97 @@ export class NavSideBarComponent implements OnInit {
 		.pipe(map((result) => result.matches), shareReplay());
 
 	title: string;
-	sidebar;
+	sidebar = [];
 	Username: any = dupayConst.username;
-	menuItems;
+	menuItems = dupayConst.menu;
 	selectedRow: number;
 	isExpanded: boolean = false;
-	constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+	isAuthenticated: boolean = false;
+	urlPaths = urlPaths;
+	userRole: string;
+	constructor(
+		private breakpointObserver: BreakpointObserver,
+		private router: Router,
+		private rootService: RootService
+	) {}
 
 	ngOnInit() {
 		this.initiateVariables();
-		this.selectedRow = 0;
-		// this.route(dupayConst.sidebar[0].url);
+		this.checkRow();
+		this.getUsername();
+		this.setRole();
 	}
 	initiateVariables() {
 		this.title = dupayConst.siteName.name;
-
-		this.makeSideBar();
-	}
-
-	makeSideBar() {
-		// this.sidebar = dupayConst.DefaultSideBar;
-		// this.sidebar = dupayConst.AdminSidebar;
-		this.sidebar = dupayConst.MerchantSidebar;
 	}
 
 	route(url) {
-		this.router.navigateByUrl(url);
+		console.log(url);
+		this.router.navigate([ url ]);
 	}
 	selectRow(index) {
 		this.selectedRow = index;
+	}
+	checkRow() {
+		let currentUrl = this.router.url;
+		let count = 0;
+		for (let i of this.sidebar) {
+			if (currentUrl == `/${i.url}`) {
+				this.selectedRow = count;
+				break;
+			}
+			count += 1;
+		}
+	}
+	checkAuthentication(res: boolean) {
+		this.isAuthenticated = res;
+	}
+
+	logout() {
+		this.rootService.logout();
+		this.route(urlPaths.Authentication.Signin.url);
+	}
+	doRoute() {
+		if (!this.isAuthenticated) {
+			this.route(this.urlPaths.Authentication.Signin.url);
+		}
+	}
+	getUsername() {
+		this.rootService.getUser().subscribe((res) => {
+			if (res) {
+				this.Username = res.username;
+			} else {
+				this.Username = dupayConst.username.name;
+			}
+		});
+	}
+	setRole() {
+		this.rootService.getTokenRole().pipe(first()).subscribe((res) => {
+			debugger;
+			if (res) {
+				this.userRole = res;
+			} else {
+				this.userRole = Token_Role.ANNONYMOUS;
+			}
+			this.makeSideBar();
+		});
+	}
+	makeSideBar() {
+		let auth = false;
+		if (this.userRole) {
+			auth = true;
+			_.forEach(dupayConst.sideBar, (res) => {
+				let exists = _.includes(res.role, this.userRole);
+				if (exists) {
+					this.sidebar.push(res);
+				}
+			});
+		}
+		if (this.userRole && this.userRole == Token_Role.ANNONYMOUS) {
+			auth = false;
+		}
+
+		this.checkAuthentication(auth);
+		this.checkRow();
 	}
 }

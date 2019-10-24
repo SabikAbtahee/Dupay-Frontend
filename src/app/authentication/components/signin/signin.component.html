@@ -1,6 +1,6 @@
 <form [formGroup]="signinform">
   <div fxLayout="row" fxLayoutAlign="center center" class="pt-124 pb-48 header-1 ">
-    Welcome to  <span (click)='route([urlPaths.Home.HomeDefault.url][0])' class='cursor-pointer ml-12'>  DUPAY</span>
+    Welcome to <span (click)='route([urlPaths.Home.HomeDefault.url][0])' class='cursor-pointer ml-12'> DUPAY</span>
   </div>
   <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="12px" class="margin-auto w-312 pb-16">
     <div>
@@ -20,12 +20,7 @@
                 <mat-form-field appearance="outline" class='w-224'>
                   <mat-label>Email</mat-label>
                   <input type="email" matInput placeholder="Type in Email" formControlName="email">
-                  <!--                <mat-error *ngIf="signinform.get('email').touched && signinform.get('email').invalid">{{emailError()}}</mat-error>-->
 
-                  <!-- <mat-error *ngIf="signinform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                  <!-- <mat-error *ngIf="true">222</mat-error> -->
-                  <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
                   <mat-error *ngIf="signinform.get('email').errors?.required && signinform.get('email').touched
                ">
                     {{error_messages.email_required}}
@@ -38,13 +33,41 @@
 
               </div>
             </div>
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px" >
+           
+           
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+              <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
+                <i class="material-icons-outlined">
+                  email
+                </i>
+              </div>
+              <div>
+                <mat-form-field appearance="outline" class='w-224'>
+                  <mat-label>Username</mat-label>
+                  <input type="text" matInput placeholder="Type in username" formControlName="username">
+
+                  <mat-error *ngIf="signinform.get('email').errors?.required && signinform.get('email').touched
+               ">
+                    {{error_messages.email_required}}
+                  </mat-error>
+                  <mat-error *ngIf="signinform.get('email').errors?.email && signinform.get('email').touched
+               ">
+                    {{error_messages.email_error}}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+            </div> -->
+           
+           
+           
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
               <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                 <i class="material-icons-outlined">
                   lock
                 </i>
               </div>
-              <div >
+              <div>
                 <mat-form-field appearance="outline" class='w-224'>
                   <mat-label>Password</mat-label>
                   <input type="password" matInput placeholder="Type in passoword " formControlName="password">

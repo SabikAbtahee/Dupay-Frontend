@@ -1,63 +1,185 @@
 import { HttpHeaders } from '@angular/common/http';
+import { Token_Role } from '../enums/dupay.enum';
 
 export const dupayConst = {
 	DefaultSideBar: [
 		{
 			name: 'Home',
 			url: 'home',
-			icon: 'account_balance'
+			icon: 'home'
 		},
 		{
 			name: 'Query Transaction',
 			url: 'transaction/query',
-			icon: 'account_balance'
+			icon: 'search'
 		}
 	],
 
 	AdminSidebar: [
 		{
-			name: 'Dashboard',
+			name: 'Home',
 			url: 'home',
+			icon: 'home'
+		},
+		{
+			name: 'Profile',
+			url: 'user/profile',
 			icon: 'dashboard'
 		},
 		{
-			name: 'Merchant',
-			url: 'home',
-			icon: 'account_balance'
+			name: 'Merchant Requests',
+			url: 'user/merchant-request',
+			icon: 'inbox'
 		},
 		{
-			name: 'Configuration',
-			url: 'home',
-			icon: 'build'
+			name: 'Merchant List',
+			url: 'user/merchant-list',
+			icon: 'waves'
+		},
+		{
+			name: 'Transfer Request',
+			url: 'withdrawal/transfer-request',
+			icon: 'attach_money'
+		},
+		{
+			name: 'Notify Merchant',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active'
+		},
+		{
+			name: 'Transaction History',
+			url: 'transaction/history',
+			icon: 'history'
 		}
 	],
 
 	MerchantSidebar: [
 		{
-			name: 'Dashboard',
+			name: 'Home',
 			url: 'home',
+			icon: 'home'
+		},
+		{
+			name: 'Profile',
+			url: 'user/profile',
 			icon: 'dashboard'
 		},
 		{
-			name: 'Configuration',
-			url: 'home',
-			icon: 'build'
+			name: 'Merchant Notification',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active'
+		},
+		// {
+		// 	name: 'Configuration',
+		// 	url: 'home',
+		// 	icon: 'build'
+		// },
+		{
+			name: 'Withdraw request',
+			url: 'withdrawal/withdraw-request',
+			icon: 'compare_arrows'
 		},
 		{
-			name: 'Transfer request',
-			url: 'home',
-			icon: 'compare_arrows'
+			name: 'Transaction History',
+			url: 'transaction/history',
+			icon: 'history'
 		}
+	],
+	sideBar:[
+		{
+			name: 'Home',
+			url: 'home',
+			icon: 'home',
+			role: [Token_Role.ANNONYMOUS,Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT]
+		},
+		
+		{
+			name: 'Profile',
+			url: 'user/profile',
+			icon: 'dashboard',
+			role: [Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT]
+
+		},
+		{
+			name: 'Merchant Requests',
+			url: 'user/merchant-request',
+			icon: 'inbox',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Merchant List',
+			url: 'user/merchant-list',
+			icon: 'waves',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Transfer Request',
+			url: 'withdrawal/transfer-request',
+			icon: 'attach_money',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Notify Merchant',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Merchant Notification',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active',
+			role: [Token_Role.ROLE_MERCHANT]
+
+		},
+		{
+			name: 'Withdraw request',
+			url: 'withdrawal/withdraw-request',
+			icon: 'compare_arrows',
+			role: [Token_Role.ROLE_MERCHANT]
+
+		},
+		{
+			name: 'Transaction History',
+			url: 'transaction/history',
+			icon: 'history',
+			role: [Token_Role.ROLE_MERCHANT,Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Query Transaction',
+			url: 'transaction/query',
+			icon: 'search',
+			role: [Token_Role.ANNONYMOUS]
+
+		},
 	],
 	siteName: {
 		name: 'DUPAY'
+	},
+	menu: {
+		profile: {
+			name: 'My Profile',
+			url: 'user/profile'
+		},
+		logout: {
+			name: 'Logout',
+			url: 'sign-in'
+		}
+		
 	},
 	username: {
 		name: 'Login',
 		url: 'authentication/sign-in'
 	}
+	
 };
-export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+// export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+export const passwordRegex = '.{8,}$';
+
 
 export const authentication_error_messages = {
 	merchant_type: 'Please choose merchant type',
@@ -65,7 +187,7 @@ export const authentication_error_messages = {
 	email_error: 'Invalid email',
 	email_required: 'Email is required',
 	nid_error: 'Please provide your National ID number',
-	weak_password: 'Make within 8 characters',
+	weak_password: 'Password should be at least 8 characters',
 	password_mismatch: 'Password does not match',
 	password_required: 'Password is required',
 	phone_number_error: 'Provide phone number',
@@ -76,14 +198,19 @@ export const authentication_error_messages = {
 
 export const snackbarMessages = {
 	email_sent: 'Email sent successfully',
-	login: 'Log in successfully',
+	login: 'Logged in successfully',
 	login_failed: 'Email or password do not match',
 	otp_verified: 'OTP verified',
 	email_exists: 'Email already exists in our system',
 	otp_failed: 'OTP verification failed',
 	check_email_for_verification: 'Check email for verification',
 	registration_complete:'Registration Complete',
-	try_again:'Please try again'
+	try_again:'Please try again',
+	auth_failure:'Must login to continue',
+	access_denied:'Access Denied',
+	must_be_admin:'You need Admin permission',
+	must_be_merchant:'You need to be merchant to access',
+	reset_password_complete:'Password reset successful'
 };
 
 export const urlPaths = {
@@ -109,12 +236,16 @@ export const httpHeader = {
 	headers: new HttpHeaders({
 		'Content-Type': 'application/json',
 		'Accept':'application/json'
+		
 	})
 };
-
-// export const httpOptionsText = new HttpHeaders({
-// 	'Content-Type': 'application/json'
-// });
+export const httpHeaderLogin = {
+	headers: new HttpHeaders({
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'Accept':'application/x-www-form-urlencoded'
+		
+	})
+};
 
 
 export const httpOptionsText:Object = {
@@ -130,3 +261,13 @@ export const httpOptionsJson = {
 		'Content-Type': 'application/json'
 	})
 };
+
+
+export const localStorageKeys={
+	DupaySignUp:'DupaySignUp',
+	User:'User',
+	Token:'Token',
+	DupayAccountRecovery:'DupayAccountRecovery'
+
+}
+

@@ -8,19 +8,25 @@ import { SharedModule } from '../shared/shared.module';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PasswordChangeComponent } from './components/password-change/password-change.component';
 import {PasswordModalService} from "./services/password-modal.service";
+import { AdminGuard } from '../core/security-services/admin.guard';
+import { AuthGuard } from '../core/security-services/auth.guard';
 
 const routes:Routes=[
   {
     path:'merchant-list',
-    component:MerchantListComponent
+    component:MerchantListComponent,
+    canActivate:[AdminGuard]
   },
   {
     path:'merchant-request',
-    component:MerchantRequestsComponent
+    component:MerchantRequestsComponent,
+    canActivate:[AdminGuard]
+
   },
   {
     path:'merchant-notification',
-    component:MerchantNotificationComponent
+    component:MerchantNotificationComponent,
+    canActivate:[AdminGuard]
   },
   {
     path:'profile',

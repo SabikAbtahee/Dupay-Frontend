@@ -1,9 +1,7 @@
 <mat-sidenav-container class="sidenav-container " autosize>
-  <mat-sidenav #drawer [ngClass]="isExpanded ? 'sidenav-opened' : 'sidenav-closed' " 
-  
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false" >
-
+  <mat-sidenav #drawer [ngClass]="isExpanded ? 'sidenav-opened' : 'sidenav-closed' "
+    [opened]="(isHandset$ | async) === false" [mode]="(isHandset$ | async) ? 'side' : 'side'">
+    <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" -->
     <mat-toolbar *ngIf="isExpanded" fxLayout="row" fxLayoutAlign="space-between center" class="white-color-foreground">
       <div>{{title}}</div>
 
@@ -24,11 +22,11 @@
     </mat-toolbar>
 
 
-    <mat-nav-list *ngIf='isExpanded' class="white-color-foreground">
+    <mat-nav-list *ngIf='isExpanded && sidebar' class="white-color-foreground">
       <div *ngFor="let content of sidebar;let i = index">
 
         <mat-list-item (click)="route(content.url) ; selectRow(i)" [class.active]="i == selectedRow"
-          class="cursor-pointer px-24 font-size-16 my-24">
+          class="cursor-pointer px-24 font-size-16 ">
           <i class="material-icons-outlined mr-16">
             {{content.icon}}
           </i>
@@ -38,11 +36,11 @@
       </div>
     </mat-nav-list>
 
-    <mat-nav-list *ngIf='!isExpanded' class="white-color-foreground">
+    <mat-nav-list *ngIf='!isExpanded && sidebar' class="white-color-foreground">
 
       <div *ngFor="let content of sidebar;let i = index">
 
-        <mat-list-item class='my-24'>
+        <mat-list-item class='my-12'>
           <button mat-mini-fab color='white' (click)="route(content.url); selectRow(i)"
             [class.active]="i == selectedRow" class="cursor-pointer white-color-background"><i
               class="material-icons-outlined ">
@@ -77,21 +75,35 @@
           </div>
         </div>
         <!-- [matMenuTriggerFor]="menu" -->
-        <div fxLayout="row" fxLayoutAlign="center center" class="mr-64">
+        <div [matMenuTriggerFor]="menu" *ngIf='isAuthenticated' fxLayout="row" fxLayoutAlign="center center"
+          class="mr-64">
+
+          <!-- (click)='route(Username.url)' -->
+          <button mat-button class="font-size-16">{{Username}} <i class="material-icons">
+            keyboard_arrow_down
+            </i></button>
+
+          <mat-menu #menu="matMenu" class="w-180 mt-16">
+            <button mat-menu-item>
+              <div (click)="route(menuItems.profile.url)">{{menuItems.profile.name}}</div>
+            </button>
+            <button mat-menu-item>
+              <div (click)="logout()">{{menuItems.logout.name}}</div>
+            </button>
+          </mat-menu>
+        </div>
+
+
+        <div *ngIf='!isAuthenticated' (click)='doRoute()' fxLayout="row" fxLayoutAlign="center center" class="mr-64">
           <mat-icon class="material-icons-outlined cursor-pointer">
             settings
           </mat-icon>
-          <button mat-button class="font-size-16" (click)='route(Username.url)'>{{Username.name}}</button>
-          <!-- <mat-menu #menu="matMenu" class="w-180 mt-16">
-                  <button mat-menu-item>
-                    <div (click)="route(menuItems.profile.url)">{{menuItems.profile.name}}</div>
-                  </button>
-                  <button mat-menu-item>
-                    <div (click)="logout()">{{menuItems.logout.name}}</div>
-                  </button>
-                </mat-menu> -->
+          <button mat-button class="font-size-16">{{Username}}</button>
         </div>
       </div>
+
+
+
 
     </mat-toolbar>
     <router-outlet></router-outlet>

@@ -1,7 +1,7 @@
 export enum Roles{
-    Admin='Admin',
-    Merchant='Merchant',
-    Anonymous='Anonymous'
+    ADMIN='ADMIN',
+    MERCHANT='MERCHANT',
+    anonymousUser='anonymousUser'
 }
 
 export enum Merchant_Status{
@@ -12,4 +12,10 @@ export enum Merchant_Status{
 export enum Merchant_Types{
     TYPE_A='TYPE_A',
     TYPE_B='TYPE_B'
+}
+
+export enum Token_Role{
+    ROLE_MERCHANT='ROLE_MERCHANT',
+    ROLE_ADMIN='ROLE_ADMIN',
+    ANNONYMOUS='ANNONYMOUS'
 }

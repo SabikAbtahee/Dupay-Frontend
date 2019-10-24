@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { dupayConst } from '../../config/constants/dupayConstants';
+import { catchError, retry, first } from 'rxjs/operators';
+import { dupayConst, localStorageKeys } from '../../config/constants/dupayConstants';
 import { HttpHeaders } from '@angular/common/http';
 import { api_path } from '../../config/apiRoutes/apiroutes';
 
@@ -40,5 +40,38 @@ export class QueryService {
 	//Read JSON data from localStorage
 	readJSONValueFromLocalStorage(key) {
 		return JSON.parse(localStorage.getItem(key));
+	}
+
+
+
+	getToken():Observable<any>{
+		return new Observable(observer=>{
+			let token=this.readValueFromLocalStorage(localStorageKeys.Token);
+			if(token){
+				observer.next(token);
+				observer.complete();
+			}
+			else{
+				observer.next(null);
+				observer.complete();
+
+			}
+		})
+	}
+	httpGet(apiPath, httpheader): Observable<any> {
+		
+		return new Observable((observer) => {
+			this.http.get<any>(`${apiPath}`, httpheader).pipe(first()).subscribe(
+				(res) => {
+					observer.next(res);
+				},
+				(err) => {
+					observer.error(err);
+				},
+				() => {
+					observer.complete();
+				}
+			);
+		});
 	}
 }

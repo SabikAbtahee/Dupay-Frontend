@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import * as _ from 'lodash';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
+import { snackbarMessages } from '../../config/constants/dupayConstants';
 @Injectable({
 	providedIn: 'root'
 })
@@ -38,30 +39,47 @@ export class UtilityService {
 		return throwError('Something bad happened; please try again later.');
 	}
 
-	toJSON(str){
-		let object=str;
+	toJSON(str) {
+		let object = str;
 		try {
-			object=JSON.parse(str);
+			object = JSON.parse(str);
 		} catch (e) {
 			return object;
 		}
 		return object;
 	}
 
-	giveErrorMessage(err){
-		if(err && err.error && err.error.error ){
-			return err.error.error;
-		}
-		else if(err && err.error){
-			return err.error;
-		}
-		else{
-			return err;
+	giveErrorMessage(err) {
+		if (err && err.error && err.error.error) {
+			if (typeof err.error.error == 'string') {
+				return err.error.error;
+			} else {
+				return snackbarMessages.try_again;
+			}
+		} else if (err && err.error) {
+			if (typeof err.error == 'string') {
+				return err.error;
+			} else {
+				return snackbarMessages.try_again;
+			}
+		} else {
+			if (typeof err == 'string') {
+				return err;
+			} else {
+				return snackbarMessages.try_again;
+			}
 		}
 	}
 
-	toCapitalize(str){
-		return (str.charAt(0).toUpperCase() + str.slice(1))
+	toCapitalize(str) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+
+	decodeToken(token) {
+		var ca = token;
+		var base64Url = ca.split('.')[1];
+		var decodedValue = JSON.parse(window.atob(base64Url));
+		return decodedValue;
 	}
 }
 export class FieldMatcher implements ErrorStateMatcher {
