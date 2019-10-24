@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, first } from 'rxjs/operators';
 import { dupayConst, localStorageKeys } from '../../config/constants/dupayConstants';
 import { HttpHeaders } from '@angular/common/http';
 import { api_path } from '../../config/apiRoutes/apiroutes';
@@ -57,5 +57,21 @@ export class QueryService {
 
 			}
 		})
+	}
+	httpGet(apiPath, httpheader): Observable<any> {
+		
+		return new Observable((observer) => {
+			this.http.get<any>(`${apiPath}`, httpheader).pipe(first()).subscribe(
+				(res) => {
+					observer.next(res);
+				},
+				(err) => {
+					observer.error(err);
+				},
+				() => {
+					observer.complete();
+				}
+			);
+		});
 	}
 }
