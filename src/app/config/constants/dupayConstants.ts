@@ -1,4 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
+import { Token_Role } from '../enums/dupay.enum';
 
 export const dupayConst = {
 	DefaultSideBar: [
@@ -83,6 +84,78 @@ export const dupayConst = {
 			url: 'transaction/history',
 			icon: 'history'
 		}
+	],
+	sideBar:[
+		{
+			name: 'Home',
+			url: 'home',
+			icon: 'home',
+			role: [Token_Role.ANNONYMOUS,Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT]
+		},
+		
+		{
+			name: 'Profile',
+			url: 'user/profile',
+			icon: 'dashboard',
+			role: [Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT]
+
+		},
+		{
+			name: 'Merchant Requests',
+			url: 'user/merchant-request',
+			icon: 'inbox',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Merchant List',
+			url: 'user/merchant-list',
+			icon: 'waves',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Transfer Request',
+			url: 'withdrawal/transfer-request',
+			icon: 'attach_money',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Notify Merchant',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active',
+			role: [Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Merchant Notification',
+			url: 'user/merchant-notification',
+			icon: 'notifications_active',
+			role: [Token_Role.ROLE_MERCHANT]
+
+		},
+		{
+			name: 'Withdraw request',
+			url: 'withdrawal/withdraw-request',
+			icon: 'compare_arrows',
+			role: [Token_Role.ROLE_MERCHANT]
+
+		},
+		{
+			name: 'Transaction History',
+			url: 'transaction/history',
+			icon: 'history',
+			role: [Token_Role.ROLE_MERCHANT,Token_Role.ROLE_ADMIN]
+
+		},
+		{
+			name: 'Query Transaction',
+			url: 'transaction/query',
+			icon: 'search',
+			role: [Token_Role.ANNONYMOUS]
+
+		},
 	],
 	siteName: {
 		name: 'DUPAY'
