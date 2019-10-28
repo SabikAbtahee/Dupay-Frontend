@@ -98,7 +98,7 @@ export class SecurityService {
 let httpOptions={
 	headers:new HttpHeaders().set('Authorization',`Bearer ${Token}`)
 }
-debugger
+//debugger
 return httpOptions;
   }
   getTokenRole(): Observable<any> {
