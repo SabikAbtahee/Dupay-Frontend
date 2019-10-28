@@ -13,7 +13,7 @@ export class MerchantListComponent implements OnInit {
 
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['name', 'tradeInsurance', 'balance', 'details', 'update', 'delete'];
+  public displayedColumns = ['id','username','name','type', 'tradeInsurance','NID', 'balance', 'details', 'notify', 'delete'];
 
   constructor(private userService:UserService) { }
 
