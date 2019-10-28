@@ -24,5 +24,6 @@ export const api_path = {
   resetPassword: `${environment.baseurl}/api/user/reset/password`,
 
   // profile
-  changePassword : `${environment.baseurl}/api/user/change/password`
+  changePassword : `${environment.baseurl}/api/user/change/password`,
+  merchantList:`${environment.baseurl}/api/admin/merchant`
 }
