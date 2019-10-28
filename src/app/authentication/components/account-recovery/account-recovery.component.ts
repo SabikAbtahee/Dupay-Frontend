@@ -204,7 +204,7 @@ export class AccountRecoveryComponent implements OnInit {
 		};
 		this.authService.recoverMerchantAccount(emailPasswordConfirmPassword).pipe(first()).subscribe(
 			(res) => {
-				debugger;
+				//debugger;
 				this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 				this.openSnackBar(snackbarMessages.reset_password_complete, true);
 				this.isAccountRecoveryLoading = false;
