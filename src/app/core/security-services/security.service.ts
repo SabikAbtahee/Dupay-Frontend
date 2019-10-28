@@ -4,12 +4,17 @@ import { Roles } from '../../config/enums/dupay.enum';
 import { Observable } from 'rxjs';
 import { QueryService } from '../query-services/query.service';
 import { localStorageKeys } from '../../config/constants/dupayConstants';
+import {first} from "rxjs/operators";
+import {UtilityService} from "../utility-services/utility-service.service";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class SecurityService {
-	constructor(private queryservice: QueryService) {}
+	constructor(private queryservice: QueryService,
+              private utilityService:UtilityService
+              ) {}
 
 	checkAuthorization(user: User, isRoleValid: string): boolean {
 		if (user && Roles[isRoleValid] != null && user.role == isRoleValid) {
@@ -70,6 +75,38 @@ export class SecurityService {
 			}
 
     })
+  }
+  getHeader(Token:any):any {
+    let headers = new HttpHeaders({
+      'Content-Type':'application/json',
+
+    'Authorization':`Bearer ${Token}`});
+    
+    debugger;
+    return headers;
+
+  }
+  getTokenRole(): Observable<any> {
+    return new Observable((observer) => {
+      this.queryservice.getToken().pipe(first()).subscribe(
+        (response) => {
+          if (response) {
+            let jsonToken=this.utilityService.decodeToken(response);
+            if(jsonToken && jsonToken['authorities']&& jsonToken['authorities'][0]){
+              observer.next(jsonToken['authorities'][0]);
+
+            }
+          }
+          else{
+            observer.next(null);
+
+          }
+        },
+        (err) => {
+          observer.error(err);
+        }
+      );
+    });
   }
 
   getCurrentUser():Observable<any>{

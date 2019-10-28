@@ -58,6 +58,20 @@ export class QueryService {
 			}
 		})
 	}
+	getUser():Observable<any>{
+		return new Observable(observer=>{
+			let user=this.readValueFromLocalStorage(localStorageKeys.User);
+			if(user){
+				observer.next(user);
+				observer.complete();
+			}
+			else{
+				observer.next(null);
+				observer.complete();
+
+			}
+		})
+	}
 	httpGet(apiPath, httpheader): Observable<any> {
 		
 		return new Observable((observer) => {

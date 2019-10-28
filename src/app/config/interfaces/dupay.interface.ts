@@ -45,6 +45,12 @@ export interface emailPasswordConfirmPassword{
 	newPassword:string,
 	confirmPassword:string
 }
+export interface passwordChange{
+	email:string,
+	oldPassword:string,
+	newPassword:string,
+	confirmPassword:string
+}
 
 
 

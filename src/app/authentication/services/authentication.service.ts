@@ -50,10 +50,10 @@ export class AuthenticationService {
 		return this.coreMutate.httpPost(`${api_path.forgotPasswordOTPVerification}`, otpVerification, httpHeader);
 	}
 
-	recoverMerchantAccount(emailPasswordConfirmPassword: emailPasswordConfirmPassword): Observable<any> {
-		debugger;
-		return this.coreMutate.httpPost(`${api_path.resetPassword}`, emailPasswordConfirmPassword, httpHeader);
-	}
+  recoverMerchantAccount(emailPasswordConfirmPassword: emailPasswordConfirmPassword): Observable<any> {
+    debugger;
+    return this.coreMutate.httpPost(`${api_path.resetPassword}`, emailPasswordConfirmPassword, httpHeader);
+  }
 
 
 

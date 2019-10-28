@@ -85,7 +85,6 @@ export class NavSideBarComponent implements OnInit {
 	}
 	setRole() {
 		this.rootService.getTokenRole().pipe(first()).subscribe((res) => {
-			debugger;
 			if (res) {
 				this.userRole = res;
 			} else {

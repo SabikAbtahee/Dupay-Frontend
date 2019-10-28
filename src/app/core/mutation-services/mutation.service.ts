@@ -43,4 +43,20 @@ export class MutationService {
 			);
 		});
 	}
+	httpPut(apiPath, payload, httpheader): Observable<any> {
+
+		return new Observable((observer) => {
+			this.http.put<any>(`${apiPath}`, payload, httpheader).pipe(first()).subscribe(
+				(res) => {
+					observer.next(res);
+				},
+				(err) => {
+					observer.error(err);
+				},
+				() => {
+					observer.complete();
+				}
+			);
+		});
+	}
 }
