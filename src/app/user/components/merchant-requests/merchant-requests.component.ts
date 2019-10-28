@@ -5,6 +5,7 @@ import {Merchant_Status} from 'src/app/config/enums/dupay.enum';
 
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-merchant-requests',
@@ -16,18 +17,16 @@ export class MerchantRequestsComponent implements OnInit {
   dataSource: MatTableDataSource<Merchant>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  merchants = new MatTableDataSource<Merchant>();
+  public displayedColumns = ['SI No.','username','name','type', 'tradeInsurance', 'NID', 'details', 'approve', 'reject'];
+
  
-  requests: Merchant[]=[
-  {
-    email:'asd',
-    username:'asd',
-    
-  },
-    
-  ]
+  requests: Merchant[]=[]
 
   filteredRequests: Merchant[]
   private _searchTerm:string;
+
+
   get searchTerm(): string{
     return this._searchTerm;
   }
@@ -38,7 +37,20 @@ export class MerchantRequestsComponent implements OnInit {
   // }
 
   
-  constructor() { }
+  constructor(private userService:UserService) { }
+
+  ngOnInit() {
+    console.log('ng on init called');
+    this.getMerchantList();
+    
+  }
+
+
+  getMerchantList(){
+    this.userService.getPendingMerchantList().subscribe(res=>{
+      this.merchants.data = res as Merchant[];
+    });
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -48,8 +60,19 @@ export class MerchantRequestsComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    
+  public redirectToDetails = (id: string) => {
+
   }
+
+  public redirectToUpdate = (id: string) => {
+
+  }
+
+  public redirectToDelete = (id: string) => {
+
+  }
+
+
+
 
 }
