@@ -20,62 +20,6 @@ export class MerchantListComponent implements OnInit {
   ngOnInit() {
     console.log('ng on init called');
     this.getMerchantList();
-    this.merchants.data = [{
-      NID: "3452394839843948(NID)",
-      balance: 3498,
-      pending: false,
-      email: "bsse0811@iit.du.ac.bd",
-      approved: true,
-      code: "merchantcode",
-      username: "tulshidas",
-      name: "tulshi das",
-      id: "thisisaid",
-      password: "thisisapassword",
-      tradeInsurance: "thisistradeinsurance",
-      type: Merchant_Types.TYPE_A
-    },
-    {
-      NID: "3452394839843948(NID)",
-      balance: 3498,
-      pending: false,
-      email: "bsse0811@iit.du.ac.bd",
-      approved: true,
-      code: "merchantcode",
-      username: "tulshidas",
-      name: "tulshi das",
-      id: "thisisaid",
-      password: "thisisapassword",
-      tradeInsurance: "thisistradeinsurance",
-      type: Merchant_Types.TYPE_A
-    },
-    {
-      NID: "3452394839843948(NID)",
-      balance: 3498,
-      pending: false,
-      email: "bsse0811@iit.du.ac.bd",
-      approved: true,
-      code: "merchantcode",
-      username: "tulshidas",
-      name: "tulshi das",
-      id: "thisisaid",
-      password: "thisisapassword",
-      tradeInsurance: "thisistradeinsurance",
-      type: Merchant_Types.TYPE_A
-    },
-    {
-      NID: "3452394839843948(NID)",
-      balance: 3498,
-      pending: false,
-      email: "bsse0811@iit.du.ac.bd",
-      approved: true,
-      code: "merchantcode",
-      username: "tulshidas",
-      name: "tulshi das",
-      id: "thisisaid",
-      password: "thisisapassword",
-      tradeInsurance: "thisistradeinsurance",
-      type: Merchant_Types.TYPE_A
-    }];
   }
 
   public getMerchantList = () => {
