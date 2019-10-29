@@ -10,6 +10,7 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import {PasswordModalService} from "./services/password-modal.service";
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { AuthGuard } from '../core/security-services/auth.guard';
+import { NotifyMerchantComponent } from './components/notify-merchant/notify-merchant.component';
 
 const routes:Routes=[
   {
@@ -31,11 +32,15 @@ const routes:Routes=[
   {
     path:'profile',
     component:UserProfileComponent
+  },
+  {
+    path:'notify-merchant',
+    component:NotifyMerchantComponent
   }
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

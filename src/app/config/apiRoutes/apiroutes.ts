@@ -25,4 +25,6 @@ export const api_path = {
 
   // profile
   changePassword : `${environment.baseurl}/api/user/change/password`
+
+  //Admin
 }

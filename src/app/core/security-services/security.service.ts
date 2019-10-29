@@ -77,13 +77,18 @@ export class SecurityService {
     })
   }
   getHeader(Token:any):any {
-    let headers = new HttpHeaders({
-      'Content-Type':'application/json',
-
-    'Authorization':`Bearer ${Token}`});
-    
-    debugger;
-    return headers;
+    // let headers = new HttpHeaders({
+    //   'Content-Type':'application/json',
+    //   'withCredentials':'true',
+    // 'Authorization':`Bearer ${Token}`});
+    //
+    // debugger;
+    // return headers;
+    let httpOptions={
+      headers:new HttpHeaders().set('Authorization',`Bearer ${Token}`)
+    }
+    debugger
+    return httpOptions;
 
   }
   getTokenRole(): Observable<any> {
