@@ -95,8 +95,9 @@ export class MerchantRequestsComponent implements OnInit {
         index = i;
         break;
       }
-      this.merchants.data.splice(index,1);
     }
+    this.merchants.data.splice(index,1);
+
   }
 
 
