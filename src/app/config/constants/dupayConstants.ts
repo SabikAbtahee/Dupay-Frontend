@@ -90,70 +90,81 @@ export const dupayConst = {
 			name: 'Home',
 			url: 'home',
 			icon: 'home',
-			role: [Token_Role.ANNONYMOUS,Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT]
+			role: [Token_Role.ANNONYMOUS,Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT],
+			mini_name:'Home'
 		},
 		
 		{
 			name: 'Profile',
 			url: 'user/profile',
 			icon: 'dashboard',
-			role: [Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT]
+			role: [Token_Role.ROLE_ADMIN,Token_Role.ROLE_MERCHANT],
+			mini_name:'Profile'
+			
 
 		},
 		{
 			name: 'Merchant Requests',
 			url: 'user/merchant-request',
 			icon: 'inbox',
-			role: [Token_Role.ROLE_ADMIN]
+			role: [Token_Role.ROLE_ADMIN],
+			mini_name:'Requests'
 
 		},
 		{
 			name: 'Merchant List',
 			url: 'user/merchant-list',
 			icon: 'waves',
-			role: [Token_Role.ROLE_ADMIN]
+			role: [Token_Role.ROLE_ADMIN],
+			mini_name:'List'
 
 		},
 		{
 			name: 'Transfer Request',
 			url: 'withdrawal/transfer-request',
 			icon: 'attach_money',
-			role: [Token_Role.ROLE_ADMIN]
-
-		},
-		{
-			name: 'Notify Merchant',
-			url: 'user/merchant-notification',
-			icon: 'notifications_active',
-			role: [Token_Role.ROLE_ADMIN]
+			role: [Token_Role.ROLE_ADMIN],
+			mini_name:'Transfer'
 
 		},
 		{
 			name: 'Merchant Notification',
 			url: 'user/merchant-notification',
 			icon: 'notifications_active',
-			role: [Token_Role.ROLE_MERCHANT]
+			role: [Token_Role.ROLE_MERCHANT],
+			mini_name:'Notification'
+
+		},
+		{
+			name: 'Notify Merchant',
+			url: 'user/notify-merchant',
+			icon: 'notifications_active',
+			role: [Token_Role.ROLE_ADMIN],
+			mini_name:'Notify'
 
 		},
 		{
 			name: 'Withdraw request',
 			url: 'withdrawal/withdraw-request',
 			icon: 'compare_arrows',
-			role: [Token_Role.ROLE_MERCHANT]
+			role: [Token_Role.ROLE_MERCHANT],
+			mini_name:'Withdraw'
 
 		},
 		{
 			name: 'Transaction History',
 			url: 'transaction/history',
 			icon: 'history',
-			role: [Token_Role.ROLE_MERCHANT,Token_Role.ROLE_ADMIN]
+			role: [Token_Role.ROLE_MERCHANT,Token_Role.ROLE_ADMIN],
+			mini_name:'Transaction'
 
 		},
 		{
 			name: 'Query Transaction',
 			url: 'transaction/query',
 			icon: 'search',
-			role: [Token_Role.ANNONYMOUS]
+			role: [Token_Role.ANNONYMOUS],
+			mini_name:'Query'
 
 		},
 	],

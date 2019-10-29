@@ -307,6 +307,8 @@
                     <button type="submit" (click)='onSignupSubmit()' mat-raised-button color="primary"
                         class="w-240 h-40">Sign
                         up</button>
+                    <button *ngIf='isExpired'  (click)='resendOtp()' mat-stroked-button color="primary" class="w-240 h-40">Resend Email</button>
+
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                         login</button> -->
 

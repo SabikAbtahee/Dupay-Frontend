@@ -6,7 +6,7 @@ import { FieldMatcher, UtilityService } from '../../../core/utility-services/uti
 import { Merchant_Types } from '../../../config/enums/dupay.enum';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { email, emailOtp, emailPasswordConfirmPassword,Merchant } from '../../../config/interfaces/dupay.interface';
+import { email, emailOtp, emailPasswordConfirmPassword, Merchant } from '../../../config/interfaces/dupay.interface';
 import { QueryService } from '../../../core/query-services/query.service';
 import { MutationService } from '../../../core/mutation-services/mutation.service';
 import { SharedService } from '../../../shared/services/shared.service';
@@ -14,23 +14,22 @@ import { first } from 'rxjs/operators';
 import { authenticationEmailOtp } from '../../../config/interfaces/configurations.interface';
 
 @Component({
-  selector: 'app-account-recovery',
-  templateUrl: './account-recovery.component.html',
-  styleUrls: ['./account-recovery.component.scss']
+	selector: 'app-account-recovery',
+	templateUrl: './account-recovery.component.html',
+	styleUrls: [ './account-recovery.component.scss' ]
 })
 export class AccountRecoveryComponent implements OnInit {
+	constructor(
+		private fb: FormBuilder,
+		private authService: AuthenticationService,
+		private router: Router,
+		private coreQuery: QueryService,
+		private coreMutate: MutationService,
+		private sharedService: SharedService,
+		private util: UtilityService
+	) {}
 
-  constructor(
-    private fb: FormBuilder,
-	private authService: AuthenticationService,
-    private router: Router,
-    private coreQuery: QueryService,
-    private coreMutate: MutationService,
-	private sharedService:SharedService,
-	private util: UtilityService
-  ) { }
-
-  // Localstorage Object
+	// Localstorage Object
 	authenticationObject: authenticationEmailOtp = {
 		key: localStorageKeys.DupayAccountRecovery
 	};
@@ -41,7 +40,7 @@ export class AccountRecoveryComponent implements OnInit {
 	isAccountRecoveryLoading = false;
 
 	isresendOtp = false;
-	isresendPassword=false;
+	isresendPassword = false;
 	// Page format
 	isEmailFormDone = false;
 	isOTPFormDone = false;
@@ -56,15 +55,15 @@ export class AccountRecoveryComponent implements OnInit {
 	error_messages = authentication_error_messages;
 	urlPaths = urlPaths;
 
-  ngOnInit() {
-    this.checkForm();
-	this.makeEmailForm();
-    this.makeOTPForm();
-    this.makeAccountRecoveryForm();
-    this.setCustomValidation();
-  }
+	ngOnInit() {
+		this.checkForm();
+		this.makeEmailForm();
+		this.makeOTPForm();
+		this.makeAccountRecoveryForm();
+		this.setCustomValidation();
+	}
 
-  // Check if email and otp is already done setting
+	// Check if email and otp is already done setting
 	checkForm() {
 		let check: authenticationEmailOtp = this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key);
 		if (check && check.isEmailDone) {
@@ -84,16 +83,16 @@ export class AccountRecoveryComponent implements OnInit {
 		this.OTPForm = this.fb.group({
 			otp: [ '', [ Validators.required ] ]
 		});
-  }
+	}
 
-  makeAccountRecoveryForm() {
+	makeAccountRecoveryForm() {
 		this.accountRecoveryForm = this.fb.group({
-		  password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
-		  confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
+			password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
+			confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ]
 		});
 	}
-  
-  passwordMatchValidator(group: FormGroup): any {
+
+	passwordMatchValidator(group: FormGroup): any {
 		if (group) {
 			if (group.get('password').value !== group.get('confirm_password').value) {
 				return { not_matching: true };
@@ -101,9 +100,9 @@ export class AccountRecoveryComponent implements OnInit {
 		}
 
 		return null;
-  }
+	}
 
-  setCustomValidation() {
+	setCustomValidation() {
 		this.accountRecoveryForm.setValidators(this.passwordMatchValidator);
 		this.accountRecoveryForm.updateValueAndValidity();
 		this.matcher = new FieldMatcher();
@@ -126,20 +125,17 @@ export class AccountRecoveryComponent implements OnInit {
 						isOtpDone: false
 					};
 
-
 					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
 					this.openSnackBar(res.message, true);
 					this.isEmailLoading = false;
 				},
 				(err) => {
 					let message = this.util.giveErrorMessage(err);
-					
-					if(typeof(message)=='string'){
-						this.openSnackBar(this.util.toCapitalize(message), false);
-					}
-					else{
-						this.openSnackBar(snackbarMessages.try_again, false);
 
+					if (typeof message == 'string') {
+						this.openSnackBar(this.util.toCapitalize(message), false);
+					} else {
+						this.openSnackBar(snackbarMessages.try_again, false);
 					}
 					this.isEmailLoading = false;
 				}
@@ -148,11 +144,9 @@ export class AccountRecoveryComponent implements OnInit {
 			this.authService.touchAllfields(this.emailForm);
 			this.isEmailLoading = false;
 		}
-		
-    }
+	}
 
-    verifyOTP() {
-		
+	verifyOTP() {
 		this.isOTPLoading = true;
 		if (this.OTPForm.valid) {
 			let emailOtp: emailOtp = {
@@ -182,7 +176,6 @@ export class AccountRecoveryComponent implements OnInit {
 			this.authService.touchAllfields(this.OTPForm);
 			this.isOTPLoading = false;
 		}
-		
 	}
 
 	resendOtp() {
@@ -190,51 +183,49 @@ export class AccountRecoveryComponent implements OnInit {
 		this.isresendOtp = false;
 		this.isEmailFormDone = false;
 		this.isOTPFormDone = false;
-		this.isresendPassword=false;
+		this.isresendPassword = false;
 	}
 
-  onAccountRecoverySubmit() {
-	this.isAccountRecoveryLoading = true;
-	// If valid delete localstorage
-	if (this.accountRecoveryForm.valid) {
-		let emailPasswordConfirmPassword: emailPasswordConfirmPassword = {
-			email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
-			newPassword: this.accountRecoveryForm.value.password,
-			confirmPassword:this.accountRecoveryForm.value.confirm_password
-		};
-		this.authService.recoverMerchantAccount(emailPasswordConfirmPassword).pipe(first()).subscribe(
-			(res) => {
-				//debugger;
-				this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
-				this.openSnackBar(snackbarMessages.reset_password_complete, true);
-				this.isAccountRecoveryLoading = false;
-				this.route(urlPaths.Home.HomeDefault.url);
-			},
-			(err) => {
-				this.isresendPassword=true;
-				let message = this.util.giveErrorMessage(err);
-				this.openSnackBar(this.util.toCapitalize(message), false);
-				this.isAccountRecoveryLoading = false;
-			}
-		);
-	} else {
-		this.authService.touchAllfields(this.accountRecoveryForm);
-		this.isAccountRecoveryLoading = false;
-	}	
-	
+	onAccountRecoverySubmit() {
+		this.isAccountRecoveryLoading = true;
+		// If valid delete localstorage
+		if (this.accountRecoveryForm.valid) {
+			let emailPasswordConfirmPassword: emailPasswordConfirmPassword = {
+				email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
+				newPassword: this.accountRecoveryForm.value.password,
+				confirmPassword: this.accountRecoveryForm.value.confirm_password
+			};
+			this.authService.recoverMerchantAccount(emailPasswordConfirmPassword).pipe(first()).subscribe(
+				(res) => {
+					//debugger;
+					this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
+					this.openSnackBar(snackbarMessages.reset_password_complete, true);
+					this.isAccountRecoveryLoading = false;
+					this.route(urlPaths.Home.HomeDefault.url);
+				},
+				(err) => {
+					this.isresendPassword = true;
+					let message = this.util.giveErrorMessage(err);
+					this.openSnackBar(this.util.toCapitalize(message), false);
+					this.isAccountRecoveryLoading = false;
+				}
+			);
+		} else {
+			this.authService.touchAllfields(this.accountRecoveryForm);
+			this.isAccountRecoveryLoading = false;
+		}
 	}
 
 	routeToLogin() {
+		this.resendOtp();
 		this.router.navigate([ urlPaths.Authentication.Signin.url ]);
 	}
-  
-  
+
 	route(path) {
 		this.router.navigate([ path ]);
 	}
 
-
-  openSnackBar(message,isAccepted) {
+	openSnackBar(message, isAccepted) {
 		this.sharedService.openSnackBar({
 			data: { message: message, isAccepted: isAccepted },
 			duration: 2,
@@ -243,7 +234,4 @@ export class AccountRecoveryComponent implements OnInit {
 			verticalPosition: 'top'
 		});
 	}
-  
-  
-
 }
