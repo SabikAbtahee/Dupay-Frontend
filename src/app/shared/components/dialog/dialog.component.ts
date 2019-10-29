@@ -9,6 +9,7 @@ import { DialogData } from 'src/app/config/interfaces/dupay.interface';
 })
 
 export class DialogComponent{
+  inputValue;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,

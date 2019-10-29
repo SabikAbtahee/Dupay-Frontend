@@ -12,6 +12,7 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
   styleUrls: ['./merchant-list.component.scss']
 })
 export class MerchantListComponent implements OnInit {
+  input;
 
 
   merchants = new MatTableDataSource<Merchant>();
@@ -36,7 +37,7 @@ export class MerchantListComponent implements OnInit {
   public openNotifyDialog(merchantId:string){
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
-      data: {message:"message",buttons:["Ok","No thanks"]}
+      data: {message:"message",buttons:["Ok","No thanks"],input:true}
     });
 
     dialogRef.afterClosed().subscribe(result => {

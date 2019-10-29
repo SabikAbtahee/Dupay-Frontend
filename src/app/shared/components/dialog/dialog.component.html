@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>
   <p>{{data.message}}</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.input">
+  <mat-form-field  *ngIf="data.input">
+    <input matInput [(ngModel)]="input">
   </mat-form-field>
 </div>
 <div mat-dialog-actions >
-  <button mat-button (click)="onNoClick()">{{data.buttons[0]}}</button>
-  <button mat-button [mat-dialog-close]="data.input" cdkFocusInitial>{{data.buttons[1]}}</button>
+  <button mat-button (click)="onNoClick()">{{data.buttons[1]}}</button>
+  <button mat-button [mat-dialog-close]="input" cdkFocusInitial>{{data.buttons[0]}}</button>
 </div>
