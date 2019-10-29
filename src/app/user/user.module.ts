@@ -10,6 +10,7 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import {PasswordModalService} from "./services/password-modal.service";
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { AuthGuard } from '../core/security-services/auth.guard';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 const routes:Routes=[
   {
@@ -42,6 +43,7 @@ const routes:Routes=[
     SharedModule
   ],
   providers: [ PasswordModalService ],
-  entryComponents: [ PasswordChangeComponent ]
+  entryComponents: [ PasswordChangeComponent,DialogComponent]
+
 })
 export class UserModule { }

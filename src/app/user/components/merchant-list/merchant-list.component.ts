@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Merchant } from 'src/app/config/interfaces/dupay.interface';
+import { Merchant, DialogData } from 'src/app/config/interfaces/dupay.interface';
 import { Merchant_Types } from 'src/app/config/enums/dupay.enum';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-merchant-list',
@@ -15,7 +17,8 @@ export class MerchantListComponent implements OnInit {
   merchants = new MatTableDataSource<Merchant>();
   public displayedColumns = ['id','username','name','type', 'tradeInsurance','NID', 'balance', 'details', 'notify', 'delete'];
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     console.log('ng on init called');
@@ -28,6 +31,17 @@ export class MerchantListComponent implements OnInit {
       this.merchants.data = res as Merchant[];
     });
     
+  }
+
+  public openNotifyDialog(merchantId:string){
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '500px',
+      data: {message:"message",buttons:["Ok","No thanks"]}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('result after closed:'+result);
+    });
   }
 
   public redirectToDetails = (id: string) => {
