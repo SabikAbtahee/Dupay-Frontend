@@ -1,3 +1,4 @@
+import { MerchantGuard } from './../core/security-services/merchant.guard';
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MerchantListComponent } from './components/merchant-list/merchant-list.component';
@@ -10,6 +11,7 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import {PasswordModalService} from "./services/password-modal.service";
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { AuthGuard } from '../core/security-services/auth.guard';
+import { NotifyMerchantComponent } from './components/notify-merchant/notify-merchant.component';
 
 const routes:Routes=[
   {
@@ -26,6 +28,11 @@ const routes:Routes=[
   {
     path:'merchant-notification',
     component:MerchantNotificationComponent,
+    canActivate:[MerchantGuard]
+  },
+  {
+    path:'notify-merchant',
+    component:NotifyMerchantComponent,
     canActivate:[AdminGuard]
   },
   {
@@ -35,7 +42,7 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

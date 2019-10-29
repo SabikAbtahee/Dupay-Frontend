@@ -38,7 +38,7 @@ export class MerchantSignupComponent implements OnInit {
 	isEmailLoading = false;
 	isOTPLoading = false;
 	isSignUpLoading = false;
-
+	isExpired = false;
 	isresendOtp = false;
 
 	// Page format
@@ -192,6 +192,7 @@ export class MerchantSignupComponent implements OnInit {
 		this.isresendOtp = false;
 		this.isEmailFormDone = false;
 		this.isOTPFormDone = false;
+		this.isExpired=false;
 	}
 
 	onSignupSubmit() {
@@ -216,6 +217,7 @@ export class MerchantSignupComponent implements OnInit {
 					this.route(urlPaths.Home.HomeDefault.url);
 				},
 				(err) => {
+					this.isExpired=true;
 					let message = this.util.giveErrorMessage(err);
 					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isSignUpLoading = false;
