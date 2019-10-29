@@ -7,5 +7,5 @@
 </div>
 <div mat-dialog-actions >
   <button mat-button (click)="onNoClick()">{{data.buttons[1]}}</button>
-  <button mat-button [mat-dialog-close]="input" cdkFocusInitial>{{data.buttons[0]}}</button>
+  <button mat-button [mat-dialog-close]="data.input?input:ok" cdkFocusInitial>{{data.buttons[0]}}</button>
 </div>
