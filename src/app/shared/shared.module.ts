@@ -23,9 +23,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 import { MatTableModule } from '@angular/material/table';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
-  declarations: [SnackbarComponent],
+  declarations: [SnackbarComponent, DialogComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
