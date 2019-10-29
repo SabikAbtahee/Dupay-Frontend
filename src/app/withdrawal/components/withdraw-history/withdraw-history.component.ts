@@ -1,3 +1,4 @@
+import { WithdrawRequestModalService } from './../../services/withdraw-request-modal.service';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -34,10 +35,14 @@ export class WithdrawHistoryComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor() {}
+  constructor(private withdrawRequestModalService: WithdrawRequestModalService) {}
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  openWithdrawRequestWindow(){
+    this.withdrawRequestModalService.openWithdrawRequestModal();
   }
 }

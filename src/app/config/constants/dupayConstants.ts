@@ -145,7 +145,7 @@ export const dupayConst = {
 		},
 		{
 			name: 'Withdraw request',
-			url: 'withdrawal/withdraw-request',
+			url: 'withdrawal/withdraw-history',
 			icon: 'compare_arrows',
 			role: [Token_Role.ROLE_MERCHANT],
 			mini_name:'Withdraw'

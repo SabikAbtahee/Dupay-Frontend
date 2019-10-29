@@ -38,6 +38,6 @@ import { MatListModule } from '@angular/material/list';
     
   ],
   providers: [RootService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
