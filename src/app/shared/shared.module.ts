@@ -21,6 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { MatTableModule } from '@angular/material/table';
 
@@ -51,7 +52,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   exports:[
     
@@ -78,7 +80,8 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]

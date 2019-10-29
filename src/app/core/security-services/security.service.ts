@@ -7,7 +7,7 @@ import { localStorageKeys } from '../../config/constants/dupayConstants';
 import {first} from "rxjs/operators";
 import {UtilityService} from "../utility-services/utility-service.service";
 import {HttpHeaders} from "@angular/common/http";
-
+// import {Headers} from '@angular/common/http'
 @Injectable({
 	providedIn: 'root'
 })
@@ -77,19 +77,29 @@ export class SecurityService {
     })
   }
   getHeader(Token:any):any {
+	//   debugger;
+	//   let headers = new HttpHeaders();
+	//   headers.append('Authorization',`Bearer ${Token}`);
+	//   headers.append('withCredentials','true');
+	//   headers.append('Pragma','no-cache');
+	//   headers.append('Content-Type','application/json');
+	//   headers.append('Access-Control-Allow-Origin','*');
+	//   debugger
+	//   return headers;
+	  
+
     // let headers = new HttpHeaders({
     //   'Content-Type':'application/json',
-    //   'withCredentials':'true',
-    // 'Authorization':`Bearer ${Token}`});
-    //
-    // debugger;
-    // return headers;
-    let httpOptions={
-      headers:new HttpHeaders().set('Authorization',`Bearer ${Token}`)
-    }
-    debugger
-    return httpOptions;
 
+    // 'Authorization':`Bearer ${Token}`});
+    
+    // //debugger;
+    // return headers;
+let httpOptions={
+	headers:new HttpHeaders().set('Authorization',`Bearer ${Token}`)
+}
+//debugger
+return httpOptions;
   }
   getTokenRole(): Observable<any> {
     return new Observable((observer) => {
