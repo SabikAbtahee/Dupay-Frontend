@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransferRequestComponent } from './components/transfer-request/transfer-request.component';
@@ -5,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WithdrawRequestComponent } from './components/withdraw-request/withdraw-request.component';
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { MerchantGuard } from '../core/security-services/merchant.guard';
+import { WithdrawHistoryComponent } from './components/withdraw-history/withdraw-history.component';
 
 
 const routes:Routes=[
@@ -23,10 +25,11 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [TransferRequestComponent, WithdrawRequestComponent],
+  declarations: [TransferRequestComponent, WithdrawRequestComponent, WithdrawHistoryComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SharedModule
   ]
 })
 export class WithdrawalModule { }
