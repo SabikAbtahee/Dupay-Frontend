@@ -10,6 +10,7 @@ import { DialogData } from 'src/app/config/interfaces/dupay.interface';
 
 export class DialogComponent{
   inputValue;
+  ok="ok"
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,

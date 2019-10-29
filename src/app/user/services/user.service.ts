@@ -4,6 +4,7 @@ import { api_path } from 'src/app/config/apiRoutes/apiroutes';
 import { QueryService } from 'src/app/core/query-services/query.service';
 import { SecurityService } from 'src/app/core/security-services/security.service';
 import { Merchant } from 'src/app/config/interfaces/dupay.interface';
+import { MutationService } from 'src/app/core/mutation-services/mutation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { Merchant } from 'src/app/config/interfaces/dupay.interface';
 export class UserService {
 
   constructor(private queryService: QueryService,
-    private securityService: SecurityService) { }
+    private securityService: SecurityService, private mutationService:MutationService ) { }
 
   public getAllMerchant(): Observable<Merchant[]> {
 
@@ -67,4 +68,25 @@ export class UserService {
 
   }
 
+  public approveMerchant(id: string): Observable<Merchant[]> {
+    return new Observable((observer) => {
+      this.queryService.getToken().subscribe(res => {
+        let token = res;
+        console.log('token:' + token);
+        let header = this.securityService.getHeader(token);
+        this.mutationService.httpPut(api_path.approveMerchant+"/"+id,{}, header).subscribe(res => {
+          console.log('result:');
+          console.log(res);
+          observer.next(res);
+        }, err => {
+          console.log('error:');
+          console.log(err);
+          observer.error(err);
+        });
+
+      });
+
+    });
+
+  }
 }
