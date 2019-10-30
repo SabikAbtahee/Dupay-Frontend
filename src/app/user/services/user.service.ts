@@ -41,7 +41,7 @@ export class UserService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (!item.pending) merchants.push(item);
+          if (item.approved) merchants.push(item);
         });
         observer.next(merchants);
 
