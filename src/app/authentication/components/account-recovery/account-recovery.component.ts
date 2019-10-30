@@ -39,8 +39,7 @@ export class AccountRecoveryComponent implements OnInit {
 	isOTPLoading = false;
 	isAccountRecoveryLoading = false;
 
-	isresendOtp = false;
-	isresendPassword = false;
+	
 	// Page format
 	isEmailFormDone = false;
 	isOTPFormDone = false;
@@ -166,7 +165,6 @@ export class AccountRecoveryComponent implements OnInit {
 					this.isOTPLoading = false;
 				},
 				(err) => {
-					this.isresendOtp = true;
 					let message = this.util.giveErrorMessage(err);
 					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isOTPLoading = false;
@@ -180,10 +178,8 @@ export class AccountRecoveryComponent implements OnInit {
 
 	resendOtp() {
 		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
-		this.isresendOtp = false;
 		this.isEmailFormDone = false;
 		this.isOTPFormDone = false;
-		this.isresendPassword = false;
 	}
 
 	onAccountRecoverySubmit() {
@@ -204,7 +200,6 @@ export class AccountRecoveryComponent implements OnInit {
 					this.route(urlPaths.Home.HomeDefault.url);
 				},
 				(err) => {
-					this.isresendPassword = true;
 					let message = this.util.giveErrorMessage(err);
 					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isAccountRecoveryLoading = false;

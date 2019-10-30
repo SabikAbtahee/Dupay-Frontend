@@ -204,7 +204,9 @@ export const authentication_error_messages = {
 	phone_number_error: 'Provide phone number',
 	otp_error: 'Wrong OTP given',
 	username_error:'Provide valid username',
-	trade_insurance_error:'Provide valid trade insurance error'
+	trade_insurance_error:'Provide valid trade insurance error',
+	minimum_5:'Minimum 5 length is required',
+	maximum_20:'Maximum length is 20'
 };
 
 export const snackbarMessages = {
