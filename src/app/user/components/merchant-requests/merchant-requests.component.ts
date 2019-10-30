@@ -90,6 +90,7 @@ export class MerchantRequestsComponent implements OnInit {
 
   private removeMerchantFromPendingList(id:string){
     let index;
+    console.log('removing merchant from request list');
     for(let i=0;i<this.merchants.data.length;i++){
       if(this.merchants.data[i].id == id) {
         index = i;
@@ -97,6 +98,7 @@ export class MerchantRequestsComponent implements OnInit {
       }
     }
     this.merchants.data.splice(index,1);
+    this.merchants._updateChangeSubscription();
 
   }
 
