@@ -67,3 +67,7 @@ export interface TransferRequest{
 	status: any
 }
 
+export interface TransferStatus{
+	value: string;
+	viewValue: string;
+}
