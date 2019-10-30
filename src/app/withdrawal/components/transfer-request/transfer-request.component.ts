@@ -45,5 +45,8 @@ export class TransferRequestComponent implements OnInit {
     this.transferRequests.data = this.dummyData as TransferRequest[];
   }
 
+  onStatusChange(element){
+    console.log(element);
+  }
 
 }
