@@ -25,16 +25,16 @@ export class TransferRequestComponent implements OnInit {
   initialize(){
     this.displayedColumns = ["id", "time", "amount", "status" ];
     this.statusList = [
-      {value: 'Accept',viewValue:'Accept' },
-      {value: 'Pending',viewValue:'Pending' },
-      {value: 'Complete',viewValue:'Complete' },
+      {value: 'PENDING',viewValue:'Pending' },
+      {value: 'IN_PROGRESS',viewValue:'In Progress' },
+      {value: 'DONE',viewValue:'Complete' },
     ];
     this.dummyData =  [
-      {id: '1', time: 1.10, amount: 120.50, status: 'Accept'},
-      {id: '2', time: 0.10, amount: 50.50, status: 'Complete'},
-      {id: '3', time: 1.10, amount: 110.50, status: 'Accept'},
-      {id: '4', time: 18.10, amount: 20.54, status: 'Complete'},
-      {id: '5', time: 15.10, amount: 12.50, status: 'Pending'}
+      {id: '1', transactionId: '2',  amount: 120.50, withdrawDate: 1.10, status: 'PENDING'},
+      {id: '2', transactionId: '2',  amount: 50.50,  withdrawDate: 0.10, status: 'IN_PROGRESS'},
+      {id: '3', transactionId: '2',  amount: 110.50, withdrawDate: 1.10, status: 'PENDING'},
+      {id: '4', transactionId: '2',  amount: 20.54,  withdrawDate: 18.10,status: 'DONE'},
+      {id: '5', transactionId: '2',  amount: 12.50,  withdrawDate: 15.10,status: 'IN_PROGRESS'}
     ];
   }
 
@@ -45,8 +45,15 @@ export class TransferRequestComponent implements OnInit {
     this.transferRequests.data = this.dummyData as TransferRequest[];
   }
 
-  onStatusChange(element){
-    console.log(element);
+  onStatusChange(element: TransferRequest){
+
+    if(element.status == "DONE"){
+      console.log(element);
+    }
+    else{
+      // update in database
+    }
+
   }
 
 }

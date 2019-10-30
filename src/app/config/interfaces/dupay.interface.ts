@@ -62,10 +62,12 @@ export interface DialogData {
 // change the interface based on the response data 
 export interface TransferRequest{
 	id: string,
-	time: any,
+	transactionId?: string,
 	amount: number,
+	withdrawDate: any,
 	status: any
 }
+
 
 export interface TransferStatus{
 	value: string;
