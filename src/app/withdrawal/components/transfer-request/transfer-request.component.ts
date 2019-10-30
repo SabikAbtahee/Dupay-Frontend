@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { TransferRequest, TransferStatus } from 'src/app/config/interfaces/dupay.interface';
 import { TransferState } from '@angular/platform-browser';
+import { WithdrawalService } from '../../services/withdrawal.service';
 
 @Component({
   selector: 'app-transfer-request',
@@ -15,7 +16,7 @@ export class TransferRequestComponent implements OnInit {
   statusList: TransferStatus[];
   transferRequests = new MatTableDataSource<TransferRequest>();
 
-  constructor() { }
+  constructor(private withdrawalService:WithdrawalService) { }
 
   ngOnInit() {
     this.initialize();
@@ -29,20 +30,16 @@ export class TransferRequestComponent implements OnInit {
       {value: 'IN_PROGRESS',viewValue:'In Progress' },
       {value: 'DONE',viewValue:'Complete' },
     ];
-    this.dummyData =  [
-      {id: '1', transactionId: '2',  amount: 120.50, withdrawDate: 1.10, status: 'PENDING'},
-      {id: '2', transactionId: '2',  amount: 50.50,  withdrawDate: 0.10, status: 'IN_PROGRESS'},
-      {id: '3', transactionId: '2',  amount: 110.50, withdrawDate: 1.10, status: 'PENDING'},
-      {id: '4', transactionId: '2',  amount: 20.54,  withdrawDate: 18.10,status: 'DONE'},
-      {id: '5', transactionId: '2',  amount: 12.50,  withdrawDate: 15.10,status: 'IN_PROGRESS'}
-    ];
   }
 
   getTransferRequestList(){
 
     // using service get data and link with datasource
-
-    this.transferRequests.data = this.dummyData as TransferRequest[];
+    this.withdrawalService.getTransferRequestList().subscribe( res =>{
+      debugger;
+      this.transferRequests.data = res as TransferRequest[];
+    });
+    //this.transferRequests.data = this.dummyData as TransferRequest[];
   }
 
   onStatusChange(element: TransferRequest){
