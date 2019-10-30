@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { TransferRequest, TransferStatus } from 'src/app/config/interfaces/dupay.interface';
 import { TransferState } from '@angular/platform-browser';
 import { WithdrawalService } from '../../services/withdrawal.service';
@@ -16,11 +16,14 @@ export class TransferRequestComponent implements OnInit {
   statusList: TransferStatus[];
   transferRequests = new MatTableDataSource<TransferRequest>();
 
+  @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
+
   constructor(private withdrawalService:WithdrawalService) { }
 
   ngOnInit() {
     this.initialize();
     this.getTransferRequestList();
+    this.transferRequests.paginator = this.paginator;
   }
 
   initialize(){
@@ -34,12 +37,9 @@ export class TransferRequestComponent implements OnInit {
 
   getTransferRequestList(){
 
-    // using service get data and link with datasource
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
-      debugger;
       this.transferRequests.data = res as TransferRequest[];
     });
-    //this.transferRequests.data = this.dummyData as TransferRequest[];
   }
 
   onStatusChange(element: TransferRequest){
