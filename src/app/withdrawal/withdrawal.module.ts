@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WithdrawRequestComponent } from './components/withdraw-request/withdraw-request.component';
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { MerchantGuard } from '../core/security-services/merchant.guard';
+import { MatTableModule } from '@angular/material';
 
 
 const routes:Routes=[
@@ -26,6 +27,7 @@ const routes:Routes=[
   declarations: [TransferRequestComponent, WithdrawRequestComponent],
   imports: [
     CommonModule,
+    MatTableModule,
     RouterModule.forChild(routes),
   ]
 })

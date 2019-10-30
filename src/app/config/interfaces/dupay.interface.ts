@@ -59,3 +59,11 @@ export interface DialogData {
 	buttons:string[];
 }
 
+// change the interface based on the response data 
+export interface TransferRequest{
+	id: string,
+	time: any,
+	amount: number,
+	status: any
+}
+
