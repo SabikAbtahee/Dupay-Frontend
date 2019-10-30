@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransferRequestComponent } from './components/transfer-request/transfer-request.component';
@@ -6,6 +7,9 @@ import { WithdrawRequestComponent } from './components/withdraw-request/withdraw
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { MerchantGuard } from '../core/security-services/merchant.guard';
 import { MatTableModule, MatSelectModule } from '@angular/material';
+import { WithdrawHistoryComponent } from './components/withdraw-history/withdraw-history.component';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
+import { WithdrawRequestModalService } from './services/withdraw-request-modal.service';
 
 
 const routes:Routes=[
@@ -15,8 +19,8 @@ const routes:Routes=[
     canActivate:[AdminGuard]
   },
   {
-    path:'withdraw-request',
-    component:WithdrawRequestComponent,
+    path:'withdraw-history',
+    component:WithdrawHistoryComponent,
     canActivate:[MerchantGuard]
 
   },
@@ -24,12 +28,16 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [TransferRequestComponent, WithdrawRequestComponent],
+  declarations: [TransferRequestComponent, WithdrawRequestComponent, WithdrawHistoryComponent],
   imports: [
     CommonModule,
     MatTableModule,
     MatSelectModule,
     RouterModule.forChild(routes),
-  ]
+    SharedModule
+  ],
+  exports:[WithdrawRequestComponent],
+  providers:[WithdrawRequestModalService],
+  entryComponents:[WithdrawRequestComponent]
 })
 export class WithdrawalModule { }

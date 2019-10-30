@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-withdraw-request',
-  templateUrl: './withdraw-request.component.html',
-  styleUrls: ['./withdraw-request.component.scss']
+  selector: "app-withdraw-request",
+  templateUrl: "./withdraw-request.component.html",
+  styleUrls: ["./withdraw-request.component.scss"]
 })
 export class WithdrawRequestComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

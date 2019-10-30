@@ -25,6 +25,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { MatTableModule } from '@angular/material/table';
 import { DialogComponent } from './components/dialog/dialog.component';
 
+import { MatPaginatorModule } from '@angular/material';
 @NgModule({
   declarations: [SnackbarComponent, DialogComponent],
   imports: [
@@ -52,7 +53,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports:[
     
@@ -79,7 +81,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatIconModule,
     MatListModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]
