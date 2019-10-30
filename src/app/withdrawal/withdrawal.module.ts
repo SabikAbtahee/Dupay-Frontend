@@ -10,6 +10,7 @@ import { MatTableModule, MatSelectModule } from '@angular/material';
 import { WithdrawHistoryComponent } from './components/withdraw-history/withdraw-history.component';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { WithdrawRequestModalService } from './services/withdraw-request-modal.service';
+import { StatusCompleteModalComponent } from './components/transfer-request/status-complete-modal/status-complete-modal.component';
 
 
 const routes:Routes=[
@@ -28,7 +29,7 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [TransferRequestComponent, WithdrawRequestComponent, WithdrawHistoryComponent],
+  declarations: [TransferRequestComponent, WithdrawRequestComponent, WithdrawHistoryComponent, StatusCompleteModalComponent],
   imports: [
     CommonModule,
     MatTableModule,
