@@ -15,6 +15,7 @@ export class TransferRequestComponent implements OnInit {
   dummyData: TransferRequest[];
   displayedColumns: string[];
   statusList: TransferStatus[];
+  statusIndexMap : any;
   transferRequests = new MatTableDataSource<TransferRequest>();
 
   @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
@@ -34,13 +35,18 @@ export class TransferRequestComponent implements OnInit {
       {value: 'IN_PROGRESS',viewValue:'In Progress' },
       {value: 'DONE',viewValue:'Complete' },
     ];
+    let i=0;
+    this.statusIndexMap = new Map(this.statusList.map( element => [element.value, i++])) ;
   }
 
   getTransferRequestList(){
-
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
       this.transferRequests.data = res as TransferRequest[];
     });
+  }
+
+  getStatusList(status:string): TransferStatus[]{
+    return Object.assign([], this.statusList).splice(this.statusIndexMap.get(status),this.statusList.length);
   }
 
   onStatusChange(element: TransferRequest){
@@ -50,8 +56,6 @@ export class TransferRequestComponent implements OnInit {
       // open dialog
     }
     else{
-
-      // status not reversable
       let updateRequest = {
         id: element.id,
         transactionId: element.transactionId,
