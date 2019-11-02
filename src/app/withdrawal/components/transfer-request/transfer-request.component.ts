@@ -66,6 +66,7 @@ export class TransferRequestComponent implements OnInit {
 
       });
     }
+    
     else{
       let updateRequest = {
         id: element.id,
