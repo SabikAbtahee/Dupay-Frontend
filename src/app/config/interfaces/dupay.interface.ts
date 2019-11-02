@@ -74,7 +74,7 @@ export interface TransferRequest{
 }
 
 
-export interface TransferStatus{
+export interface SelectOption{
 	value: string;
 	viewValue: string;
 }

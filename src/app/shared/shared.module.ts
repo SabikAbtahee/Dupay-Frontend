@@ -27,7 +27,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from "@angular/material";
 import { DialogComponent } from './components/dialog/dialog.component';
 
-import { MatPaginatorModule } from '@angular/material';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [SnackbarComponent, DialogComponent],
   imports: [
@@ -57,7 +57,8 @@ import { MatPaginatorModule } from '@angular/material';
     HttpClientModule,
     MatTableModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxSpinnerModule
   ],
   exports:[
     
@@ -86,7 +87,9 @@ import { MatPaginatorModule } from '@angular/material';
     HttpClientModule,
     MatTableModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    
+    MatPaginatorModule,
+    NgxSpinnerModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]

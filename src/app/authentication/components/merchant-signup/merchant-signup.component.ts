@@ -12,7 +12,6 @@ import { MutationService } from '../../../core/mutation-services/mutation.servic
 import { SharedService } from '../../../shared/services/shared.service';
 import { first } from 'rxjs/operators';
 import { authenticationEmailOtp } from '../../../config/interfaces/configurations.interface';
-
 @Component({
 	selector: 'app-merchant-signup',
 	templateUrl: './merchant-signup.component.html',
@@ -132,6 +131,7 @@ export class MerchantSignupComponent implements OnInit {
 					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
 					this.openSnackBar(res.message, true);
 					this.isEmailLoading = false;
+
 				},
 				(err) => {
 					
