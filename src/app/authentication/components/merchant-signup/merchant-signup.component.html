@@ -57,7 +57,8 @@
             </mat-card>
         </div>
         <div>
-            <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
+            <a (click)='route([urlPaths.Authentication.Signin.url][0])'
+                class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
 
     </div>
@@ -108,7 +109,8 @@
                     <button type="submit" (click)='verifyOTP()' mat-raised-button color="primary"
                         class="w-260 h-40">Verify
                         OTP</button>
-                    <button *ngIf='isresendOtp'  (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend Otp</button>
+                    <button (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend
+                        Otp</button>
 
 
                 </div>
@@ -116,9 +118,10 @@
             </mat-card>
         </div>
         <div>
-            <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
+            <a (click)='route([urlPaths.Authentication.Signin.url][0])'
+                class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
-        
+
 
     </div>
 </form>
@@ -150,9 +153,17 @@
                                 <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Name</mat-label>
                                     <input type="text" matInput placeholder="Type in name" formControlName="name">
-                                    <mat-error *ngIf="signupform.get('name').touched && signupform.get('name').invalid">
-                                        {{error_messages.empty_name}}</mat-error>
 
+
+                                    <mat-error
+                                        *ngIf="signupform.get('name').touched && signupform.get('name').hasError('minlength')">
+                                        {{error_messages.minimum_5}}</mat-error>
+                                    <mat-error
+                                        *ngIf="signupform.get('name').touched && signupform.get('name').hasError('maxlength')">
+                                        {{error_messages.maximum_20}}</mat-error>
+                                    <mat-error
+                                        *ngIf="signupform.get('name').touched && signupform.get('name').hasError('required')">
+                                        {{error_messages.empty_name}}</mat-error>
                                     <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
 
                                     <!-- <mat-error *ngIf="true">222</mat-error> -->
@@ -215,8 +226,10 @@
                             <div>
                                 <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Trade Insurance</mat-label>
-                                    <input type="text" matInput placeholder="Type in trade insurance" formControlName="trade_insurance">
-                                    <mat-error *ngIf="signupform.get('trade_insurance').touched && signupform.get('trade_insurance').invalid">
+                                    <input type="text" matInput placeholder="Type in trade insurance"
+                                        formControlName="trade_insurance">
+                                    <mat-error
+                                        *ngIf="signupform.get('trade_insurance').touched && signupform.get('trade_insurance').invalid">
                                         {{error_messages.trade_insurance_error}}</mat-error>
 
                                     <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
@@ -226,7 +239,7 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                        
+
 
 
                     </div>
@@ -245,8 +258,17 @@
                                     <input type="tel" matInput placeholder="Type in username"
                                         formControlName="username">
                                     <mat-error
-                                        *ngIf="signupform.get('username').touched && signupform.get('username').invalid">
+                                        *ngIf="signupform.get('username').touched && signupform.get('username').hasError('minlength')">
+                                        {{error_messages.minimum_5}}</mat-error>
+                                    <mat-error
+                                        *ngIf="signupform.get('username').touched && signupform.get('username').hasError('maxlength')">
+                                        {{error_messages.maximum_20}}</mat-error>
+                                    <mat-error
+                                        *ngIf="signupform.get('username').touched && signupform.get('username').hasError('required')">
                                         {{error_messages.username_error}}</mat-error>
+                                    <!-- <mat-error
+                                        *ngIf="signupform.get('username').touched && signupform.get('username').invalid">
+                                        {{error_messages.username_error}}</mat-error> -->
 
                                     <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
 
@@ -307,6 +329,9 @@
                     <button type="submit" (click)='onSignupSubmit()' mat-raised-button color="primary"
                         class="w-240 h-40">Sign
                         up</button>
+                    <button (click)='resendOtp()' mat-stroked-button color="primary" class="w-240 h-40">Resend
+                        Email</button>
+
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                         login</button> -->
 
@@ -316,7 +341,8 @@
             </mat-card>
         </div>
         <div>
-            <a (click)='route([urlPaths.Authentication.Signin.url][0])' class="cursor-pointer link-color font-size-16">Back to login </a>
+            <a (click)='route([urlPaths.Authentication.Signin.url][0])'
+                class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
         <!-- <div fxFlex='15' fxLayout="row" fxFlexAlign="start center">
             <div>

@@ -51,7 +51,7 @@ export class AuthenticationService {
 	}
 
   recoverMerchantAccount(emailPasswordConfirmPassword: emailPasswordConfirmPassword): Observable<any> {
-    debugger;
+   // debugger;
     return this.coreMutate.httpPost(`${api_path.resetPassword}`, emailPasswordConfirmPassword, httpHeader);
   }
 

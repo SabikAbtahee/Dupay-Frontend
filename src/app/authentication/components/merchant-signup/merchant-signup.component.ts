@@ -39,8 +39,6 @@ export class MerchantSignupComponent implements OnInit {
 	isOTPLoading = false;
 	isSignUpLoading = false;
 
-	isresendOtp = false;
-
 	// Page format
 	isEmailFormDone = false;
 	isOTPFormDone = false;
@@ -87,13 +85,13 @@ export class MerchantSignupComponent implements OnInit {
 	}
 	makeSignupFormMerchant() {
 		this.signupform = this.fb.group({
-			name: [ '', Validators.required ],
+			name: [ '', [Validators.required, Validators.maxLength(20), Validators.minLength(5)] ],
 			username: [ '', [ Validators.required, Validators.maxLength(20), Validators.minLength(5) ] ],
-			trade_insurance: [ '' ],
-			nid_number: [ '', Validators.required ],
+			trade_insurance: [ '', [Validators.maxLength(20)]],
+			nid_number: [ '', [Validators.required, Validators.maxLength(10), Validators.minLength(10)] ],
 			password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
 			confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
-			merchant_type: [ '', Validators.required ]
+			merchant_type: [ '', [Validators.required] ]
 		});
 	}
 
@@ -175,7 +173,6 @@ export class MerchantSignupComponent implements OnInit {
 					this.isOTPLoading = false;
 				},
 				(err) => {
-					this.isresendOtp = true;
 					let message = this.util.giveErrorMessage(err);
 					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isOTPLoading = false;
@@ -189,7 +186,6 @@ export class MerchantSignupComponent implements OnInit {
 
 	resendOtp() {
 		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
-		this.isresendOtp = false;
 		this.isEmailFormDone = false;
 		this.isOTPFormDone = false;
 	}

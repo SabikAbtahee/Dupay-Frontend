@@ -1,9 +1,25 @@
 <table mat-table [dataSource]="merchants">
+  
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef class="third-background"> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef class="third-background"> Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+  </ng-container>  
+
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef class="third-background"> Name </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
- 
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef class="third-background"> Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+  
   <ng-container matColumnDef="tradeInsurance">
     <th mat-header-cell *matHeaderCellDef class="third-background"> TradeInsurance </th>
     <td mat-cell *matCellDef="let element"> {{element.tradeInsurance}} </td>
@@ -12,6 +28,11 @@
   <ng-container matColumnDef="balance">
     <th mat-header-cell *matHeaderCellDef class="third-background"> Balance </th>
     <td mat-cell *matCellDef="let element"> {{element.balance}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="NID">
+      <th mat-header-cell *matHeaderCellDef class="third-background"> NID </th>
+      <td mat-cell *matCellDef="let element"> {{element.nid}} </td>
   </ng-container>
  
   <ng-container matColumnDef="details">
@@ -23,12 +44,12 @@
     </td>
   </ng-container>
  
-  <ng-container matColumnDef="update">
-      <th mat-header-cell *matHeaderCellDef class="third-background"> Update </th>
+  <ng-container matColumnDef="notify">
+      <th mat-header-cell *matHeaderCellDef class="third-background"> Notify </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="accent" (click)="redirectToUpdate(element.id)">
-            <mat-icon class="mat-18">system_update</mat-icon>
-        </button>
+        <a [routerLink]="['/user/notify-merchant']" [state]="{tracingId: 123}">
+          <mat-icon class="mat-18">notification_important</mat-icon>
+        </a>
       </td>
     </ng-container>
  
