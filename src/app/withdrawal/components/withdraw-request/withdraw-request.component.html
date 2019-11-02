@@ -1,4 +1,35 @@
-<div>
-    hello
-    
-</div>
+<form [formGroup]="withdrawRequestForm">
+    <div>
+        <label>Available Balance: BDT 1000</label>        
+    </div>
+    <div>
+        <!-- <mat-form-field>
+            <mat-label>Wallet Name</mat-label>
+            <mat-select [formControl]="walletName" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let wallet of wallets" [value]="wallet">
+                {{wallet.walletName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="walletName.hasError('required')">Please choose a wallet</mat-error>
+          </mat-form-field> -->
+
+          <mat-form-field appearance="outline" class='w-224'>
+            <mat-label>Wallet Name</mat-label>
+            <mat-select formControlName='walletName' disableOptionCentering>
+                <mat-option *ngFor='let wallet of wallets | keyvalue' [value]='wallet.key'>
+                    {{wallet.value}}</mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="withdrawRequestForm.get('walletName').hasError('required')">
+                Please choose a wallet</mat-error>
+
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field hintLabel="Max 11 Digit" appearance="outline" class='w-224'>
+            <input matInput #input (keypress)="numberOnly($event)" placeholder="Phone Number" type="tel" formControlName="phoneNumber">
+            <!-- <mat-hint >{{input.value?.length || 0}}/11</mat-hint> -->
+          </mat-form-field>
+    </div>
+</form>

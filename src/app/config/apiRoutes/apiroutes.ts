@@ -32,4 +32,6 @@ export const api_path = {
   // transfer-request
   transferRequestList : `${environment.baseurl}/api/admin/withdraw`,
   transferRequestStatusChange: `${environment.baseurl}/api/admin/withdraw/changestatus`
+
+  
 }

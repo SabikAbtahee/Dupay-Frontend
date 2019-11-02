@@ -19,3 +19,10 @@ export enum Token_Role{
     ROLE_ADMIN='ROLE_ADMIN',
     ANNONYMOUS='ANNONYMOUS'
 }
+
+export enum Wallet_Types{
+    Bkash='Bkash',
+    Ucash='Ucash',
+    SureCash='SureCash'
+    
+}
