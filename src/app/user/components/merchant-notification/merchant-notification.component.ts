@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {trigger,state,style,animate,transition}from '@angular/animations';
 import { element } from 'protractor';
@@ -23,10 +23,14 @@ export class MerchantNotificationComponent implements OnInit {
   columnsToDisplay = ['date', 'id', 'message'];
   expandedElement: MerchantNotification | null;
 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   changeNotificationStatus(element,isRead:boolean){
@@ -37,6 +41,7 @@ export class MerchantNotificationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
 }
