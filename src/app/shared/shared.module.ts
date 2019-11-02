@@ -24,6 +24,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from "@angular/material";
 
 @NgModule({
   declarations: [SnackbarComponent],
@@ -53,7 +54,8 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     HttpClientModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
   ],
   exports:[
     
@@ -81,7 +83,8 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     HttpClientModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatPaginatorModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]

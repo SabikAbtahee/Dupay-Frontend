@@ -1,5 +1,5 @@
 <mat-card>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mb-8 w-100-p">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
@@ -18,17 +18,20 @@
 
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (click)="updateCheckBox()"[(ngModel)]= "select_All">Select All</mat-checkbox>
+        <mat-checkbox (click)="updateCheckBox()"[(ngModel)]= "select_All" color="primary">Select All</mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.checked">Select</mat-checkbox>
+        <mat-checkbox [(ngModel)]="element.checked" color="primary">Select</mat-checkbox>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
   <div fxLayout=row fxLayoutAlign="end column">
     <button (click)="notify()" mat-button>Notify Selected</button>
   </div>
 </mat-card>
+

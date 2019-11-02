@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NotifyMerchantService} from "../../services/notify-merchant.service";
+import {MatPaginator, MatTableDataSource} from "@angular/material";
 
 
 export interface notifyMerchantTable {
+  id: string;
   name: string;
   userName: string;
   checked: boolean;
@@ -29,46 +31,49 @@ export interface notifyMerchantTable {
 export class NotifyMerchantComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'userName','select'];
   data : notifyMerchantTable []=[];
-  dataSource;
+  dataSource=new MatTableDataSource<notifyMerchantTable>(this.data);
   select_All: boolean = false;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private notifyMerchantService:NotifyMerchantService) { }
 
   ngOnInit() {
 
-
     this.notifyMerchantService.getAppovedMerchantList().subscribe(res=>{
         res.forEach(item => {
             this.data.push({
+              id: item.id,
               name: item.name,
               userName: item.username,
               checked: false
             })
-
+          this.dataSource.paginator = this.paginator;
         });
-        this.dataSource = this.data;
+
         }
       );
   }
 
   notify() {
+    let merchantIdList : string[] = [];
     this.data.forEach( item=>{
       if(item.checked == true){
-        console.log(item);
+        merchantIdList.push(item.id);
       }
     });
-
+    this.notifyMerchantService.merchantIdList = merchantIdList;
+    this.notifyMerchantService.openDialog();
 
   }
 
   updateCheckBox() {
     if(this.select_All){
       this.data.forEach( item=>{
-        item.checked =true;
+        item.checked =false;
       })
     }
     else{
       this.data.forEach( item=>{
-        item.checked =false;
+        item.checked =true;
       })
     }
   }

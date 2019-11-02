@@ -1,1 +1,13 @@
-<p>merchant-notification works!</p>
+<form [formGroup]="notificationForm" class="h-100-p">
+  <mat-form-field class="h-80-p">
+    <mat-label>Notification</mat-label>
+    <textarea matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"formControlName="notification"></textarea>
+  </mat-form-field>
+
+  <button mat-button mat-raised-button color="primary" (click)="send()">Send</button>
+</form>
+

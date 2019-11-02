@@ -11,6 +11,7 @@ import {PasswordModalService} from "./services/password-modal.service";
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { AuthGuard } from '../core/security-services/auth.guard';
 import { NotifyMerchantComponent } from './components/notify-merchant/notify-merchant.component';
+import {NotifyMerchantService} from "./services/notify-merchant.service";
 
 const routes:Routes=[
   {
@@ -46,7 +47,7 @@ const routes:Routes=[
     RouterModule.forChild(routes),
     SharedModule
   ],
-  providers: [ PasswordModalService ],
-  entryComponents: [ PasswordChangeComponent ]
+  providers: [ PasswordModalService, NotifyMerchantService ],
+  entryComponents: [ PasswordChangeComponent, MerchantNotificationComponent ]
 })
 export class UserModule { }
