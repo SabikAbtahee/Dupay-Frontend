@@ -205,6 +205,7 @@ export const authentication_error_messages = {
 	otp_error: 'Wrong OTP given',
 	username_error:'Provide valid username',
 	trade_insurance_error:'Provide valid trade insurance error',
+  required_field:'Required field',
 	minimum_5:'Minimum 5 length is required',
 	maximum_20:'Maximum length is 20'
 };
@@ -223,7 +224,9 @@ export const snackbarMessages = {
 	access_denied:'Access Denied',
 	must_be_admin:'You need Admin permission',
 	must_be_merchant:'You need to be merchant to access',
-	reset_password_complete:'Password reset successful'
+	reset_password_complete:'Password reset successful',
+  change_password_success:'Password has been changed successfully',
+  change_password_fail:'Password change has been failed',
 };
 
 export const urlPaths = {
@@ -242,7 +245,12 @@ export const urlPaths = {
 		HomeDefault: {
 			url: 'home'
 		}
-	}
+	},
+  User: {
+	  profile:{
+	    url: 'user/profile'
+    }
+  }
 };
 
 export const httpHeader = {

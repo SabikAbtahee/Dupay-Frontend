@@ -18,8 +18,12 @@ export class PasswordModalService {
       // height:'60vh'
     });
 
+
     // dialogRef.afterClosed().subscribe(result => {
     // console.log('The dialog was closed',result);
     // });
+  }
+  modalClose(){
+    this.dialog.closeAll();
   }
 }

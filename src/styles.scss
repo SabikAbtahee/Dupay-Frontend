@@ -48,6 +48,9 @@ $custom-typography: mat-typography-config(
 .mat-error {
 	font-size: 12px !important;
 }
+.bold {
+  font-weight: 600 ;
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

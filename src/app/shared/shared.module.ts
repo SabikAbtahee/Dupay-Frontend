@@ -21,8 +21,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from "@angular/material";
 import { DialogComponent } from './components/dialog/dialog.component';
 
 import { MatPaginatorModule } from '@angular/material';
@@ -54,6 +56,7 @@ import { MatPaginatorModule } from '@angular/material';
     MatListModule,
     HttpClientModule,
     MatTableModule,
+    MatCheckboxModule,
     MatPaginatorModule
   ],
   exports:[
@@ -82,6 +85,7 @@ import { MatPaginatorModule } from '@angular/material';
     MatListModule,
     HttpClientModule,
     MatTableModule,
+    MatCheckboxModule,
     MatPaginatorModule
   ],
   providers:[SharedService],

@@ -11,8 +11,10 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import {PasswordModalService} from "./services/password-modal.service";
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { AuthGuard } from '../core/security-services/auth.guard';
-import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { NotifyMerchantComponent } from './components/notify-merchant/notify-merchant.component';
+import {NotifyMerchantService} from "./services/notify-merchant.service";
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
+
 
 const routes:Routes=[
   {
@@ -39,6 +41,10 @@ const routes:Routes=[
   {
     path:'profile',
     component:UserProfileComponent
+  },
+  {
+    path:'notify-merchant',
+    component:NotifyMerchantComponent
   }
 ]
 
@@ -49,8 +55,10 @@ const routes:Routes=[
     RouterModule.forChild(routes),
     SharedModule
   ],
-  providers: [ PasswordModalService ],
-  entryComponents: [ PasswordChangeComponent,DialogComponent]
+  providers: [ PasswordModalService, NotifyMerchantService ],
+  entryComponents: [ PasswordChangeComponent, MerchantNotificationComponent,DialogComponent ]
+  
+
 
 })
 export class UserModule { }

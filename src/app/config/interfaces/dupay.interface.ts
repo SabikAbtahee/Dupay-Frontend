@@ -51,6 +51,11 @@ export interface passwordChange {
 	newPassword: string,
 	confirmPassword: string
 }
+export interface merchantNotification{
+  message: string,
+	merchantIds:string[],
+
+}
 
 export interface DialogData {
 	title?:string;
