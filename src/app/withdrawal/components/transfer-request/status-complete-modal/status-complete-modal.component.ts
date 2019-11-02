@@ -13,6 +13,7 @@ export class StatusCompleteModalComponent implements OnInit {
   statusCompleteForm: FormGroup;
   transactionId = new FormControl('',[]);
   amount = new FormControl('',[]);
+  password = new FormControl('',[]);
 
   constructor(private dialogRef: MatDialogRef<StatusCompleteModalComponent>, 
     @Inject(MAT_DIALOG_DATA) private data: TransferRequest, private formBuilder: FormBuilder) { }
@@ -30,7 +31,8 @@ export class StatusCompleteModalComponent implements OnInit {
   createForm(){
     this.statusCompleteForm = this.formBuilder.group({
       transactionId : this.transactionId,
-      amount: this.amount
+      amount: this.amount,
+      password: this.password
     });
   }
 
