@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {  TransferRequest } from 'src/app/config/interfaces/dupay.interface';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import {  TransferRequest, SelectOption } from 'src/app/config/interfaces/dupay.interface';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-status-complete-modal',
@@ -13,7 +13,8 @@ export class StatusCompleteModalComponent implements OnInit {
   statusCompleteForm: FormGroup;
   transactionId = new FormControl('',[]);
   amount = new FormControl('',[]);
-  password = new FormControl('',[]);
+  //password = new FormControl('',[Validators.required]);
+  waletList: SelectOption[];
 
   constructor(private dialogRef: MatDialogRef<StatusCompleteModalComponent>, 
     @Inject(MAT_DIALOG_DATA) private data: TransferRequest, private formBuilder: FormBuilder) { }
@@ -26,13 +27,20 @@ export class StatusCompleteModalComponent implements OnInit {
   initializeForm(){
     this.statusCompleteForm.controls.transactionId.patchValue(this.data.transactionId);
     this.statusCompleteForm.controls.amount.patchValue(this.data.amount);
+    this.waletList = [
+      {value :"ROCKET",viewValue: "Rocket"},
+      {value :"BKASH",viewValue: "Bkash"},
+      {value :"NAGAD",viewValue: "Nagad"},
+      {value :"SURE_CASH",viewValue: "Sure Cash"},
+    ];
+
   }
 
   createForm(){
     this.statusCompleteForm = this.formBuilder.group({
       transactionId : this.transactionId,
       amount: this.amount,
-      password: this.password
+      //password: this.password
     });
   }
 

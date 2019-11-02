@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
-import { TransferRequest, TransferStatus } from 'src/app/config/interfaces/dupay.interface';
-import { TransferState } from '@angular/platform-browser';
+import { TransferRequest, SelectOption } from 'src/app/config/interfaces/dupay.interface';
 import { WithdrawalService } from '../../services/withdrawal.service';
-import { element } from 'protractor';
 import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
 
 @Component({
@@ -15,7 +13,7 @@ export class TransferRequestComponent implements OnInit {
 
   dummyData: TransferRequest[];
   displayedColumns: string[];
-  statusList: TransferStatus[];
+  statusList: SelectOption[];
   statusIndexMap : any;
   transferRequests = new MatTableDataSource<TransferRequest>();
 
@@ -46,7 +44,7 @@ export class TransferRequestComponent implements OnInit {
     });
   }
 
-  getStatusList(status:string): TransferStatus[]{
+  getStatusList(status:string): SelectOption[]{
     return Object.assign([], this.statusList).splice(this.statusIndexMap.get(status),this.statusList.length);
   }
 
@@ -63,7 +61,7 @@ export class TransferRequestComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-
+        if(result.event == "close") this.getTransferRequestList();
       });
     }
     
