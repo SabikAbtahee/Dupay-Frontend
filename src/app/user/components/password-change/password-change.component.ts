@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {authentication_error_messages, passwordRegex} from "../../../config/constants/dupayConstants";
+import {
+  authentication_error_messages,
+  passwordRegex,
+  snackbarMessages,
+  urlPaths
+} from "../../../config/constants/dupayConstants";
 import {FieldMatcher} from "../../../core/utility-services/utility-service.service";
 import {UserProfileService} from "../../services/user-profile.service";
 import {passwordChange} from "../../../config/interfaces/dupay.interface";
+import {AuthenticationService} from "../../../authentication/services/authentication.service";
+import {Router} from "@angular/router";
+import {SharedService} from "../../../shared/services/shared.service";
+import {PasswordModalService} from "../../services/password-modal.service";
 
 @Component({
   selector: 'app-password-change',
@@ -12,7 +21,11 @@ import {passwordChange} from "../../../config/interfaces/dupay.interface";
 })
 export class PasswordChangeComponent implements OnInit {
 
-  constructor(	private fb: FormBuilder, private profileservice:UserProfileService) { }
+  constructor(	private fb: FormBuilder,
+                private profileservice:UserProfileService,
+                private router: Router,
+                private passwordModalService: PasswordModalService,
+                private sharedService: SharedService) { }
   changePasswordForm: FormGroup;
   passwordgroup: any = {};
   error_messages = authentication_error_messages;
@@ -74,6 +87,7 @@ export class PasswordChangeComponent implements OnInit {
       this.setPassword();
       this.passwordChangeValueAssign();
       this.updatePassword(this.passwordgroup);
+
     } else {
       this.updateFields();
     }
@@ -81,7 +95,27 @@ export class PasswordChangeComponent implements OnInit {
   updatePassword(passwords) {
 
     this.profileservice.updatePassword(this.data).subscribe(result =>{
+      if(result.message == 'Password has changed successfully.'){
+        this.openSnackBar(snackbarMessages.change_password_success, true);
+      }
+      else{
+        this.openSnackBar(snackbarMessages.change_password_fail, false);
+
+      }
+      this.close();
       console.log(result);
+    });
+  }
+  close(){
+    this.passwordModalService.modalClose();
+  }
+  openSnackBar(message, isAccepted) {
+    this.sharedService.openSnackBar({
+      data: { message: message, isAccepted: isAccepted },
+      duration: 2,
+      panelClass: [ 'recovery-snackbar' ],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
     });
   }
 }

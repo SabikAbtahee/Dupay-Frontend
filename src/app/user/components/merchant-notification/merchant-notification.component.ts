@@ -43,7 +43,7 @@ export class MerchantNotificationComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
-
+  
 }
 
 export interface MerchantNotification {

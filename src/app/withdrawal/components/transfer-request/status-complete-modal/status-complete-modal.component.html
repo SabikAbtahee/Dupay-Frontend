@@ -15,16 +15,20 @@
         </div>
     </div>
 
-    <!-- <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
         <div> Payment process </div>
         <div>
-            <mat-select [(value)]= "" >
-                <mat-option *ngFor="" [value]="">
-                  {{}}
-                </mat-option>
-              </mat-select>
+            <mat-form-field appearance="outline">
+                <mat-label>Select process</mat-label>
+                <mat-select [(ngModel)]="selectedValue">
+                    <mat-option *ngFor="let item of waletList" [value]="item.value">
+                    {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
         </div>
-    </div> -->
+    </div>
 
     
     <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -37,14 +41,14 @@
     </div>
 
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between center">
         <div>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Password" type="password" [formControl]="password">
               </mat-form-field>
         </div>
-    </div>
+    </div> -->
 
 </form>
 
@@ -52,5 +56,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-<button mat-button (click) = "save()">  Submit </button>
+<button mat-button (click) = "close()"> Close </button>
+<button class="mat-raised-button mat-primary" [disabled]="!statusCompleteForm.valid" (click) = "save()">  Submit </button>
 </mat-dialog-actions>

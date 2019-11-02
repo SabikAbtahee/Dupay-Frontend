@@ -51,6 +51,11 @@ export interface passwordChange {
 	newPassword: string,
 	confirmPassword: string
 }
+export interface merchantNotification{
+  message: string,
+	merchantIds:string[],
+
+}
 
 export interface DialogData {
 	title?:string;
@@ -69,7 +74,7 @@ export interface TransferRequest{
 }
 
 
-export interface TransferStatus{
+export interface SelectOption{
 	value: string;
 	viewValue: string;
 }
