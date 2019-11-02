@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card >
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mb-8 w-100-p">
 
     <!-- Name Column -->
@@ -27,6 +27,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
 

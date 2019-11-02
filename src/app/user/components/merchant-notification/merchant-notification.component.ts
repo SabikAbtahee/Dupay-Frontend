@@ -27,6 +27,8 @@ export class MerchantNotificationComponent implements OnInit {
 
   send() {
     this.notifyMerchantService.message = this.notificationForm.value.notification;
-    this.notifyMerchantService.sendNotification();
+    this.notifyMerchantService.sendNotification().subscribe(res=>{
+      
+    });
   }
 }

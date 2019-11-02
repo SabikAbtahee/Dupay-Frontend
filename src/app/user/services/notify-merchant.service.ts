@@ -69,28 +69,36 @@ export class NotifyMerchantService {
     });
   }
 
-  sendNotification(): Observable<any> {
+  sendNotification():Observable<any> {
     this.data = {
       message : this.message,
-      merchant_id : this.merchantIdList
+      merchantIds : this.merchantIdList
     };
     let token;
     let httpHeader;
 
 
 
-    // return new Observable(observer=>{
+    return new Observable(observer=>{
       this.queryService.getToken().subscribe(res => {
         token = res;
         httpHeader = this.securityService.getHeader(token);
         this.mutationService.httpPost(`${api_path.notifyMerchant}`,
-          this.data, httpHeader).subscribe(res2=>{
-          // observer.next(res2);
+          this.data, httpHeader).subscribe(res2 => {
+          observer.next(res2);
           console.log(res2);
-        });
+        },
+          (err) => {
+            observer.error(err);
+            console.log(err);
+          },
+          () => {
+            observer.complete();
+          }
+        );
 
       });
-    // });
+    });
 
 
 

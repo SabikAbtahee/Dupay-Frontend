@@ -52,8 +52,8 @@ export interface passwordChange {
 	confirmPassword: string
 }
 export interface merchantNotification{
-  "message": string,
-	merchant_id:string[],
+  message: string,
+	merchantIds:string[],
 
 }
 
