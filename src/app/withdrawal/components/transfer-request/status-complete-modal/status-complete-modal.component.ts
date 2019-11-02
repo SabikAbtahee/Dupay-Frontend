@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {  TransferRequest } from 'src/app/config/interfaces/dupay.interface';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-status-complete-modal',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatusCompleteModalComponent implements OnInit {
 
-  constructor() { }
+  statusCompleteForm: FormGroup;
+  transactionId = new FormControl('',[]);
+  amount = new FormControl('',[]);
+
+  constructor(private dialogRef: MatDialogRef<StatusCompleteModalComponent>, 
+    @Inject(MAT_DIALOG_DATA) private data: TransferRequest, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.createForm();
+    this.initializeForm();
+  }
+
+  initializeForm(){
+    this.statusCompleteForm.controls.transactionId.patchValue(this.data.transactionId);
+    this.statusCompleteForm.controls.amount.patchValue(this.data.amount);
+  }
+
+  createForm(){
+    this.statusCompleteForm = this.formBuilder.group({
+      transactionId : this.transactionId,
+      amount: this.amount
+    });
+  }
+
+  close(){
+    this.dialogRef.close({event:"close"});
+  }
+
+  save(){
+    
   }
 
 }

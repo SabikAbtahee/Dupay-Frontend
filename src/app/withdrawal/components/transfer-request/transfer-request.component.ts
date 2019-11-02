@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
 import { TransferRequest, TransferStatus } from 'src/app/config/interfaces/dupay.interface';
 import { TransferState } from '@angular/platform-browser';
 import { WithdrawalService } from '../../services/withdrawal.service';
 import { element } from 'protractor';
+import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
 
 @Component({
   selector: 'app-transfer-request',
@@ -20,7 +21,7 @@ export class TransferRequestComponent implements OnInit {
 
   @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
 
-  constructor(private withdrawalService:WithdrawalService) { }
+  constructor(private withdrawalService:WithdrawalService, private matDialog:MatDialog) { }
 
   ngOnInit() {
     this.initialize();
@@ -52,8 +53,18 @@ export class TransferRequestComponent implements OnInit {
   onStatusChange(element: TransferRequest){
 
     if(element.status == "DONE"){
-      console.log(element);
-      // open dialog
+      let dialogConfig = new MatDialogConfig();
+      dialogConfig.width = "400px";
+      dialogConfig.data = element;
+
+      let dialogRef = this.matDialog.open(StatusCompleteModalComponent,dialogConfig);
+      dialogRef.backdropClick().subscribe(()=>{
+        this.getTransferRequestList()
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+      });
     }
     else{
       let updateRequest = {

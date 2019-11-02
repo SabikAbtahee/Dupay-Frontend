@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { WithdrawRequestComponent } from './components/withdraw-request/withdraw-request.component';
 import { AdminGuard } from '../core/security-services/admin.guard';
 import { MerchantGuard } from '../core/security-services/merchant.guard';
-import { MatTableModule, MatSelectModule } from '@angular/material';
 import { WithdrawHistoryComponent } from './components/withdraw-history/withdraw-history.component';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { WithdrawRequestModalService } from './services/withdraw-request-modal.service';
@@ -32,13 +31,11 @@ const routes:Routes=[
   declarations: [TransferRequestComponent, WithdrawRequestComponent, WithdrawHistoryComponent, StatusCompleteModalComponent],
   imports: [
     CommonModule,
-    MatTableModule,
-    MatSelectModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
   ],
   exports:[WithdrawRequestComponent],
   providers:[WithdrawRequestModalService],
-  entryComponents:[WithdrawRequestComponent]
+  entryComponents:[WithdrawRequestComponent, StatusCompleteModalComponent]
 })
 export class WithdrawalModule { }
