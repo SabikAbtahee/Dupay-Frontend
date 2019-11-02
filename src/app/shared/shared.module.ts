@@ -25,9 +25,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from "@angular/material";
+import { DialogComponent } from './components/dialog/dialog.component';
 
+import { MatPaginatorModule } from '@angular/material';
 @NgModule({
-  declarations: [SnackbarComponent],
+  declarations: [SnackbarComponent, DialogComponent],
   imports: [
     CommonModule,
     MatToolbarModule,

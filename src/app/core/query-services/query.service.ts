@@ -72,6 +72,7 @@ export class QueryService {
 			}
 		})
 	}
+
 	httpGet(apiPath, httpheader): Observable<any> {
 		
 		return new Observable((observer) => {

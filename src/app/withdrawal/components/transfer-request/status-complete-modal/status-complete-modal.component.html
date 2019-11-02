@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>
+    Complete Transfer Request
+</h2>
+<mat-dialog-content>
+<form [formGroup]="statusCompleteForm">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>   
+            Transaction Id
+        </div>
+        <div>
+            <mat-form-field appearance="outline">
+                <input matInput [readonly]="true" [formControl]="transactionId">
+              </mat-form-field>
+        </div>
+    </div>
+
+    <!-- <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div> Payment process </div>
+        <div>
+            <mat-select [(value)]= "" >
+                <mat-option *ngFor="" [value]="">
+                  {{}}
+                </mat-option>
+              </mat-select>
+        </div>
+    </div> -->
+
+    
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div> Amount </div>
+        <div>
+            <mat-form-field appearance="outline">
+                <input matInput [readonly]="true" [formControl]="amount">
+              </mat-form-field>
+        </div>
+    </div>
+
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" type="password" [formControl]="password">
+              </mat-form-field>
+        </div>
+    </div>
+
+</form>
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+<button mat-button (click) = "save()">  Submit </button>
+</mat-dialog-actions>

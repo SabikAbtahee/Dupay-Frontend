@@ -45,7 +45,9 @@ export class NavSideBarComponent implements OnInit {
 
 	route(url) {
 		console.log(url);
-		this.router.navigate([ url ]);
+		this.router.navigate([ url ]).then(res=>{
+			this.checkRow();
+		});
 	}
 	selectRow(index) {
 		this.selectedRow = index;
