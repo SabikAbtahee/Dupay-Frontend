@@ -227,6 +227,8 @@ export const snackbarMessages = {
 	reset_password_complete:'Password reset successful',
   change_password_success:'Password has been changed successfully',
   change_password_fail:'Password change has been failed',
+  selected_merchant_notification_sent_success:'Notification has been sent',
+  selected_merchant_notification_sent_fail:'Notification sent has been failed',
 };
 
 export const urlPaths = {

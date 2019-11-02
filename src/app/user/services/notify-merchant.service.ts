@@ -68,7 +68,9 @@ export class NotifyMerchantService {
       // height:'60vh'
     });
   }
-
+  close(){
+    this.dialog.closeAll();
+  }
   sendNotification():Observable<any> {
     this.data = {
       message : this.message,
