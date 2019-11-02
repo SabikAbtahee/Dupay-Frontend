@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {trigger,state,style,animate,transition}from '@angular/animations';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-merchant-notification',
@@ -27,6 +28,12 @@ export class MerchantNotificationComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  changeNotificationStatus(element,isRead:boolean){
+   
+       element.isRead=true;
+  }
+   
   constructor() { }
 
   ngOnInit() {
@@ -48,7 +55,7 @@ const NOTIFICATION_DATA: MerchantNotification[] = [
     id: 'abc',
     message: 'Dummy transaction of 5.00 BDT',
     description:`At 10 pm GMT+6, transaction of 5 BDT took place`,
-    isRead:true
+    isRead:false
   }, {
    date: '2',
     id: 'bcd',

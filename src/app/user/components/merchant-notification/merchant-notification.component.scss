@@ -1,7 +1,12 @@
 table {
     width: 100%;
+    text-align: center !important;
   }
-  
+
+th {
+    text-align: center !important;
+   }
+
   tr.example-detail-row {
     height: 0;
   }
@@ -57,7 +62,7 @@ table {
   }
   
   .is-read {
-    background-color: lightsteelblue;
+    background-color: #f6f6f6;
   }
   
   
