@@ -71,6 +71,11 @@ export class NotifyMerchantComponent implements OnInit {
     else{
       this.notifyMerchantService.merchantIdList = merchantIdList;
       this.notifyMerchantService.openDialog();
+      // this.data.forEach( item=>{
+      //   item.checked =false;
+      //
+      // });
+      // this.select_All = false;
     }
   }
 

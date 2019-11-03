@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {passwordRegex, snackbarMessages, urlPaths} from "../../../config/constants/dupayConstants";
 import {NotifyMerchantService} from "../../services/notify-merchant.service";
-import {PasswordModalService} from "../../services/password-modal.service";
 import {SharedService} from "../../../shared/services/shared.service";
 import {Router} from "@angular/router";
+import {snackbarMessages} from "../../../config/constants/dupayConstants";
 
 @Component({
-  selector: 'app-merchant-notification',
-  templateUrl: './merchant-notification.component.html',
-  styleUrls: ['./merchant-notification.component.scss']
+  selector: 'app-notification',
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.scss']
 })
-export class MerchantNotificationComponent implements OnInit {
+export class NotificationComponent implements OnInit {
   notificationForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private notifyMerchantService: NotifyMerchantService,
               private sharedService: SharedService,
               private router: Router
-              ) { }
+  ) { }
 
   ngOnInit() {
     this.makeNotificationForm();

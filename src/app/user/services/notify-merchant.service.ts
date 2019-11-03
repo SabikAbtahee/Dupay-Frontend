@@ -8,6 +8,8 @@ import {MatDialog} from "@angular/material";
 import {PasswordChangeComponent} from "../components/password-change/password-change.component";
 import {MerchantNotificationComponent} from "../components/merchant-notification/merchant-notification.component";
 import {MutationService} from "../../core/mutation-services/mutation.service";
+import {SharedService} from "../../shared/services/shared.service";
+import {NotificationComponent} from "../components/notification/notification.component";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ export class NotifyMerchantService {
               private securityService:SecurityService,
               public dialog: MatDialog,
               private mutationService:MutationService,
+              private sharedService: SharedService
 
   ) { }
   public getAppovedMerchantList(): Observable<Merchant[]> {
@@ -61,7 +64,7 @@ export class NotifyMerchantService {
   }
 
   openDialog(width?: string) {
-    const dialogRef = this.dialog.open(MerchantNotificationComponent, {
+    const dialogRef = this.dialog.open(NotificationComponent, {
       height: '20vw',
       minWidth:'450px',
       width: width ? width : '35vw'
@@ -78,7 +81,6 @@ export class NotifyMerchantService {
     };
     let token;
     let httpHeader;
-
 
 
     return new Observable(observer=>{
