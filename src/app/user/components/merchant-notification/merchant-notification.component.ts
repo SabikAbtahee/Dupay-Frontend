@@ -1,62 +1,121 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {passwordRegex, snackbarMessages, urlPaths} from "../../../config/constants/dupayConstants";
-import {NotifyMerchantService} from "../../services/notify-merchant.service";
-import {PasswordModalService} from "../../services/password-modal.service";
-import {SharedService} from "../../../shared/services/shared.service";
-import {Router} from "@angular/router";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {trigger,state,style,animate,transition}from '@angular/animations';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-merchant-notification',
   templateUrl: './merchant-notification.component.html',
-  styleUrls: ['./merchant-notification.component.scss']
+  styleUrls: ['./merchant-notification.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
+  
 })
 export class MerchantNotificationComponent implements OnInit {
-  notificationForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private notifyMerchantService: NotifyMerchantService,
-              private sharedService: SharedService,
-              private router: Router
-              ) { }
+  dataSource = new MatTableDataSource(NOTIFICATION_DATA);
+  columnsToDisplay = ['date', 'id', 'message'];
+  expandedElement: MerchantNotification | null;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  changeNotificationStatus(element,isRead:boolean){
+   
+       element.isRead=true;
+  }
+   
+  constructor() { }
 
   ngOnInit() {
-    this.makeNotificationForm();
+    this.dataSource.paginator = this.paginator;
   }
-  makeNotificationForm() {
-    this.notificationForm = this.fb.group({
-      notification: [ '', [ Validators.required] ],
-
-    });
-  }
-
-  send() {
-    this.notifyMerchantService.message = this.notificationForm.value.notification;
-    this.sharedService.openSpinner();
-
-    this.notifyMerchantService.sendNotification().subscribe(res=>{
-      this.sharedService.hideSpinner();
-
-      if(res.message == "Email has been sent to the merchants"){
-        console.log("ok");
-        this.openSnackBar(snackbarMessages.selected_merchant_notification_sent_success, true);
-
-      }
-      else {
-        this.openSnackBar(snackbarMessages.selected_merchant_notification_sent_fail, false);
-
-      }
-      this.notifyMerchantService.close();
-
-    });
-  }
-  openSnackBar(message, isAccepted) {
-    this.sharedService.openSnackBar({
-      data: { message: message, isAccepted: isAccepted },
-      duration: 2,
-      panelClass: [ 'recovery-snackbar' ],
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
-    });
-  }
+  
 }
+
+export interface MerchantNotification {
+  date: string;
+  id: string;
+  message: string;
+  description: string;
+  isRead: boolean;
+}
+
+const NOTIFICATION_DATA: MerchantNotification[] = [
+  {
+    date: '1',
+    id: 'abc',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`,
+    isRead:false
+  }, {
+   date: '2',
+    id: 'bcd',
+    message: 'Dummy transaction of 5.00 BDT',
+    description: `At 10 pm GMT+6, transaction of 5 BDT took place`,
+    isRead:true
+  }, {
+    date: '3',
+    id: 'cde',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`,
+    isRead:true
+      }, {
+    date: '4',
+    id: 'def',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`,
+    isRead:true
+  }, {
+    date: '5',
+    id: 'efg',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`,
+    isRead:true
+      }, {
+     date: '6',
+    id: 'fgh',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`
+    ,isRead:true
+  }, {
+   date: '7',
+    id: 'ghi',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`,
+        isRead:true
+  }, {
+    date: '1',
+    id: '123456789',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`
+    ,isRead:true
+  }, {
+    date: '1',
+    id: '123456789',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`
+  ,isRead:true
+      }, {
+  
+    date: '1',
+    id: '123456789',
+    message: 'Dummy transaction of 5.00 BDT',
+    description:`At 10 pm GMT+6, transaction of 5 BDT took place`
+        ,isRead:true
+      }
+
+];

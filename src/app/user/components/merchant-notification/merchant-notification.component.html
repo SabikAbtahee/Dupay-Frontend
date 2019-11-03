@@ -1,16 +1,50 @@
-<ngx-spinner></ngx-spinner>
-<form [formGroup]="notificationForm" class="h-100-p">
-  <div><p class="font-size-20">Write your message</p></div>
+<div class="container-fluid">
+  <div class="example-container">
+      <mat-form-field appearance="fill" floatLabel="never">
+          <!-- <mat-label>Fill form field</mat-label> -->
+          <input matInput placeholder="Placeholder" (keyup)="applyFilter($event.target.value)">
+      </mat-form-field>
+  </div>
+ 
+  
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          
+          <th mat-header-cell *matHeaderCellDef> {{column}}  </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'is-read': element.isRead }"  (click)="changeNotificationStatus(element,isRead)"> {{element[column]}} </td>
+        </ng-container>
 
-  <mat-form-field appearance="outline" class="h-60-p">
-<!--    <mat-label>Notification</mat-label>-->
-    <textarea matInput
-              cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize"
-              cdkAutosizeMinRows="1"
-              cdkAutosizeMaxRows="5"formControlName="notification"></textarea>
-  </mat-form-field>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail"  >
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length"  >
+            <div  class="example-element-detail"
+                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
+              <!-- <div class="example-element-diagram"> -->
+                <!-- <div class="example-element-position"> {{element.date}} </div>
+                <div class="example-element-symbol"> {{element.id}} </div>
+                <div class="example-element-name"> {{element.message}} </div> -->
+              
+              <!-- </div> -->
+              <div class="example-element-description">
+                {{element.description}} <br>
+                <!-- <span class="example-element-description-attribution"> -- Wikipedia </span> -->
+                <!-- <button mat-raised-button (click)="element.isRead=!element.isRead" >Mark as Unread</button> -->
+              </div>
+            </div>
+          </td>
+        </ng-container>
 
-  <button mat-button mat-raised-button color="primary" (click)="send()" class="mt-24">Send</button>
-</form>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
 
+
+<!-- Copyright 2019 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
