@@ -9,6 +9,11 @@
               #autosize="cdkTextareaAutosize"
               cdkAutosizeMinRows="1"
               cdkAutosizeMaxRows="5"formControlName="notification"></textarea>
+    <mat-error
+      *ngIf="notificationForm.get('notification').errors?.required &&
+                   notificationForm.get('notification').touched">
+      {{error_messages.required_field}}
+    </mat-error>
   </mat-form-field>
 
   <button mat-button mat-raised-button color="primary" (click)="send()" class="mt-24">Send</button>

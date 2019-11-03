@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {
   authentication_error_messages,
   passwordRegex,
@@ -13,6 +13,7 @@ import {AuthenticationService} from "../../../authentication/services/authentica
 import {Router} from "@angular/router";
 import {SharedService} from "../../../shared/services/shared.service";
 import {PasswordModalService} from "../../services/password-modal.service";
+import {group} from "@angular/animations";
 
 @Component({
   selector: 'app-password-change',
@@ -61,10 +62,13 @@ export class PasswordChangeComponent implements OnInit {
   passwordMatchValidator(group: FormGroup): any {
     if (group) {
       if (group.get('newpassword').value !== group.get('confirmpassword').value) {
-        return { notMatching: true };
+        return { not_matching: true };
       }
     }
 
+    // if(control.value !== this.changePasswordForm.value.newpassword) {
+    //   return { notMatching: true };
+    // }
     return null;
   }
   setCustomValidation() {
@@ -97,6 +101,9 @@ export class PasswordChangeComponent implements OnInit {
     this.profileservice.updatePassword(this.data).subscribe(result =>{
       if(result.message == 'Password has changed successfully.'){
         this.openSnackBar(snackbarMessages.change_password_success, true);
+      }
+      else if(result.error == 'Old password does not match.'){
+        this.openSnackBar('Old password does not match.', false);
       }
       else{
         this.openSnackBar(snackbarMessages.change_password_fail, false);

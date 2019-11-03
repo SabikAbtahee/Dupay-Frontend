@@ -51,6 +51,7 @@ export class MutationService {
 					observer.next(res);
 				},
 				(err) => {
+				  observer.next(err);
 					observer.error(err);
 				},
 				() => {
