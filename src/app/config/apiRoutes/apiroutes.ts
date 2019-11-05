@@ -36,7 +36,8 @@ export const api_path = {
   //withdraw-request
   getMerchantAccounts: `${environment.baseurl}/api/merchant/merchantacc` ,
   getMerchantInfoWithId:`${environment.baseurl}/api/merchant`,
-  withdrawRequestByMerchant:`${environment.baseurl}/api/merchant/withdraw`
+  withdrawRequestByMerchant:`${environment.baseurl}/api/merchant/withdraw`,
+  getWithdrawrequests:`${environment.baseurl}/api/merchant/withdraw`,
  
 
 }

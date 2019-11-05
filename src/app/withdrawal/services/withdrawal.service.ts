@@ -111,4 +111,11 @@ export class WithdrawalService {
 		
 		return this.mutationService.httpPost(`${api_path.withdrawRequestByMerchant}`,payload,httpHeader)
 	}
+
+	getWithdrawRequestsByMerchant():Observable<any>{
+		let id = this.securityService.getLoggedInUserId();
+		let httpHeader = this.securityService.getAuthorizedHeader();
+		return this.queryService.httpGet(`${api_path.withdrawRequestByMerchant}/${id}`,httpHeader)
+
+	}
 }

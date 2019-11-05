@@ -26,7 +26,7 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from "@angular/material";
 import { DialogComponent } from './components/dialog/dialog.component';
-
+import {MatChipsModule} from '@angular/material/chips';
 import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [SnackbarComponent, DialogComponent],
@@ -59,7 +59,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatCheckboxModule,
     MatPaginatorModule,
     NgxSpinnerModule,
-    ShowHidePasswordModule
+    ShowHidePasswordModule,
+    MatChipsModule
   ],
   exports:[
     
@@ -90,7 +91,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatCheckboxModule,
     ShowHidePasswordModule,
     MatPaginatorModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatChipsModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]

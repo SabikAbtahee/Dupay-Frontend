@@ -19,3 +19,19 @@ export enum Token_Role{
     ROLE_ADMIN='ROLE_ADMIN',
     ANNONYMOUS='ANNONYMOUS'
 }
+
+export enum Withdraw_status{
+    PENDING='PENDING',
+    REJECTED='REJECTED',
+    IN_PROGRESS='IN_PROGRESS',
+    DONE='DONE'
+}
+
+export enum Wallet_type{
+    
+    ROCKET='ROCKET',
+    NEXUSPAY='NEXUSPAY',
+    MOGOD='MOGOD',
+    SURECASH='SURECASH',
+    BKASH='BKASH'
+}

@@ -1,40 +1,60 @@
 <div class="example-button-row m-40" fxLayout="column" fxLayoutAlign="end end">
-  <button (click)='openWithdrawRequestWindow()' mat-raised-button color="warn" class="w-250 h-58 fontSize-B">Withdraw Money</button>
+  <button (click)='openWithdrawRequestWindow()' mat-raised-button color="warn" class="w-250 h-58 fontSize-B">Withdraw
+    Money</button>
 </div>
 
-<div fxLayout="column" class="m-40 mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
-    <!-- Position Column -->
-    <ng-container matColumnDef="transactionId">
-      <mat-header-cell *matHeaderCellDef> Transaction ID </mat-header-cell>
+<div class='mx-40'>
+  <mat-form-field appearance="outline">
+      <!-- <mat-label>Type in to filter</mat-label> -->
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <mat-icon matPrefix class='mr-16'>search</mat-icon>
+     
+    </mat-form-field>
+  </div>
+<div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
+  <mat-table #table [dataSource]="withdraws">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Transaction ID
+      </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{ element.transactionId }}
+        {{ element.id }}
       </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.date }} </mat-cell>
+
+    <ng-container matColumnDef="withdrawDate">
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Withdraw Date
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.withdrawDate }} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Amount
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{ element.amount }} </mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <ng-container matColumnDef="walletType">
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Wallet Type
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.walletType }} </mat-cell>
+    </ng-container>
+
+
     <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.status }} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Status
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip  color="accent" [disableRipple]=true>{{ element.status }}</mat-chip>
+          </mat-chip-list>
+         </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-  ></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
