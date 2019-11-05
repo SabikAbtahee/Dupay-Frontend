@@ -78,3 +78,11 @@ export interface SelectOption{
 	value: string;
 	viewValue: string;
 }
+
+export interface WithdrawRequest{
+	amount:number;
+	merchantAccount: ID
+}
+export interface ID{
+	id:string
+}

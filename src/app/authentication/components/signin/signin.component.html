@@ -70,10 +70,11 @@
               <div>
                 <mat-form-field appearance="outline" class='w-224'>
                   <mat-label>Password</mat-label>
-                  <input type="password" matInput placeholder="Type in passoword " formControlName="password">
+                  <input id="mysecretpassword" type="password" matInput placeholder="Type in passoword " formControlName="password" showHideInput>
                   <!--                <mat-error *ngIf="signinform.get('password').touched && signinform.get('password').invalid">{{passwordError()}}</mat-error>-->
 
-                  <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                  <mat-icon  class='cursor-pointer' matSuffix showHideTrigger="mysecretpassword" [showHideStatus]="{id: 'mysecretpassword',materialIcon:true }" ></mat-icon>
+                  
                   <mat-error *ngIf="signinform.get('password').errors?.required && signinform.get('password').touched
                ">
                     {{error_messages.password_required}}

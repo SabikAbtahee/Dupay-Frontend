@@ -144,7 +144,7 @@ export const dupayConst = {
 
     },
     {
-      name: 'Withdraw request',
+      name: 'Withdraw Money',
       url: 'withdrawal/withdraw-history',
       icon: 'compare_arrows',
       role: [Token_Role.ROLE_MERCHANT],
@@ -229,7 +229,20 @@ export const snackbarMessages = {
   change_password_fail: 'Password change has been failed',
   selected_merchant_notification_sent_success: 'Notification has been sent',
   selected_merchant_notification_sent_fail: 'Notification sent has been failed',
+  withdraw_success:'Request sent successfully'
 };
+
+export const withdrawErrorMessages={
+  required_amount:'Please enter a valid amount',
+  insufficient_amount:'You do not have enough balance',
+  select_account:'Select one of your account',
+  greater_than_20000:'Have to be less than 20000 BDT',
+  less_than_0:'Cannot enter negative value',
+  select_wallet:'Select a wallet',
+  password_required:'Enter password'
+
+
+}
 
 export const urlPaths = {
   Authentication: {
