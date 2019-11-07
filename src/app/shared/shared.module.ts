@@ -28,6 +28,7 @@ import {MatPaginatorModule} from "@angular/material";
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [SnackbarComponent, DialogComponent],
   imports: [
@@ -60,7 +61,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatPaginatorModule,
     NgxSpinnerModule,
     ShowHidePasswordModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSortModule
   ],
   exports:[
     
@@ -92,7 +94,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ShowHidePasswordModule,
     MatPaginatorModule,
     NgxSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSortModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]

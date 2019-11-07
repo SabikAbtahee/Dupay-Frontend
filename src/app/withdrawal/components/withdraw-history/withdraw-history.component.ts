@@ -1,5 +1,5 @@
 import { WithdrawRequestModalService } from './../../services/withdraw-request-modal.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,20 +12,22 @@ import { first } from 'rxjs/operators';
 	templateUrl: './withdraw-history.component.html',
 	styleUrls: [ './withdraw-history.component.scss' ]
 })
-export class WithdrawHistoryComponent implements OnInit {
+export class WithdrawHistoryComponent implements OnInit{
 	displayedColumns: string[] = [ 'id', 'withdrawDate', 'walletType', 'amount', 'status' ];
 	withdraws = new MatTableDataSource<WithdrawHistory>();
-	@ViewChild(MatSort, { static: true }) sort: MatSort;
-	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+	@ViewChild(MatSort, { static: true })
+	sort: MatSort;
+	@ViewChild(MatPaginator, { static: true })
+	paginator: MatPaginator;
 	constructor(
 		private withdrawRequestModalService: WithdrawRequestModalService,
 		private withdrawService: WithdrawalService
 	) {}
 
 	ngOnInit() {
-		
 		this.setDataSource();
 	}
+	
 
 	openWithdrawRequestWindow() {
 		this.withdrawRequestModalService.openWithdrawRequestModal();
@@ -42,12 +44,12 @@ export class WithdrawHistoryComponent implements OnInit {
 					status: i.status
 				});
 			}
-      this.withdraws.data = data;
-      this.withdraws.sort = this.sort;
-		  this.withdraws.paginator = this.paginator;
+			this.withdraws.data = data;
+			this.withdraws.sort = this.sort;
+			this.withdraws.paginator = this.paginator;
 		});
 	}
-  applyFilter(filterValue: string) {
-    this.withdraws.filter = filterValue.trim().toLowerCase();
-  }
+	applyFilter(filterValue: string) {
+		this.withdraws.filter = filterValue.trim().toLowerCase();
+	}
 }
