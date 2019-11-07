@@ -5,6 +5,7 @@ import { WithdrawalService } from '../../services/withdrawal.service';
 import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
 import { Withdraw_status, Withdraw_status_view } from 'src/app/config/enums/dupay.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { request } from 'https';
 
 @Component({
   selector: 'app-transfer-request',
@@ -53,9 +54,10 @@ export class TransferRequestComponent implements OnInit {
   }
 
   getTransferRequestList(){
+    this.spinner.show();
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
-      debugger;
       this.transferRequests.data = res as TransferRequest[];
+      this.spinner.hide();
     });
   }
 
@@ -66,6 +68,13 @@ export class TransferRequestComponent implements OnInit {
   }
 
   onStatusChange(element: TransferRequest){
+
+    let updateRequest = {
+      id: element.id,
+      transactionId: element.transactionId,
+      status: element.status,
+      systemAccount: null
+    };
 
     if(element.status == "DONE"){
 
@@ -81,21 +90,22 @@ export class TransferRequestComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if(result.event == "close") this.getTransferRequestList();
+        else if (result.event == "save") {
+          updateRequest.transactionId = result.data.transactionId;
+          this.spinner.show();
+          this.withdrawalService.updateTransferRequestStatus(updateRequest).subscribe( res =>{
+            this.spinner.hide();
+            this.getTransferRequestList()
+          });
+        }
       });
     }
     
     else{
-      let updateRequest = {
-        id: element.id,
-        transactionId: element.transactionId,
-        status: element.status,
-        systemAccount: null
-      };
-
+      updateRequest.transactionId = element.transactionId
       this.spinner.show();
       this.withdrawalService.updateTransferRequestStatus(updateRequest).subscribe( res =>{
         this.spinner.hide();
-        console.log("updated result = " +res);
       });
     }
 
