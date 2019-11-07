@@ -27,6 +27,14 @@ export enum Withdraw_status{
     DONE='DONE'
 }
 
+export enum Withdraw_status_view{
+    PENDING='Pending',
+    REJECTED='Reject',
+    IN_PROGRESS='In progress',
+    ACCEPT = 'Accept',
+    DONE='Complete'
+}
+
 export enum Wallet_type{
     
     ROCKET='ROCKET',

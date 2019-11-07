@@ -3,6 +3,8 @@ import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@a
 import { TransferRequest, SelectOption } from 'src/app/config/interfaces/dupay.interface';
 import { WithdrawalService } from '../../services/withdrawal.service';
 import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
+import { Withdraw_status, Withdraw_status_view } from 'src/app/config/enums/dupay.enum';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-transfer-request',
@@ -13,13 +15,15 @@ export class TransferRequestComponent implements OnInit {
 
   dummyData: TransferRequest[];
   displayedColumns: string[];
+  initialStatusList: SelectOption[];
   statusList: SelectOption[];
   statusIndexMap : any;
+  initialStatusIndexMap : any;
   transferRequests = new MatTableDataSource<TransferRequest>();
 
   @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
 
-  constructor(private withdrawalService:WithdrawalService, private matDialog:MatDialog) { }
+  constructor(private withdrawalService:WithdrawalService, private matDialog:MatDialog, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.initialize();
@@ -28,34 +32,49 @@ export class TransferRequestComponent implements OnInit {
   }
 
   initialize(){
-    this.displayedColumns = ["id", "time", "amount", "status" ];
-    this.statusList = [
-      {value: 'PENDING',viewValue:'Pending' },
-      {value: 'IN_PROGRESS',viewValue:'In Progress' },
-      {value: 'DONE',viewValue:'Complete' },
+    this.displayedColumns = ["accountNumber","accountType", "time", "amount", "status" ];
+    this.initialStatusList = [
+      {value: Withdraw_status.PENDING,viewValue: Withdraw_status_view.PENDING },
+      {value: Withdraw_status.IN_PROGRESS,viewValue: Withdraw_status_view.ACCEPT },
+      {value: Withdraw_status.REJECTED,viewValue:Withdraw_status_view.REJECTED },
     ];
-    let i=0;
-    this.statusIndexMap = new Map(this.statusList.map( element => [element.value, i++])) ;
+    this.statusList = [
+      {value: Withdraw_status.IN_PROGRESS, viewValue: Withdraw_status_view.IN_PROGRESS},
+      {value: Withdraw_status.DONE, viewValue: Withdraw_status_view.DONE}
+    ];
+    this.initialStatusIndexMap =  this.getMap(this.initialStatusList);
+    this.statusIndexMap = this.getMap(this.statusList);
+
+  }
+
+  getMap(list: SelectOption[]){
+    let i = 0;
+    return new Map(list.map( element => [element.value, i++])) ;
   }
 
   getTransferRequestList(){
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
+      debugger;
       this.transferRequests.data = res as TransferRequest[];
     });
   }
 
   getStatusList(status:string): SelectOption[]{
-    return Object.assign([], this.statusList).splice(this.statusIndexMap.get(status),this.statusList.length);
+    if(status == Withdraw_status.PENDING) return Object.assign([], this.initialStatusList).splice(this.initialStatusIndexMap.get(status),this.initialStatusList.length);
+    else if (status == Withdraw_status.REJECTED) return Object.assign([], this.initialStatusList).splice(this.initialStatusIndexMap.get(status),this.initialStatusList.length);
+    else return Object.assign([], this.statusList).splice(this.statusIndexMap.get(status),this.statusList.length);
   }
 
   onStatusChange(element: TransferRequest){
 
     if(element.status == "DONE"){
+
       let dialogConfig = new MatDialogConfig();
       dialogConfig.width = "400px";
       dialogConfig.data = element;
 
       let dialogRef = this.matDialog.open(StatusCompleteModalComponent,dialogConfig);
+      
       dialogRef.backdropClick().subscribe(()=>{
         this.getTransferRequestList()
       });
@@ -72,7 +91,10 @@ export class TransferRequestComponent implements OnInit {
         status: element.status,
         systemAccount: null
       };
+
+      this.spinner.show();
       this.withdrawalService.updateTransferRequestStatus(updateRequest).subscribe( res =>{
+        this.spinner.hide();
         console.log("updated result = " +res);
       });
     }
