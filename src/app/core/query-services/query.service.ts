@@ -58,6 +58,7 @@ export class QueryService {
 			}
 		})
 	}
+	
 	getUser():Observable<any>{
 		return new Observable(observer=>{
 			let user=this.readValueFromLocalStorage(localStorageKeys.User);
@@ -88,5 +89,13 @@ export class QueryService {
 				}
 			);
 		});
+	}
+
+	getLoggedInUser(){
+		return this.readJSONValueFromLocalStorage(localStorageKeys.User);
+	}
+
+	getTokenDirect(){
+		return this.readValueFromLocalStorage(localStorageKeys.Token);
 	}
 }

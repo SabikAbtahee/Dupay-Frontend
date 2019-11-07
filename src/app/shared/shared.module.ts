@@ -22,11 +22,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from "@angular/material";
 import { DialogComponent } from './components/dialog/dialog.component';
-
+import {MatChipsModule} from '@angular/material/chips';
 import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [SnackbarComponent, DialogComponent],
@@ -58,7 +58,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatTableModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ShowHidePasswordModule,
+    MatChipsModule
   ],
   exports:[
     
@@ -87,9 +89,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HttpClientModule,
     MatTableModule,
     MatCheckboxModule,
-    
+    ShowHidePasswordModule,
     MatPaginatorModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatChipsModule
   ],
   providers:[SharedService],
   entryComponents:[SnackbarComponent]

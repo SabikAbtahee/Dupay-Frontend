@@ -41,6 +41,7 @@ export class SecurityService {
 			}
 		});
 	}
+
 	isMerchant(): Observable<boolean> {
 		return new Observable((observer) => {
 			let user: User = this.queryservice.readJSONValueFromLocalStorage(localStorageKeys.User);
@@ -51,6 +52,7 @@ export class SecurityService {
 			}
 		});
 	}
+
 	isLoggedIn(): Observable<boolean> {
 		return new Observable((observer) => {
 			let user: User = this.queryservice.readJSONValueFromLocalStorage(localStorageKeys.User);
@@ -76,31 +78,21 @@ export class SecurityService {
 
 		})
 	}
+
 	getHeader(Token: any): any {
-		//   debugger;
-		//   let headers = new HttpHeaders();
-		//   headers.append('Authorization',`Bearer ${Token}`);
-		//   headers.append('withCredentials','true');
-		//   headers.append('Pragma','no-cache');
-		//   headers.append('Content-Type','application/json');
-		//   headers.append('Access-Control-Allow-Origin','*');
-		//   debugger
-		//   return headers;
-
-
-		// let headers = new HttpHeaders({
-		//   'Content-Type':'application/json',
-
-		// 'Authorization':`Bearer ${Token}`});
-
-		// //debugger;
-		// return headers;
+		
+		let httpheader=new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization':`Bearer ${Token}`
+		});
+		
 		let httpOptions = {
-			headers: new HttpHeaders().set('Authorization', `Bearer ${Token}`)
+			headers: httpheader
 		}
-		//debugger
+		
 		return httpOptions;
 	}
+
 	getTokenRole(): Observable<any> {
 		return new Observable((observer) => {
 			this.queryservice.getToken().pipe(first()).subscribe(
@@ -134,4 +126,28 @@ export class SecurityService {
 			}
 		})
 	}
+
+	getAuthorizedHeader(){
+		let token=this.queryservice.getTokenDirect();
+		let header=this.getHeader(token);
+		return header;
+	}
+
+	getLoggedInUserId(){
+		let user=this.queryservice.getLoggedInUser();
+		if(user && user.id){
+			return user.id;
+		}
+		return null;
+	}
+	
+
+	getLoggedinEmail(){
+		let user = this.queryservice.readJSONValueFromLocalStorage(localStorageKeys.User);
+		if(user && user.email){
+			return user.email;
+		}
+		return null;
+	}
+
 }

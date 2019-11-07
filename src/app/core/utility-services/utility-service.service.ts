@@ -50,9 +50,16 @@ export class UtilityService {
 	}
 
 	giveErrorMessage(err) {
+		debugger;
 		if (err && err.error && err.error.error) {
 			if (typeof err.error.error == 'string') {
 				return err.error.error;
+			} else {
+				return snackbarMessages.try_again;
+			}
+		} else if (err && err.error && err.error.message) {
+			if (typeof err.error.message == 'string') {
+				return err.error.message;
 			} else {
 				return snackbarMessages.try_again;
 			}

@@ -203,8 +203,11 @@
                             <div>
                                 <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Password</mat-label>
-                                    <input type="password" matInput placeholder="Type in password "
-                                        formControlName="password" [errorStateMatcher]="matcher">
+                                    <input id='mysecretpassword1' type="password" matInput
+                                        placeholder="Type in password " formControlName="password"
+                                        [errorStateMatcher]="matcher" showHideInput>
+                                    <mat-icon class='cursor-pointer' matSuffix showHideTrigger="mysecretpassword1"
+                                        [showHideStatus]="{id: 'mysecretpassword1',materialIcon:true }"></mat-icon>
 
                                     <mat-error
                                         *ngIf="signupform.get('password').touched && signupform.get('password').invalid  && !signupform.hasError('not_matching')">
@@ -310,9 +313,10 @@
                             <div>
                                 <mat-form-field appearance="outline" class='w-224'>
                                     <mat-label>Confirm Password</mat-label>
-                                    <input type="password" matInput placeholder="Type in confirm password "
-                                        formControlName="confirm_password" [errorStateMatcher]="matcher">
-
+                                    <input id='mysecretpassword2' type="password" matInput placeholder="Type in confirm password "
+                                        formControlName="confirm_password" [errorStateMatcher]="matcher" showHideInput>
+                                    <mat-icon class='cursor-pointer' matSuffix showHideTrigger="mysecretpassword2"
+                                        [showHideStatus]="{id: 'mysecretpassword2',materialIcon:true }"></mat-icon>
                                     <mat-error
                                         *ngIf="signupform.get('confirm_password').touched && signupform.get('confirm_password').invalid  && !signupform.hasError('not_matching')">
                                         {{error_messages.weak_password}}</mat-error>

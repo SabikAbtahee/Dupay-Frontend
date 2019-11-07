@@ -97,8 +97,11 @@ export class PasswordChangeComponent implements OnInit {
     }
   }
   updatePassword(passwords) {
+    this.sharedService.openSpinner();
 
     this.profileservice.updatePassword(this.data).subscribe(result =>{
+      this.sharedService.hideSpinner();
+
       if(result.message == 'Password has changed successfully.'){
         this.openSnackBar(snackbarMessages.change_password_success, true);
       }
