@@ -16,7 +16,7 @@ export class MerchantListComponent implements OnInit {
 
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['id','username','name','type', 'tradeInsurance','NID', 'balance', 'details', 'notify', 'delete'];
+  public displayedColumns = ['name','type', 'tradeInsurance', 'balance', 'details', 'notify'];
 
   constructor(private userService:UserService,
     public dialog: MatDialog) { }
