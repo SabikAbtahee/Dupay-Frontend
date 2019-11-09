@@ -23,7 +23,7 @@ export interface Merchant {
 	balance?: number,
 	type?: Merchant_Types,
 	code?: string,
-	status: Merchant_Status,
+	status?: Merchant_Status,
 	role?: Roles
 }
 
@@ -62,7 +62,7 @@ export interface DialogData {
 	buttons:string[];
 }
 
-// change the interface based on the response data 
+// change the interface based on the response data
 export interface TransferRequest{
 	id: string,
 	transactionId?: string,
