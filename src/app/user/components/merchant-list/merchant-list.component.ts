@@ -45,6 +45,10 @@ export class MerchantListComponent implements OnInit {
     });
   }
 
+  applyFilter(filterValue: string) {
+    this.merchants.filter = filterValue.trim().toLowerCase();
+  }
+
   public redirectToDetails = (id: string) => {
 
   }
