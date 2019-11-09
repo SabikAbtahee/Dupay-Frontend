@@ -5,6 +5,7 @@ import { QueryService } from 'src/app/core/query-services/query.service';
 import { SecurityService } from 'src/app/core/security-services/security.service';
 import { Merchant } from 'src/app/config/interfaces/dupay.interface';
 import { MutationService } from 'src/app/core/mutation-services/mutation.service';
+import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,7 @@ export class UserService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (item.approved) merchants.push(item);
+          if (item.status == Merchant_Status.Approved) merchants.push(item);
         });
         observer.next(merchants);
 
@@ -57,7 +58,7 @@ export class UserService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (item.pending) merchants.push(item);
+          if (item.status == Merchant_Status.Pending) merchants.push(item);
         });
         observer.next(merchants);
 
