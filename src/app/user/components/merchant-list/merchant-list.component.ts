@@ -30,6 +30,8 @@ export class MerchantListComponent implements OnInit {
 
     this.userService.getAppovedMerchantList().subscribe(res=>{
       this.merchants.data = res as Merchant[];
+      console.log('after refactored:');
+      console.log(this.merchants.data);
     });
     
   }

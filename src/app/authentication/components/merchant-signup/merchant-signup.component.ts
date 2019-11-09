@@ -198,11 +198,11 @@ export class MerchantSignupComponent implements OnInit {
 				username: this.signupform.value.username,
 				name: this.signupform.value.name,
 				email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
-				NID: this.signupform.value.nid_number,
+				nidFile: this.signupform.value.nid_number,
 				balance: 0.0,
 				password: this.signupform.value.password,
 				type: this.signupform.value.merchant_type,
-				tradeInsurance: this.signupform.value.trade_insurance
+				tradeInsuranceFile: this.signupform.value.trade_insurance
 			};
 			this.authService.signUpMerchantAccount(merchant).pipe(first()).subscribe(
 				(res) => {

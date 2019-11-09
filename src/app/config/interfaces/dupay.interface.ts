@@ -15,18 +15,16 @@ export interface Merchant {
 	username: string,
 	email: string,
 	password?: string,
-	name?: string,
-	tradeInsurance?: string,
-	NID?: string,
+	name: string,
+	tradeInsuranceFile?: string,
+	tradeInsuranceFileName?:string,
+	nidFileName?:string,
+	nidFile?: string,
 	balance?: number,
 	type?: Merchant_Types,
 	code?: string,
-	pending?: boolean,
-	approved?: boolean
-
-
-
-
+	status: Merchant_Status,
+	role?: Roles
 }
 
 

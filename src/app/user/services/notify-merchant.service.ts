@@ -10,6 +10,7 @@ import {MerchantNotificationComponent} from "../components/merchant-notification
 import {MutationService} from "../../core/mutation-services/mutation.service";
 import {SharedService} from "../../shared/services/shared.service";
 import {NotificationComponent} from "../components/notification/notification.component";
+import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class NotifyMerchantService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (!item.pending){
+          if (item.status == Merchant_Status.Approved){
             merchants.push(item);
           }
         });
