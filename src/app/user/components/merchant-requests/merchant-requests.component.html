@@ -1,45 +1,42 @@
-<!-- <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field> -->
-
 <mat-form-field>
-    <input matInput [(ngModel)]="searchTerm" placeholder="Filter">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
+
 
 <table mat-table [dataSource]="merchants">
 
     <ng-container matColumnDef="SI No.">
-        <th mat-header-cell *matHeaderCellDef class="third-background"> SI No. </th>
+        <th mat-header-cell *matHeaderCellDef > SI No. </th>
         <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
     </ng-container>
 
     <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef class="third-background"> Username </th>
+        <th mat-header-cell *matHeaderCellDef> Username </th>
         <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef class="third-background"> Name </th>
+      <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef class="third-background"> Type </th>
+        <th mat-header-cell *matHeaderCellDef > Type </th>
         <td mat-cell *matCellDef="let element"> {{element.type}} </td>
     </ng-container>
    
     <ng-container matColumnDef="tradeInsurance">
-      <th mat-header-cell *matHeaderCellDef class="third-background"> TradeInsurance </th>
+      <th mat-header-cell *matHeaderCellDef > TradeInsurance </th>
       <td mat-cell *matCellDef="let element"> {{element.tradeInsurance}} </td>
     </ng-container>
    
     <ng-container matColumnDef="NID">
-      <th mat-header-cell *matHeaderCellDef class="third-background"> NID </th>
+      <th mat-header-cell *matHeaderCellDef > NID </th>
       <td mat-cell *matCellDef="let element"> {{element.nid}} </td>
     </ng-container>
    
     <ng-container matColumnDef="details">
-      <th mat-header-cell *matHeaderCellDef class="third-background"> Details </th>
+      <th mat-header-cell *matHeaderCellDef > Details </th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="primary" (click)="redirectToDetails(element.id)">
             <mat-icon class="mat-18">reorder</mat-icon>
@@ -48,7 +45,7 @@
     </ng-container>
    
     <ng-container matColumnDef="approve">
-        <th mat-header-cell *matHeaderCellDef class="third-background"> Aprrove </th>
+        <th mat-header-cell *matHeaderCellDef> Aprrove </th>
         <td mat-cell *matCellDef="let element">
           <button mat-icon-button color="accent" (click)="openConfirmationDialog(element.id)">
               <mat-icon class="mat-18">done_outline</mat-icon>
@@ -57,7 +54,7 @@
       </ng-container>
    
       <ng-container matColumnDef="reject">
-          <th mat-header-cell *matHeaderCellDef class="third-background"> reject </th>
+          <th mat-header-cell *matHeaderCellDef> reject </th>
           <td mat-cell *matCellDef="let element">
             <button mat-icon-button color="warn" (click)="redirectToDelete(element.id)">
                 <mat-icon class="mat-18">delete</mat-icon>
