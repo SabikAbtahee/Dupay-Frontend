@@ -14,6 +14,7 @@ import { AuthGuard } from '../core/security-services/auth.guard';
 import { NotifyMerchantComponent } from './components/notify-merchant/notify-merchant.component';
 import {NotifyMerchantService} from "./services/notify-merchant.service";
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 
 const routes:Routes=[
@@ -49,14 +50,14 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent, NotificationComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule
   ],
   providers: [ PasswordModalService, NotifyMerchantService ],
-  entryComponents: [ PasswordChangeComponent, MerchantNotificationComponent,DialogComponent ]
+  entryComponents: [ PasswordChangeComponent, NotificationComponent, DialogComponent ]
   
 
 

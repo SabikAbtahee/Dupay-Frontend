@@ -1,4 +1,4 @@
-import { Roles, Merchant_Status, Merchant_Types } from '../enums/dupay.enum';
+import { Roles, Merchant_Status, Merchant_Types, Withdraw_status, Wallet_type } from '../enums/dupay.enum';
 
 export interface User {
 	id: string,
@@ -77,4 +77,21 @@ export interface TransferRequest{
 export interface SelectOption{
 	value: string;
 	viewValue: string;
+}
+
+export interface WithdrawRequest{
+	amount:number;
+	merchantAccount: ID;
+}
+export interface ID{
+	id:string;
+}
+
+export interface WithdrawHistory{
+	id:string;
+	amount:number;
+	withdrawDate:any;
+	walletType?:Wallet_type;
+	status:Withdraw_status;
+
 }

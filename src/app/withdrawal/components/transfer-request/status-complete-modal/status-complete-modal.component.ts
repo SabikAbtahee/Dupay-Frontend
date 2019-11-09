@@ -49,7 +49,7 @@ export class StatusCompleteModalComponent implements OnInit {
   }
 
   save(){
-    
+    this.dialogRef.close({event:"save", data:{transactionId:this.transactionId.value}});
   }
 
 }

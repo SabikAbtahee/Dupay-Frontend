@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotifyMerchantComponent } from './notify-merchant.component';
+import { PaymentDefaultComponent } from './payment-default.component';
 
-describe('NotifyMerchantComponent', () => {
-  let component: NotifyMerchantComponent;
-  let fixture: ComponentFixture<NotifyMerchantComponent>;
+describe('PaymentDefaultComponent', () => {
+  let component: PaymentDefaultComponent;
+  let fixture: ComponentFixture<PaymentDefaultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotifyMerchantComponent ]
+      declarations: [ PaymentDefaultComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotifyMerchantComponent);
+    fixture = TestBed.createComponent(PaymentDefaultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

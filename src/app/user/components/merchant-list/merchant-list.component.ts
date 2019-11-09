@@ -16,7 +16,7 @@ export class MerchantListComponent implements OnInit {
 
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['id','username','name','type', 'tradeInsurance','NID', 'balance', 'details', 'notify', 'delete'];
+  public displayedColumns = ['name','type', 'tradeInsurance', 'balance', 'details', 'notify'];
 
   constructor(private userService:UserService,
     public dialog: MatDialog) { }
@@ -43,6 +43,10 @@ export class MerchantListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('result after closed:'+result);
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.merchants.filter = filterValue.trim().toLowerCase();
   }
 
   public redirectToDetails = (id: string) => {

@@ -9,5 +9,14 @@ table {
 th.mat-header-cell {
     text-align: left;
     max-width: 300px;
-    color: white;
+}
+
+th{
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+
+tr:hover {
+    background-color: #e3e4ec;
 }

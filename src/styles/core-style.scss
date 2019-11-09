@@ -313,20 +313,20 @@ $x1: 0;
 }
 
 .white-color-background {
-	background: $white-color;
+	background: $white-color !important;
 }
 .white-color-foreground {
-	color: $white-color;
+	color: $white-color !important;
 }
 .black-color-background {
-	background: $black-color;
+	background: $black-color !important;
 }
 .black-color-foreground {
-	color: $black-color;
+	color: $black-color !important;
 }
 
 .link-color{
-	color:$link-color;
+	color:$link-color !important;
 }
 
 .header-1 {
@@ -355,35 +355,7 @@ $x1: 0;
 	margin: auto;
 }
 
-//International phone number
-// international-phone-number {
-// 	.input-group {
-// 		border: 1px solid #ced4da;
-// 		border-radius: 6px;
-// 		height: 100%;
-// 		// max-width: 200px ;
-// 		max-width: 100% !important;
-// 		min-width: 200px ;
-// 	}
-// 	.input-group .input-group-addon .dropdown {
-// 		height: 100%;
-// 	}
-// 	.input-group .input-group-addon .dropdown .dropbtn {
-// 		padding-top: 12px;
-// 		padding-bottom: 12px;
-// 		padding-left: 12px;
-// 		padding-right: 0px;
-// 		height: 100%;
-// 	}
-// 	.input-group .input-group-addon .dropdown .dropbtn .arrow-down {
-// 		margin: 8px;
-// 	}
-// 	.form-control {
-//     border: none;
-// 	padding-left: 8px;
-// 	font-size:14px;
-// 	}
-// }
+
 
 // mat snackbar
 .recovery-snackbar {
@@ -414,3 +386,28 @@ $x1: 0;
 	background: $primary-color !important;
 	color: $white-color !important;
 }
+
+
+.mobile-label {
+	display: none;
+  }
+@media(max-width: 600px) {
+	.mobile-label {
+	  width: 80px;
+	  display: inline-block;
+		  font-weight: bold;
+	}
+  
+	.mat-header-row {
+	  display: none;
+	}
+  
+	.mat-row { 
+	  flex-direction: column;
+	  align-items: start;
+	  padding: 8px 24px;
+	}
+	mat-cell:first-of-type{
+		padding-left:0px !important;
+	}
+  }

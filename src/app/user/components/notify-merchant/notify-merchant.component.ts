@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NotifyMerchantService} from "../../services/notify-merchant.service";
 import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {snackbarMessages} from "../../../config/constants/dupayConstants";
+import {SharedService} from "../../../shared/services/shared.service";
 
 
 export interface notifyMerchantTable {
@@ -34,7 +36,9 @@ export class NotifyMerchantComponent implements OnInit {
   dataSource=new MatTableDataSource<notifyMerchantTable>(this.data);
   select_All: boolean = false;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  constructor(private notifyMerchantService:NotifyMerchantService) { }
+  disable: boolean = true;
+  constructor(private notifyMerchantService:NotifyMerchantService,
+              private sharedService: SharedService) { }
 
   ngOnInit() {
 
@@ -60,9 +64,19 @@ export class NotifyMerchantComponent implements OnInit {
         merchantIdList.push(item.id);
       }
     });
-    this.notifyMerchantService.merchantIdList = merchantIdList;
-    this.notifyMerchantService.openDialog();
+    if(merchantIdList.length == 0){
+      this.openSnackBar("Please select merchant", false);
 
+    }
+    else{
+      this.notifyMerchantService.merchantIdList = merchantIdList;
+      this.notifyMerchantService.openDialog();
+      // this.data.forEach( item=>{
+      //   item.checked =false;
+      //
+      // });
+      // this.select_All = false;
+    }
   }
 
   updateCheckBox() {
@@ -74,7 +88,19 @@ export class NotifyMerchantComponent implements OnInit {
     else{
       this.data.forEach( item=>{
         item.checked =true;
+        this.disable = false;
       })
     }
+  }
+
+  
+  openSnackBar(message, isAccepted) {
+    this.sharedService.openSnackBar({
+      data: { message: message, isAccepted: isAccepted },
+      duration: 2,
+      panelClass: [ 'recovery-snackbar' ],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
   }
 }

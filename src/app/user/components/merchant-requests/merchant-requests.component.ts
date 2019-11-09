@@ -55,11 +55,7 @@ export class MerchantRequestsComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.merchants.filter = filterValue.trim().toLowerCase();
   }
 
   public openConfirmationDialog = (id:string)=>{

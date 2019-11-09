@@ -31,5 +31,13 @@ export const api_path = {
 
   // transfer-request
   transferRequestList : `${environment.baseurl}/api/admin/withdraw`,
-  transferRequestStatusChange: `${environment.baseurl}/api/admin/withdraw/changestatus`
+  transferRequestStatusChange: `${environment.baseurl}/api/admin/withdraw/changestatus`,
+
+  //withdraw-request
+  getMerchantAccounts: `${environment.baseurl}/api/merchant/merchantacc` ,
+  getMerchantInfoWithId:`${environment.baseurl}/api/merchant`,
+  withdrawRequestByMerchant:`${environment.baseurl}/api/merchant/withdraw`,
+  getWithdrawrequests:`${environment.baseurl}/api/merchant/withdraw`,
+ 
+
 }

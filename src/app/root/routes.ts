@@ -45,6 +45,10 @@ export const routes: Routes = [
 				path: 'authentication',
 				loadChildren: '../authentication/authentication.module#AuthenticationModule',
 				
+			},
+			{
+				path:'payment',
+				loadChildren: '../payment/payment.module#PaymentModule',
 			}
 		]
 	},

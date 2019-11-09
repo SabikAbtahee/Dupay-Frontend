@@ -1,4 +1,109 @@
-<div>
-    hello
-    
-</div>
+<ngx-spinner></ngx-spinner>
+<form [formGroup]="withdrawForm">
+    <div fxLayout="row" fxLayoutAlign="end center" class='cursor-pointer'>
+         <i class="material-icons" (click)='closeModal()'>
+                clear
+            </i>
+        
+
+    </div>
+
+    <mat-dialog-content>
+
+
+        <div class='px-24 pb-24'>
+
+            <div class='font-size-24 mb-8'>Withdraw Money</div>
+
+
+            <mat-divider></mat-divider>
+
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="36px" class='my-12'>
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="12px">
+                    <div class='font-size-16 '>Existing Amount: </div>
+                    <div class='font-size-16 '>Requested Amount: </div>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="12px">
+                    <div class='rejected-color'>{{CurrentAmount}} BDT</div>
+                    <div class='accepted-color'>{{RequestedAmount}} BDT</div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
+                <div fxFlex='40' class='mat-input-for-text font-size-16'>Enter Amount to withdraw:</div>
+                <div fxFlex='60'>
+                    <mat-form-field appearance="outline" class='w-224'>
+                        <mat-label>Amount</mat-label>
+                        <input type="number" matInput placeholder="Enter amount " formControlName="amount">
+
+                        <mat-error *ngIf="withdrawForm.get('amount').errors?.required && withdrawForm.get('amount').touched
+                     ">
+                            {{withdrawErrorMessages.required_amount}}
+                        </mat-error>
+                        <mat-error *ngIf="withdrawForm.get('amount').errors?.min && withdrawForm.get('amount').touched
+                     ">
+                            {{withdrawErrorMessages.less_than_0}}
+                        </mat-error>
+                        <mat-error *ngIf="withdrawForm.get('amount').errors?.max && withdrawForm.get('amount').touched
+                        ">
+                            Have to be less that existing {{CurrentAmount-RequestedAmount}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
+                <div fxFlex='40' class='mat-input-for-text font-size-16 '>Select Wallet:</div>
+                <div fxFlex='60'>
+                    <mat-form-field appearance="outline" class='w-224'>
+                        <mat-label>Wallet type</mat-label>
+                        <mat-select formControlName='wallet' disableOptionCentering>
+                            <div *ngFor='let type of wallets'>
+                                <mat-option *ngFor='let i of type|keyvalue' [value]='i.key'>
+                                    {{i.value}}
+                                </mat-option>
+                            </div>
+
+                        </mat-select>
+                        <mat-error *ngIf="withdrawForm.get('wallet').touched && withdrawForm.get('wallet').invalid">
+                            {{withdrawErrorMessages.select_wallet}}</mat-error>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
+                <div fxFlex='40' class='mat-input-for-text font-size-16 '>Confirm Password:</div>
+                <div fxFlex='60'>
+                    <mat-form-field appearance="outline" class='w-224'>
+                        <mat-label>Password</mat-label>
+                        <input id='mysecretpassword' type="password" matInput placeholder="Enter password "
+                            formControlName="password" showHideInput>
+                        <mat-icon class='cursor-pointer' matSuffix showHideTrigger="mysecretpassword"
+                            [showHideStatus]="{id: 'mysecretpassword',materialIcon:true }"></mat-icon>
+                        <mat-error *ngIf="withdrawForm.get('password').errors?.required && withdrawForm.get('password').touched
+                             ">
+                            {{withdrawErrorMessages.password_required}}
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+
+    </mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutAlign="end center" class='m-16'>
+        <button type="submit" (click)='onSubmit()' mat-raised-button color="primary" class="w-260 h-40">Submit</button>
+    </div>
+</form>

@@ -2,7 +2,7 @@
   <mat-sidenav #drawer [ngClass]="isExpanded ? 'sidenav-opened' : 'sidenav-closed' "
     [opened]="(isHandset$ | async) === false" [mode]="(isHandset$ | async) ? 'side' : 'side'">
     <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" -->
-    <mat-toolbar *ngIf="isExpanded" fxLayout="row" fxLayoutAlign="space-between center" class="white-color-foreground">
+    <mat-toolbar *ngIf="isExpanded" fxLayout="row" fxLayoutAlign="space-between center" class='cursor-pointer'>
       <div>{{title}}</div>
 
       <div>
@@ -12,7 +12,7 @@
       </div>
     </mat-toolbar>
 
-    <mat-toolbar *ngIf="!isExpanded" fxLayout="row" fxLayoutAlign="space-between center" class="white-color-foreground">
+    <mat-toolbar *ngIf="!isExpanded" fxLayout="row" fxLayoutAlign="space-between center" >
 
       <div>
         <button mat-mini-fab color='warn' mat-icon-button (click)="isExpanded = !isExpanded" class='mt-8'>
@@ -69,9 +69,9 @@
             </button>
           </div>
           <div class='cursor-pointer'>
-            <span *ngIf="!drawer.opened">DUPAY</span>
-            <div *ngIf="drawer.opened" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-              <div>DUPAY</div>
+            <span *ngIf="!drawer.opened" class='cursor-pointer'>DUPAY</span>
+            <div *ngIf="drawer.opened" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" >
+              <div class='cursor-pointer'>DUPAY</div>
 
 
             </div>
