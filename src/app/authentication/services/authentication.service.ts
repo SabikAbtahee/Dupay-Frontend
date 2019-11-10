@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { UtilityService } from '../../core/utility-services/utility-service.service';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { httpOptionsJson, httpOptionsText, httpHeader, httpHeaderLogin, localStorageKeys } from '../../config/constants/dupayConstants';
 import { first, catchError } from 'rxjs/operators';
 import { otpVerification, loginCredentials } from '../../config/interfaces/configurations.interface';
@@ -37,7 +37,12 @@ export class AuthenticationService {
 		return this.coreMutate.httpPost(`${api_path.signUpOTPVerification}`, otpVerification, httpHeader);
 	}
 
-	signUpMerchantAccount(merchant: Merchant): Observable<any> {
+	signUpMerchantAccount(merchant: any): Observable<any> {
+		let httpHeader={
+			headers: new HttpHeaders({
+				
+			})
+		}
 		return this.coreMutate.httpPost(`${api_path.registerMerchantAccount}`, merchant, httpHeader);
 	}
 

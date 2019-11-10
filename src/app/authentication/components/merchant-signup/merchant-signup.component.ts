@@ -50,8 +50,11 @@ export class MerchantSignupComponent implements OnInit {
 	matcher;
 	merchant_types = Merchant_Types;
 	error_messages = authentication_error_messages;
-	snackbarMessages=snackbarMessages;
+	snackbarMessages = snackbarMessages;
 	urlPaths = urlPaths;
+
+	trade_insurance_filename=null;
+	nid_filename=null;
 
 	ngOnInit() {
 		this.checkForm();
@@ -84,13 +87,13 @@ export class MerchantSignupComponent implements OnInit {
 	}
 	makeSignupFormMerchant() {
 		this.signupform = this.fb.group({
-			name: [ '', [Validators.required, Validators.maxLength(20), Validators.minLength(5)] ],
+			name: [ '', [ Validators.required, Validators.maxLength(20), Validators.minLength(5) ] ],
 			username: [ '', [ Validators.required, Validators.maxLength(20), Validators.minLength(5) ] ],
-			trade_insurance: [ '', [Validators.maxLength(20)]],
-			nid_number: [ '', [Validators.required, Validators.maxLength(10), Validators.minLength(10)] ],
+			trade_insurance_file: [ null, [ Validators.required ] ],
+			nid_file: [ null, [ Validators.required ] ],
 			password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
 			confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
-			merchant_type: [ '', [Validators.required] ]
+			merchant_type: [ '', [ Validators.required ] ]
 		});
 	}
 
@@ -126,23 +129,18 @@ export class MerchantSignupComponent implements OnInit {
 						isEmailDone: true,
 						isOtpDone: false
 					};
-					
 
 					this.coreMutate.setJSONDataInLocalStorage(this.authenticationObject.key, this.authenticationObject);
 					this.openSnackBar(res.message, true);
 					this.isEmailLoading = false;
-
 				},
 				(err) => {
-					
 					let message = this.util.giveErrorMessage(err);
-					
-					if(typeof(message)=='string'){
-						this.openSnackBar(this.util.toCapitalize(message), false);
-					}
-					else{
-						this.openSnackBar(snackbarMessages.try_again, false);
 
+					if (typeof message == 'string') {
+						this.openSnackBar(this.util.toCapitalize(message), false);
+					} else {
+						this.openSnackBar(snackbarMessages.try_again, false);
 					}
 					this.isEmailLoading = false;
 				}
@@ -192,19 +190,21 @@ export class MerchantSignupComponent implements OnInit {
 
 	onSignupSubmit() {
 		this.isSignUpLoading = true;
-		// If valid delete localstorage
 		if (this.signupform.valid) {
+			let payloadOfMerchant = new FormData();
 			let merchant: Merchant = {
 				username: this.signupform.value.username,
 				name: this.signupform.value.name,
 				email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
-				nidFile: this.signupform.value.nid_number,
 				balance: 0.0,
 				password: this.signupform.value.password,
-				type: this.signupform.value.merchant_type,
-				tradeInsuranceFile: this.signupform.value.trade_insurance
+				type: this.signupform.value.merchant_type
 			};
-			this.authService.signUpMerchantAccount(merchant).pipe(first()).subscribe(
+			let merchantstringified = JSON.stringify(merchant);
+			payloadOfMerchant.append('nidFile', this.signupform.value.nid_file);
+			payloadOfMerchant.append('tradeInsuranceFile', this.signupform.value.trade_insurance_file);
+			payloadOfMerchant.append('merchantInfo', merchantstringified);
+			this.authService.signUpMerchantAccount(payloadOfMerchant).pipe(first()).subscribe(
 				(res) => {
 					this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 					this.openSnackBar(snackbarMessages.registration_complete, true);
@@ -219,8 +219,41 @@ export class MerchantSignupComponent implements OnInit {
 			);
 		} else {
 			this.authService.touchAllfields(this.signupform);
+			if(this.signupform.value.nid_file==null || this.signupform.value.trade_insurance_file==null){
+				this.openSnackBar('Please upload files',false);
+			}
 			this.isSignUpLoading = false;
 		}
+	}
+
+	onNIDFileSelect(event) {
+		if (event && event.target && event.target.files.length > 0) {
+			if (this.util.ifFileImage(event.target.files[0])) {
+				// this.imageblob = event.target.files[0];
+				this.signupform.patchValue({
+					nid_file: event.target.files[0]
+					
+				});
+				this.nid_filename=event.target.files[0].name;
+
+			}
+		}
+		// console.log(this.signupform.valid);
+	}
+
+	onTradeInsuranceFileSelect(event) {
+		if (event && event.target && event.target.files.length > 0) {
+			if (this.util.ifFileImage(event.target.files[0])) {
+				// this.imageblob = event.target.files[0];
+				this.signupform.patchValue({
+					trade_insurance_file: event.target.files[0]
+				});
+
+				this.trade_insurance_filename=event.target.files[0].name;
+
+			}
+		}
+		// console.log(this.signupform.valid);
 	}
 
 	route(path) {
