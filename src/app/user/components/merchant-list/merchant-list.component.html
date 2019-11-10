@@ -1,6 +1,9 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<div class="filter">
+  <mat-form-field  appearance="outline">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <mat-icon matPrefix class='mr-16'>search</mat-icon>
+  </mat-form-field>
+</div>
 
 <table mat-table [dataSource]="merchants">
 

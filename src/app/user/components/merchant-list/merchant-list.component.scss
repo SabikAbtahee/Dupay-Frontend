@@ -1,9 +1,9 @@
 table {
-    width: 100%;
+    width: 90%;
     overflow-x: auto;
     overflow-y: hidden;
     min-width: 500px;
-    margin-top: 30px;
+    margin: auto;
 }
  
 th.mat-header-cell {
@@ -19,4 +19,9 @@ th{
 
 tr:hover {
     background-color: #e3e4ec;
+}
+
+.filter{
+    width: 90%;
+    margin: auto;
 }
