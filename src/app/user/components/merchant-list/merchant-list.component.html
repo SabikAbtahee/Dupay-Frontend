@@ -39,7 +39,7 @@
   <ng-container matColumnDef="notify">
       <th mat-header-cell *matHeaderCellDef> Notify </th>
       <td mat-cell *matCellDef="let element">
-        <a [routerLink]="['/user/notify-merchant']" [state]="{tracingId: 123}">
+        <a [routerLink]="['/user/notify-merchant', element.id]" [state]="{tracingId: 123}">
           <mat-icon class="mat-18">notification_important</mat-icon>
         </a>
       </td>
