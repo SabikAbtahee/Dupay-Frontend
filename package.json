@@ -28,6 +28,7 @@
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
+    "hammerjs": "^2.0.8",
     "lodash": "^4.17.15",
     "mat-table-exporter": "^1.2.2",
     "ngx-show-hide-password": "^2.1.0",

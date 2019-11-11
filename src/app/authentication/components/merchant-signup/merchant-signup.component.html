@@ -1,4 +1,3 @@
-<!-- <form [formGroup]="signupform"> -->
 <div fxLayout="row" fxLayoutAlign="center center" class="pt-84 pb-48 header-1 ">
     Sign up in DUPAY
 </div>
@@ -32,10 +31,7 @@
                                 <mat-error *ngIf="emailForm.get('email').touched && emailForm.get('email').invalid">
                                     {{error_messages.email_error}}</mat-error>
 
-                                <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -48,8 +44,7 @@
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='sendOTPtoEmail()' mat-raised-button color="primary"
                         class="w-260 h-40">Send OTP</button>
-                    <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
-                            login</button> -->
+                    
 
 
                 </div>
@@ -92,10 +87,7 @@
                                 <mat-error *ngIf="OTPForm.get('otp').touched && OTPForm.get('otp').invalid">
                                     {{error_messages.otp_error}}</mat-error>
 
-                                <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -164,10 +156,7 @@
                                     <mat-error
                                         *ngIf="signupform.get('name').touched && signupform.get('name').hasError('required')">
                                         {{error_messages.empty_name}}</mat-error>
-                                    <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                                    
                                 </mat-form-field>
                             </div>
                         </div>
@@ -193,7 +182,6 @@
                                     <mat-error
                                         *ngIf="signupform.get('password').touched && signupform.hasError('not_matching') ">
                                         {{error_messages.password_mismatch}}</mat-error>
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
                                 </mat-form-field>
                             </div>
                         </div>
@@ -262,14 +250,7 @@
                                     <mat-error
                                         *ngIf="signupform.get('username').touched && signupform.get('username').hasError('required')">
                                         {{error_messages.username_error}}</mat-error>
-                                    <!-- <mat-error
-                                        *ngIf="signupform.get('username').touched && signupform.get('username').invalid">
-                                        {{error_messages.username_error}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                                    
                                 </mat-form-field>
                             </div>
                         </div>
@@ -297,7 +278,6 @@
                                     <mat-error
                                         *ngIf="signupform.get('confirm_password').touched && signupform.hasError('not_matching') ">
                                         {{error_messages.password_mismatch}}</mat-error>
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
                                 </mat-form-field>
                             </div>
                         </div>
@@ -333,8 +313,7 @@
                     <button (click)='resendOtp()' mat-stroked-button color="primary" class="w-240 h-40">Resend
                         Email</button>
 
-                    <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
-                        login</button> -->
+                  
 
 
                 </div>
@@ -345,13 +324,7 @@
             <a (click)='route([urlPaths.Authentication.Signin.url][0])'
                 class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
-        <!-- <div fxFlex='15' fxLayout="row" fxFlexAlign="start center">
-            <div>
-                <a (click)='routeToAccountRecovery()' class="cursor-pointer secondary-text-color">Forgot Password? </a>
-            </div>
-        </div> -->
+        
 
     </div>
 </form>
-
-<!-- </form> -->

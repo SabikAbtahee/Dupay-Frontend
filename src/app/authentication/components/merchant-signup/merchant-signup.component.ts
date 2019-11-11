@@ -72,6 +72,12 @@ export class MerchantSignupComponent implements OnInit {
 		if (check && check.isOtpDone) {
 			this.isOTPFormDone = true;
 		}
+		if(!this.isEmailFormDone){
+			this.makeEmailForm();
+		}
+		if(!this.isOTPFormDone){
+			this.makeOTPForm();
+		}
 	}
 
 	// 3 Forms related to signup
@@ -186,6 +192,7 @@ export class MerchantSignupComponent implements OnInit {
 		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 		this.isEmailFormDone = false;
 		this.isOTPFormDone = false;
+		this.checkForm();
 	}
 
 	onSignupSubmit() {
@@ -209,7 +216,7 @@ export class MerchantSignupComponent implements OnInit {
 					this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 					this.openSnackBar(snackbarMessages.registration_complete, true);
 					this.isSignUpLoading = false;
-					this.route(urlPaths.Home.HomeDefault.url);
+					this.route(urlPaths.Authentication.Signin.url);
 				},
 				(err) => {
 					let message = this.util.giveErrorMessage(err);
@@ -238,7 +245,6 @@ export class MerchantSignupComponent implements OnInit {
 
 			}
 		}
-		// console.log(this.signupform.valid);
 	}
 
 	onTradeInsuranceFileSelect(event) {
@@ -253,10 +259,10 @@ export class MerchantSignupComponent implements OnInit {
 
 			}
 		}
-		// console.log(this.signupform.valid);
 	}
 
 	route(path) {
+		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 		this.router.navigate([ path ]);
 	}
 

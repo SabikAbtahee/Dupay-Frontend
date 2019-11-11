@@ -23,7 +23,6 @@ export class MerchantListComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log('ng on init called');
     this.getMerchantList();
   }
 
@@ -31,8 +30,7 @@ export class MerchantListComponent implements OnInit {
 
     this.userService.getAppovedMerchantList().subscribe(res=>{
       this.merchants.data = res as Merchant[];
-      console.log('after refactored:');
-      console.log(this.merchants.data);
+      
     });
 
   }
@@ -44,7 +42,6 @@ export class MerchantListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('result after closed:'+result);
     });
   }
 
@@ -64,7 +61,6 @@ export class MerchantListComponent implements OnInit {
     this.dialog.open(MerchantDetailsComponent, {
       data: specificMerchant
     }).afterClosed().subscribe(result => {
-        console.log(result);
     });
   }
 

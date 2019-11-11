@@ -63,15 +63,13 @@ export class NotifyMerchantComponent implements OnInit {
   }
 
   checkSelectedMerchant() {
-    console.log('checking');
     this.route.paramMap.subscribe(params => {
       let merchantId = params.get('merchantId');
-      console.log("merchant id "+ merchantId);
       this.data.forEach(item => {
-        console.log("item id:"+ item.id);
+        // console.log("item id:"+ item.id);
         if (item.id == merchantId) {
           item.checked = true;
-          console.log("found:");
+          // console.log("found:");
           return;
         }
       })

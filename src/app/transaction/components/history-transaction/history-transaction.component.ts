@@ -31,7 +31,6 @@ export class HistoryTransactionComponent implements OnInit {
           };
         });
          this.listData = new MatTableDataSource(array);
-         console.log(array);
          this.listData.sort = this.sort;
          this.listData.paginator = this.paginator;
       });

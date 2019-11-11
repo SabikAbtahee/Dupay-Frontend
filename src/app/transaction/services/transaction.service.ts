@@ -16,12 +16,10 @@ export class TransactionService {
     return new Observable((observer) => {
       this.securityService.getCurrentUser().subscribe(res => {
         this.queryService.httpGet(res.id, res.token).subscribe( res => {
-          console.log('result:');
-          console.log(res);
+          
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          
           observer.error(err);
         });
 

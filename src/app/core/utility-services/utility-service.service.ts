@@ -50,16 +50,15 @@ export class UtilityService {
 	}
 
 	giveErrorMessage(err) {
-		debugger;
-		if (err && err.error && err.error.error) {
-			if (typeof err.error.error == 'string') {
-				return err.error.error;
+		if (err && err.error && err.error.message) {
+			if (typeof err.error.message == 'string') {
+				return err.error.message;
 			} else {
 				return snackbarMessages.try_again;
 			}
-		} else if (err && err.error && err.error.message) {
-			if (typeof err.error.message == 'string') {
-				return err.error.message;
+		} else if (err && err.error && err.error.error) {
+			if (typeof err.error.error == 'string') {
+				return err.error.error;
 			} else {
 				return snackbarMessages.try_again;
 			}
@@ -88,7 +87,7 @@ export class UtilityService {
 		var decodedValue = JSON.parse(window.atob(base64Url));
 		return decodedValue;
 	}
-	ifFileImage(file){
+	ifFileImage(file) {
 		return file && file['type'].split('/')[0] === 'image';
 	}
 }

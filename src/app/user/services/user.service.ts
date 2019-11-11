@@ -20,15 +20,15 @@ export class UserService {
     return new Observable((observer) => {
       this.queryService.getToken().subscribe(res => {
         let token = res;
-        console.log('token:' + token);
+        // console.log('token:' + token);
         let header = this.securityService.getHeader(token);
         this.queryService.httpGet(api_path.merchantList, header).subscribe(res => {
-          console.log('result:');
-          console.log(res);
+          // console.log('result:');
+          // console.log(res);
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          // console.log('error:');
+          // console.log(err);
           observer.error(err);
         });
 
@@ -73,15 +73,15 @@ export class UserService {
     return new Observable((observer) => {
       this.queryService.getToken().subscribe(res => {
         let token = res;
-        console.log('token:' + token);
+        // console.log('token:' + token);
         let header = this.securityService.getHeader(token);
         this.mutationService.httpPut(api_path.approveMerchant+"/"+id,{}, header).subscribe(res => {
-          console.log('result:');
-          console.log(res);
+          // console.log('result:');
+          // console.log(res);
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          // console.log('error:');
+          // console.log(err);
           observer.error(err);
         });
 
