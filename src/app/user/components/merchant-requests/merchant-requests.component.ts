@@ -8,6 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
+import { MerchantDetailsComponent } from '../merchant-details/merchant-details.component';
 
 @Component({
   selector: 'app-merchant-requests',
@@ -102,7 +103,19 @@ export class MerchantRequestsComponent implements OnInit {
 
 
   public redirectToDetails = (id: string) => {
+    let specificMerchant: Merchant;
 
+    for(let i=0; i<this.merchants.data.length; i++){
+      if (this.merchants.data[i].id === id) {
+        specificMerchant = this.merchants.data[i];
+      }
+    }
+
+    this.dialog.open(MerchantDetailsComponent, {
+      data: specificMerchant
+    }).afterClosed().subscribe(result => {
+        console.log(result);
+    });
   }
 
   public redirectToUpdate = (id: string) => {

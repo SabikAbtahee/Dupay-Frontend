@@ -88,6 +88,9 @@ export class UtilityService {
 		var decodedValue = JSON.parse(window.atob(base64Url));
 		return decodedValue;
 	}
+	ifFileImage(file){
+		return file && file['type'].split('/')[0] === 'image';
+	}
 }
 export class FieldMatcher implements ErrorStateMatcher {
 	isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
