@@ -51,12 +51,12 @@ export class NotifyMerchantService {
         let httpHeader = this.securityService.getHeader(token);
 
         this.queryService.httpGet(api_path.merchantList,httpHeader).subscribe(res => {
-          console.log('result:');
-          console.log(res);
+          // console.log('result:');
+          // console.log(res);
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          // console.log('error:');
+          // console.log(err);
           observer.error(err);
         })
       })
@@ -91,11 +91,11 @@ export class NotifyMerchantService {
         this.mutationService.httpPost(`${api_path.notifyMerchant}`,
           this.data, httpHeader).subscribe(res2 => {
           observer.next(res2);
-          console.log(res2);
+          // console.log(res2);
         },
           (err) => {
             observer.error(err);
-            console.log(err);
+            // console.log(err);
           },
           () => {
             observer.complete();

@@ -207,7 +207,8 @@ export const authentication_error_messages = {
   trade_insurance_error: 'Provide valid trade insurance error',
   required_field: 'Required field',
   minimum_5: 'Minimum 5 length is required',
-  maximum_20: 'Maximum length is 20'
+  maximum_20: 'Maximum length is 20',
+ 
 };
 
 export const snackbarMessages = {

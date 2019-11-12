@@ -93,3 +93,11 @@ export interface WithdrawHistory{
 	status:Withdraw_status;
 
 }
+
+export interface MerchantAccount{
+	id:string,
+	accountName:string,
+	accountNumber:string,
+	bankName:string,
+	branch:string,
+}

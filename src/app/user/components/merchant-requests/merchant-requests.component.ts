@@ -1,10 +1,10 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Merchant } from 'src/app/config/interfaces/dupay.interface';
-import { User} from 'src/app/config/interfaces/dupay.interface';
-import {Merchant_Status} from 'src/app/config/enums/dupay.enum';
+import { User } from 'src/app/config/interfaces/dupay.interface';
+import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
@@ -16,21 +16,23 @@ import { MerchantDetailsComponent } from '../merchant-details/merchant-details.c
   styleUrls: ['./merchant-requests.component.scss']
 })
 export class MerchantRequestsComponent implements OnInit {
-  
+
   dataSource: MatTableDataSource<Merchant>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['SI No.','username','name','type', 'tradeInsurance', 'NID', 'details', 'approve', 'reject'];
+  public displayedColumns = ['SI No.', 'username', 'name', 'type', 'details', 'approve', 'reject'];
 
- 
-  requests: Merchant[]=[]
+
+  requests: Merchant[] = []
+  APPROVE = "A";
+  REJECT = "R";
 
   filteredRequests: Merchant[]
-  private _searchTerm:string;
+  private _searchTerm: string;
 
 
-  get searchTerm(): string{
+  get searchTerm(): string {
     return this._searchTerm;
   }
 
@@ -39,18 +41,18 @@ export class MerchantRequestsComponent implements OnInit {
   //   this.filteredRequests=this.filterRequests(value);
   // }
 
-  
-  constructor(private userService:UserService,public dialog: MatDialog) { }
+
+  constructor(private userService: UserService, public dialog: MatDialog) { }
 
   ngOnInit() {
     console.log('ng on init called');
     this.getMerchantList();
-    
+
   }
 
 
-  getMerchantList(){
-    this.userService.getPendingMerchantList().subscribe(res=>{
+  getMerchantList() {
+    this.userService.getPendingMerchantList().subscribe(res => {
       this.merchants.data = res as Merchant[];
     });
   }
@@ -59,62 +61,84 @@ export class MerchantRequestsComponent implements OnInit {
     this.merchants.filter = filterValue.trim().toLowerCase();
   }
 
-  public openConfirmationDialog = (id:string)=>{
+  public openConfirmationDialog = (id: string, actionType: string) => {
     console.log('has come here');
+    let title: string = "";
+    if (actionType == this.APPROVE) title = "Approve Merchant!";
+    else if (actionType == this.REJECT) title = "Reject Merchant!";
+
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '300px',
-      data: {message:"Approve Merchant!",buttons:["Confirm","Cancel"]}
+      data: { message: title, buttons: ["Confirm", "Cancel"],
+     }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('result after closed:'+result);
-      if(result) this.approve(id);
+      console.log('result after closed:' + result);
+      if (result) {
+
+        if (actionType == this.APPROVE) this.approve(id);
+        else if (actionType == this.REJECT) this.reject(id);
+      }
     });
   }
 
-  public approve = (id:string)=>{
-    console.log('id:'+id);
-    this.userService.approveMerchant(id).subscribe(res=>{
+  public approve = (id: string) => {
+    console.log('id:' + id);
+    this.userService.approveMerchant(id).subscribe(res => {
       console.log('result in approve:');
       console.log(res);
       this.removeMerchantFromPendingList(id);
 
-    }, err=>{
+    }, err => {
       console.log('error');
       console.log(err);
     })
   }
 
-  private removeMerchantFromPendingList(id:string){
+  public reject = (id: string) => {
+    console.log('id:' + id);
+    this.userService.rejectMerchant(id).subscribe(res => {
+      debugger
+      console.log('result in approve:');
+      console.log(res);
+      this.removeMerchantFromPendingList(id);
+
+    }, err => {
+      console.log('error');
+      console.log(err);
+    })
+  }
+
+  private removeMerchantFromPendingList(id: string) {
     let index;
     console.log('removing merchant from request list');
-    for(let i=0;i<this.merchants.data.length;i++){
-      if(this.merchants.data[i].id == id) {
+    for (let i = 0; i < this.merchants.data.length; i++) {
+      if (this.merchants.data[i].id == id) {
         index = i;
         break;
       }
     }
-    this.merchants.data.splice(index,1);
+    this.merchants.data.splice(index, 1);
     this.merchants._updateChangeSubscription();
 
   }
 
-
-
-
   public redirectToDetails = (id: string) => {
-    let specificMerchant: Merchant;
 
-    for(let i=0; i<this.merchants.data.length; i++){
-      if (this.merchants.data[i].id === id) {
-        specificMerchant = this.merchants.data[i];
-      }
-    }
-
-    this.dialog.open(MerchantDetailsComponent, {
-      data: specificMerchant
-    }).afterClosed().subscribe(result => {
-        console.log(result);
+    this.userService.getMerchantDetails(id).subscribe(res => {
+      console.log('merchant details');
+      console.log(res);
+      res.nidFile = "data:image/png;base64," + res.nidFile;
+      res.tradeInsuranceFile = "data:image/png;base64," + res.tradeInsuranceFile;
+      this.dialog.open(MerchantDetailsComponent, {
+        data: res,
+        autoFocus: false,
+        maxHeight: '90vh'
+      }).afterClosed().subscribe(result => {
+      });
+    }, err => {
+      console.error(err);
     });
   }
 
@@ -124,6 +148,7 @@ export class MerchantRequestsComponent implements OnInit {
 
   public redirectToDelete = (id: string) => {
     console.log('in rederectToDelete');
+
   }
 
 

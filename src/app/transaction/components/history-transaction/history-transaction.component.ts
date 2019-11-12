@@ -24,6 +24,13 @@ export class HistoryTransactionComponent implements OnInit {
   ngOnInit() {
     this.transactionService.getAllTransactionsByUserId().subscribe(
       list => {
+         const array = list.map(item => {
+          return {
+            $key: item.payload.doc.id,
+            ...item.payload.doc.data()
+          };
+        });
+         this.listData = new MatTableDataSource(array);
         // console.log('This should be worked: ', list);      
         //  const array = list.map(item => {
         //   return {

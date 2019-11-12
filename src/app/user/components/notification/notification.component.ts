@@ -41,7 +41,6 @@ export class NotificationComponent implements OnInit {
         this.sharedService.hideSpinner();
 
         if (res.message == "Email has been sent to the merchants") {
-          console.log("ok");
           this.openSnackBar(snackbarMessages.selected_merchant_notification_sent_success, true);
 
         } else {
