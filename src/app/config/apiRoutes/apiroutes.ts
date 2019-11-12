@@ -14,6 +14,7 @@ export const api_path = {
   signUpOTPEmail: `${environment.baseurl}/api/user/register/email/otp`,
   signUpOTPVerification: `${environment.baseurl}/api/user/register/otp/verify`,
   registerMerchantAccount: `${environment.baseurl}/api/user`,
+  registerMerchantBankAccount:`${environment.baseurl}/api/user/merchantacc`,
 
   //Login
   loginWithUsernamePassword: `${environment.baseurl}/api/login`,

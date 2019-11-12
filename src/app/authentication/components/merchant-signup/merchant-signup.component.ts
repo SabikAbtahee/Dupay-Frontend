@@ -6,12 +6,13 @@ import { FieldMatcher, UtilityService } from '../../../core/utility-services/uti
 import { Merchant_Types } from '../../../config/enums/dupay.enum';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { email, emailOtp, Merchant } from '../../../config/interfaces/dupay.interface';
+import { email, emailOtp, Merchant, MerchantAccount } from '../../../config/interfaces/dupay.interface';
 import { QueryService } from '../../../core/query-services/query.service';
 import { MutationService } from '../../../core/mutation-services/mutation.service';
 import { SharedService } from '../../../shared/services/shared.service';
 import { first } from 'rxjs/operators';
 import { authenticationEmailOtp } from '../../../config/interfaces/configurations.interface';
+import { Observable } from 'rxjs';
 @Component({
 	selector: 'app-merchant-signup',
 	templateUrl: './merchant-signup.component.html',
@@ -46,21 +47,22 @@ export class MerchantSignupComponent implements OnInit {
 	emailForm: FormGroup;
 	OTPForm: FormGroup;
 	signupform: FormGroup;
-
+	merchantAccountForm: FormGroup;
 	matcher;
 	merchant_types = Merchant_Types;
 	error_messages = authentication_error_messages;
 	snackbarMessages = snackbarMessages;
 	urlPaths = urlPaths;
 
-	trade_insurance_filename=null;
-	nid_filename=null;
+	trade_insurance_filename = null;
+	nid_filename = null;
 
 	ngOnInit() {
 		this.checkForm();
 		this.makeEmailForm();
 		this.makeOTPForm();
 		this.makeSignupFormMerchant();
+		this.makeMerchantAccountForm();
 		this.setCustomValidation();
 	}
 
@@ -72,10 +74,10 @@ export class MerchantSignupComponent implements OnInit {
 		if (check && check.isOtpDone) {
 			this.isOTPFormDone = true;
 		}
-		if(!this.isEmailFormDone){
+		if (!this.isEmailFormDone) {
 			this.makeEmailForm();
 		}
-		if(!this.isOTPFormDone){
+		if (!this.isOTPFormDone) {
 			this.makeOTPForm();
 		}
 	}
@@ -100,6 +102,14 @@ export class MerchantSignupComponent implements OnInit {
 			password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
 			confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
 			merchant_type: [ '', [ Validators.required ] ]
+		});
+	}
+	makeMerchantAccountForm() {
+		this.merchantAccountForm = this.fb.group({
+			accountName: [ '', [ Validators.required, Validators.maxLength(70) ] ],
+			accountNumber: [ '', [ Validators.required, Validators.maxLength(70) ] ],
+			bankName: [ '', [ Validators.required, Validators.maxLength(70) ] ],
+			branch: [ '', [ Validators.required, Validators.maxLength(70) ] ]
 		});
 	}
 
@@ -197,7 +207,7 @@ export class MerchantSignupComponent implements OnInit {
 
 	onSignupSubmit() {
 		this.isSignUpLoading = true;
-		if (this.signupform.valid) {
+		if (this.signupform.valid && this.merchantAccountForm.valid) {
 			let payloadOfMerchant = new FormData();
 			let merchant: Merchant = {
 				username: this.signupform.value.username,
@@ -213,12 +223,27 @@ export class MerchantSignupComponent implements OnInit {
 			payloadOfMerchant.append('merchantInfo', merchantstringified);
 			this.authService.signUpMerchantAccount(payloadOfMerchant).pipe(first()).subscribe(
 				(res) => {
-					this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
-					this.openSnackBar(snackbarMessages.registration_complete, true);
-					this.isSignUpLoading = false;
-					this.route(urlPaths.Authentication.Signin.url);
+					debugger;
+					this.merchantAccountSubmit(res.id).pipe(first()).subscribe(response=>{
+						debugger;
+
+						this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
+						this.openSnackBar(snackbarMessages.registration_complete, true);
+						this.isSignUpLoading = false;
+						this.route(urlPaths.Authentication.Signin.url);
+					},
+					err=>{
+						debugger;
+
+						let message = this.util.giveErrorMessage(err);
+						this.openSnackBar(this.util.toCapitalize(message), false);
+						this.isSignUpLoading = false;
+					});
+					
 				},
 				(err) => {
+					debugger;
+
 					let message = this.util.giveErrorMessage(err);
 					this.openSnackBar(this.util.toCapitalize(message), false);
 					this.isSignUpLoading = false;
@@ -226,11 +251,38 @@ export class MerchantSignupComponent implements OnInit {
 			);
 		} else {
 			this.authService.touchAllfields(this.signupform);
-			if(this.signupform.value.nid_file==null || this.signupform.value.trade_insurance_file==null){
-				this.openSnackBar('Please upload files',false);
+			this.authService.touchAllfields(this.merchantAccountForm);
+
+			if (this.signupform.value.nid_file == null || this.signupform.value.trade_insurance_file == null) {
+				this.openSnackBar('Please upload files', false);
 			}
 			this.isSignUpLoading = false;
 		}
+	}
+
+	merchantAccountSubmit(mer_id):Observable<any>{
+		return new Observable(observer=>{
+			debugger;
+			let payload={
+				accountName: this.merchantAccountForm.value.accountName,
+				accountNumber: this.merchantAccountForm.value.accountNumber,
+				bankName: this.merchantAccountForm.value.bankName,
+				branch: this.merchantAccountForm.value.branch,
+				merchant:{
+					id:mer_id
+				}
+			}
+			debugger;
+
+			this.authService.registerMerchantBankAccount(payload).pipe(first()).subscribe(res=>{
+			debugger;
+				
+				observer.next(res);
+			},
+			err=>{
+				observer.error(err);
+			})
+		})
 	}
 
 	onNIDFileSelect(event) {
@@ -239,10 +291,8 @@ export class MerchantSignupComponent implements OnInit {
 				// this.imageblob = event.target.files[0];
 				this.signupform.patchValue({
 					nid_file: event.target.files[0]
-					
 				});
-				this.nid_filename=event.target.files[0].name;
-
+				this.nid_filename = event.target.files[0].name;
 			}
 		}
 	}
@@ -255,8 +305,7 @@ export class MerchantSignupComponent implements OnInit {
 					trade_insurance_file: event.target.files[0]
 				});
 
-				this.trade_insurance_filename=event.target.files[0].name;
-
+				this.trade_insurance_filename = event.target.files[0].name;
 			}
 		}
 	}
