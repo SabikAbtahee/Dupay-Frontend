@@ -113,7 +113,7 @@ export class PasswordChangeComponent implements OnInit {
 
       }
       this.close();
-      console.log(result);
+      // console.log(result);
     });
   }
   close(){

@@ -1,3 +1,4 @@
+import { MerchantDetailsComponent } from './../merchant-details/merchant-details.component';
 import { Component, OnInit } from '@angular/core';
 import { Merchant, DialogData } from 'src/app/config/interfaces/dupay.interface';
 import { Merchant_Types } from 'src/app/config/enums/dupay.enum';
@@ -16,32 +17,32 @@ export class MerchantListComponent implements OnInit {
 
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['name','type', 'tradeInsurance', 'balance', 'details', 'notify'];
+  public displayedColumns = ['name', 'type', 'balance', 'details', 'notify'];
 
-  constructor(private userService:UserService,
+  constructor(private userService: UserService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log('ng on init called');
     this.getMerchantList();
   }
 
   public getMerchantList = () => {
 
-    this.userService.getAppovedMerchantList().subscribe(res=>{
+    this.userService.getAppovedMerchantList().subscribe(res => {
       this.merchants.data = res as Merchant[];
+      console.log(this.merchants.data);
+
     });
-    
+
   }
 
-  public openNotifyDialog(merchantId:string){
+  public openNotifyDialog(merchantId: string) {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
-      data: {message:"message",buttons:["Ok","No thanks"],input:true}
+      data: { message: "message", buttons: ["Ok", "No thanks"], input: true }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('result after closed:'+result);
     });
   }
 
@@ -50,8 +51,24 @@ export class MerchantListComponent implements OnInit {
   }
 
   public redirectToDetails = (id: string) => {
+    let specificMerchant: Merchant;
 
+    this.userService.getMerchantDetails(id).subscribe(res => {
+      console.log('merchant details');
+      console.log(res);
+      res.nidFile = "data:image/png;base64," + res.nidFile;
+      res.tradeInsuranceFile = "data:image/png;base64,"+res.tradeInsuranceFile;
+      this.dialog.open(MerchantDetailsComponent, {
+        data: res,
+        autoFocus: false,
+        maxHeight: '90vh'
+      }).afterClosed().subscribe(result => {
+      });
+    }, err => {
+      console.error(err);
+    });
   }
+
 
   public redirectToUpdate = (id: string) => {
 

@@ -14,6 +14,7 @@ export const api_path = {
   signUpOTPEmail: `${environment.baseurl}/api/user/register/email/otp`,
   signUpOTPVerification: `${environment.baseurl}/api/user/register/otp/verify`,
   registerMerchantAccount: `${environment.baseurl}/api/user`,
+  registerMerchantBankAccount:`${environment.baseurl}/api/user/merchantacc`,
 
   //Login
   loginWithUsernamePassword: `${environment.baseurl}/api/login`,
@@ -27,6 +28,8 @@ export const api_path = {
   changePassword : `${environment.baseurl}/api/user/change/password`,
   merchantList:`${environment.baseurl}/api/admin/merchant`,
   approveMerchant:`${environment.baseurl}/api/admin/approve/merchant`,
+  rejectMerchant:`${environment.baseurl}/api/admin/reject/merchant/`,
+  merchantDetails:`${environment.baseurl}/api/admin/merchant/`,
   notifyMerchant:`${environment.baseurl}/api/admin/notification`,
 
   // transfer-request
@@ -39,5 +42,6 @@ export const api_path = {
   withdrawRequestByMerchant:`${environment.baseurl}/api/merchant/withdraw`,
   getWithdrawrequests:`${environment.baseurl}/api/merchant/withdraw`,
  
-
+  //Payment
+  payment: `${environment.baseurl}/api/payment`,
 }

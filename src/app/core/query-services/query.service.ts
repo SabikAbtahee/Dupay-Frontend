@@ -77,15 +77,13 @@ export class QueryService {
 	httpGet(apiPath, httpheader): Observable<any> {
 		
 		return new Observable((observer) => {
-			this.http.get<any>(`${apiPath}`, httpheader).pipe(first()).subscribe(
+			
+			this.http.get<any>(`${apiPath}`, httpheader).subscribe(
 				(res) => {
 					observer.next(res);
 				},
 				(err) => {
 					observer.error(err);
-				},
-				() => {
-					observer.complete();
 				}
 			);
 		});

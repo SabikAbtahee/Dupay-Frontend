@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { UtilityService } from '../../core/utility-services/utility-service.service';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { httpOptionsJson, httpOptionsText, httpHeader, httpHeaderLogin, localStorageKeys } from '../../config/constants/dupayConstants';
 import { first, catchError } from 'rxjs/operators';
 import { otpVerification, loginCredentials } from '../../config/interfaces/configurations.interface';
@@ -37,8 +37,17 @@ export class AuthenticationService {
 		return this.coreMutate.httpPost(`${api_path.signUpOTPVerification}`, otpVerification, httpHeader);
 	}
 
-	signUpMerchantAccount(merchant: Merchant): Observable<any> {
+	signUpMerchantAccount(merchant: any): Observable<any> {
+		let httpHeader={
+			headers: new HttpHeaders({
+				
+			})
+		}
 		return this.coreMutate.httpPost(`${api_path.registerMerchantAccount}`, merchant, httpHeader);
+	}
+	registerMerchantBankAccount(merchantAccount):Observable<any>{
+		
+		return this.coreMutate.httpPost(`${api_path.registerMerchantBankAccount}`, merchantAccount, httpHeader);
 	}
 
 
@@ -51,7 +60,6 @@ export class AuthenticationService {
 	}
 
   recoverMerchantAccount(emailPasswordConfirmPassword: emailPasswordConfirmPassword): Observable<any> {
-   // debugger;
     return this.coreMutate.httpPost(`${api_path.resetPassword}`, emailPasswordConfirmPassword, httpHeader);
   }
 
@@ -60,9 +68,9 @@ export class AuthenticationService {
 
 	signInAccount(login: loginCredentials): Observable<any> {
 
-		// this.sec.isAdmin().subscribe(res=>console.log(res));
 		return this.coreMutate.httpPost(`${api_path.loginWithUsernamePassword}`, login, httpHeaderLogin);
 	}
+
 
 	setSession(user: User) {
 		this.coreMutate.setJSONDataInLocalStorage(localStorageKeys.User, user);

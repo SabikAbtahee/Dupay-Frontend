@@ -31,7 +31,20 @@ export class HistoryTransactionComponent implements OnInit {
           };
         });
          this.listData = new MatTableDataSource(array);
-         console.log(array);
+        // console.log('This should be worked: ', list);      
+        //  const array = list.map(item => {
+        //   return {
+        //     $key: item.payload.doc.id,
+        //     ...item.payload.doc.data()
+        //   };
+        // });
+        //  this.listData = new MatTableDataSource(array);
+        //  console.log(array);
+        //  this.listData.sort = this.sort;
+        //  this.listData.paginator = this.paginator;
+
+         this.listData = new MatTableDataSource(list.content);
+        //  console.log('IBRAHIM' , this.listData);
          this.listData.sort = this.sort;
          this.listData.paginator = this.paginator;
       });

@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NotifyMerchantService} from "../../services/notify-merchant.service";
-import {MatPaginator, MatTableDataSource} from "@angular/material";
-import {snackbarMessages} from "../../../config/constants/dupayConstants";
-import {SharedService} from "../../../shared/services/shared.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NotifyMerchantService } from "../../services/notify-merchant.service";
+import { MatPaginator, MatTableDataSource } from "@angular/material";
+import { snackbarMessages } from "../../../config/constants/dupayConstants";
+import { SharedService } from "../../../shared/services/shared.service";
+import { ActivatedRoute } from '@angular/router';
 
 
 export interface notifyMerchantTable {
@@ -31,44 +32,62 @@ export interface notifyMerchantTable {
   styleUrls: ['./notify-merchant.component.scss']
 })
 export class NotifyMerchantComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'userName','select'];
-  data : notifyMerchantTable []=[];
-  dataSource=new MatTableDataSource<notifyMerchantTable>(this.data);
+  displayedColumns: string[] = ['name', 'userName', 'select'];
+  data: notifyMerchantTable[] = [];
+  dataSource = new MatTableDataSource<notifyMerchantTable>(this.data);
   select_All: boolean = false;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   disable: boolean = true;
-  constructor(private notifyMerchantService:NotifyMerchantService,
-              private sharedService: SharedService) { }
+  constructor(private notifyMerchantService: NotifyMerchantService,
+    private sharedService: SharedService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
 
-    this.notifyMerchantService.getAppovedMerchantList().subscribe(res=>{
-        res.forEach(item => {
-            this.data.push({
-              id: item.id,
-              name: item.name,
-              userName: item.username,
-              checked: false
-            })
-          this.dataSource.paginator = this.paginator;
-        });
+    this.notifyMerchantService.getAppovedMerchantList().subscribe(res => {
+      res.forEach(item => {
+        this.data.push({
+          id: item.id,
+          name: item.name,
+          userName: item.username,
+          checked: false
+        })
+        this.dataSource.paginator = this.paginator;
+      });
+      this.checkSelectedMerchant();
 
+    }
+    );
+
+  }
+
+  checkSelectedMerchant() {
+    this.route.paramMap.subscribe(params => {
+      let merchantId = params.get('merchantId');
+      this.data.forEach(item => {
+        // console.log("item id:"+ item.id);
+        if (item.id == merchantId) {
+          item.checked = true;
+          // console.log("found:");
+          return;
         }
-      );
+      })
+    });
   }
 
   notify() {
-    let merchantIdList : string[] = [];
-    this.data.forEach( item=>{
-      if(item.checked == true){
+    let merchantIdList: string[] = [];
+    this.data.forEach(item => {
+      if (item.checked == true) {
         merchantIdList.push(item.id);
       }
     });
-    if(merchantIdList.length == 0){
+    if (merchantIdList.length == 0) {
       this.openSnackBar("Please select merchant", false);
 
     }
-    else{
+    else {
       this.notifyMerchantService.merchantIdList = merchantIdList;
       this.notifyMerchantService.openDialog();
       // this.data.forEach( item=>{
@@ -80,25 +99,25 @@ export class NotifyMerchantComponent implements OnInit {
   }
 
   updateCheckBox() {
-    if(this.select_All){
-      this.data.forEach( item=>{
-        item.checked =false;
+    if (this.select_All) {
+      this.data.forEach(item => {
+        item.checked = false;
       })
     }
-    else{
-      this.data.forEach( item=>{
-        item.checked =true;
+    else {
+      this.data.forEach(item => {
+        item.checked = true;
         this.disable = false;
       })
     }
   }
 
-  
+
   openSnackBar(message, isAccepted) {
     this.sharedService.openSnackBar({
       data: { message: message, isAccepted: isAccepted },
       duration: 2,
-      panelClass: [ 'recovery-snackbar' ],
+      panelClass: ['recovery-snackbar'],
       horizontalPosition: 'right',
       verticalPosition: 'top'
     });

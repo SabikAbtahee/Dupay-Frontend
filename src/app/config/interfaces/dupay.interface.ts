@@ -15,18 +15,16 @@ export interface Merchant {
 	username: string,
 	email: string,
 	password?: string,
-	name?: string,
-	tradeInsurance?: string,
-	NID?: string,
+	name: string,
+	tradeInsuranceFile?: string,
+	tradeInsuranceFileName?:string,
+	nidFileName?:string,
+	nidFile?: string,
 	balance?: number,
 	type?: Merchant_Types,
 	code?: string,
-	pending?: boolean,
-	approved?: boolean
-
-
-
-
+	status?: Merchant_Status,
+	role?: Roles
 }
 
 
@@ -64,7 +62,7 @@ export interface DialogData {
 	buttons:string[];
 }
 
-// change the interface based on the response data 
+// change the interface based on the response data
 export interface TransferRequest{
 	id: string,
 	transactionId?: string,
@@ -94,4 +92,12 @@ export interface WithdrawHistory{
 	walletType?:Wallet_type;
 	status:Withdraw_status;
 
+}
+
+export interface MerchantAccount{
+	id:string,
+	accountName:string,
+	accountNumber:string,
+	bankName:string,
+	branch:string,
 }

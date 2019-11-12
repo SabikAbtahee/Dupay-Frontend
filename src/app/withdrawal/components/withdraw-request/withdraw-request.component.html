@@ -22,11 +22,19 @@
                 <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="12px">
                     <div class='font-size-16 '>Existing Amount: </div>
                     <div class='font-size-16 '>Requested Amount: </div>
+                    <div class='font-size-16 '>Account Name: </div>
+                    <div class='font-size-16 '>Account Number: </div>
+                    <div class='font-size-16 '>Bank Name: </div>
+                    <div class='font-size-16 '>Branch: </div>
                 </div>
 
                 <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="12px">
                     <div class='rejected-color'>{{CurrentAmount}} BDT</div>
                     <div class='accepted-color'>{{RequestedAmount}} BDT</div>
+                    <div *ngIf='accountInformation && accountInformation.accountName'>{{accountInformation.accountName}}</div>
+                    <div *ngIf='accountInformation && accountInformation.accountNumber'>{{accountInformation.accountNumber}}</div>
+                    <div *ngIf='accountInformation && accountInformation.bankName'>{{accountInformation.bankName}}</div>
+                    <div *ngIf='accountInformation && accountInformation.branch'>{{accountInformation.branch}}</div>
 
                 </div>
             </div>
@@ -41,7 +49,7 @@
                 <div fxFlex='60'>
                     <mat-form-field appearance="outline" class='w-224'>
                         <mat-label>Amount</mat-label>
-                        <input type="number" matInput placeholder="Enter amount " formControlName="amount">
+                        <input type="number"  matInput placeholder="Enter amount " formControlName="amount">
 
                         <mat-error *ngIf="withdrawForm.get('amount').errors?.required && withdrawForm.get('amount').touched
                      ">
@@ -60,7 +68,7 @@
 
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
                 <div fxFlex='40' class='mat-input-for-text font-size-16 '>Select Wallet:</div>
                 <div fxFlex='60'>
                     <mat-form-field appearance="outline" class='w-224'>
@@ -78,7 +86,7 @@
 
                     </mat-form-field>
                 </div>
-            </div>
+            </div> -->
 
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="36px">
