@@ -5,6 +5,8 @@ import {UserProfileService} from "../../services/user-profile.service";
 import {Merchant} from "../../../config/interfaces/dupay.interface";
 import {SecurityService} from "../../../core/security-services/security.service";
 import {Token_Role} from "../../../config/enums/dupay.enum";
+import {QueryService} from "../../../core/query-services/query.service";
+import {api_path} from "../../../config/apiRoutes/apiroutes";
 
 @Component({
   selector: 'app-user-profile',
@@ -18,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   isMarchent ;
   constructor(private passwordmodal: PasswordModalService,private fb: FormBuilder,
               private userProfileService: UserProfileService,
+              private queryService:QueryService,
               private securityService:SecurityService
               ) { }
 
@@ -42,6 +45,11 @@ export class UserProfileComponent implements OnInit {
     this.profileform.controls.email.patchValue(obj.email);
     if(this.role == Token_Role.ROLE_MERCHANT){
       this.isMarchent = true;
+      let header = this.securityService.getAuthorizedHeader();
+      let id = this.securityService.getLoggedInUserId();
+      this.queryService.httpGet(`${api_path.getMerchantInfoWithId}/${id}`, header).subscribe(res =>{
+
+      })
       this.profileform.controls.tradeInsurance.patchValue(obj.tradeInsurance);
       this.profileform.controls.balance.patchValue(obj.balance);
     }
