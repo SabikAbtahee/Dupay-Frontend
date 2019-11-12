@@ -1,48 +1,136 @@
-<div class="container-fluid">
-  <div class="example-container">
-      <mat-form-field appearance="fill" floatLabel="never">
+<!-- <div class="container"> -->
+  <br>
+
+  <mat-toolbar>
+      <span class="example-fill-remaining-space"></span>
+      <span class> <h1>Notifications</h1></span>
+      <span class="example-fill-remaining-space"></span>
+    </mat-toolbar>
+
+  <br>
+  
+
+  <div class="mx-40">
+      <mat-form-field appearance="outline" floatLabel="never" >
           <!-- <mat-label>Fill form field</mat-label> -->
-          <input matInput placeholder="Placeholder" (keyup)="applyFilter($event.target.value)">
+          <input matInput [(ngModel)]="searchField" placeholder="Search" (keyup)="applyFilter($event.target.value)" id="filterFormField">
+          <mat-icon matPrefix class='mr-16'>search</mat-icon>
+          <!-- <i class="material-icons ml-16" (click)="clearField()">
+            clear
+            </i> -->
+          
+            <button mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="searchField">
+              <mat-icon>close</mat-icon>
+          </button>
+
       </mat-form-field>
   </div>
- 
+
+  <br>
+
+  <div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="date" matSortDirection="desc"  [class.isMobile]="isMobile" >
   
-      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-          
-          <th mat-header-cell *matHeaderCellDef> {{column}}  </th>
-          <td mat-cell *matCellDef="let element" [ngClass]="{'is-read': element.isRead }"  (click)="changeNotificationStatus(element,isRead)"> {{element[column]}} </td>
-        </ng-container>
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16">  Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Date:</span>
+          {{ element.date }}
+        </mat-cell>
+      </ng-container>
 
-        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-        <ng-container matColumnDef="expandedDetail"  >
-          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length"  >
-            <div  class="example-element-detail"
-                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
-              <!-- <div class="example-element-diagram"> -->
-                <!-- <div class="example-element-position"> {{element.date}} </div>
-                <div class="example-element-symbol"> {{element.id}} </div>
-                <div class="example-element-name"> {{element.message}} </div> -->
-              
-              <!-- </div> -->
-              <div class="example-element-description">
-                {{element.description}} <br>
-                <!-- <span class="example-element-description-attribution"> -- Wikipedia </span> -->
-                <!-- <button mat-raised-button (click)="element.isRead=!element.isRead" >Mark as Unread</button> -->
-              </div>
-            </div>
-          </td>
-        </ng-container>
+      
+  
+  
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Notification ID
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">ID:</span>
+  
+          {{ element.id }} </mat-cell>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-</div>
+      <ng-container matColumnDef="message">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Message
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <span class="mobile-label">Message:</span>
+  
+          {{ element.message }} </mat-cell>
+      </ng-container>
+  
+  
+    
+  
+  
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+    
+ 
+  <!-- <div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+              <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> {{column}} </mat-header-cell> 
+              <mat-cell *matCellDef="let element" [ngClass]="{'is-read': element.isRead }" (click)="changeNotificationStatus(element,isRead)"> {{element[column]}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Date">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Transaction ID
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" [ngClass]="{'is-read': element.isRead }" (click)="changeNotificationStatus(element,isRead)">
+                <span class="mobile-label">ID:</span>
+                {{ element.id }}
+              </mat-cell>
+            </ng-container> -->
+
+            <!-- <ng-container matColumnDef="Notification ID">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Transaction ID
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" [ngClass]="{'is-read': element.isRead }" (click)="changeNotificationStatus(element,isRead)">
+                <span class="mobile-label">ID:</span>
+                {{ element.id }}
+              </mat-cell>
+            </ng-container> -->
+
+            
+            <!-- <ng-container matColumnDef="Message">
+              <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Transaction ID
+              </mat-header-cell>
+              <mat-cell *matCellDef="let element" [ngClass]="{'is-read': element.isRead }" (click)="changeNotificationStatus(element,isRead)">
+                <span class="mobile-label">ID:</span>
+                {{ element.id }}
+              </mat-cell>
+            </ng-container> -->
+
+
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <!-- <ng-container matColumnDef="expandedDetail"  >
+              <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length"  >
+                <div  class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
+                  <div class="example-element-description">
+                    {{element.description}} <br>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div> --> 
+      
+<!-- </div> -->
 
 
 <!-- Copyright 2019 Google Inc. All Rights Reserved.

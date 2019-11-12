@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator,MatSort } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {trigger,state,style,animate,transition}from '@angular/animations';
 import { element } from 'protractor';
@@ -23,7 +23,10 @@ export class MerchantNotificationComponent implements OnInit {
   columnsToDisplay = ['date', 'id', 'message'];
   expandedElement: MerchantNotification | null;
 
+  searchField:string;
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true })sort: MatSort;
   
 
   applyFilter(filterValue: string) {
@@ -31,6 +34,12 @@ export class MerchantNotificationComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  clearSearchField(){
+    this.searchField="";
+    this.applyFilter(this.searchField);
+
   }
 
   changeNotificationStatus(element,isRead:boolean){
@@ -42,6 +51,7 @@ export class MerchantNotificationComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort=this.sort;
   }
   
 }
@@ -64,7 +74,7 @@ const NOTIFICATION_DATA: MerchantNotification[] = [
   }, {
    date: '2',
     id: 'bcd',
-    message: 'Dummy transaction of 5.00 BDT',
+    message: 'Dummy transaction of 5.00 BDT. Dummy transaction of 5.00 BDT. Dummy transaction of 5.00 BDT. Dummy transaction of 5.00 BDT. ',
     description: `At 10 pm GMT+6, transaction of 5 BDT took place`,
     isRead:true
   }, {
