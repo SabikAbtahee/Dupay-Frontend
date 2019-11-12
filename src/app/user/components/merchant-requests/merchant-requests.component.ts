@@ -21,12 +21,12 @@ export class MerchantRequestsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['SI No.', 'username', 'name', 'type', 'tradeInsurance', 'NID', 'details', 'approve', 'reject'];
+  public displayedColumns = ['SI No.', 'username', 'name', 'type', 'details', 'approve', 'reject'];
 
 
   requests: Merchant[] = []
-  APPROVE="A";
-  REJECT="R";
+  APPROVE = "A";
+  REJECT = "R";
 
   filteredRequests: Merchant[]
   private _searchTerm: string;
@@ -61,23 +61,24 @@ export class MerchantRequestsComponent implements OnInit {
     this.merchants.filter = filterValue.trim().toLowerCase();
   }
 
-  public openConfirmationDialog = (id: string, actionType:string) => {
+  public openConfirmationDialog = (id: string, actionType: string) => {
     console.log('has come here');
-    let title:string = "";
-    if(actionType == this.APPROVE) title = "Approve Merchant!";
-    else if(actionType == this.REJECT) title = "Reject Merchant!";
+    let title: string = "";
+    if (actionType == this.APPROVE) title = "Approve Merchant!";
+    else if (actionType == this.REJECT) title = "Reject Merchant!";
 
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '300px',
-      data: { message: title, buttons: ["Confirm", "Cancel"] }
+      data: { message: title, buttons: ["Confirm", "Cancel"],
+     }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('result after closed:' + result);
       if (result) {
 
-        if(actionType == this.APPROVE)this.approve(id);
-        else if(actionType == this.REJECT) this.reject(id);
+        if (actionType == this.APPROVE) this.approve(id);
+        else if (actionType == this.REJECT) this.reject(id);
       }
     });
   }
@@ -124,18 +125,20 @@ export class MerchantRequestsComponent implements OnInit {
   }
 
   public redirectToDetails = (id: string) => {
-    let specificMerchant: Merchant;
 
-    for (let i = 0; i < this.merchants.data.length; i++) {
-      if (this.merchants.data[i].id === id) {
-        specificMerchant = this.merchants.data[i];
-      }
-    }
-
-    this.dialog.open(MerchantDetailsComponent, {
-      data: specificMerchant
-    }).afterClosed().subscribe(result => {
-      console.log(result);
+    this.userService.getMerchantDetails(id).subscribe(res => {
+      console.log('merchant details');
+      console.log(res);
+      res.nidFile = "data:image/png;base64," + res.nidFile;
+      res.tradeInsuranceFile = "data:image/png;base64," + res.tradeInsuranceFile;
+      this.dialog.open(MerchantDetailsComponent, {
+        data: res,
+        autoFocus: false,
+        maxHeight: '90vh'
+      }).afterClosed().subscribe(result => {
+      });
+    }, err => {
+      console.error(err);
     });
   }
 

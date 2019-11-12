@@ -17,7 +17,7 @@ export class MerchantListComponent implements OnInit {
 
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['name', 'type', 'tradeInsurance', 'balance', 'details', 'notify'];
+  public displayedColumns = ['name', 'type', 'balance', 'details', 'notify'];
 
   constructor(private userService: UserService,
     public dialog: MatDialog) { }
@@ -52,12 +52,6 @@ export class MerchantListComponent implements OnInit {
 
   public redirectToDetails = (id: string) => {
     let specificMerchant: Merchant;
-
-    // for(let i=0; i<this.merchants.data.length; i++){
-    //   if (this.merchants.data[i].id === id) {
-    //     specificMerchant = this.merchants.data[i];
-    //   }
-    // }
 
     this.userService.getMerchantDetails(id).subscribe(res => {
       console.log('merchant details');
