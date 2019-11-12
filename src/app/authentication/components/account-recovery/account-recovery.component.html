@@ -156,6 +156,10 @@
                                 <mat-error
                                     *ngIf="accountRecoveryForm.get('password').touched && accountRecoveryForm.hasError('not_matching') ">
                                     {{error_messages.password_mismatch}}</mat-error>
+
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
                                 <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
                             </mat-form-field>
                         </div>
@@ -187,6 +191,9 @@
                                     *ngIf="accountRecoveryForm.get('confirm_password').touched && accountRecoveryForm.hasError('not_matching') ">
                                     {{error_messages.password_mismatch}}</mat-error>
                                 <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                                <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+                                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
                             </mat-form-field>
                         </div>
                     </div>
