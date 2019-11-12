@@ -13,7 +13,7 @@ import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 export class UserService {
 
   constructor(private queryService: QueryService,
-    private securityService: SecurityService, private mutationService:MutationService ) { }
+    private securityService: SecurityService, private mutationService: MutationService) { }
 
   public getAllMerchant(): Observable<Merchant[]> {
 
@@ -70,24 +70,34 @@ export class UserService {
   }
 
   public approveMerchant(id: string): Observable<Merchant[]> {
-    return new Observable((observer) => {
-      this.queryService.getToken().subscribe(res => {
-        let token = res;
-        // console.log('token:' + token);
-        let header = this.securityService.getHeader(token);
-        this.mutationService.httpPut(api_path.approveMerchant+"/"+id,{}, header).subscribe(res => {
-          // console.log('result:');
-          // console.log(res);
-          observer.next(res);
-        }, err => {
-          // console.log('error:');
-          // console.log(err);
-          observer.error(err);
-        });
 
-      });
+    return new Observable((observer) => {
+      let header = this.securityService.getAuthorizedHeader();
+      this.mutationService.httpPut(api_path.approveMerchant + "/" + id, {}, header).subscribe(res => {
+        observer.next(res);
+      },
+        err => {
+          observer.error(err);
+        })
 
     });
 
   }
+
+
+  public rejectMerchant(id: string): Observable<any> {
+    return new Observable((observer) => {
+      let header = this.securityService.getAuthorizedHeader();
+      this.mutationService.httpPut(api_path.rejectMerchant + id, {}, header).subscribe(res => {
+        observer.next(res);
+      },
+        err => {
+          observer.error(err);
+        })
+
+    });
+
+  }
+
+
 }
