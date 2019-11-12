@@ -22,32 +22,12 @@ export class HistoryTransactionComponent implements OnInit {
 
 
   ngOnInit() {
-    this.transactionService.getAllTransactionsByUserId().subscribe(
-      list => {
-         const array = list.map(item => {
-          return {
-            $key: item.payload.doc.id,
-            ...item.payload.doc.data()
-          };
-        });
-         this.listData = new MatTableDataSource(array);
-        // console.log('This should be worked: ', list);      
-        //  const array = list.map(item => {
-        //   return {
-        //     $key: item.payload.doc.id,
-        //     ...item.payload.doc.data()
-        //   };
-        // });
-        //  this.listData = new MatTableDataSource(array);
-        //  console.log(array);
-        //  this.listData.sort = this.sort;
-        //  this.listData.paginator = this.paginator;
-
+    this.transactionService.getAllTransactionsByUserId().subscribe(list => {
          this.listData = new MatTableDataSource(list.content);
         //  console.log('IBRAHIM' , this.listData);
          this.listData.sort = this.sort;
          this.listData.paginator = this.paginator;
-      });
+    });
 
   }
   applyFilter(filterValue: string) {
