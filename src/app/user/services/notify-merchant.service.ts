@@ -10,6 +10,7 @@ import {MerchantNotificationComponent} from "../components/merchant-notification
 import {MutationService} from "../../core/mutation-services/mutation.service";
 import {SharedService} from "../../shared/services/shared.service";
 import {NotificationComponent} from "../components/notification/notification.component";
+import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class NotifyMerchantService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (!item.pending){
+          if (item.status == Merchant_Status.Approved){
             merchants.push(item);
           }
         });
@@ -50,12 +51,12 @@ export class NotifyMerchantService {
         let httpHeader = this.securityService.getHeader(token);
 
         this.queryService.httpGet(api_path.merchantList,httpHeader).subscribe(res => {
-          console.log('result:');
-          console.log(res);
+          // console.log('result:');
+          // console.log(res);
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          // console.log('error:');
+          // console.log(err);
           observer.error(err);
         })
       })
@@ -90,11 +91,11 @@ export class NotifyMerchantService {
         this.mutationService.httpPost(`${api_path.notifyMerchant}`,
           this.data, httpHeader).subscribe(res2 => {
           observer.next(res2);
-          console.log(res2);
+          // console.log(res2);
         },
           (err) => {
             observer.error(err);
-            console.log(err);
+            // console.log(err);
           },
           () => {
             observer.complete();

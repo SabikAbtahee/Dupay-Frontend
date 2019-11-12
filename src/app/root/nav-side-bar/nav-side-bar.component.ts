@@ -44,7 +44,6 @@ export class NavSideBarComponent implements OnInit {
 	}
 
 	route(url) {
-		console.log(url);
 		this.router.navigate([ url ]).then(res=>{
 			this.checkRow();
 		});

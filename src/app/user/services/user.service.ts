@@ -5,6 +5,7 @@ import { QueryService } from 'src/app/core/query-services/query.service';
 import { SecurityService } from 'src/app/core/security-services/security.service';
 import { Merchant } from 'src/app/config/interfaces/dupay.interface';
 import { MutationService } from 'src/app/core/mutation-services/mutation.service';
+import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +20,15 @@ export class UserService {
     return new Observable((observer) => {
       this.queryService.getToken().subscribe(res => {
         let token = res;
-        console.log('token:' + token);
+        // console.log('token:' + token);
         let header = this.securityService.getHeader(token);
         this.queryService.httpGet(api_path.merchantList, header).subscribe(res => {
-          console.log('result:');
-          console.log(res);
+          // console.log('result:');
+          // console.log(res);
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          // console.log('error:');
+          // console.log(err);
           observer.error(err);
         });
 
@@ -41,7 +42,7 @@ export class UserService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (item.approved) merchants.push(item);
+          if (item.status == Merchant_Status.Approved) merchants.push(item);
         });
         observer.next(merchants);
 
@@ -57,7 +58,7 @@ export class UserService {
       this.getAllMerchant().subscribe(res => {
         let merchants: Merchant[] = [];
         res.forEach(item => {
-          if (item.pending) merchants.push(item);
+          if (item.status == Merchant_Status.Pending) merchants.push(item);
         });
         observer.next(merchants);
 
@@ -72,15 +73,15 @@ export class UserService {
     return new Observable((observer) => {
       this.queryService.getToken().subscribe(res => {
         let token = res;
-        console.log('token:' + token);
+        // console.log('token:' + token);
         let header = this.securityService.getHeader(token);
         this.mutationService.httpPut(api_path.approveMerchant+"/"+id,{}, header).subscribe(res => {
-          console.log('result:');
-          console.log(res);
+          // console.log('result:');
+          // console.log(res);
           observer.next(res);
         }, err => {
-          console.log('error:');
-          console.log(err);
+          // console.log('error:');
+          // console.log(err);
           observer.error(err);
         });
 

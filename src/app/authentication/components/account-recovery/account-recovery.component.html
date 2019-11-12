@@ -104,8 +104,8 @@
                     <button type="submit" (click)='verifyOTP()' mat-raised-button color="primary"
                         class="w-260 h-40">Verify
                         OTP</button>
-                    <button (click)='resendOtp()' mat-stroked-button color="primary"
-                        class="w-260 h-40">Resend Otp</button>
+                    <button (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend
+                        Otp</button>
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                             login</button> -->
 
@@ -146,9 +146,10 @@
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>Password</mat-label>
-                                <input type="password" matInput placeholder="Type in password "
-                                    formControlName="password" [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'" >
-
+                                <input id='secretPassword1' type="password" matInput placeholder="Type in password "
+                                    formControlName="password" [errorStateMatcher]="matcher" showHideInput>
+                                    <mat-icon class='cursor-pointer' matSuffix showHideTrigger="secretPassword1" 
+                                    [showHideStatus]="{id: 'secretPassword1',materialIcon:true }"></mat-icon>
                                 <mat-error
                                     *ngIf="accountRecoveryForm.get('password').touched && accountRecoveryForm.get('password').invalid  && !accountRecoveryForm.hasError('not_matching')">
                                     {{error_messages.weak_password}}</mat-error>
@@ -178,9 +179,11 @@
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label>Confirm Password</mat-label>
-                                <input type="password" matInput placeholder="Type in confirm password "
-                                    formControlName="confirm_password" [errorStateMatcher]="matcher" [type]="hideConfirmPassword ? 'password' : 'text'">
-
+                                <input id='secretPassword2' type="password" matInput
+                                    placeholder="Type in confirm password " formControlName="confirm_password"
+                                    [errorStateMatcher]="matcher" showHideInput>
+                                <mat-icon class='cursor-pointer' matSuffix showHideTrigger="secretPassword2"
+                                    [showHideStatus]="{id: 'secretPassword2',materialIcon:true }"></mat-icon>
                                 <mat-error
                                     *ngIf="accountRecoveryForm.get('confirm_password').touched && accountRecoveryForm.get('confirm_password').invalid  && !accountRecoveryForm.hasError('not_matching')">
                                     {{error_messages.weak_password}}</mat-error>
@@ -200,8 +203,8 @@
                     <button type="submit" (click)='onAccountRecoverySubmit()' mat-raised-button color="primary"
                         class="w-260 h-40">
                         Reset Password</button>
-                    <button  (click)='resendOtp()' mat-stroked-button color="primary"
-                        class="w-260 h-40">Resend Email</button>
+                    <button (click)='resendOtp()' mat-stroked-button color="primary" class="w-260 h-40">Resend
+                        Email</button>
                     <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
                         login</button> -->
 

@@ -5,8 +5,9 @@ export enum Roles{
 }
 
 export enum Merchant_Status{
-    Active='Active',
-    Inactive='Inactive'
+    Approved='approved',
+    Pending='pending',
+    Rejected='rejected'
 }
 
 export enum Merchant_Types{

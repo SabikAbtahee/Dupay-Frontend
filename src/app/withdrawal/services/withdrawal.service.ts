@@ -27,15 +27,15 @@ export class WithdrawalService {
 		return new Observable((observer) => {
 			this.queryService.getToken().subscribe((res) => {
 				let token = res;
-				console.log(' token = ' + token);
+				// console.log(' token = ' + token);
 				let header = this.securityService.getHeader(token);
 				this.queryService.httpGet(api_path.transferRequestList, header).subscribe(
 					(response) => {
-						console.log(' transfer request List : ' + response);
+						// console.log(' transfer request List : ' + response);
 						observer.next(response);
 					},
 					(err) => {
-						console.log('error transfer request List ' + err);
+						// console.log('error transfer request List ' + err);
 						observer.error(err);
 					}
 				);
@@ -47,15 +47,15 @@ export class WithdrawalService {
 		return new Observable((observer) => {
 			this.queryService.getToken().subscribe((res) => {
 				let token = res;
-				console.log('transfer request update token = ' + token);
+				// console.log('transfer request update token = ' + token);
 				let header = this.securityService.getHeader(token);
 				this.mutationService.httpPost(api_path.transferRequestStatusChange, updateData, header).subscribe(
 					(response) => {
-						console.log(' transfer request update result = ' + response);
+						// console.log(' transfer request update result = ' + response);
 						observer.next(response);
 					},
 					(err) => {
-						console.log('error  transfer request update status = ' + err);
+						// console.log('error  transfer request update status = ' + err);
 						observer.error(err);
 					}
 				);
@@ -80,6 +80,14 @@ export class WithdrawalService {
 				);
 		});
 	}
+
+	// getMerchantAccountNumber():Observable<any>{
+	// 	return new Observable(obs=>{
+	// 		let id = this.securityService.getLoggedInUserId();
+	// 		let httpheader = this.securityService.getAuthorizedHeader();
+			
+	// 	})
+	// }
 
 	getMerchantInfo(): Observable<any> {
 		return new Observable((observer) => {

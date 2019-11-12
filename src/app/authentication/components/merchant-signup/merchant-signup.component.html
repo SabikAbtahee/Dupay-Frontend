@@ -1,4 +1,3 @@
-<!-- <form [formGroup]="signupform"> -->
 <div fxLayout="row" fxLayoutAlign="center center" class="pt-84 pb-48 header-1 ">
     Sign up in DUPAY
 </div>
@@ -32,10 +31,7 @@
                                 <mat-error *ngIf="emailForm.get('email').touched && emailForm.get('email').invalid">
                                     {{error_messages.email_error}}</mat-error>
 
-                                <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -48,8 +44,7 @@
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='sendOTPtoEmail()' mat-raised-button color="primary"
                         class="w-260 h-40">Send OTP</button>
-                    <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
-                            login</button> -->
+                    
 
 
                 </div>
@@ -92,10 +87,7 @@
                                 <mat-error *ngIf="OTPForm.get('otp').touched && OTPForm.get('otp').invalid">
                                     {{error_messages.otp_error}}</mat-error>
 
-                                <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -143,7 +135,7 @@
 
 
                         <!-- Name -->
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                        <div fxLayout="row"  fxLayoutAlign="start center" fxLayoutGap="12px">
                             <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                                 <i class="material-icons-outlined">
                                     perm_identity
@@ -164,37 +156,12 @@
                                     <mat-error
                                         *ngIf="signupform.get('name').touched && signupform.get('name').hasError('required')">
                                         {{error_messages.empty_name}}</mat-error>
-                                    <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                                    
                                 </mat-form-field>
-                            </div>
-                        </div>
-                        <!-- Merchant type -->
-                        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="12px">
-                            <div fxLayout="column" fxLayoutAlign="center center" class="mat-icon-for-input">
-                                <i class="material-icons-outlined ">
-                                    group
-                                </i>
-                            </div>
-                            <div>
-                                <mat-form-field appearance="outline" class='w-224'>
-                                    <mat-label>Merchant type</mat-label>
-                                    <mat-select formControlName='merchant_type' disableOptionCentering>
-                                        <mat-option *ngFor='let type of merchant_types | keyvalue' [value]='type.key'>
-                                            {{type.value}}</mat-option>
-                                    </mat-select>
-                                    <mat-error
-                                        *ngIf="signupform.get('merchant_type').touched && signupform.get('merchant_type').invalid">
-                                        {{error_messages.merchant_type}}</mat-error>
-
-                                </mat-form-field>
-
                             </div>
                         </div>
                         <!-- Password -->
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                        <div fxLayout="row"   fxLayoutAlign="start center" fxLayoutGap="12px">
                             <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                                 <i class="material-icons-outlined">
                                     lock
@@ -215,31 +182,45 @@
                                     <mat-error
                                         *ngIf="signupform.get('password').touched && signupform.hasError('not_matching') ">
                                         {{error_messages.password_mismatch}}</mat-error>
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
                                 </mat-form-field>
                             </div>
                         </div>
+                        <!-- NID number -->
+                        <div fxLayout="row"    fxLayoutAlign="start center" fxLayoutGap="12px" >
+                            <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12" >
+                                <i class="material-icons-outlined">
+                                    credit_card
+                                </i>
+                            </div>
+                            <div class='mb-12 mt-4'>
+                               
+                                  <button mat-stroked-button (click)="imgFileInput.click()" class='w-224 h-56'>
+                                      
+                                    <span *ngIf='!nid_filename'>Choose NID File</span>
+                                     <span *ngIf='nid_filename'>{{nid_filename}}</span>
+                                  </button>
+                                  <input  hidden  type="file" #imgFileInput (change)="onNIDFileSelect($event)">
+
+                            </div>
+                        </div>
+                        
+                        
                         <!-- Trade Insurance -->
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-                            <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
+                        <div fxLayout="row"   fxLayoutAlign="start center" fxLayoutGap="12px">
+                            <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12">
                                 <i class="material-icons-outlined">
                                     perm_identity
                                 </i>
                             </div>
-                            <div>
-                                <mat-form-field appearance="outline" class='w-224'>
-                                    <mat-label>Trade Insurance</mat-label>
-                                    <input type="text" matInput placeholder="Type in trade insurance"
-                                        formControlName="trade_insurance">
-                                    <mat-error
-                                        *ngIf="signupform.get('trade_insurance').touched && signupform.get('trade_insurance').invalid">
-                                        {{error_messages.trade_insurance_error}}</mat-error>
+                            <div class='mb-12 mt-4'>
+                               
 
-                                    <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
-                                </mat-form-field>
+                                  <button mat-stroked-button (click)="tradeFileInput.click()"  class='w-224 h-60'>
+                                    
+                                    <span *ngIf='!trade_insurance_filename'  >Choose Trade Insurance File</span>
+                                     <span *ngIf='trade_insurance_filename'>{{trade_insurance_filename}}</span>
+                                  </button>
+                                  <input  hidden  type="file" #tradeFileInput (change)="onTradeInsuranceFileSelect($event)">
                             </div>
                         </div>
 
@@ -249,7 +230,7 @@
 
                     <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="12px">
                         <!-- USERNAME -->
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                        <div fxLayout="row"   fxLayoutAlign="start center" fxLayoutGap="12px">
                             <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                                 <i class="material-icons-outlined">
                                     smartphone
@@ -269,42 +250,16 @@
                                     <mat-error
                                         *ngIf="signupform.get('username').touched && signupform.get('username').hasError('required')">
                                         {{error_messages.username_error}}</mat-error>
-                                    <!-- <mat-error
-                                        *ngIf="signupform.get('username').touched && signupform.get('username').invalid">
-                                        {{error_messages.username_error}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="signupform.get('email').touched && signinform.get('email').invalid">{{signinform.get('email').errors|json}}</mat-error> -->
-
-                                    <!-- <mat-error *ngIf="true">222</mat-error> -->
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
+                                    
                                 </mat-form-field>
                             </div>
                         </div>
-                        <!-- NID number -->
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-                            <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
-                                <i class="material-icons-outlined">
-                                    credit_card
-                                </i>
-                            </div>
-                            <div>
-                                <mat-form-field appearance="outline" class='w-224'>
-                                    <mat-label>NID No.</mat-label>
-                                    <input type="text" matInput placeholder="Type in NID number"
-                                        formControlName="nid_number">
-                                    <mat-error
-                                        *ngIf="signupform.get('nid_number').touched && signupform.get('nid_number').invalid">
-                                        {{error_messages.nid_error}}</mat-error>
-
-
-                                </mat-form-field>
-                            </div>
-                        </div>
+                        
 
 
 
                         <!-- Confirm Password -->
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                        <div fxLayout="row"   fxLayoutAlign="start center" fxLayoutGap="12px">
                             <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
                                 <i class="material-icons-outlined">
                                     vpn_key
@@ -323,12 +278,34 @@
                                     <mat-error
                                         *ngIf="signupform.get('confirm_password').touched && signupform.hasError('not_matching') ">
                                         {{error_messages.password_mismatch}}</mat-error>
-                                    <!-- <mat-icon matPrefix>sentiment_very_satisfied</mat-icon> -->
                                 </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- Merchant type -->
+                        <div fxLayout="row"   fxLayoutAlign="center center" fxLayoutGap="12px">
+                            <div fxLayout="column" fxLayoutAlign="center center" class="mat-icon-for-input">
+                                <i class="material-icons-outlined ">
+                                    group
+                                </i>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="outline" class='w-224'>
+                                    <mat-label>Merchant type</mat-label>
+                                    <mat-select formControlName='merchant_type' disableOptionCentering>
+                                        <mat-option *ngFor='let type of merchant_types | keyvalue' [value]='type.key'>
+                                            {{type.value}}</mat-option>
+                                    </mat-select>
+                                    <mat-error
+                                        *ngIf="signupform.get('merchant_type').touched && signupform.get('merchant_type').invalid">
+                                        {{error_messages.merchant_type}}</mat-error>
+
+                                </mat-form-field>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class='mt-24'>
                     <button type="submit" (click)='onSignupSubmit()' mat-raised-button color="primary"
                         class="w-240 h-40">Sign
@@ -336,8 +313,7 @@
                     <button (click)='resendOtp()' mat-stroked-button color="primary" class="w-240 h-40">Resend
                         Email</button>
 
-                    <!-- <button (click)='routeToSignin()' mat-stroked-button color="primary" class="w-240 h-40">Back to
-                        login</button> -->
+                  
 
 
                 </div>
@@ -348,13 +324,7 @@
             <a (click)='route([urlPaths.Authentication.Signin.url][0])'
                 class="cursor-pointer link-color font-size-16">Back to login </a>
         </div>
-        <!-- <div fxFlex='15' fxLayout="row" fxFlexAlign="start center">
-            <div>
-                <a (click)='routeToAccountRecovery()' class="cursor-pointer secondary-text-color">Forgot Password? </a>
-            </div>
-        </div> -->
+        
 
     </div>
 </form>
-
-<!-- </form> -->

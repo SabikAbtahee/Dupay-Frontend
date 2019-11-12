@@ -75,6 +75,12 @@ export class AccountRecoveryComponent implements OnInit {
 		if (check && check.isOtpDone) {
 			this.isOTPFormDone = true;
 		}
+		if(!this.isEmailFormDone){
+			this.makeEmailForm();
+		}
+		if(!this.isOTPFormDone){
+			this.makeOTPForm();
+		}
 	}
 
 	makeEmailForm() {
@@ -184,6 +190,8 @@ export class AccountRecoveryComponent implements OnInit {
 		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 		this.isEmailFormDone = false;
 		this.isOTPFormDone = false;
+		this.checkForm();
+
 	}
 
 	onAccountRecoverySubmit() {
@@ -197,7 +205,6 @@ export class AccountRecoveryComponent implements OnInit {
 			};
 			this.authService.recoverMerchantAccount(emailPasswordConfirmPassword).pipe(first()).subscribe(
 				(res) => {
-					//debugger;
 					this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 					this.openSnackBar(snackbarMessages.reset_password_complete, true);
 					this.isAccountRecoveryLoading = false;
@@ -221,6 +228,7 @@ export class AccountRecoveryComponent implements OnInit {
 	}
 
 	route(path) {
+		this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 		this.router.navigate([ path ]);
 	}
 
