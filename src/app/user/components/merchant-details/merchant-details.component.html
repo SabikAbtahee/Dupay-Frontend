@@ -1,12 +1,16 @@
-<h1 mat-dialog-title>Hi {{data?.name}}</h1>
+<h1 mat-dialog-title>{{data?.name}}</h1>
 <div mat-dialog-content>
   Username: {{ data?.username }}  <br>
   Email: {{ data?.email }} <br>
   Trade Insurance: {{ data?.tradeInsurance}} <br>
-  NID: {{ data?.NID}} <br>
+  
 	Balance: {{ data?.balance}} <br>
   Status: {{ data?.status }} <br>
 </div>
+<p>NID</p>
+<img [src]="data.nidFile"/>
+<p>Trade Insurance File</p>
+<img [src]="data.tradeInsuranceFile"/>
 <div mat-dialog-actions>
   <button mat-raised-button mat-dialog-close="1" cdkFocusInitial > Ok </button>
   <button mat-raised-button mat-dialog-close="0" > Cancel </button>
