@@ -15,7 +15,7 @@ export class HistoryTransactionComponent implements OnInit {
   constructor(private exportService: ExportService,
               private transactionService: TransactionService) { }
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['id', 'time', 'amount', 'actions'];
+  displayedColumns: string[] = ['SI No','id', 'time', 'amount'];
   @ViewChild(MatSort, {static: false}  ) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   searchKey: string;
