@@ -11,7 +11,7 @@ import { loginCredentials } from '../../../config/interfaces/configurations.inte
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../../authentication/services/authentication.service';
 import { UtilityService } from '../../../core/utility-services/utility-service.service';
-import { WithdrawRequest } from 'src/app/config/interfaces/dupay.interface';
+import { WithdrawRequest, MerchantAccount } from 'src/app/config/interfaces/dupay.interface';
 import { WithdrawRequestModalService } from '../../services/withdraw-request-modal.service';
 
 @Component({
@@ -22,11 +22,12 @@ import { WithdrawRequestModalService } from '../../services/withdraw-request-mod
 export class WithdrawRequestComponent implements OnInit {
 	withdrawForm: FormGroup;
 	withdrawErrorMessages = withdrawErrorMessages;
-	wallets = [];
+	
 	CurrentAmount = 0;
 	RequestedAmount = 0;
 	isLoading = false;
 	loggedInEmail;
+	accountInformation:MerchantAccount;
 	constructor(
 		private withdrawService: WithdrawalService,
 		private router: Router,
@@ -38,10 +39,9 @@ export class WithdrawRequestComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		// this.getMerchantAccount();
+		this.setAccountInformation();
 		this.setAmount();
 		this.makeWithdrawForm();
-		this.makeWallets();
 		this.setEmail();
 	}
 	makeWithdrawForm() {
@@ -54,7 +54,7 @@ export class WithdrawRequestComponent implements OnInit {
 					(control: AbstractControl) => Validators.max(this.CurrentAmount - this.RequestedAmount)(control)
 				]
 			],
-			wallet: [ '', [ Validators.required ] ],
+			
 			password: [ '', [ Validators.required ] ]
 		});
 	}
@@ -72,17 +72,7 @@ export class WithdrawRequestComponent implements OnInit {
 			);
 		});
 	}
-	makeWallets() {
-		this.getMerchantAccount().subscribe((res) => {
-			for (let i of res) {
-				let key = i.id;
-				let walletname = i.bankName;
-				let obj = {};
-				obj[key] = walletname;
-				this.wallets.push(obj);
-			}
-		});
-	}
+	
 
 	onSubmit() {
 		this.sharedService.openSpinner();
@@ -138,7 +128,7 @@ export class WithdrawRequestComponent implements OnInit {
 		let payload: WithdrawRequest = {
 			amount: this.withdrawForm.value.amount,
 			merchantAccount: {
-				id: this.withdrawForm.value.wallet
+				id: this.accountInformation.id
 			}
 		};
 
@@ -154,7 +144,19 @@ export class WithdrawRequestComponent implements OnInit {
 		);
 	}
 
+	setAccountInformation(){
+		this.getMerchantAccount().pipe(first()).subscribe(res=>{
+			this.accountInformation=res;
+			
+		},
+		err=>{
+			let message = this.util.giveErrorMessage(err);
+			this.openSnackBar(this.util.toCapitalize(message), false);
+		})
+	}
+
 	closeModal(){
 		this.withdrawModalService.closeDialog();
+		
 	}
 }

@@ -29,6 +29,10 @@ export class AccountRecoveryComponent implements OnInit {
 		private util: UtilityService
 	) {}
 
+	//Password hide button
+	hide=true;
+	hideConfirmPassword=true;
+
 	// Localstorage Object
 	authenticationObject: authenticationEmailOtp = {
 		key: localStorageKeys.DupayAccountRecovery

@@ -81,6 +81,14 @@ export class WithdrawalService {
 		});
 	}
 
+	// getMerchantAccountNumber():Observable<any>{
+	// 	return new Observable(obs=>{
+	// 		let id = this.securityService.getLoggedInUserId();
+	// 		let httpheader = this.securityService.getAuthorizedHeader();
+			
+	// 	})
+	// }
+
 	getMerchantInfo(): Observable<any> {
 		return new Observable((observer) => {
 			let id = this.securityService.getLoggedInUserId();
