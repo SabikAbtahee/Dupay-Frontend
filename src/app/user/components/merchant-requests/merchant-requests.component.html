@@ -28,7 +28,7 @@
     </ng-container>
    
     <ng-container matColumnDef="tradeInsurance">
-      <th mat-header-cell *matHeaderCellDef > TradeInsurance </th>
+      <th mat-header-cell *matHeaderCellDef > Trade Insurance </th>
       <td mat-cell *matCellDef="let element"> {{element.tradeInsurance}} </td>
     </ng-container>
    
@@ -56,7 +56,7 @@
       </ng-container>
    
       <ng-container matColumnDef="reject">
-          <th mat-header-cell *matHeaderCellDef> reject </th>
+          <th mat-header-cell *matHeaderCellDef> Reject </th>
           <td mat-cell *matCellDef="let element">
             <button mat-icon-button color="warn" (click)="openConfirmationDialog(element.id,REJECT)">
                 <mat-icon class="mat-18">delete</mat-icon>

@@ -28,6 +28,7 @@ export const api_path = {
   merchantList:`${environment.baseurl}/api/admin/merchant`,
   approveMerchant:`${environment.baseurl}/api/admin/approve/merchant`,
   rejectMerchant:`${environment.baseurl}/api/admin/reject/merchant/`,
+  merchantDetails:`${environment.baseurl}/api/admin/merchant/`,
   notifyMerchant:`${environment.baseurl}/api/admin/notification`,
 
   // transfer-request

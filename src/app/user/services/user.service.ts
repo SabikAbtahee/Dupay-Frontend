@@ -99,5 +99,16 @@ export class UserService {
 
   }
 
+  public getMerchantDetails(id: string): Observable<Merchant> {
+    return new Observable((observer) => {
+      let header = this.securityService.getAuthorizedHeader();
+      this.queryService.httpGet(api_path.merchantDetails + id, header).subscribe(res => {
+        observer.next(res);
+      }, err => {
+        observer.error(err);
+      })
+    })
+  }
+
 
 }

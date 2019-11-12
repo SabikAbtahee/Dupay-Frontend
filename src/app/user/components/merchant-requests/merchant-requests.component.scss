@@ -1,29 +1,42 @@
+//@import '../../../../styles/color.scss';
+@import '../../../../styles/theme.scss';
 
-.example-card{
-    max-width: 800px;
-    border: 1px solid rebeccapurple;
-}
 
 table {
-    width: 90%;
-    margin: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
-    min-width: 500px;
+  width: 90%;
+  margin: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
 }
- 
+
 th.mat-header-cell {
-    text-align: left;
-    max-width: 300px;
+  text-align: left;
+  max-width: 300px;
+
 }
 
-th{
-    font-size: 15px;
-    font-weight: 600;
-    color: black;
+th {
+  font-size: 16px;
+  font-weight: 600;
+  color: white !important;
+  background: $primary-color !important;
+
 }
 
-.filter{
-    width: 90%;
-    margin: auto;
+.filter {
+  width: 90%;
+  margin: auto;
+}
+
+mat-cell {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+mat-header-cell {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
 }
