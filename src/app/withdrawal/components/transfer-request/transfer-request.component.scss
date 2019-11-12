@@ -1,13 +1,29 @@
-table {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    min-width: 500px;
-    margin-top: 30px;
+
+mat-cell {
+    display: flex !important;
+    justify-content: center !important;
 }
+mat-header-cell {
+    display: flex;
+    justify-content: center;
+}
+mat-paginator {
+    height: 64px !important;
+}
+  
+
+
+// table {
+//     width: 100%;
+//     overflow-x: auto;
+//     overflow-y: hidden;
+//     min-width: 500px;
+//     margin-top: 30px;
+// }
  
-th.mat-header-cell {
-    text-align: left;
-    max-width: 300px;
-    color: white;
-}
+// th.mat-header-cell {
+//     text-align: left;
+//     max-width: 300px;
+//     color: white;
+// }
+

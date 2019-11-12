@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig, MatSort } from '@angular/material';
 import { TransferRequest, SelectOption } from 'src/app/config/interfaces/dupay.interface';
 import { WithdrawalService } from '../../services/withdrawal.service';
 import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
@@ -23,7 +23,7 @@ export class TransferRequestComponent implements OnInit {
   transferRequests = new MatTableDataSource<TransferRequest>();
 
   @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
-
+	@ViewChild(MatSort, { static: true })	sort: MatSort;
   constructor(private withdrawalService:WithdrawalService, private matDialog:MatDialog, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
@@ -57,6 +57,7 @@ export class TransferRequestComponent implements OnInit {
     this.spinner.show();
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
       this.transferRequests.data = res as TransferRequest[];
+      this.transferRequests.sort = this.sort;
       this.spinner.hide();
     });
   }

@@ -1,46 +1,51 @@
 <ngx-spinner></ngx-spinner>
-<table mat-table [dataSource]="transferRequests">
+
+<div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
+
+  <table mat-table [dataSource]="transferRequests" >
     <!-- <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef class="third-background">Marchent Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <mat-header-cell *matHeaderCellDef class="third-background">Marchent Id <mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} <mat-cell>
     </ng-container> -->
 
     <ng-container matColumnDef="accountNumber">
-      <th mat-header-cell *matHeaderCellDef class="third-background"> Account Number</th>
-      <td mat-cell *matCellDef="let element"> {{element.merchantAccount.accountNumber}} </td>
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Account Number</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.merchantAccount.accountNumber}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="accountType">
-      <th mat-header-cell *matHeaderCellDef class="third-background">Account Type</th>
-      <td mat-cell *matCellDef="let element"> {{element.merchantAccount.walletType}} </td>
+      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16">Account Type</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.merchantAccount.bankName}} </mat-cell>
     </ng-container>
-  
+
     <ng-container matColumnDef="time">
-        <th mat-header-cell *matHeaderCellDef class="third-background">Time </th>
-        <td mat-cell *matCellDef="let element"> {{element.withdrawDate}} </td>
+        <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16">Time </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.withdrawDate}} </mat-cell>
       </ng-container>
 
 
     <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef class="third-background">Amount </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16">Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
       </ng-container>
 
     <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef class="third-background">Status</th>
-        <td mat-cell *matCellDef="let element">
+        <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16">Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
             <mat-select [(value)]= "element.status" (selectionChange)="onStatusChange(element)">
                 <mat-option *ngFor="let status of getStatusList(element.status)" [value]="status.value">
                   {{status.viewValue}}
                 </mat-option>
               </mat-select>
-        </td>
+            </mat-cell>
       </ng-container>
-   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </table>
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
   ></mat-paginator>
+
+</div>
