@@ -5,7 +5,6 @@ import { WithdrawalService } from '../../services/withdrawal.service';
 import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
 import { Withdraw_status, Withdraw_status_view } from 'src/app/config/enums/dupay.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { request } from 'https';
 
 @Component({
   selector: 'app-transfer-request',
@@ -29,11 +28,22 @@ export class TransferRequestComponent implements OnInit {
   ngOnInit() {
     this.initialize();
     this.getTransferRequestList();
+    this.transferRequests.sort = this.sort;
+    this.transferRequests.sortingDataAccessor = (item,property)=>{
+      switch(property) {
+        case 'accountNumber': return item.merchantAccount.accountNumber;
+        default: return item[property];
+      }
+    };
     this.transferRequests.paginator = this.paginator;
+    this.transferRequests.filterPredicate = function (data,filter:string) : boolean{
+      return data.merchantAccount.accountNumber.toLowerCase().includes(filter) || data.status.toLowerCase().includes(filter)
+      || data.amount.toString().includes(filter) ;
+    };
   }
 
   initialize(){
-    this.displayedColumns = ["accountNumber","accountType", "time", "amount", "status" ];
+    this.displayedColumns = ["accountNumber", "withdrawDate", "amount", "status" ];
     this.initialStatusList = [
       {value: Withdraw_status.PENDING,viewValue: Withdraw_status_view.PENDING },
       {value: Withdraw_status.IN_PROGRESS,viewValue: Withdraw_status_view.ACCEPT },
@@ -56,8 +66,11 @@ export class TransferRequestComponent implements OnInit {
   getTransferRequestList(){
     this.spinner.show();
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
+      debugger;
       this.transferRequests.data = res as TransferRequest[];
-      this.transferRequests.sort = this.sort;
+      
+      this.spinner.hide();
+    }, err=>{
       this.spinner.hide();
     });
   }
@@ -67,6 +80,26 @@ export class TransferRequestComponent implements OnInit {
     else if (status == Withdraw_status.REJECTED) return Object.assign([], this.initialStatusList).splice(this.initialStatusIndexMap.get(status),this.initialStatusList.length);
     else return Object.assign([], this.statusList).splice(this.statusIndexMap.get(status),this.statusList.length);
   }
+
+  applyFilter(value:string){
+    this.transferRequests.filter = value.trim().toLowerCase();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   onStatusChange(element: TransferRequest){
 
