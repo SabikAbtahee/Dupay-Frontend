@@ -18,8 +18,8 @@ export class MerchantGuard implements CanActivate {
 					observer.next(true);
 				} else if (!res) {
 					observer.next(false);
-					this.openSnackBar(snackbarMessages.auth_failure, false);
-					this.router.navigate([ urlPaths.Authentication.Signin.url ]);
+					this.openSnackBar(snackbarMessages.not_allowed, false);
+					this.router.navigate([ urlPaths.Home.HomeDefault.url ]);
 				}
 			});
 		});

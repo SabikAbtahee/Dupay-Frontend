@@ -20,6 +20,9 @@ export class TransferRequestComponent implements OnInit {
   statusIndexMap : any;
   initialStatusIndexMap : any;
   transferRequests = new MatTableDataSource<TransferRequest>();
+  merchantNameList: string[] = [];
+  selectedName: string;
+  inputFilter: string;
 
   @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true })	sort: MatSort;
@@ -38,12 +41,12 @@ export class TransferRequestComponent implements OnInit {
     this.transferRequests.paginator = this.paginator;
     this.transferRequests.filterPredicate = function (data,filter:string) : boolean{
       return data.merchantAccount.accountNumber.toLowerCase().includes(filter) || data.status.toLowerCase().includes(filter)
-      || data.amount.toString().includes(filter) ;
+      || data.amount.toString().includes(filter) || data.merchantName.toLowerCase().includes(filter) ;
     };
   }
 
   initialize(){
-    this.displayedColumns = ["accountNumber", "withdrawDate", "amount", "status" ];
+    this.displayedColumns = ["merchantName","accountNumber", "withdrawDate", "amount", "status" ];
     this.initialStatusList = [
       {value: Withdraw_status.PENDING,viewValue: Withdraw_status_view.PENDING },
       {value: Withdraw_status.IN_PROGRESS,viewValue: Withdraw_status_view.ACCEPT },
@@ -66,9 +69,9 @@ export class TransferRequestComponent implements OnInit {
   getTransferRequestList(){
     this.spinner.show();
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
-      debugger;
+      res.forEach((element)=>{ if(!this.merchantNameList.includes(element.merchantName)) this.merchantNameList.push(element.merchantName)});
+      this.merchantNameList.sort((first,second)=>first.localeCompare(second));
       this.transferRequests.data = res as TransferRequest[];
-      
       this.spinner.hide();
     }, err=>{
       this.spinner.hide();
@@ -82,12 +85,18 @@ export class TransferRequestComponent implements OnInit {
   }
 
   applyFilter(value:string){
-    this.transferRequests.filter = value.trim().toLowerCase();
+    if(value!=null) this.transferRequests.filter = value.trim().toLowerCase();
   }
 
+  onNamefilter(name: string){
+    this.applyFilter(name);
+  }
 
-
-
+  onRefresh(){
+    this.selectedName = undefined;
+    this.inputFilter = undefined;
+    this.onNamefilter("");
+  }
 
 
 

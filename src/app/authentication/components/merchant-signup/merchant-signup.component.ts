@@ -1,6 +1,6 @@
 import { dupayConst, snackbarMessages, localStorageKeys } from './../../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { passwordRegex, authentication_error_messages, urlPaths } from '../../../config/constants/dupayConstants';
 import { FieldMatcher, UtilityService } from '../../../core/utility-services/utility-service.service';
 import { Merchant_Types } from '../../../config/enums/dupay.enum';
@@ -56,6 +56,9 @@ export class MerchantSignupComponent implements OnInit {
 
 	trade_insurance_filename = null;
 	nid_filename = null;
+
+	trade_insurance_file_valid=true;
+	nid_file_valid=true;
 
 	ngOnInit() {
 		this.checkForm();
@@ -123,8 +126,10 @@ export class MerchantSignupComponent implements OnInit {
 
 		return null;
 	}
+
 	setCustomValidation() {
 		this.signupform.setValidators(this.passwordMatchValidator);
+		
 		this.signupform.updateValueAndValidity();
 		this.matcher = new FieldMatcher();
 	}
@@ -287,27 +292,45 @@ export class MerchantSignupComponent implements OnInit {
 
 	onNIDFileSelect(event) {
 		if (event && event.target && event.target.files.length > 0) {
-			if (this.util.ifFileImage(event.target.files[0])) {
+			if (this.util.ifFileImageJpegPng(event.target.files[0]) && this.util.ifFilesizeValid(event.target.files[0])) {
 				// this.imageblob = event.target.files[0];
 				this.signupform.patchValue({
 					nid_file: event.target.files[0]
 				});
 				this.nid_filename = event.target.files[0].name;
+				this.nid_file_valid=true;
 			}
+			else{
+				this.nid_file_valid=false;
+			}
+		}
+		else{
+			this.nid_file_valid=false;
 		}
 	}
 
 	onTradeInsuranceFileSelect(event) {
+		console.log(event);
 		if (event && event.target && event.target.files.length > 0) {
-			if (this.util.ifFileImage(event.target.files[0])) {
+			if (this.util.ifFileImageJpegPng(event.target.files[0])  && this.util.ifFilesizeValid(event.target.files[0])) {
 				// this.imageblob = event.target.files[0];
 				this.signupform.patchValue({
 					trade_insurance_file: event.target.files[0]
 				});
 
 				this.trade_insurance_filename = event.target.files[0].name;
+				console.log(this.trade_insurance_filename);
+				this.trade_insurance_file_valid=true;
+
+			}
+			else{
+				this.trade_insurance_file_valid=false;
 			}
 		}
+		else{
+			this.trade_insurance_file_valid=false;
+		}
+
 	}
 
 	route(path) {

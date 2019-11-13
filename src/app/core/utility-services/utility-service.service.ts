@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import * as _ from 'lodash';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { snackbarMessages } from '../../config/constants/dupayConstants';
+import { snackbarMessages, fileSize } from '../../config/constants/dupayConstants';
 @Injectable({
 	providedIn: 'root'
 })
@@ -89,6 +89,18 @@ export class UtilityService {
 	}
 	ifFileImage(file) {
 		return file && file['type'].split('/')[0] === 'image';
+	}
+	ifFileImageJpegPng(file){
+		if(file && (file['type']==='image/png' || file['type']==='image/jpeg')){
+			return true;
+		}
+		return false;
+	}
+	ifFilesizeValid(file){
+		if(file && file['size']<=fileSize.size){
+			return true;
+		}
+		return false;
 	}
 }
 export class FieldMatcher implements ErrorStateMatcher {

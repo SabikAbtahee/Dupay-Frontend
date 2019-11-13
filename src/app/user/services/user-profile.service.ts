@@ -7,6 +7,10 @@ import {api_path} from "../../config/apiRoutes/apiroutes";
 import {passwordChange} from "../../config/interfaces/dupay.interface";
 import {MutationService} from "../../core/mutation-services/mutation.service";
 import {SecurityService} from "../../core/security-services/security.service";
+import {PasswordChangeComponent} from "../components/password-change/password-change.component";
+import {TradeInsurancePhotoComponent} from "../components/trade-insurance-photo/trade-insurance-photo.component";
+import {NIDPhotoComponent} from "../components/nid-photo/nid-photo.component";
+import {MatDialog} from "@angular/material";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +20,7 @@ export class UserProfileService {
   constructor(private queryService: QueryService,
               private coreMutate: MutationService,
               private securityService: SecurityService,
+              public dialog: MatDialog,
   private util: UtilityService) { }
   user;
   getProfileInformation() {
@@ -30,6 +35,24 @@ export class UserProfileService {
 
 
   }
+
+  openNID(width?: string) {
+    const dialogRef = this.dialog.open(NIDPhotoComponent, {
+
+      minWidth: '450px',
+      width: width ? width : '35vw'
+      // height:'60vh'
+    });
+  }
+  openTradeInsurance(width?: string) {
+    const dialogRef = this.dialog.open(TradeInsurancePhotoComponent, {
+
+      minWidth: '450px',
+      width: width ? width : '35vw'
+      // height:'60vh'
+    });
+  }
+
   touchAllfields(formgroup: FormGroup) {
     this.util.touchAllFieldsOfForm(formgroup);
   }

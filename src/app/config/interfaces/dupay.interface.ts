@@ -79,7 +79,8 @@ export interface TransferRequest{
 	amount: number,
 	withdrawDate: any,
 	status: string,
-	merchantAccount: MerchantAccount
+	merchantAccount: MerchantAccount,
+	merchantName: string,
 }
 
 
@@ -111,4 +112,10 @@ export interface MerchantAccount{
 	accountNumber:string,
 	bankName:string,
 	branch:string,
+}
+
+export interface Transaction {
+	transactionId: string,
+	time: string,
+	amount: number,
 }

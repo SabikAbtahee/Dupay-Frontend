@@ -1,10 +1,35 @@
-.filter-header {
-    min-height: 64px;
-    padding: 8px 24px 0;
-    width: 100%;
-  }
+@import '../../../../styles/theme.scss';
 
-.mat-form-field {
-    font-size: 14px;
-    width: 50%;
-  }
+table {
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+th.mat-header-cell {
+  text-align: center;
+  padding: 10px 0;
+  max-width: 300px;
+}
+
+td.mat-cell {
+  text-align: center;
+  padding: 10px 0;
+  max-width: 300px;
+}
+
+th {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  background: $primary-color !important;
+}
+
+.filter {
+  width: 90%;
+  margin: auto;
+}
+
+mat-paginator {
+  height: 64px !important;
+}

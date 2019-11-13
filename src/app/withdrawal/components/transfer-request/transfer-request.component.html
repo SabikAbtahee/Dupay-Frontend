@@ -1,31 +1,44 @@
 <ngx-spinner></ngx-spinner>
 
-<div class='mx-40'>
-    <mat-form-field appearance="outline">
-      <!-- <mat-label>Type in to filter</mat-label> -->
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-      <mat-icon matPrefix class='mr-16'>search</mat-icon>
-  
-    </mat-form-field>
-  </div>
+<div  fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="24px" class='mx-40 mt-40 '>
+    <div class='w-100-p'>
+        <mat-form-field appearance="outline">
+          <input matInput [(ngModel)]="inputFilter" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          <mat-icon matPrefix class='mr-16'>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <!-- [(value)]= "element.status" -->
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mat-form-field appearance="outline">
+            <mat-label>Filter by name</mat-label>
+            <mat-select [(ngModel)]="selectedName" (selectionChange)="onNamefilter(selectedName)">
+                <mat-option *ngFor="let name of merchantNameList" [value]="name">
+                  {{name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="marginTop">
+            <button  matTooltip="Refresh" mat-icon-button (click)="onRefresh()" >
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </div>
+      </div>
+
+</div>
 
 <div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
 
   <table mat-table [dataSource]="transferRequests" matSort matSortActive="withdrawDate" matSortDirection="desc" >
-    <!-- <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef class="third-background">Marchent Id <mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.id}} <mat-cell>
-    </ng-container> -->
+
+    <ng-container matColumnDef="merchantName">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header class="primary-background white-color-foreground font-size-16"> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.merchantName}} </mat-cell>
+      </ng-container>
 
     <ng-container matColumnDef="accountNumber">
       <mat-header-cell *matHeaderCellDef  mat-sort-header class="primary-background white-color-foreground font-size-16"> Account Number</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.merchantAccount.accountNumber}} </mat-cell>
     </ng-container>
-
-    <!-- <ng-container matColumnDef="accountType">
-      <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16">Account Type</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.merchantAccount.bankName}} </mat-cell>
-    </ng-container> -->
 
     <ng-container matColumnDef="withdrawDate">
         <mat-header-cell *matHeaderCellDef  mat-sort-header class="primary-background white-color-foreground font-size-16">Time </mat-header-cell>

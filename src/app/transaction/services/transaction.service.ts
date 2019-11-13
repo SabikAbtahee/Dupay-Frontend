@@ -12,19 +12,17 @@ export class TransactionService {
 
 	public getAllTransactionsByUserId(): Observable<any> {
 		return new Observable((observer) => {
-			this.securityService.getCurrentUser().subscribe((response) => {
-				this.queryService.httpGet(response.id, response.token).subscribe((res) => {
-					let httpHeader = this.securityService.getHeader(res.token);
-					this.queryService.httpGet(api_path.payment, httpHeader).subscribe(
-						(res) => {
-							observer.next(res);
-						},
-						(err) => {
-							observer.error(err);
-						}
-					);
-				});
-			});
+			let httpHeader = this.securityService.getAuthorizedHeader();
+			this.queryService.httpGet(api_path.payment, httpHeader).subscribe(
+				(res) => {
+					observer.next(res);
+				},
+				(err) => {
+					observer.error(err);
+				},() => {
+					observer.complete();
+				}
+			);
 		});
 	}
 }
