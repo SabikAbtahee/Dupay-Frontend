@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { SecurityService } from 'src/app/core/security-services/security.service';
 import { Observable } from 'rxjs';
-import { QueryService } from 'src/app/core/query-services/query.service';
-import { api_path } from 'src/app/config/apiRoutes/apiroutes';
+import { QueryService } from '../../core/query-services/query.service';
+import { api_path } from '../../config/apiRoutes/apiroutes';
+import { httpHeader } from '../../config/constants/dupayConstants';
+import { first } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class TransactionService {
+	api_path=api_path;
 	constructor(private securityService: SecurityService, private queryService: QueryService) {}
 
 	public getAllTransactionsByUserId(): Observable<any> {
@@ -24,5 +27,18 @@ export class TransactionService {
 				}
 			);
 		});
+	}
+
+
+	queryTransaction(id):Observable<any>{
+		let key= 'transactionId'
+		return new Observable(observer=>{
+			this.queryService.httpGet(`${api_path.payment}/?${key}=${id}`,httpHeader).pipe(first()).subscribe(res=>{
+				observer.next(res);
+			},
+			err=>{
+				observer.next(err);
+			})
+		})
 	}
 }

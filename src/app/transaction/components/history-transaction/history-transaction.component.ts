@@ -11,13 +11,13 @@ import { Transaction } from 'src/app/config/interfaces/dupay.interface';
   styleUrls: ['./history-transaction.component.scss']
 })
 export class HistoryTransactionComponent implements OnInit {
-
+  panelOpenState = false;
 
   constructor(private exportService: ExportService, private transactionService: TransactionService) { }
 
   listData = new MatTableDataSource<Transaction>();
   displayedColumns: string[] = ['SI No','transactionId', 'time', 'amount'];
-
+  showChart=false;
   @ViewChild(MatSort, {static: true}  ) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   searchKey: string;
@@ -49,6 +49,10 @@ export class HistoryTransactionComponent implements OnInit {
     this.listData.filter = filterValue.trim().toLowerCase();
   }
 
+  toggleChart(){
+    this.showChart=!this.showChart;
+  }
+
 
 
 
@@ -62,7 +66,7 @@ export class HistoryTransactionComponent implements OnInit {
 
 
   export() {
-    this.exportService.exportExcel(this.listData.data, 'transaction historys');
+    this.exportService.exportExcel(this.listData.data, 'Transaction historys');
   }
 
   public redirectToDetails = (id: string) => {

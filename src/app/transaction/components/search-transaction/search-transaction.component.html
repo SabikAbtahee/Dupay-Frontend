@@ -1,1 +1,121 @@
-<p>search-transaction works!</p>
+<form [formGroup]="queryTransactionForm">
+  <div fxLayout="row" fxLayoutAlign="center center" class="pt-24 pb-24 font-size-24 ">
+    Search Transactions with ID
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px" class="margin-auto pb-16">
+    <div>
+      <mat-progress-bar *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center" mode="indeterminate"
+        color='primary' class="m-0"></mat-progress-bar>
+      <mat-card class="p-36" [class.mat-elevation-z4]="true">
+
+        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="32px">
+          <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="12px">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+              <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
+                <i class="material-icons-outlined">
+                  search
+                </i>
+              </div>
+              <div>
+                <mat-form-field appearance="outline" class='w-224'>
+                  <mat-label>Transaction ID</mat-label>
+                  <input type="text" matInput placeholder="Type in ID" formControlName="id">
+
+                  <!-- <mat-error *ngIf="signinform.get('email').errors?.required && signinform.get('email').touched
+                     ">
+                          {{error_messages.email_required}}
+                        </mat-error>
+                        <mat-error *ngIf="signinform.get('email').errors?.email && signinform.get('email').touched
+                     ">
+                          {{error_messages.email_error}}
+                        </mat-error> -->
+                </mat-form-field>
+
+              </div>
+            </div>
+
+
+
+
+
+
+
+          </div>
+
+
+          <div *ngIf='dataready' fxLayout='row' fxLayoutAlign='space-between center' fxLayoutGap='16px'
+            >
+            <div fxLayout='column' fxLayoutGap='4px'>
+              <div>
+                Invoice Id:
+              </div>
+              <div>
+                Transaction Id:
+              </div>
+              <div>
+                Pay Date:
+              </div>
+
+              <div>
+                Pay Amount:
+
+              </div>
+              <div>
+                Wallet Type:
+              </div>
+
+            </div>
+            <div fxLayout='column' fxLayoutGap='4px'>
+              <div>
+                {{content.invoiceId}}
+              </div>
+              <div>
+                {{content.transactionId}}
+              </div>
+              <div>
+                {{content.payDate}}
+              </div>
+
+              <div class='accepted-color'>
+                {{content.payAmount}}
+
+              </div>
+              <div>
+                {{content.walletType}}
+              </div>
+            </div>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+            <button type="submit" (click)='onSubmit()' mat-raised-button color="primary"
+              class="w-260 h-40">Search</button>
+
+            <!-- <button (click)='route([urlPaths.Authentication.Signup.url][0])' mat-stroked-button color="primary"
+                    class="w-260 h-40">Create Merchant
+                    Account
+                  </button> -->
+            <!-- <button (click)='routeToHome()' mat-stroked-button color="primary" class="w-240 h-40">Back To Home
+                </button> -->
+
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+
+  </div>
+  <!-- <div fxLayout="row" fxLayoutAlign="space-between center" class="margin-auto w-332 pb-124">
+          <div>
+            <a (click)='route([urlPaths.Authentication.AccountRecovery.url][0])'
+              class="cursor-pointer primary-text-color">Forgot Password? </a>
+          </div>
+          <div>
+            <a (click)='route([urlPaths.Home.HomeDefault.url][0])' class="cursor-pointer primary-text-color">Back to Home
+            </a>
+          </div>
+        </div> -->
+
+
+
+
+</form>

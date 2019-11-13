@@ -87,4 +87,13 @@ export class UserProfileComponent implements OnInit {
   openTradeInsuranceModal() {
     this.userProfileService.openTradeInsurance();
   }
+
+  // copyId(){
+  //   const selBox = document.createElement('textarea');
+  //   selBox.value = this.info.id;
+  //   document.body.appendChild(selBox);
+  //   selBox.focus();
+  //   selBox.select();
+  //   document.execCommand('copy');
+  // }
 }

@@ -1,3 +1,4 @@
+
 <div fxLayout='row' fxLayoutAlign='space-between center' fxLayoutGap="24px" class='mx-40 mt-40 '>
     <div class='w-100-p'> 
         <mat-form-field  appearance="outline">
@@ -5,39 +6,46 @@
         <mat-icon matPrefix class='mr-16'>search</mat-icon>
         </mat-form-field>
     </div>
+    
     <div class='pb-16'>
         <button mat-raised-button color="primary" type="button" class='h-60 w-224' (click)="export()" >
             Export
         </button>
     </div>
+    <div class='pb-16'>
+            <button mat-stroked-button color="primary" type="button" class='h-60 w-224' (click)="toggleChart()" >
+                Show Chart
+            </button>
+        </div>
 </div>
+<app-charts *ngIf='showChart'></app-charts>
 
-<div fxLayout="column" class="mat-elevation-z8 mx-40 mb-40 ">
-    <table mat-table #table [dataSource]="listData" matSort matSortActive="time" matSortDirection="desc" [class.isMobile]="isMobile">
+<div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
+    <mat-table #table [dataSource]="listData" matSort matSortActive="time" matSortDirection="desc" [class.isMobile]="isMobile">
 
         <ng-container matColumnDef="SI No">
-            <th mat-header-cell *matHeaderCellDef > Serial No </th>
-            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+            <mat-header-cell *matHeaderCellDef class="primary-background white-color-foreground font-size-16"> Serial No </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="transactionId">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.transactionId}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Transaction ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.transactionId}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="time">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Time </th>
-            <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Transaction Time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.time}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
-          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Amount </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
         </ng-container>
        
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
 
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
 </div>

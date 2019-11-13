@@ -44,4 +44,6 @@ export const api_path = {
  
   //Payment
   payment: `${environment.baseurl}/api/payment`,
+
+  
 }
