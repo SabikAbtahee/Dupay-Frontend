@@ -77,7 +77,7 @@ export interface TransferRequest{
 	id: string,
 	transactionId?: string,
 	amount: number,
-	withdrawDate: any,
+	withdrawDate: Date,
 	status: string,
 	merchantAccount: MerchantAccount,
 	merchantName: string,

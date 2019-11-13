@@ -1,3 +1,4 @@
+import { first } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig, MatSort } from '@angular/material';
 import { TransferRequest, SelectOption } from 'src/app/config/interfaces/dupay.interface';
@@ -67,14 +68,14 @@ export class TransferRequestComponent implements OnInit {
   }
 
   getTransferRequestList(){
-    this.spinner.show();
+    //this.spinner.show();
     this.withdrawalService.getTransferRequestList().subscribe( res =>{
       res.forEach((element)=>{ if(!this.merchantNameList.includes(element.merchantName)) this.merchantNameList.push(element.merchantName)});
       this.merchantNameList.sort((first,second)=>first.localeCompare(second));
       this.transferRequests.data = res as TransferRequest[];
-      this.spinner.hide();
-    }, err=>{
-      this.spinner.hide();
+      //this.spinner.hide();
+    }, (err)=>{
+      //this.spinner.hide();
     });
   }
 
@@ -95,7 +96,7 @@ export class TransferRequestComponent implements OnInit {
   onRefresh(){
     this.selectedName = undefined;
     this.inputFilter = undefined;
-    this.onNamefilter("");
+    this.transferRequests.filter = undefined;
   }
 
 
