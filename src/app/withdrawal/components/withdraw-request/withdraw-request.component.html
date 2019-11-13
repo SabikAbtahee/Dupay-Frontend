@@ -63,6 +63,10 @@
                         ">
                             Have to be less that existing {{CurrentAmount-RequestedAmount}}
                         </mat-error>
+                        <mat-error *ngIf="withdrawForm.get('amount').errors?.pattern && withdrawForm.get('amount').touched
+                        ">
+                            Have to be round number
+                        </mat-error>
                     </mat-form-field>
                 </div>
 

@@ -127,14 +127,14 @@ export const dupayConst = {
       mini_name: 'Transfer'
 
     },
-    {
-      name: 'Merchant Notification',
-      url: 'user/merchant-notification',
-      icon: 'notifications_active',
-      role: [Token_Role.ROLE_MERCHANT],
-      mini_name: 'Notification'
+    // {
+    //   name: 'Merchant Notification',
+    //   url: 'user/merchant-notification',
+    //   icon: 'notifications_active',
+    //   role: [Token_Role.ROLE_MERCHANT],
+    //   mini_name: 'Notification'
 
-    },
+    // },
     {
       name: 'Notify Merchant',
       url: 'user/notify-merchant',
@@ -190,7 +190,7 @@ export const dupayConst = {
 };
 // export const passwordRegex = '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
 export const passwordRegex = '.{8,}$';
-
+export const integerRegex='/^\d+$/';
 
 export const authentication_error_messages = {
   merchant_type: 'Please choose merchant type',
@@ -230,7 +230,8 @@ export const snackbarMessages = {
   change_password_fail: 'Password change has been failed',
   selected_merchant_notification_sent_success: 'Notification has been sent',
   selected_merchant_notification_sent_fail: 'Notification sent has been failed',
-  withdraw_success:'Request sent successfully'
+  withdraw_success:'Request sent successfully',
+  not_allowed:'Not allowed'
 };
 
 export const withdrawErrorMessages={
@@ -311,3 +312,7 @@ export const localStorageKeys = {
 
 }
 
+
+export const fileSize={
+  size:2000000
+}

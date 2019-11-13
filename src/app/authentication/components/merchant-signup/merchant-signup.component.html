@@ -136,10 +136,8 @@
         <form [formGroup]="signupform">
             <div fxLayout="row" fxLayout.lt-md='column' fxLayoutAlign="center start" fxLayoutAlign.lt-md="start center"
                 fxLayoutGap="32px" fxLayoutGap.lt-md='12px'>
+
                 <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="12px">
-
-
-
                     <!-- Name -->
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
                         <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
@@ -191,47 +189,57 @@
                         </div>
                     </div>
                     <!-- NID number -->
-                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-                        <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12">
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="12px">
+                        <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12 pt-16">
                             <i class="material-icons-outlined">
                                 credit_card
                             </i>
                         </div>
                         <div class='mb-12 mt-4'>
+                            <div>
+                                <button mat-stroked-button (click)="imgFileInput.click()"
+                                    [ngClass]="!nid_file_valid ? 'w-224 h-60 button_error rejected-color' : 'w-224 h-60' ">
 
-                            <button mat-stroked-button (click)="imgFileInput.click()" class='w-224 h-56'>
-
-                                <span *ngIf='!nid_filename'>Choose NID File</span>
-                                <span *ngIf='nid_filename'>{{nid_filename}}</span>
-                            </button>
-                            <input hidden type="file" #imgFileInput (change)="onNIDFileSelect($event)">
-
+                                    <span *ngIf='!nid_filename'>Choose NID File</span>
+                                    <span *ngIf='nid_filename'>{{nid_filename}}</span>
+                                </button>
+                                <input hidden type="file" #imgFileInput (change)="onNIDFileSelect($event)">
+                                <div *ngIf="!nid_file_valid" class='font-size-12 px-8 rejected-color'>
+                                    Choose png or jpeg file within 2MB</div>
+                            </div>
                         </div>
                     </div>
-
-
                     <!-- Trade Insurance -->
-                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
-                        <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12">
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="12px">
+                        <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12 pt-16">
                             <i class="material-icons-outlined">
                                 perm_identity
                             </i>
                         </div>
                         <div class='mb-12 mt-4'>
 
+                            <div>
+                                <button mat-stroked-button (click)="tradeFileInput.click()"
+                                    [ngClass]="!trade_insurance_file_valid ? 'w-224 h-60 button_error rejected-color' : 'w-224 h-60' ">
 
-                            <button mat-stroked-button (click)="tradeFileInput.click()" class='w-224 h-60'>
-
-                                <span *ngIf='!trade_insurance_filename'>Choose Trade Insurance File</span>
-                                <span *ngIf='trade_insurance_filename'>{{trade_insurance_filename}}</span>
-                            </button>
-                            <input hidden type="file" #tradeFileInput (change)="onTradeInsuranceFileSelect($event)">
+                                    <span *ngIf='!trade_insurance_filename'>Choose Trade Insurance File</span>
+                                    <span *ngIf='trade_insurance_filename'>{{trade_insurance_filename}}</span>
+                                </button>
+                                <input hidden type="file"  #tradeFileInput
+                                    (change)="onTradeInsuranceFileSelect($event)">
+                                <div *ngIf="!trade_insurance_file_valid" class='font-size-12 px-8 rejected-color'>
+                                    Choose png or jpeg file within 2MB</div>
+                            </div>
                         </div>
                     </div>
-
-
-
                 </div>
+
+
+
+
+
+
+
 
                 <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="12px">
                     <!-- USERNAME -->
@@ -258,10 +266,6 @@
                             </mat-form-field>
                         </div>
                     </div>
-
-
-
-
                     <!-- Confirm Password -->
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
                         <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-input">
@@ -402,8 +406,8 @@
                                 <mat-label>Branch Name</mat-label>
                                 <input type="text" matInput placeholder="Type in Branch Name " formControlName="branch">
                                 <mat-error
-                                *ngIf="merchantAccountForm.get('branch').touched && merchantAccountForm.get('branch').hasError('required')">
-                                Enter Branch Name</mat-error>
+                                    *ngIf="merchantAccountForm.get('branch').touched && merchantAccountForm.get('branch').hasError('required')">
+                                    Enter Branch Name</mat-error>
                             </mat-form-field>
                         </div>
                     </div>

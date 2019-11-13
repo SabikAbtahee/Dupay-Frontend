@@ -3,7 +3,7 @@ import { WithdrawalService } from '../../services/withdrawal.service';
 import { SecurityService } from '../../../core/security-services/security.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../../../shared/services/shared.service';
-import { snackbarMessages, urlPaths, withdrawErrorMessages } from '../../../config/constants/dupayConstants';
+import { snackbarMessages, urlPaths, withdrawErrorMessages, integerRegex } from '../../../config/constants/dupayConstants';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { validateBasis } from '@angular/flex-layout';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -50,6 +50,7 @@ export class WithdrawRequestComponent implements OnInit {
 				'',
 				[
 					Validators.required,
+					Validators.pattern(/^\d+$/),
 					Validators.min(0),
 					(control: AbstractControl) => Validators.max(this.CurrentAmount - this.RequestedAmount)(control)
 				]
