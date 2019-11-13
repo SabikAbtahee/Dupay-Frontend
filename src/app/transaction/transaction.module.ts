@@ -7,8 +7,11 @@ import { AuthGuard } from '../core/security-services/auth.guard';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatListModule, MatTableModule, MatSortModule, MatPaginatorModule } from '@angular/material';
 import { SharedModule } from '../shared/shared.module';
+import { ChartsComponent } from './components/charts/charts.component';
+import { ChartsModule } from 'ng2-charts';
 
 const routes:Routes=[
+  
   {
     path:'',
     redirectTo:'query'
@@ -22,12 +25,18 @@ const routes:Routes=[
     component:HistoryTransactionComponent,
     canActivate: [AuthGuard]
 
+  },
+  {
+    path:'chart',
+    component:ChartsComponent,
+    canActivate: [AuthGuard]
+
   }
  
 ]
 
 @NgModule({
-  declarations: [SearchTransactionComponent, HistoryTransactionComponent],
+  declarations: [SearchTransactionComponent, HistoryTransactionComponent, ChartsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -41,7 +50,8 @@ const routes:Routes=[
     MatSortModule,
     MatPaginatorModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    ChartsModule
   ]
 })
 export class TransactionModule { }

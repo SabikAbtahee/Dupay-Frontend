@@ -61,7 +61,7 @@
                         </mat-error>
                         <mat-error *ngIf="withdrawForm.get('amount').errors?.max && withdrawForm.get('amount').touched
                         ">
-                            Have to be less that existing {{CurrentAmount-RequestedAmount}}
+                            Have to be less than existing balance
                         </mat-error>
                         <mat-error *ngIf="withdrawForm.get('amount').errors?.pattern && withdrawForm.get('amount').touched
                         ">
