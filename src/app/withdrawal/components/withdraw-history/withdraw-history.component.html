@@ -1,5 +1,5 @@
 <div class="example-button-row m-40" fxLayout="column" fxLayoutAlign="end end" fxLayoutAlign.lt-md='center center'>
-  <button (click)='openWithdrawRequestWindow()' mat-raised-button color="warn" class="w-250 h-58 fontSize-B">Withdraw
+  <button (click)='openWithdrawRequestWindow()' mat-raised-button  class="w-250 h-58 fontSize-B withdraw-color white-color-foreground" >Withdraw
     Money</button>
 </div>
 
@@ -8,14 +8,15 @@
     <!-- <mat-label>Type in to filter</mat-label> -->
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     <mat-icon matPrefix class='mr-16'>search</mat-icon>
-
+    <!-- <mat-icon matSuffix class='mr-16 cursor-pointer' >tune</mat-icon> -->
+    
   </mat-form-field>
 </div>
 <div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
   <mat-table #table [dataSource]="withdraws" matSort matSortActive="withdrawDate" matSortDirection="desc" [class.isMobile]="isMobile">
 
     <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Transaction ID
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Withdrawal ID
       </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <span class="mobile-label">ID:</span>

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotifyMerchantService } from "../../services/notify-merchant.service";
-import { MatPaginator, MatTableDataSource } from "@angular/material";
+import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import { snackbarMessages } from "../../../config/constants/dupayConstants";
 import { SharedService } from "../../../shared/services/shared.service";
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 
 export interface notifyMerchantTable {
@@ -32,8 +33,10 @@ export interface notifyMerchantTable {
   styleUrls: ['./notify-merchant.component.scss']
 })
 export class NotifyMerchantComponent implements OnInit {
+  @ViewChild (MatSort, {static: true}) sort: MatSort;
   displayedColumns: string[] = ['name', 'userName', 'select'];
   data: notifyMerchantTable[] = [];
+
   dataSource = new MatTableDataSource<notifyMerchantTable>(this.data);
   select_All: boolean = false;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -41,6 +44,7 @@ export class NotifyMerchantComponent implements OnInit {
   constructor(private notifyMerchantService: NotifyMerchantService,
     private sharedService: SharedService,
     private route: ActivatedRoute,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -54,28 +58,28 @@ export class NotifyMerchantComponent implements OnInit {
           checked: false
         })
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
-      this.checkSelectedMerchant();
+
+      this.userService.merchantIdToNotify.subscribe(id => this.checkSelectedMerchant(id));
 
     }
     );
 
   }
 
-  checkSelectedMerchant() {
-    this.route.paramMap.subscribe(params => {
-      let merchantId = params.get('merchantId');
-      this.data.forEach(item => {
-        // console.log("item id:"+ item.id);
-        if (item.id == merchantId) {
-          item.checked = true;
-          // console.log("found:");
-          return;
-        }
-      })
+  checkSelectedMerchant(merchantId: string) {
+    this.data.forEach(item => {
+      if (item.id == merchantId) {
+        item.checked = true;
+        return;
+      }
     });
-  }
 
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   notify() {
     let merchantIdList: string[] = [];
     this.data.forEach(item => {

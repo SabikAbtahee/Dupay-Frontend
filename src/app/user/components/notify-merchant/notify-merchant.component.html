@@ -1,38 +1,116 @@
 
-  <table mat-table [dataSource]="dataSource" class=" mb-8 w-100-p">
+<div fxLayout=row fxLayoutAlign="end column" class="mr-12">
+  <button (click)="notify()"  mat-button>Notify Selected</button>
+</div>
 
-    <!-- Name Column -->
+<div class='mx-40'>
+  <mat-form-field appearance="outline">
+    <!-- <mat-label>Type in to filter</mat-label> -->
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <mat-icon matPrefix class='mr-16'>search</mat-icon>
+
+  </mat-form-field>
+</div>
+
+<div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="desc" [class.isMobile]="isMobile">
+
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name</th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">ID:</span>
+        {{ element.name }}
+      </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="userName">
-      <th mat-header-cell *matHeaderCellDef> Username</th>
-      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-    </ng-container>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Username
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Date:</span>
 
-    <!--  &lt;!&ndash; Symbol Column &ndash;&gt;-->
+        {{ element.userName }} </mat-cell>
+    </ng-container>
 
 
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (click)="updateCheckBox()"[(ngModel)]= "select_All" color="primary">Select All</mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-checkbox [(ngModel)]="element.checked"  color="primary">Select</mat-checkbox>
-      </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16">
+        <mat-checkbox (click)="updateCheckBox()"[(ngModel)]= "select_All" color="warn">Select All</mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Amount:</span>
+        <mat-checkbox [(ngModel)]="element.checked"  color="warn">Select</mat-checkbox>
+      </mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- <ng-container matColumnDef="walletType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Wallet Type
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span class="mobile-label">Wallet Type:</span>
 
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        {{ element.walletType }} </mat-cell>
+    </ng-container> -->
 
-  <div fxLayout=row fxLayoutAlign="end column">
-    <button (click)="notify()"  mat-button>Notify Selected</button>
-  </div>
+
+<!--    <ng-container matColumnDef="status">-->
+<!--      <mat-header-cell *matHeaderCellDef mat-sort-header class="primary-background white-color-foreground font-size-16"> Status-->
+<!--      </mat-header-cell>-->
+<!--      <mat-cell *matCellDef="let element">-->
+<!--        <span class="mobile-label">Status:</span>-->
+<!--        <mat-chip-list>-->
+<!--          <mat-chip [disableRipple]=true-->
+<!--                    [ngClass]='{PENDING:element.status=="PENDING",IN_PROGRESS:element.status=="IN_PROGRESS",REJECTED:element.status=="REJECTED",DONE:element.status=="DONE"}'>-->
+<!--            {{ element.status | titlecase }}</mat-chip>-->
+<!--        </mat-chip-list>-->
+<!--      </mat-cell>-->
+<!--    </ng-container>-->
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+<!--  <table mat-table [dataSource]="dataSource" class=" mb-8 w-100-p">-->
+
+<!--    &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="name">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Name</th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="userName">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Username</th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>-->
+<!--    </ng-container>-->
+
+<!--    &lt;!&ndash;  &lt;!&ndash; Symbol Column &ndash;&gt;&ndash;&gt;-->
+
+
+<!--    <ng-container matColumnDef="select">-->
+<!--      <th mat-header-cell *matHeaderCellDef>-->
+<!--        <mat-checkbox (click)="updateCheckBox()"[(ngModel)]= "select_All" color="primary">Select All</mat-checkbox>-->
+<!--      </th>-->
+<!--      <td mat-cell *matCellDef="let element">-->
+<!--        <mat-checkbox [(ngModel)]="element.checked"  color="primary">Select</mat-checkbox>-->
+<!--      </td>-->
+<!--    </ng-container>-->
+
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+
+<!--  </table>-->
+<!--  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>-->
+
+
 
 

@@ -45,6 +45,10 @@ export class AuthenticationService {
 		}
 		return this.coreMutate.httpPost(`${api_path.registerMerchantAccount}`, merchant, httpHeader);
 	}
+	registerMerchantBankAccount(merchantAccount):Observable<any>{
+		
+		return this.coreMutate.httpPost(`${api_path.registerMerchantBankAccount}`, merchantAccount, httpHeader);
+	}
 
 
 	sendOtpToEmailforAccountRecovery(email: email): Observable<any> {
@@ -66,6 +70,7 @@ export class AuthenticationService {
 
 		return this.coreMutate.httpPost(`${api_path.loginWithUsernamePassword}`, login, httpHeaderLogin);
 	}
+
 
 	setSession(user: User) {
 		this.coreMutate.setJSONDataInLocalStorage(localStorageKeys.User, user);

@@ -10,6 +10,7 @@ import { WithdrawHistoryComponent } from './components/withdraw-history/withdraw
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { WithdrawRequestModalService } from './services/withdraw-request-modal.service';
 import { StatusCompleteModalComponent } from './components/transfer-request/status-complete-modal/status-complete-modal.component';
+import { MatTooltipModule } from '@angular/material';
 
 
 const routes:Routes=[
@@ -33,6 +34,7 @@ const routes:Routes=[
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
+    MatTooltipModule
   ],
   exports:[WithdrawRequestComponent],
   providers:[WithdrawRequestModalService],

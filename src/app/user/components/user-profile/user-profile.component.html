@@ -1,131 +1,177 @@
 <form [formGroup]="profileform">
 <div fxLayout="column" fxLayoutAlign="center center" class='px-64'>
-  <mat-card    class='w-60-p p-48 m-56 '>
-    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" class="mb-48">
+  <mat-card    class='w-60-p  m-56 ' style="padding: 0px !important;">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="center center">
+                        <span>
+                            <mat-card-title style="font-size: 28px">Profile</mat-card-title>
+                        </span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" >
 
 <!--      <div *ngIf="user && user.email" class="font-size-20">{{user.email}}</div>-->
     </div>
-    <div class="mb-48">
-      <div fxLayout="row" fxLayoutAlign="center center" >
-        <div fxFlex='50' class="mat-input-for-text font-size-16">
-          <div fxLayout="row" fxLayoutAlign="center center">
-            Name
-          </div>
+    <div fxlayout="row" class="pt-40">
+      <div fxFlex="16">
 
-        </div>
-        <div fxFlex='50' >
-<!--          <mat-form-field appearance="outline">-->
-<!--            <mat-label>Name</mat-label>-->
-            {{profileform.value.name}}
-<!--            <input type="text" [readonly]="true" matInput  formControlName="name">-->
-<!--            <mat-error *ngIf="profileform.get('name').touched && profileform.get('name').invalid">-->
-<!--              {{errormessages.name}}</mat-error>-->
-
-<!--          </mat-form-field>-->
+      </div>
+      <div fxFlex="25" fxLayout="column" fxLayoutGap="16px"
+           style="color: #222858; font-weight: bold"
+           class="p-16 font-size-18">
+        <p>Name</p>
+        <p>Username</p>
+        <p>Email</p>
+        <div *ngIf="isMarchent" fxLayout="column" fxLayoutGap="16px">
+          <p>App key</p>
+          <p>Balance</p>
+          <p>NID</p>
+          <p style="position: relative; top:12px"
+          >Trade insurance</p>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex='50' class="mat-input-for-text font-size-16">
-          <div fxLayout="row" fxLayoutAlign="center center"
-          style="position: relative; bottom: 4px; padding-left: 30px !important; " >
-            Username
+      <div fxFlex="50" fxLayout="column" fxLayoutGap="16px"
+           class="p-16 font-size-18">
+        <p>{{profileform.value.name}}</p>
+        <p>{{profileform.value.username}}</p>
+        <p>{{profileform.value.email}}</p>
+        <div *ngIf="isMarchent" fxLayout="column" fxLayoutGap="16px">
+          <p style="color: red">{{info.id}}</p>
+          <p style="color: green">{{balance}}</p>
+
+          <div>
+            <button color="primary" (click)='openNIDModal()'
+                    mat-raised-button>View NID</button>
           </div>
-
-        </div>
-        <div fxFlex='50'>
-          <div class="mat-form-field-wrapper " style="position: relative; top: 2px;">
-<!--            <mat-form-field >-->
-              <!--            <mat-label>Name</mat-label>-->
-            {{profileform.value.username}}
-<!--              <input type="text" [readonly]="true" matInput  formControlName="username">-->
-              <!--            <mat-error *ngIf="profileform.get('name').touched && profileform.get('name').invalid">-->
-              <!--              {{errormessages.name}}</mat-error>-->
-
-<!--            </mat-form-field>-->
-<!--            <international-phone-number formControlName="phoneNumber" placeholder="Enter phone number">-->
-<!--            </international-phone-number>-->
-<!--            <mat-error-->
-<!--              *ngIf="profileform.get('phoneNumber').touched && profileform.get('phoneNumber').invalid">-->
-<!--              {{errormessages.phonenumber_invalid}}</mat-error>-->
-
+          <div>
+            <button color="primary" (click)='openTradeInsuranceModal()'
+                    mat-raised-button>View Trade insurance</button>
           </div>
-        </div>
-      </div>
-      <!-- <div fxLayout="row" fxLayoutAlign="center center">
-          <div fxFlex='15' class="mat-input-for-text font-size-16">User Type</div>
-          <div fxFlex='50'>
-              <mat-form-field appearance="outline">
-                  <mat-label>User Type</mat-label>
-                  <mat-select formControlName='role' multiple disableOptionCentering>
-                      <mat-option *ngFor='let role of roles | keyvalue' [value]='role.key'>{{role.value}}
-                      </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="profileform.get('role').touched && profileform.get('role').invalid">
-                      {{errormessages.roles_required}}</mat-error>
-              </mat-form-field>
-          </div>
-      </div> -->
-
-
-
-      <div fxLayout="row" fxLayoutAlign="center center" style="position: relative;
-    bottom: 11px;">
-        <div fxFlex='50' class="mat-input-for-text font-size-16">
-          <div fxLayout="row" fxLayoutAlign="center center">
-            Email
-          </div>
-
-        </div>        <div fxFlex='50'>
-<!--          <mat-form-field >-->
-          {{profileform.value.email}}
-
-          <!--            <input type="text" [readonly]="true" matInput formControlName="email"-->
-
-<!--          </mat-form-field>-->
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isMarchent"
-       style="position: relative; bottom: 16px">
-        <div fxFlex='50' class="mat-input-for-text font-size-16">
-          <div fxLayout="row" fxLayoutAlign="center center" style=" padding-left: 70px !important;">
-            Trade Insurance
-          </div>
-
-        </div>        <div fxFlex='50'>
-<!--          <mat-form-field appearance="outline">-->
-          {{profileform.value.tradeInsurance}}
-
-          <!--            <input type="text" [readonly]="true" matInput formControlName="tradeInsurance"-->
-
-<!--          </mat-form-field>-->
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isMarchent" style="position: relative;
-    bottom: 21px;">
-        <div fxFlex='50' class="mat-input-for-text font-size-16">
-          <div fxLayout="row" fxLayoutAlign="center center"
-          class="pl-16"
-          >
-            Balance
-          </div>
-
-        </div>        <div fxFlex='50'>
-<!--          <mat-form-field appearance="outline">-->
-          {{profileform.value.balance}}
-
-          <!--            <input type="text" [readonly]="true" matInput formControlName="balance"-->
-
-<!--          </mat-form-field>-->
         </div>
       </div>
     </div>
+<!--    <div class="mb-48">-->
+<!--      <div fxLayout="row" fxLayoutAlign="center center" >-->
+<!--        <div fxFlex='50' class="mat-input-for-text font-size-16">-->
+<!--          <div fxLayout="row" fxLayoutAlign="center center">-->
+<!--            Name-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--        <div fxFlex='50' >-->
+<!--&lt;!&ndash;          <mat-form-field appearance="outline">&ndash;&gt;-->
+<!--&lt;!&ndash;            <mat-label>Name</mat-label>&ndash;&gt;-->
+<!--            {{profileform.value.name}}-->
+<!--&lt;!&ndash;            <input type="text" [readonly]="true" matInput  formControlName="name">&ndash;&gt;-->
+<!--&lt;!&ndash;            <mat-error *ngIf="profileform.get('name').touched && profileform.get('name').invalid">&ndash;&gt;-->
+<!--&lt;!&ndash;              {{errormessages.name}}</mat-error>&ndash;&gt;-->
+
+<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div fxLayout="row" fxLayoutAlign="center center">-->
+<!--        <div fxFlex='50' class="mat-input-for-text font-size-16">-->
+<!--          <div fxLayout="row" fxLayoutAlign="center center"-->
+<!--          style="position: relative; bottom: 4px; padding-left: 30px !important; " >-->
+<!--            Username-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--        <div fxFlex='50'>-->
+<!--          <div class="mat-form-field-wrapper " style="position: relative; top: 2px;">-->
+<!--&lt;!&ndash;            <mat-form-field >&ndash;&gt;-->
+<!--              &lt;!&ndash;            <mat-label>Name</mat-label>&ndash;&gt;-->
+<!--            {{profileform.value.username}}-->
+<!--&lt;!&ndash;              <input type="text" [readonly]="true" matInput  formControlName="username">&ndash;&gt;-->
+<!--              &lt;!&ndash;            <mat-error *ngIf="profileform.get('name').touched && profileform.get('name').invalid">&ndash;&gt;-->
+<!--              &lt;!&ndash;              {{errormessages.name}}</mat-error>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;            <international-phone-number formControlName="phoneNumber" placeholder="Enter phone number">&ndash;&gt;-->
+<!--&lt;!&ndash;            </international-phone-number>&ndash;&gt;-->
+<!--&lt;!&ndash;            <mat-error&ndash;&gt;-->
+<!--&lt;!&ndash;              *ngIf="profileform.get('phoneNumber').touched && profileform.get('phoneNumber').invalid">&ndash;&gt;-->
+<!--&lt;!&ndash;              {{errormessages.phonenumber_invalid}}</mat-error>&ndash;&gt;-->
+
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; <div fxLayout="row" fxLayoutAlign="center center">-->
+<!--          <div fxFlex='15' class="mat-input-for-text font-size-16">User Type</div>-->
+<!--          <div fxFlex='50'>-->
+<!--              <mat-form-field appearance="outline">-->
+<!--                  <mat-label>User Type</mat-label>-->
+<!--                  <mat-select formControlName='role' multiple disableOptionCentering>-->
+<!--                      <mat-option *ngFor='let role of roles | keyvalue' [value]='role.key'>{{role.value}}-->
+<!--                      </mat-option>-->
+<!--                  </mat-select>-->
+<!--                  <mat-error *ngIf="profileform.get('role').touched && profileform.get('role').invalid">-->
+<!--                      {{errormessages.roles_required}}</mat-error>-->
+<!--              </mat-form-field>-->
+<!--          </div>-->
+<!--      </div> &ndash;&gt;-->
+
+
+
+<!--      <div fxLayout="row" fxLayoutAlign="center center" style="position: relative;-->
+<!--    bottom: 11px;">-->
+<!--        <div fxFlex='50' class="mat-input-for-text font-size-16">-->
+<!--          <div fxLayout="row" fxLayoutAlign="center center">-->
+<!--            Email-->
+<!--          </div>-->
+
+<!--        </div>        <div fxFlex='50'>-->
+<!--&lt;!&ndash;          <mat-form-field >&ndash;&gt;-->
+<!--          {{profileform.value.email}}-->
+
+<!--          &lt;!&ndash;            <input type="text" [readonly]="true" matInput formControlName="email"&ndash;&gt;-->
+
+<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isMarchent"-->
+<!--       style="position: relative; bottom: 16px">-->
+<!--        <div fxFlex='50' class="mat-input-for-text font-size-16">-->
+<!--          <div fxLayout="row" fxLayoutAlign="center center" style=" padding-left: 70px !important;">-->
+<!--            Trade Insurance-->
+<!--          </div>-->
+
+<!--        </div>        <div fxFlex='50'>-->
+<!--&lt;!&ndash;          <mat-form-field appearance="outline">&ndash;&gt;-->
+<!--          {{profileform.value.tradeInsurance}}-->
+
+<!--          &lt;!&ndash;            <input type="text" [readonly]="true" matInput formControlName="tradeInsurance"&ndash;&gt;-->
+
+<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isMarchent" style="position: relative;-->
+<!--    bottom: 21px;">-->
+<!--        <div fxFlex='50' class="mat-input-for-text font-size-16">-->
+<!--          <div fxLayout="row" fxLayoutAlign="center center"-->
+<!--          class="pl-16"-->
+<!--          >-->
+<!--            Balance-->
+<!--          </div>-->
+
+<!--        </div>        <div fxFlex='50'>-->
+<!--&lt;!&ndash;          <mat-form-field appearance="outline">&ndash;&gt;-->
+<!--          {{profileform.value.balance}}-->
+
+<!--          &lt;!&ndash;            <input type="text" [readonly]="true" matInput formControlName="balance"&ndash;&gt;-->
+
+<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
     <div fxLayout="row" fxLayout.lt-md='column-reverse'
-         fxLayoutAlign="end center" fxLayoutGap="16px">
-      <div fxFlex="50">
+         >
+
+      <div fxFlex="43">
 
 
       </div>
-      <div fxFlex="50">
+      <div fxFlex="50" class="mb-24 mt-8">
         <button (click)='openChangePasswordModal()' mat-raised-button color="primary"
                 class="w-160 h-40">Change Password</button>
       </div>

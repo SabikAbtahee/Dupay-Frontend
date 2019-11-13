@@ -49,7 +49,7 @@
                 <div fxFlex='60'>
                     <mat-form-field appearance="outline" class='w-224'>
                         <mat-label>Amount</mat-label>
-                        <input type="number" matInput placeholder="Enter amount " formControlName="amount">
+                        <input type="number"  matInput placeholder="Enter amount " formControlName="amount">
 
                         <mat-error *ngIf="withdrawForm.get('amount').errors?.required && withdrawForm.get('amount').touched
                      ">
@@ -62,6 +62,10 @@
                         <mat-error *ngIf="withdrawForm.get('amount').errors?.max && withdrawForm.get('amount').touched
                         ">
                             Have to be less that existing {{CurrentAmount-RequestedAmount}}
+                        </mat-error>
+                        <mat-error *ngIf="withdrawForm.get('amount').errors?.pattern && withdrawForm.get('amount').touched
+                        ">
+                            Have to be round number
                         </mat-error>
                     </mat-form-field>
                 </div>

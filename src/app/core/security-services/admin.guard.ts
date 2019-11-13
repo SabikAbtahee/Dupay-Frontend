@@ -23,8 +23,7 @@ export class AdminGuard implements CanActivate {
 				} else if (!res) {
 					observer.next(false);
 					this.openSnackBar(snackbarMessages.access_denied, false);
-
-					this.router.navigate([ urlPaths.Authentication.Signin.url ]);
+					this.router.navigate([ urlPaths.Home.HomeDefault.url ]);
 				}
 			});
 		});

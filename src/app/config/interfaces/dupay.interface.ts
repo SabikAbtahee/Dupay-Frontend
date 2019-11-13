@@ -63,12 +63,24 @@ export interface DialogData {
 }
 
 // change the interface based on the response data
+
+export interface MerchantAccount{
+	accountName: string,
+	accountNumber: string,
+	bankName: string,
+	branch: string,
+	id: string
+}
+
+
 export interface TransferRequest{
 	id: string,
 	transactionId?: string,
 	amount: number,
 	withdrawDate: any,
-	status: any
+	status: string,
+	merchantAccount: MerchantAccount,
+	merchantName: string,
 }
 
 
