@@ -16,6 +16,7 @@ import {api_path} from "../../../config/apiRoutes/apiroutes";
 export class UserProfileComponent implements OnInit {
   profileform: FormGroup;
   user ;
+  info ;
   role;
   isMarchent ;
   constructor(private passwordmodal: PasswordModalService,private fb: FormBuilder,
@@ -40,6 +41,8 @@ export class UserProfileComponent implements OnInit {
   }
   setProfileForm() {
     var obj = JSON.parse(this.user);
+    this.info = obj;
+    console.log(obj);
     this.profileform.controls.name.patchValue(obj.name);
     this.profileform.controls.username.patchValue(obj.username);
     this.profileform.controls.email.patchValue(obj.email);
