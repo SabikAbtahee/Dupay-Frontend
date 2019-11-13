@@ -127,14 +127,14 @@ export const dupayConst = {
       mini_name: 'Transfer'
 
     },
-    {
-      name: 'Merchant Notification',
-      url: 'user/merchant-notification',
-      icon: 'notifications_active',
-      role: [Token_Role.ROLE_MERCHANT],
-      mini_name: 'Notification'
+    // {
+    //   name: 'Merchant Notification',
+    //   url: 'user/merchant-notification',
+    //   icon: 'notifications_active',
+    //   role: [Token_Role.ROLE_MERCHANT],
+    //   mini_name: 'Notification'
 
-    },
+    // },
     {
       name: 'Notify Merchant',
       url: 'user/notify-merchant',
