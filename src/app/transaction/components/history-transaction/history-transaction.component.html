@@ -13,7 +13,7 @@
 </div>
 
 <div fxLayout="column" class="mat-elevation-z8 mx-40 mb-40 ">
-    <table mat-table [dataSource]="listData" [class.isMobile]="isMobile">
+    <table mat-table #table [dataSource]="listData" matSort matSortActive="time" matSortDirection="desc" [class.isMobile]="isMobile">
 
         <ng-container matColumnDef="SI No">
             <th mat-header-cell *matHeaderCellDef > Serial No </th>
@@ -21,17 +21,17 @@
         </ng-container>
     
         <ng-container matColumnDef="transactionId">
-            <th mat-header-cell *matHeaderCellDef> Transaction ID </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction ID </th>
             <td mat-cell *matCellDef="let element"> {{element.transactionId}} </td>
         </ng-container>
     
         <ng-container matColumnDef="time">
-            <th mat-header-cell *matHeaderCellDef> Transaction Time </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Time </th>
             <td mat-cell *matCellDef="let element"> {{element.time}} </td>
         </ng-container>
     
         <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
           <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
         </ng-container>
        
