@@ -18,7 +18,7 @@
       </div>
       <div fxFlex="25" fxLayout="column" fxLayoutGap="16px"
            style="color: #222858; font-weight: bold"
-           class="p-16">
+           class="p-16 font-size-18">
         <p>Name</p>
         <p>Username</p>
         <p>Email</p>
@@ -26,17 +26,18 @@
           <p>App key</p>
           <p>Balance</p>
           <p>NID</p>
-          <p>Trade insurance</p>
+          <p style="position: relative; top:12px"
+          >Trade insurance</p>
         </div>
       </div>
       <div fxFlex="50" fxLayout="column" fxLayoutGap="16px"
-           class="p-16">
+           class="p-16 font-size-18">
         <p>{{profileform.value.name}}</p>
         <p>{{profileform.value.username}}</p>
         <p>{{profileform.value.email}}</p>
         <div *ngIf="isMarchent" fxLayout="column" fxLayoutGap="16px">
-          <p>{{info.id}}</p>
-          <p>{{balance}}</p>
+          <p style="color: red">{{info.id}}</p>
+          <p style="color: green">{{balance}}</p>
 
           <div>
             <button color="primary" (click)='openNIDModal()'
