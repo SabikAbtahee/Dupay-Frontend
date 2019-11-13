@@ -62,7 +62,7 @@ export class HistoryTransactionComponent implements OnInit {
 
 
   export() {
-    this.exportService.exportExcel(this.listData.data, 'transaction historys');
+    this.exportService.exportExcel(this.listData.data, 'Transaction historys');
   }
 
   public redirectToDetails = (id: string) => {
