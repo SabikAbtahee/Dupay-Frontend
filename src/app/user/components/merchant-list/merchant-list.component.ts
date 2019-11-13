@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-merchant-list',
@@ -20,6 +22,7 @@ export class MerchantListComponent implements OnInit {
   public displayedColumns = ['name', 'type', 'balance', 'details', 'notify'];
 
   constructor(private userService: UserService,
+    private route:Router,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -61,7 +64,8 @@ export class MerchantListComponent implements OnInit {
       this.dialog.open(MerchantDetailsComponent, {
         data: res,
         autoFocus: false,
-        maxHeight: '90vh'
+        maxHeight: '90vh',
+        maxWidth: '80vw !important'
       }).afterClosed().subscribe(result => {
       });
     }, err => {
@@ -76,6 +80,11 @@ export class MerchantListComponent implements OnInit {
 
   public redirectToDelete = (id: string) => {
 
+  }
+
+  public redirectToNotifyMerchant(id:string){
+    this.userService.setMerchantIdToNotify(id);
+    this.route.navigate(['user','notify-merchant']);
   }
 
 }
