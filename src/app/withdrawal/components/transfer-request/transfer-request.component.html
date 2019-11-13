@@ -28,7 +28,7 @@
 
 <div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
 
-  <table mat-table [dataSource]="transferRequests" matSort matSortActive="withdrawDate" matSortDirection="desc" >
+  <mat-table [dataSource]="transferRequests" matSort matSortActive="withdrawDate" matSortDirection="desc" >
 
     <ng-container matColumnDef="merchantName">
         <mat-header-cell *matHeaderCellDef  mat-sort-header class="primary-background white-color-foreground font-size-16"> Name </mat-header-cell>
@@ -64,7 +64,7 @@
   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </table>
+  </mat-table>
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
