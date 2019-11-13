@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotifyMerchantService } from "../../services/notify-merchant.service";
-import { MatPaginator, MatTableDataSource } from "@angular/material";
+import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import { snackbarMessages } from "../../../config/constants/dupayConstants";
 import { SharedService } from "../../../shared/services/shared.service";
 import { ActivatedRoute } from '@angular/router';
@@ -33,8 +33,10 @@ export interface notifyMerchantTable {
   styleUrls: ['./notify-merchant.component.scss']
 })
 export class NotifyMerchantComponent implements OnInit {
+  @ViewChild (MatSort, {static: true}) sort: MatSort;
   displayedColumns: string[] = ['name', 'userName', 'select'];
   data: notifyMerchantTable[] = [];
+
   dataSource = new MatTableDataSource<notifyMerchantTable>(this.data);
   select_All: boolean = false;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -56,6 +58,7 @@ export class NotifyMerchantComponent implements OnInit {
           checked: false
         })
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
 
       this.userService.merchantIdToNotify.subscribe(id => this.checkSelectedMerchant(id));
@@ -74,7 +77,9 @@ export class NotifyMerchantComponent implements OnInit {
     });
 
   }
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   notify() {
     let merchantIdList: string[] = [];
     this.data.forEach(item => {
