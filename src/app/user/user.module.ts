@@ -36,7 +36,7 @@ const routes:Routes=[
     canActivate:[MerchantGuard]
   },
   {
-    path:'notify-merchant/:merchantId',
+    path:'notify-merchant',
     component:NotifyMerchantComponent,
     canActivate:[AdminGuard]
   },

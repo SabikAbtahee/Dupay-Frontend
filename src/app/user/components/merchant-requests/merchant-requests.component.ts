@@ -134,7 +134,8 @@ export class MerchantRequestsComponent implements OnInit {
       this.dialog.open(MerchantDetailsComponent, {
         data: res,
         autoFocus: false,
-        maxHeight: '90vh'
+        maxHeight: '90vh',
+        maxWidth: '80vw !important'
       }).afterClosed().subscribe(result => {
       });
     }, err => {
