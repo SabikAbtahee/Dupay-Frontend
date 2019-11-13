@@ -101,3 +101,9 @@ export interface MerchantAccount{
 	bankName:string,
 	branch:string,
 }
+
+export interface Transaction {
+	transactionId: string,
+	time: string,
+	amount: number,
+}
