@@ -20,7 +20,7 @@ const routes:Routes=[
   {
     path:'query',
     component:SearchTransactionComponent,
-    canActivate: [MerchantGuard]
+    // canActivate: [MerchantGuard]
   },
   {
     path:'history',
