@@ -17,7 +17,7 @@ export class HistoryTransactionComponent implements OnInit {
 
   listData = new MatTableDataSource<Transaction>();
   displayedColumns: string[] = ['SI No','transactionId', 'time', 'amount'];
-
+  showChart=false;
   @ViewChild(MatSort, {static: true}  ) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   searchKey: string;
@@ -47,6 +47,10 @@ export class HistoryTransactionComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.listData.filter = filterValue.trim().toLowerCase();
+  }
+
+  toggleChart(){
+    this.showChart=!this.showChart;
   }
 
 

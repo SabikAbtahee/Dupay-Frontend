@@ -163,7 +163,7 @@ export const dupayConst = {
       name: 'Query Transaction',
       url: 'transaction/query',
       icon: 'search',
-      role: [Token_Role.ANNONYMOUS],
+      role: [Token_Role.ROLE_MERCHANT],
       mini_name: 'Query'
 
     },

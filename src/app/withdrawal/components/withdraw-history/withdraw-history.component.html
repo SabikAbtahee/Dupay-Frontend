@@ -1,17 +1,36 @@
-<div class="example-button-row m-40" fxLayout="column" fxLayoutAlign="end end" fxLayoutAlign.lt-md='center center'>
-  <button (click)='openWithdrawRequestWindow()' mat-raised-button  class="w-250 h-58 fontSize-B withdraw-color white-color-foreground" >Withdraw
-    Money</button>
-</div>
+<!-- <div fxlayout='row'>
+
 
 <div class='mx-40'>
   <mat-form-field appearance="outline">
-    <!-- <mat-label>Type in to filter</mat-label> -->
+   
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     <mat-icon matPrefix class='mr-16'>search</mat-icon>
-    <!-- <mat-icon matSuffix class='mr-16 cursor-pointer' >tune</mat-icon> -->
     
   </mat-form-field>
 </div>
+<div class="example-button-row m-40" fxLayout="column" fxLayoutAlign="end end" fxLayoutAlign.lt-md='center center'>
+    <button (click)='openWithdrawRequestWindow()' mat-raised-button  class="w-250 h-58 fontSize-B withdraw-color white-color-foreground" >Withdraw
+      Money</button>
+  </div>
+</div> -->
+
+
+<div fxLayout='row' fxLayoutAlign='space-between center' fxLayoutGap="24px" class='mx-40 mt-40 '>
+    <div class='w-100-p'> 
+        <mat-form-field  appearance="outline">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <mat-icon matPrefix class='mr-16'>search</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class='pb-16'>
+        <button mat-raised-button color="primary" type="button" class='h-60 w-224 withdraw-color white-color-foreground' (click)="openWithdrawRequestWindow()" >
+            Withdraw
+      Money
+        </button>
+    </div>
+</div>
+
 <div fxLayout="column" class="mx-40 mb-40 mat-elevation-z8">
   <mat-table #table [dataSource]="withdraws" matSort matSortActive="withdrawDate" matSortDirection="desc" [class.isMobile]="isMobile">
 

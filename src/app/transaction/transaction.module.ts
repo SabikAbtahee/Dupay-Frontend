@@ -9,6 +9,7 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, Mat
 import { SharedModule } from '../shared/shared.module';
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
+import { MerchantGuard } from '../core/security-services/merchant.guard';
 
 const routes:Routes=[
   
@@ -18,7 +19,8 @@ const routes:Routes=[
   },
   {
     path:'query',
-    component:SearchTransactionComponent
+    component:SearchTransactionComponent,
+    canActivate: [MerchantGuard]
   },
   {
     path:'history',

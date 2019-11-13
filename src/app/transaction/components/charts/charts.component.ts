@@ -121,6 +121,8 @@ export class ChartsComponent implements OnInit {
   }
 
   viewYearlyTransaction() {
+    
+    this.dates = [];
 
     this.chartService.getChartData().subscribe(data => {
 
