@@ -11,7 +11,7 @@ import { Transaction } from 'src/app/config/interfaces/dupay.interface';
   styleUrls: ['./history-transaction.component.scss']
 })
 export class HistoryTransactionComponent implements OnInit {
-
+  panelOpenState = false;
 
   constructor(private exportService: ExportService, private transactionService: TransactionService) { }
 

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card m-5">
+                <div class="card-header">
+                    Charts
+
+                    <div class="btn-group btn-group-sm float-right ml-2" role="group">
+                        <button id ="day" class="btn btn-outline-primary active" (click)="viewDailyTransaction()">Daily</button>
+                        <button id ="month" class="btn btn-outline-primary" (click)="viewMonthlyTransaction()">Monthly</button>
+                        <button id ="year" class="btn btn-outline-primary" (click)="viewYearlyTransaction()">Yearly</button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div>
+                        <div style="display: block">
+                            <canvas baseChart height="100" width="250" [datasets]="barChartData"
+                                [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                                [chartType]="barChartType">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
