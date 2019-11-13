@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { api_path } from 'src/app/config/apiRoutes/apiroutes';
 import { QueryService } from 'src/app/core/query-services/query.service';
 import { SecurityService } from 'src/app/core/security-services/security.service';
@@ -11,9 +11,15 @@ import { Merchant_Status } from 'src/app/config/enums/dupay.enum';
   providedIn: 'root'
 })
 export class UserService {
+  private source = new BehaviorSubject('');
+  merchantIdToNotify = this.source.asObservable();
 
   constructor(private queryService: QueryService,
     private securityService: SecurityService, private mutationService: MutationService) { }
+
+  setMerchantIdToNotify(message: string) {
+    this.source.next(message);
+  }
 
   public getAllMerchant(): Observable<Merchant[]> {
 
