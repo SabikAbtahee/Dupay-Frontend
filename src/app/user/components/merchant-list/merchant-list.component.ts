@@ -84,7 +84,6 @@ export class MerchantListComponent implements OnInit {
   public redirectToNotifyMerchant(id:string){
     this.userService.setMerchantIdToNotify(id);
     this.route.navigate(['user','notify-merchant']);
-    
   }
 
 }

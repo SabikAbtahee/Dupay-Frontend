@@ -4,6 +4,7 @@ import { MatPaginator, MatTableDataSource } from "@angular/material";
 import { snackbarMessages } from "../../../config/constants/dupayConstants";
 import { SharedService } from "../../../shared/services/shared.service";
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 
 export interface notifyMerchantTable {
@@ -41,6 +42,7 @@ export class NotifyMerchantComponent implements OnInit {
   constructor(private notifyMerchantService: NotifyMerchantService,
     private sharedService: SharedService,
     private route: ActivatedRoute,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -55,25 +57,22 @@ export class NotifyMerchantComponent implements OnInit {
         })
         this.dataSource.paginator = this.paginator;
       });
-      this.checkSelectedMerchant();
+
+      this.userService.merchantIdToNotify.subscribe(id => this.checkSelectedMerchant(id));
 
     }
     );
 
   }
 
-  checkSelectedMerchant() {
-    this.route.paramMap.subscribe(params => {
-      let merchantId = params.get('merchantId');
-      this.data.forEach(item => {
-        // console.log("item id:"+ item.id);
-        if (item.id == merchantId) {
-          item.checked = true;
-          // console.log("found:");
-          return;
-        }
-      })
+  checkSelectedMerchant(merchantId: string) {
+    this.data.forEach(item => {
+      if (item.id == merchantId) {
+        item.checked = true;
+        return;
+      }
     });
+
   }
 
   notify() {
