@@ -18,7 +18,8 @@ export class UserProfileComponent implements OnInit {
   user ;
   info ;
   role;
-  isMarchent ;
+  balance;
+  isMarchent = false ;
   constructor(private passwordmodal: PasswordModalService,private fb: FormBuilder,
               private userProfileService: UserProfileService,
               private queryService:QueryService,
@@ -33,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   checkRole(){
     this.securityService.getTokenRole().subscribe(result =>{
       this.role = result;
-    })
+    });
   }
   setProfileInformation() {
     this.user = this.userProfileService.getProfileInformation();
@@ -51,8 +52,9 @@ export class UserProfileComponent implements OnInit {
       let header = this.securityService.getAuthorizedHeader();
       let id = this.securityService.getLoggedInUserId();
       this.queryService.httpGet(`${api_path.getMerchantInfoWithId}/${id}`, header).subscribe(res =>{
-
-      })
+        console.log(res);
+        this.balance = res.balance;
+      });
       this.profileform.controls.tradeInsurance.patchValue(obj.tradeInsurance);
       this.profileform.controls.balance.patchValue(obj.balance);
     }
@@ -76,5 +78,13 @@ export class UserProfileComponent implements OnInit {
   }
   openChangePasswordModal() {
     this.passwordmodal.openPasswordChangeModal();
+  }
+
+  openNIDModal() {
+    this.userProfileService.openNID();
+  }
+
+  openTradeInsuranceModal() {
+    this.userProfileService.openTradeInsurance();
   }
 }

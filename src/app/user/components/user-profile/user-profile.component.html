@@ -16,18 +16,37 @@
       <div fxFlex="16">
 
       </div>
-      <div fxFlex="25" style="color: #222858; font-weight: bold"
+      <div fxFlex="25" fxLayout="column" fxLayoutGap="16px"
+           style="color: #222858; font-weight: bold"
            class="p-16">
         <p>Name</p>
         <p>Username</p>
         <p>Email</p>
-        <p>App key</p>
+        <div *ngIf="isMarchent" fxLayout="column" fxLayoutGap="16px">
+          <p>App key</p>
+          <p>Balance</p>
+          <p>NID</p>
+          <p>Trade insurance</p>
+        </div>
       </div>
-      <div fxFlex="50" class="p-16">
+      <div fxFlex="50" fxLayout="column" fxLayoutGap="16px"
+           class="p-16">
         <p>{{profileform.value.name}}</p>
         <p>{{profileform.value.username}}</p>
         <p>{{profileform.value.email}}</p>
-        <p>{{info.id}}</p>
+        <div *ngIf="isMarchent" fxLayout="column" fxLayoutGap="16px">
+          <p>{{info.id}}</p>
+          <p>{{balance}}</p>
+
+          <div>
+            <button color="primary" (click)='openNIDModal()'
+                    mat-raised-button>View NID</button>
+          </div>
+          <div>
+            <button color="primary" (click)='openTradeInsuranceModal()'
+                    mat-raised-button>View Trade insurance</button>
+          </div>
+        </div>
       </div>
     </div>
 <!--    <div class="mb-48">-->

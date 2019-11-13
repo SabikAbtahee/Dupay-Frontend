@@ -16,6 +16,9 @@ import {NotifyMerchantService} from "./services/notify-merchant.service";
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { MerchantDetailsComponent } from './components/merchant-details/merchant-details.component';
+import { NIDPhotoComponent } from './components/nid-photo/nid-photo.component';
+import { TradeInsurancePhotoComponent } from './components/trade-insurance-photo/trade-insurance-photo.component';
+import {UserProfileService} from "./services/user-profile.service";
 
 
 const routes:Routes=[
@@ -51,14 +54,15 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent, NotificationComponent, MerchantDetailsComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent, NotificationComponent, MerchantDetailsComponent, NIDPhotoComponent, TradeInsurancePhotoComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule
   ],
-  providers: [ PasswordModalService, NotifyMerchantService ],
-  entryComponents: [ PasswordChangeComponent, NotificationComponent, DialogComponent, MerchantDetailsComponent ]
+  providers: [ PasswordModalService, NotifyMerchantService, UserProfileService ],
+  entryComponents: [ PasswordChangeComponent, NIDPhotoComponent, TradeInsurancePhotoComponent,
+    NotificationComponent, DialogComponent, MerchantDetailsComponent ]
 
 
 
