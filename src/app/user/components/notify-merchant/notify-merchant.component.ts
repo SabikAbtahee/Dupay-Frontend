@@ -5,6 +5,8 @@ import { snackbarMessages } from "../../../config/constants/dupayConstants";
 import { SharedService } from "../../../shared/services/shared.service";
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { RootService } from 'src/app/root/services/root.service';
+import { Rows } from 'src/app/config/enums/dupay.enum';
 
 
 export interface notifyMerchantTable {
@@ -44,10 +46,12 @@ export class NotifyMerchantComponent implements OnInit {
   constructor(private notifyMerchantService: NotifyMerchantService,
     private sharedService: SharedService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private rootService:RootService
   ) { }
 
   ngOnInit() {
+    this.rootService.checkRow(Rows.NOTIFY);
 
     this.notifyMerchantService.getAppovedMerchantList().subscribe(res => {
       res.forEach(item => {
