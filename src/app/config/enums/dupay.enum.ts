@@ -44,3 +44,13 @@ export enum Wallet_type{
     SURECASH='SURECASH',
     BKASH='BKASH'
 }
+
+export enum Rows{
+    HOME=0,
+    PROFILE=1,
+    REQUEST=2,
+    LIST=3,
+    TRANSFER=4,
+    NOTIFY=5,
+    TRANSACTION=6
+}

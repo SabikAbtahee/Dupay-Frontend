@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { SecurityService } from '../../core/security-services/security.service';
 import { MutationService } from '../../core/mutation-services/mutation.service';
 import { localStorageKeys } from '../../config/constants/dupayConstants';
@@ -11,12 +11,20 @@ import { UtilityService } from '../../core/utility-services/utility-service.serv
 	providedIn: 'root'
 })
 export class RootService {
+
+	private source = new BehaviorSubject(0);
+	changeRow = this.source.asObservable();
+	  
 	constructor(
 		private securityService: SecurityService,
 		private mutateService: MutationService,
 		private queryService: QueryService,
-		private utilityService:UtilityService
+		private utilityService:UtilityService,
 	) {}
+
+	checkRow(row:number){
+		this.source.next(row);
+	}
 
 	checkRole(): Observable<any> {
 		return new Observable((observer) => {

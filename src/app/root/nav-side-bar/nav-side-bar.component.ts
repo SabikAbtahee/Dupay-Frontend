@@ -38,7 +38,15 @@ export class NavSideBarComponent implements OnInit {
 		this.checkRow();
 		this.getUsername();
 		this.setRole();
+		this.observRowChange();
 	}
+
+	observRowChange(){
+		this.rootService.changeRow.subscribe(value=>{
+			this.selectRow(value);
+		})
+	}
+
 	initiateVariables() {
 		this.title = dupayConst.siteName.name;
 	}
