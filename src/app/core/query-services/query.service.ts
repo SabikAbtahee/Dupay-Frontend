@@ -88,6 +88,7 @@ export class QueryService {
 			);
 		});
 	}
+	
 
 	getLoggedInUser(){
 		return this.readJSONValueFromLocalStorage(localStorageKeys.User);

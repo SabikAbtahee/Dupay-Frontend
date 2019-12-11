@@ -104,7 +104,7 @@ export class MerchantSignupComponent implements OnInit {
 			nid_file: [ null, [ Validators.required ] ],
 			password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
 			confirm_password: [ '', [ Validators.required, Validators.pattern(passwordRegex) ] ],
-			merchant_type: [ '', [ Validators.required ] ]
+			// merchant_type: [ '', [ Validators.required ] ]
 		});
 	}
 	makeMerchantAccountForm() {
@@ -220,7 +220,7 @@ export class MerchantSignupComponent implements OnInit {
 				email: this.coreQuery.readJSONValueFromLocalStorage(this.authenticationObject.key).email,
 				balance: 0.0,
 				password: this.signupform.value.password,
-				type: this.signupform.value.merchant_type
+				type: this.merchant_types.TYPE_A
 			};
 			let merchantstringified = JSON.stringify(merchant);
 			payloadOfMerchant.append('nidFile', this.signupform.value.nid_file);
@@ -228,9 +228,7 @@ export class MerchantSignupComponent implements OnInit {
 			payloadOfMerchant.append('merchantInfo', merchantstringified);
 			this.authService.signUpMerchantAccount(payloadOfMerchant).pipe(first()).subscribe(
 				(res) => {
-					debugger;
 					this.merchantAccountSubmit(res.id).pipe(first()).subscribe(response=>{
-						debugger;
 
 						this.coreMutate.deleteKeyInLocalStorage(this.authenticationObject.key);
 						this.openSnackBar(snackbarMessages.registration_complete, true);
@@ -238,7 +236,6 @@ export class MerchantSignupComponent implements OnInit {
 						this.route(urlPaths.Authentication.Signin.url);
 					},
 					err=>{
-						debugger;
 
 						let message = this.util.giveErrorMessage(err);
 						this.openSnackBar(this.util.toCapitalize(message), false);
@@ -247,7 +244,6 @@ export class MerchantSignupComponent implements OnInit {
 					
 				},
 				(err) => {
-					debugger;
 
 					let message = this.util.giveErrorMessage(err);
 					this.openSnackBar(this.util.toCapitalize(message), false);
@@ -267,7 +263,6 @@ export class MerchantSignupComponent implements OnInit {
 
 	merchantAccountSubmit(mer_id):Observable<any>{
 		return new Observable(observer=>{
-			debugger;
 			let payload={
 				accountName: this.merchantAccountForm.value.accountName,
 				accountNumber: this.merchantAccountForm.value.accountNumber,
@@ -277,10 +272,8 @@ export class MerchantSignupComponent implements OnInit {
 					id:mer_id
 				}
 			}
-			debugger;
 
 			this.authService.registerMerchantBankAccount(payload).pipe(first()).subscribe(res=>{
-			debugger;
 				
 				observer.next(res);
 			},

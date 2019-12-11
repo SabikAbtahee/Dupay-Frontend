@@ -189,7 +189,7 @@
                         </div>
                     </div>
                     <!-- NID number -->
-                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="12px">
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
                         <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12 pt-16">
                             <i class="material-icons-outlined">
                                 credit_card
@@ -209,29 +209,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Trade Insurance -->
-                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="12px">
-                        <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12 pt-16">
-                            <i class="material-icons-outlined">
-                                perm_identity
-                            </i>
-                        </div>
-                        <div class='mb-12 mt-4'>
-
-                            <div>
-                                <button mat-stroked-button (click)="tradeFileInput.click()"
-                                    [ngClass]="!trade_insurance_file_valid ? 'w-224 h-60 button_error rejected-color' : 'w-224 h-60' ">
-
-                                    <span *ngIf='!trade_insurance_filename'>Choose Trade Insurance File</span>
-                                    <span *ngIf='trade_insurance_filename'>{{trade_insurance_filename}}</span>
-                                </button>
-                                <input hidden type="file"  #tradeFileInput
-                                    (change)="onTradeInsuranceFileSelect($event)">
-                                <div *ngIf="!trade_insurance_file_valid" class='font-size-12 px-8 rejected-color'>
-                                    Choose png or jpeg file within 2MB</div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
 
 
@@ -290,8 +268,31 @@
                             </mat-form-field>
                         </div>
                     </div>
+                     <!-- Trade Insurance -->
+                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+                        <div fxLayout="column" fxLayoutAlign="center" class="mat-icon-for-button mt-12 pt-16">
+                            <i class="material-icons-outlined">
+                                perm_identity
+                            </i>
+                        </div>
+                        <div class='mb-12 mt-4'>
+
+                            <div>
+                                <button mat-stroked-button (click)="tradeFileInput.click()"
+                                    [ngClass]="!trade_insurance_file_valid ? 'w-224 h-60 button_error rejected-color' : 'w-224 h-60' ">
+
+                                    <span *ngIf='!trade_insurance_filename'>Choose Trade Insurance File</span>
+                                    <span *ngIf='trade_insurance_filename'>{{trade_insurance_filename}}</span>
+                                </button>
+                                <input hidden type="file"  #tradeFileInput
+                                    (change)="onTradeInsuranceFileSelect($event)">
+                                <div *ngIf="!trade_insurance_file_valid" class='font-size-12 px-8 rejected-color'>
+                                    Choose png or jpeg file within 2MB</div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Merchant type -->
-                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="12px">
+                    <!-- <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="12px">
                         <div fxLayout="column" fxLayoutAlign="center center" class="mat-icon-for-input">
                             <i class="material-icons-outlined ">
                                 group
@@ -311,7 +312,7 @@
                             </mat-form-field>
 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </form>

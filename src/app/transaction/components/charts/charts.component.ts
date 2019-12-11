@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartService } from '../../services/chart.service';
+import { TransactionService } from '../../services/transaction.service';
 // import { Color } from 'ng2-charts';
 
 @Component({
@@ -9,7 +10,7 @@ import { ChartService } from '../../services/chart.service';
 })
 export class ChartsComponent implements OnInit {
 
-  constructor(private chartService: ChartService) { }
+  constructor(private chartService: ChartService,private transactionService:TransactionService) { }
 
   public dates = [];
   public months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -45,14 +46,22 @@ export class ChartsComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.viewDailyTransaction();
+    this.viewDailyTransaction('0');
   }
 
-  viewDailyTransaction() {
+  viewDailyTransaction(num) {
 
-    this.dates = [];
+    if(num=='0'){
+      this.dates = [];
 
-    this.chartService.getChartData().subscribe(data => {
+    }
+    let merchantId='';
+    if(this.transactionService.getLoggedInUserRole()!='ADMIN'){
+      merchantId = this.transactionService.getCurrentUserID();
+    }
+
+    this.chartService.getAllTransactions(merchantId,num,'100').subscribe(data => {
+      console.log(data);
 
       this.amounts = Array(data.content.length).fill(0);
 
@@ -79,18 +88,28 @@ export class ChartsComponent implements OnInit {
       this.barChartLabels = this.dates;
       this.barChartData[0].data = this.amounts;
       this.barChartData[1].data = this.amounts;
-
-      console.log(this.amounts);
-      console.log(this.dates);
+      if (data.hasNext == true && data.isLast==false) {
+				this.viewDailyTransaction(String(Number(num) + 1));
+			}
+      // console.log(this.amounts);
+      // console.log(this.dates);
     })
   }
 
 
-  viewMonthlyTransaction() {
+  viewMonthlyTransaction(num) {
 
-    this.dates = [];
+    if(num=='0'){
+      this.dates = [];
 
-    this.chartService.getChartData().subscribe(data => {
+    }
+    let merchantId='';
+    if(this.transactionService.getLoggedInUserRole()!='ADMIN'){
+      merchantId = this.transactionService.getCurrentUserID();
+    }
+
+    this.chartService.getAllTransactions(merchantId,num,'100').subscribe(data => {
+      console.log(data);
 
       this.amounts = Array(data.content.length).fill(0);
 
@@ -114,18 +133,27 @@ export class ChartsComponent implements OnInit {
       this.barChartLabels = this.dates;
       this.barChartData[0].data = this.amounts;
       this.barChartData[1].data = this.amounts;
-
+      if (data.hasNext == true && data.isLast==false) {
+				this.viewDailyTransaction(String(Number(num) + 1));
+			}
       console.log(this.amounts);
       console.log(this.dates);
     })
   }
 
-  viewYearlyTransaction() {
+  viewYearlyTransaction(num) {
     
-    this.dates = [];
+    if(num=='0'){
+      this.dates = [];
 
-    this.chartService.getChartData().subscribe(data => {
+    }
+    let merchantId='';
+    if(this.transactionService.getLoggedInUserRole()!='ADMIN'){
+      merchantId = this.transactionService.getCurrentUserID();
+    }
 
+    this.chartService.getAllTransactions(merchantId,num,'100').subscribe(data => {
+      console.log(data);
       this.amounts = Array(data.content.length).fill(0);
 
       this.dates[0] = data.content[0].payDate.substring(0, 4);
@@ -148,7 +176,9 @@ export class ChartsComponent implements OnInit {
       this.barChartLabels = this.dates;
       this.barChartData[0].data = this.amounts;
       this.barChartData[1].data = this.amounts;
-
+      if (data.hasNext == true && data.isLast==false) {
+				this.viewDailyTransaction(String(Number(num) + 1));
+			}
       console.log(this.amounts);
       console.log(this.dates);
     })

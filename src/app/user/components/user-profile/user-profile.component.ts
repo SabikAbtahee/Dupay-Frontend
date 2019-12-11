@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PasswordModalService} from "../../services/password-modal.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProfileService} from "../../services/user-profile.service";
-import {Merchant} from "../../../config/interfaces/dupay.interface";
+import {Merchant, MerchantAccount} from "../../../config/interfaces/dupay.interface";
 import {SecurityService} from "../../../core/security-services/security.service";
 import {Token_Role} from "../../../config/enums/dupay.enum";
 import {QueryService} from "../../../core/query-services/query.service";
@@ -15,6 +15,7 @@ import {api_path} from "../../../config/apiRoutes/apiroutes";
 })
 export class UserProfileComponent implements OnInit {
   profileform: FormGroup;
+  merchantAccount:MerchantAccount;
   user ;
   info ;
   role;
@@ -55,6 +56,14 @@ export class UserProfileComponent implements OnInit {
         console.log(res);
         this.balance = res.balance;
       });
+      this.queryService.httpGet(`${api_path.getMerchantAccounts}/${id}`,header).subscribe(res=>{
+        this.merchantAccount={
+          accountName:res.accountName,
+          bankName:res.bankName,
+          accountNumber:res.accountNumber,
+          branch:res.branch
+        }
+      });
       this.profileform.controls.tradeInsurance.patchValue(obj.tradeInsurance);
       this.profileform.controls.balance.patchValue(obj.balance);
     }
@@ -76,9 +85,9 @@ export class UserProfileComponent implements OnInit {
       tradeInsurance: ['']
     });
   }
-  openChangePasswordModal() {
-    this.passwordmodal.openPasswordChangeModal();
-  }
+  // openChangePasswordModal() {
+  //   this.passwordmodal.openPasswordChangeModal();
+  // }
 
   openNIDModal() {
     this.userProfileService.openNID();

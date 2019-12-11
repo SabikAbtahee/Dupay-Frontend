@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { User } from '../../config/interfaces/dupay.interface';
 import { Roles } from '../../config/enums/dupay.enum';
@@ -92,6 +93,20 @@ export class SecurityService {
 		
 		return httpOptions;
 	}
+	getHeaderWithQueryParams(Token: any,params): any {
+		
+		let httpheader=new HttpHeaders({
+			'Content-Type':'application/json',
+			'Authorization':`Bearer ${Token}`
+		});
+		
+		let httpOptions = {
+			headers: httpheader,
+			params:params
+		}
+		
+		return httpOptions;
+	}
 
 	getTokenRole(): Observable<any> {
 		return new Observable((observer) => {
@@ -132,11 +147,23 @@ export class SecurityService {
 		let header=this.getHeader(token);
 		return header;
 	}
+	getAuthorizedQueryParamsHeader(params){
+		let token=this.queryservice.getTokenDirect();
+		let header=this.getHeaderWithQueryParams(token,params);
+		return header;
+	}
 
 	getLoggedInUserId(){
 		let user=this.queryservice.getLoggedInUser();
 		if(user && user.id){
 			return user.id;
+		}
+		return null;
+	}
+	getLoggedInUserRole(){
+		let user=this.queryservice.getLoggedInUser();
+		if(user && user.role){
+			return user.role;
 		}
 		return null;
 	}

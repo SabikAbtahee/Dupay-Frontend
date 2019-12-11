@@ -21,7 +21,7 @@ export class MerchantRequestsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   merchants = new MatTableDataSource<Merchant>();
-  public displayedColumns = ['SI No.', 'username', 'name', 'type', 'details', 'approve', 'reject'];
+  public displayedColumns = ['SI No.', 'username', 'name', 'details', 'approve', 'reject'];
 
 
   requests: Merchant[] = []
@@ -99,7 +99,6 @@ export class MerchantRequestsComponent implements OnInit {
   public reject = (id: string) => {
     console.log('id:' + id);
     this.userService.rejectMerchant(id).subscribe(res => {
-      debugger
       console.log('result in approve:');
       console.log(res);
       this.removeMerchantFromPendingList(id);

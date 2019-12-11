@@ -1,3 +1,4 @@
+import { PasswordModalService } from './../../user/services/password-modal.service';
 import { dupayConst, urlPaths } from './../../config/constants/dupayConstants';
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -30,7 +31,8 @@ export class NavSideBarComponent implements OnInit {
 	constructor(
 		private breakpointObserver: BreakpointObserver,
 		private router: Router,
-		private rootService: RootService
+		private rootService: RootService,
+		private passwordmodal: PasswordModalService
 	) {}
 
 	ngOnInit() {
@@ -120,4 +122,7 @@ export class NavSideBarComponent implements OnInit {
 		this.checkAuthentication(auth);
 		this.checkRow();
 	}
+	openChangePasswordModal() {
+		this.passwordmodal.openPasswordChangeModal();
+	  }
 }

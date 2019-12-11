@@ -11,9 +11,9 @@
                         <button id ="year" class="btn btn-outline-primary" (click)="viewYearlyTransaction()">Yearly</button>
                     </div> -->
                     <mat-button-toggle-group>
-                            <mat-button-toggle (click)="viewDailyTransaction()">Days</mat-button-toggle>
-                            <mat-button-toggle  (click)="viewMonthlyTransaction()">Months</mat-button-toggle>
-                            <mat-button-toggle  (click)="viewYearlyTransaction()">Years</mat-button-toggle>
+                            <mat-button-toggle (click)="viewDailyTransaction('0')">Days</mat-button-toggle>
+                            <mat-button-toggle  (click)="viewMonthlyTransaction('0')">Months</mat-button-toggle>
+                            <mat-button-toggle  (click)="viewYearlyTransaction('0')">Years</mat-button-toggle>
                           </mat-button-toggle-group>
                 </div>
 

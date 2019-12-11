@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { PasswordChangeComponent } from '../user/components/password-change/password-change.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatListModule } from '@angular/material/list';
     AppComponent,
     NotFoundComponent,
     NavSideBarComponent,
-    BlankComponent
+    BlankComponent,
+    PasswordChangeComponent
     
   ],
   imports: [
@@ -39,5 +41,6 @@ import { MatListModule } from '@angular/material/list';
   ],
   providers: [RootService],
   bootstrap: [AppComponent],
+  entryComponents: [ PasswordChangeComponent]
 })
 export class AppModule { }

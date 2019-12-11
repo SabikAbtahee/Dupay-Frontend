@@ -179,6 +179,10 @@ export const dupayConst = {
     logout: {
       name: 'Logout',
       url: 'sign-in'
+    },
+    changePassword:{
+      name:'Change Password',
+      url:''
     }
 
   },

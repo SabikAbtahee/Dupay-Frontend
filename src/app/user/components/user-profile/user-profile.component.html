@@ -12,7 +12,7 @@
         Profile Information
       </div>
       <div class='w-100-p'>
-      <div *ngIf="isMarchent" fxLayout='row' fxLayoutAlign='space-between start' class='pt-48' fxLayoutGap='12px'>
+      <div *ngIf="isMarchent" fxLayout='row' fxLayoutAlign='start start' class='pt-48' fxLayoutGap='48px'>
         <div fxLayout='column' fxLayoutAlign='center start' [ngClass.xs]="{'pl-8 ':true}" [ngClass.sm]="{'pl-8 ':true}" ngClass='pl-60'  fxLayoutGap='12px'>
             <div>Name</div>
             <div>Username</div>
@@ -35,7 +35,7 @@
             
         </div>
       </div>
-      <div *ngIf="isMarchent" fxLayout='row' fxLayoutAlign='space-between start' class='pb-48 pt-24' >
+      <div *ngIf="isMarchent" fxLayout='row' fxLayoutAlign='start start' class='pb-48 pt-24' fxLayoutGap='48px' >
           <div fxLayout='column' [ngClass.xs]="{'pl-8 ':true}" [ngClass.sm]="{'pl-8 ':true}" ngClass='pl-60' fxLayoutGap='16px'>
               
               
@@ -49,6 +49,28 @@
               <div><button color="primary" class='w-224' (click)='openTradeInsuranceModal()' mat-raised-button>View Trade
                   Insurance</button></div>
           </div>
+        </div>
+      </div>
+      <div *ngIf="isMarchent" [ngClass.sm]="{'pl-8 font-size-24 font-weight-950':true}" ngClass='font-size-24 font-weight-950 pl-60' >
+        Account Information
+      </div>
+      <div *ngIf="isMarchent" fxLayout='row' fxLayoutAlign='start start' class='pt-48' fxLayoutGap='48px' class='py-24'>
+        <div fxLayout='column' fxLayoutAlign='center start' [ngClass.xs]="{'pl-8 ':true}" [ngClass.sm]="{'pl-8 ':true}" ngClass='pl-60'  fxLayoutGap='12px'>
+            <div>Account Name</div>
+            <div>Account Number</div>
+            <div>Bank Name</div>
+            <div>Branch</div>
+            
+
+            
+        </div>
+        <div *ngIf="merchantAccount" fxLayout='column' fxLayoutAlign='center start' fxLayoutGap='12px' [ngClass.xs]="{'pr-8 ':true}" [ngClass.sm]="{'pr-8 ':true}" ngClass='pr-40'>
+            <div>{{merchantAccount.accountName}}</div>
+            <div>{{merchantAccount.accountNumber}}</div>
+            <div>{{merchantAccount.bankName}}</div>
+            <div>{{merchantAccount.branch}}</div>
+
+            
         </div>
       </div>
 
@@ -67,14 +89,14 @@
         </div>
 
 
-      <div fxLayout="row" fxLayoutAlign='end center' fxLayout.lt-md='column-reverse'>
+      <!-- <div fxLayout="row" fxLayoutAlign='end center' fxLayout.lt-md='column-reverse'>
 
         <div  class="mb-24 mt-8 mr-64">
           <button (click)='openChangePasswordModal()' mat-raised-button color="warn" class="w-224 h-40">Change
             Password</button>
         </div>
 
-      </div>
+      </div> -->
     
     </div>
     </mat-card>

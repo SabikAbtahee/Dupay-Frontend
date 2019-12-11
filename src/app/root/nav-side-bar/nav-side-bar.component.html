@@ -94,8 +94,12 @@
               <div (click)="route(menuItems.profile.url)">{{menuItems.profile.name}}</div>
             </button>
             <button mat-menu-item>
+              <div (click)="openChangePasswordModal()">{{menuItems.changePassword.name}}</div>
+            </button>
+            <button mat-menu-item>
               <div (click)="logout()">{{menuItems.logout.name}}</div>
             </button>
+            
           </mat-menu>
         </div>
 

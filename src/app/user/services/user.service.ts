@@ -116,5 +116,19 @@ export class UserService {
     })
   }
 
+  public getMerchantAccountDetails(MerchantId:string):Observable<Merchant>{
+    return new Observable(obs=>{
+      let header = this.securityService.getAuthorizedHeader();
+      this.queryService.httpGet(api_path.getMerchantAccountsAdmin,header).subscribe(res=>{
+        // var result = res.filter(obj => {
+        //   return obj.id === MerchantId
+        // })
+        obs.next(res);
+      },err=>{
+        obs.error(err);
+      })
+    })
+  }
+
 
 }

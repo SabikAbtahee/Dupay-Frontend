@@ -54,14 +54,14 @@ const routes:Routes=[
 ]
 
 @NgModule({
-  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, PasswordChangeComponent, NotifyMerchantComponent, NotificationComponent, MerchantDetailsComponent, NIDPhotoComponent, TradeInsurancePhotoComponent],
+  declarations: [MerchantListComponent, MerchantRequestsComponent, MerchantNotificationComponent, UserProfileComponent, NotifyMerchantComponent, NotificationComponent, MerchantDetailsComponent, NIDPhotoComponent, TradeInsurancePhotoComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule
   ],
   providers: [ PasswordModalService, NotifyMerchantService, UserProfileService ],
-  entryComponents: [ PasswordChangeComponent, NIDPhotoComponent, TradeInsurancePhotoComponent,
+  entryComponents: [  NIDPhotoComponent, TradeInsurancePhotoComponent,
     NotificationComponent, DialogComponent, MerchantDetailsComponent ]
 
 
