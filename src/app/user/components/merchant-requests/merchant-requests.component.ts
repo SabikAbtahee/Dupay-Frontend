@@ -123,24 +123,57 @@ export class MerchantRequestsComponent implements OnInit {
 
   }
 
-  public redirectToDetails = (id: string) => {
+  // public redirectToDetails = (id: string) => {
 
-    this.userService.getMerchantDetails(id).subscribe(res => {
-      console.log('merchant details');
-      console.log(res);
-      res.nidFile = "data:image/png;base64," + res.nidFile;
-      res.tradeInsuranceFile = "data:image/png;base64," + res.tradeInsuranceFile;
-      this.dialog.open(MerchantDetailsComponent, {
-        data: res,
-        autoFocus: false,
-        maxHeight: '90vh',
-        maxWidth: '80vw !important'
-      }).afterClosed().subscribe(result => {
-      });
-    }, err => {
-      console.error(err);
-    });
-  }
+  //   this.userService.getMerchantDetails(id).subscribe(res => {
+  //     console.log('merchant details');
+  //     console.log(res);
+  //     res.nidFile = "data:image/png;base64," + res.nidFile;
+  //     res.tradeInsuranceFile = "data:image/png;base64," + res.tradeInsuranceFile;
+  //     this.dialog.open(MerchantDetailsComponent, {
+  //       data: res,
+  //       autoFocus: false,
+  //       maxHeight: '90vh',
+  //       maxWidth: '80vw !important'
+  //     }).afterClosed().subscribe(result => {
+  //     });
+  //   }, err => {
+  //     console.error(err);
+  //   });
+  // }
+
+  public redirectToDetails = (id: string) => {
+		let specificMerchant: Merchant;
+
+		this.userService.getMerchantDetails(id).subscribe(
+			(res) => {
+				this.userService.getMerchantAccountDetails(id).subscribe(
+					(res2) => {
+            // console.log('merchant details'+res2);
+            // console.log('res:'+JSON.stringify(res));
+						console.log('res2:'+JSON.stringify(res2));
+						res.nidFile = 'data:image/png;base64,' + res.nidFile;
+						res.tradeInsuranceFile = 'data:image/png;base64,' + res.tradeInsuranceFile;
+						this.dialog
+							.open(MerchantDetailsComponent, {
+								data: {res,res2},
+								autoFocus: false,
+								maxHeight: '90vh',
+								maxWidth: '80vw !important'
+							})
+							.afterClosed()
+							.subscribe((result) => {});
+					},
+					(err) => {
+						console.log(err);
+					}
+				);
+			},
+			(err) => {
+				console.error(err);
+			}
+		);
+	};
 
   public redirectToUpdate = (id: string) => {
 

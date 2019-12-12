@@ -1,14 +1,43 @@
-<h1 mat-dialog-title>{{data?.name}}</h1>
-<div mat-dialog-content>
-  Username: {{ data?.username }}  <br>
-  Email: {{ data?.email }} <br>  
-	Balance: {{ data?.balance}} <br>
-  Status: {{ data?.status }} <br>
+<h1 mat-dialog-title>{{data.res?.name}}</h1>
+<div mat-dialog-content class='pb-16'>
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="12px">
+    <div>
+      <div class='font-size-24'>
+        User Information
+      </div>
+      <hr>
+
+      <div>
+        Username: {{ data.res?.username }} <br>
+        Email: {{ data.res?.email }} <br>
+        Balance: {{ data.res?.balance}} <br>
+        Status: {{ data.res?.status }} <br>
+      </div>
+    </div>
+    <div>
+      <div class='font-size-24'>
+        Account Information 
+      </div>
+      <hr>
+      <div>
+        Account Name: {{ data.res2?.accountName }} <br>
+        Account Number: {{ data.res2?.accountNumber }} <br>
+        Bank Name: {{ data.res2?.bankName}} <br>
+        Branch: {{ data.res2?.branch }} <br>
+      </div>
+    </div>
+  </div>
 </div>
-<h3>NID</h3>
-<img [src]="data.nidFile"/>
-<h3>Trade Insurance File</h3>
-<img [src]="data.tradeInsuranceFile"/>
+
+
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="12px">
+  <img [src]="data.res.nidFile"  style='border:1px solid black; width:50vw' />
+  <div fxLayout="row" fxLayoutAlign="center center">NID image</div>
+  <!-- <h3>Trade Insurance File</h3> -->
+  <img [src]="data.res.tradeInsuranceFile" width="400" style='border:1px solid black;width:50vw' />
+  <div fxLayout="row" fxLayoutAlign="center center">Trade Insurance File image</div>
+</div>
+
 <div mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close="1" cdkFocusInitial > Ok </button>
+  <button mat-raised-button mat-dialog-close="1" cdkFocusInitial> OK </button>
 </div>

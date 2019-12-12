@@ -45,7 +45,7 @@ export const api_path = {
   //Payment
   payment: `${environment.baseurl}/api/payment`,
 
-  getMerchantAccountsAdmin:`${environment.baseurl}/api/admin/merchantacc/`
+  getMerchantAccountsAdmin:`${environment.baseurl}/api/admin/merchantacc`
   
 
   

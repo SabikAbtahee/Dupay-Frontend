@@ -52,14 +52,14 @@ export class MerchantListComponent implements OnInit {
 			(res) => {
 				this.userService.getMerchantAccountDetails(id).subscribe(
 					(res2) => {
-            console.log('merchant details');
-            console.log('res:'+JSON.stringify(res));
+            // console.log('merchant details'+res2);
+            // console.log('res:'+JSON.stringify(res));
 						console.log('res2:'+JSON.stringify(res2));
 						res.nidFile = 'data:image/png;base64,' + res.nidFile;
 						res.tradeInsuranceFile = 'data:image/png;base64,' + res.tradeInsuranceFile;
 						this.dialog
 							.open(MerchantDetailsComponent, {
-								data: res,
+								data: {res,res2},
 								autoFocus: false,
 								maxHeight: '90vh',
 								maxWidth: '80vw !important'

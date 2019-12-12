@@ -116,10 +116,10 @@ export class UserService {
     })
   }
 
-  public getMerchantAccountDetails(MerchantId:string):Observable<Merchant>{
+  public getMerchantAccountDetails(MerchantId:string):Observable<any>{
     return new Observable(obs=>{
       let header = this.securityService.getAuthorizedHeader();
-      this.queryService.httpGet(api_path.getMerchantAccountsAdmin,header).subscribe(res=>{
+      this.queryService.httpGet(`${api_path.getMerchantAccountsAdmin}/${MerchantId}`,header).subscribe(res=>{
         // var result = res.filter(obj => {
         //   return obj.id === MerchantId
         // })

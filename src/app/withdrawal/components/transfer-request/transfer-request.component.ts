@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig, MatSort } from '@angular/material';
-import { TransferRequest, SelectOption } from 'src/app/config/interfaces/dupay.interface';
+import { TransferRequest, SelectOption, Merchant } from '../../../config/interfaces/dupay.interface';
 import { WithdrawalService } from '../../services/withdrawal.service';
 import { StatusCompleteModalComponent } from './status-complete-modal/status-complete-modal.component';
-import { Withdraw_status, Withdraw_status_view } from 'src/app/config/enums/dupay.enum';
+import { Withdraw_status, Withdraw_status_view } from '../../../config/enums/dupay.enum';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { MerchantDetailsComponent } from '../../../user/components/merchant-details/merchant-details.component';
+import { UserService } from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-transfer-request',
@@ -26,7 +28,7 @@ export class TransferRequestComponent implements OnInit {
 
   @ViewChild(MatPaginator,  { static: true } ) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true })	sort: MatSort;
-  constructor(private withdrawalService:WithdrawalService, private matDialog:MatDialog, private spinner: NgxSpinnerService) { }
+  constructor(private withdrawalService:WithdrawalService, private matDialog:MatDialog, private spinner: NgxSpinnerService,private userService:UserService) { }
 
   ngOnInit() {
     this.initialize();
@@ -46,7 +48,7 @@ export class TransferRequestComponent implements OnInit {
   }
 
   initialize(){
-    this.displayedColumns = ["merchantName","accountNumber", "withdrawDate", "amount", "status" ];
+    this.displayedColumns = ["merchantName","accountNumber","accountName","bankName","branch", "withdrawDate", "amount", "status" ];
     this.initialStatusList = [
       {value: Withdraw_status.PENDING,viewValue: Withdraw_status_view.PENDING },
       {value: Withdraw_status.IN_PROGRESS,viewValue: Withdraw_status_view.ACCEPT },
@@ -153,5 +155,38 @@ export class TransferRequestComponent implements OnInit {
     }
 
   }
+
+  public redirectToDetails = (id: string) => {
+		let specificMerchant: Merchant;
+
+		this.userService.getMerchantDetails(id).subscribe(
+			(res) => {
+				this.userService.getMerchantAccountDetails(id).subscribe(
+					(res2) => {
+            // console.log('merchant details'+res2);
+            // console.log('res:'+JSON.stringify(res));
+						console.log('res2:'+JSON.stringify(res2));
+						res.nidFile = 'data:image/png;base64,' + res.nidFile;
+						res.tradeInsuranceFile = 'data:image/png;base64,' + res.tradeInsuranceFile;
+						this.matDialog
+							.open(MerchantDetailsComponent, {
+								data: {res,res2},
+								autoFocus: false,
+								maxHeight: '90vh',
+								maxWidth: '80vw !important'
+							})
+							.afterClosed()
+							.subscribe((result) => {});
+					},
+					(err) => {
+						console.log(err);
+					}
+				);
+			},
+			(err) => {
+				console.error(err);
+			}
+		);
+	};
 
 }

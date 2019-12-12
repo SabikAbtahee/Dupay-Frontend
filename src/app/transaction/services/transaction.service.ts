@@ -57,6 +57,22 @@ export class TransactionService {
 
 	}
 
+	public getTransactionGivenMerchantIdPageSizePageIndex(merchantId,size,index): Observable<any>{
+		return new Observable((observer) => {
+			let params = new HttpParams().set('merchantId', merchantId).set('pageNumber', index).set('pageSize',size );
+			let httpHeader = this.securityService.getAuthorizedQueryParamsHeader(params);
+			this.queryService.httpGet(api_path.payment, httpHeader).subscribe(
+				(res) => {
+					observer.next(res);
+				},
+				(err) => {
+					observer.error(err);
+				},() => {
+					observer.complete();
+				}
+			);
+		});
+	}
 
 	queryTransaction(id):Observable<any>{
 		let key= 'transactionId'
